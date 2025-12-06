@@ -18,10 +18,10 @@ function App() {
   useEffect(() => {
     async function init() {
       try {
-        // 1. Fetch Cards
-        // We check local storage first for user-added cards? 
-        // For now, let's load file + combine with local "custom cards".
-        const res = await fetch('/flashcards.txt');
+        // For GitHub Pages, we need to prepend the base URL
+        const baseUrl = import.meta.env.BASE_URL;
+        const url = baseUrl.endsWith('/') ? `${baseUrl}flashcards.txt` : `${baseUrl}/flashcards.txt`;
+        const res = await fetch(url);
         const text = await res.text();
         const fileCards = parseFlashcards(text);
         
