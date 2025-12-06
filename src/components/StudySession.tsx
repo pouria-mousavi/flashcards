@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import type { Flashcard as IFlashcard } from '../utils/parser';
-import Flashcard from './Flashcard';
-import { calculateSM2, initialStats, CardState } from '../utils/sm2';
-import type { CardStats } from '../utils/sm2';
+import FlashcardComponent from './Flashcard';
+import { calculateSM2, CardState } from '../utils/sm2';
+import type { Flashcard } from '../utils/sm2';
 
 interface Props {
-  cards: IFlashcard[];
-  stats: Record<string, CardStats>;
-  onUpdateStats: (id: string, newStats: CardStats) => void;
+  cards: Flashcard[];
+  onUpdateStats: (id: string, updates: Partial<Flashcard>) => void;
   onSessionComplete: () => void;
   onExit: () => void;
 }
 
-export default function StudySession({ cards, stats, onUpdateStats, onSessionComplete, onExit }: Props) {
-  const [queue, setQueue] = useState<IFlashcard[]>([]);
+export default function StudySession({ cards, onUpdateStats, onSessionComplete, onExit }: Props) {
+  const [queue, setQueue] = useState<Flashcard[]>([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -23,32 +21,32 @@ export default function StudySession({ cards, stats, onUpdateStats, onSessionCom
     const now = Date.now();
     // 1. Find cards due for review
     const dueCards = cards.filter(card => {
-      const s = stats[card.id] || initialStats;
       // Ready if it's new (0) or due date is passed
-      return s.nextReviewDate <= now;
+      return card.nextReviewDate <= now;
     });
 
     // 2. Sort by simple priority: Learn/Relearn first, then Review, then New
     const sorted = dueCards.sort((a, b) => {
-        const sA = stats[a.id] || initialStats;
-        const sB = stats[b.id] || initialStats;
-        // Logic: specific sort order could be added, for now simple "due" is fine.
-        return sA.nextReviewDate - sB.nextReviewDate;
+        return a.nextReviewDate - b.nextReviewDate;
     });
 
-    // Limit session size? functionality for later. For now take up to 50?
     setQueue(sorted.slice(0, 50));
-  }, []); 
+  }, []); // Run only on mount. Note: if 'cards' updates externally, this won't reflect unless we depend on it, 
+          // but usually study session captures a snapshot. If using realtime, we might want to dependency.
+          // For now snapshot is safer for queue stability.
 
   const handleRate = (rating: number) => {
     const currentCard = queue[currentCardIndex];
-    const currentStats = stats[currentCard.id] || initialStats;
-    const newStats = calculateSM2(currentStats, rating);
+    // Calculate new stats
+    const updates = calculateSM2(currentCard, rating);
     
-    onUpdateStats(currentCard.id, newStats);
+    // Optimistically update the card in our queue if it's coming back
+    const updatedCard = { ...currentCard, ...updates };
+    
+    onUpdateStats(currentCard.id, updates);
 
-    // Confetti on "Easy" if graduating or mature
-    if (rating === 5 && newStats.state === CardState.REVIEW) {
+    // Confetti on "Easy" graduation
+    if (rating === 5 && updates.state === CardState.REVIEW && currentCard.state !== CardState.REVIEW) {
       confetti({
         particleCount: 50,
         spread: 60,
@@ -59,14 +57,14 @@ export default function StudySession({ cards, stats, onUpdateStats, onSessionCom
 
     setIsFlipped(false);
     
-    // Anki Logic: If card is still in LEARNING/RELEARNING/NEW and due soon (<10m), re-queue it!
+    // Anki Logic: Re-queue check
     const now = Date.now();
-    const timeUntilNext = newStats.nextReviewDate - now;
-    const tenMinutes = 10 * 60 * 1000;
-
-    if (timeUntilNext < tenMinutes) {
+    // Use the *new* nextReviewDate
+    if (updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now < 10 * 60 * 1000)) {
         // Re-queue at end of session
-        setQueue(prev => [...prev, currentCard]);
+        setQueue(prev => [...prev, updatedCard]);
+    } else {
+        // If it's done for today, we don't requeue.
     }
 
     if (currentCardIndex < queue.length - 1) {
@@ -84,9 +82,6 @@ export default function StudySession({ cards, stats, onUpdateStats, onSessionCom
   }
 
   const currentCard = queue[currentCardIndex];
-  // Calculate Progress (approx)
-  // Since we append to queue, length changes. 
-  // Let's just show "cards remaining"
   const cardsLeft = queue.length - currentCardIndex;
 
   return (
@@ -117,13 +112,13 @@ export default function StudySession({ cards, stats, onUpdateStats, onSessionCom
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <AnimatePresence mode='wait'>
             <motion.div
-                key={`${currentCard.id}-${currentCardIndex}`} // key change triggers animation
+                key={`${currentCard.id}-${currentCardIndex}`} 
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.2 }}
             >
-                <Flashcard 
+                <FlashcardComponent 
                     card={currentCard} 
                     isFlipped={isFlipped} 
                     onFlip={() => setIsFlipped(!isFlipped)} 
@@ -134,7 +129,7 @@ export default function StudySession({ cards, stats, onUpdateStats, onSessionCom
 
       {/* Controls */}
       <div style={{ 
-          height: '140px', // slightly taller for labels
+          height: '140px', 
           width: '100%', 
           maxWidth: '500px', 
           display: 'flex', 

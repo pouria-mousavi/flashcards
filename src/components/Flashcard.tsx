@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import type { Flashcard as IFlashcard } from '../utils/parser';
+import type { Flashcard as IFlashcard } from '../utils/sm2';
 
 interface Props {
   card: IFlashcard;

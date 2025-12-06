@@ -1,7 +1,8 @@
+
 import { useEffect, useState } from 'react';
-import { parseFlashcards } from './utils/parser';
-import type { Flashcard } from './utils/parser';
-import type { CardStats } from './utils/sm2';
+import { supabase } from './lib/supabase';
+import { mapRowToCard } from './utils/sm2';
+import type { Flashcard } from './utils/sm2';
 import StudySession from './components/StudySession';
 import Dashboard from './components/Dashboard';
 import AddCard from './components/AddCard';
@@ -10,7 +11,8 @@ type View = 'dashboard' | 'study' | 'add';
 
 function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
-  const [stats, setStats] = useState<Record<string, CardStats>>({});
+  // We no longer need separate 'stats' object because Flashcard interface now includes stats directly!
+  // This simplifies things greatly.
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<View>('dashboard');
 
@@ -18,25 +20,12 @@ function App() {
   useEffect(() => {
     async function init() {
       try {
-        // For GitHub Pages, we need to prepend the base URL
-        const baseUrl = import.meta.env.BASE_URL;
-        const url = baseUrl.endsWith('/') ? `${baseUrl}flashcards.txt` : `${baseUrl}/flashcards.txt`;
-        const res = await fetch(url);
-        const text = await res.text();
-        const fileCards = parseFlashcards(text);
+        const { data, error } = await supabase.from('cards').select('*');
+        if (error) throw error;
         
-        const localCardsJson = localStorage.getItem('custom-cards');
-        const localCards = localCardsJson ? JSON.parse(localCardsJson) : [];
-        
-        setCards([...fileCards, ...localCards]);
-
-        // 2. Load Progress
-        const savedStats = localStorage.getItem('flashcard-stats-v2');
-        if (savedStats) {
-          setStats(JSON.parse(savedStats));
-        } else {
-            // Check for v1 stats and maybe migrate? Or just start fresh.
-            // Start fresh is safer for v2 strict algo.
+        if (data) {
+            const mappedCards = data.map(mapRowToCard);
+            setCards(mappedCards);
         }
       } catch (e) {
         console.error("Failed to load data", e);
@@ -47,36 +36,50 @@ function App() {
     init();
   }, []);
 
-  const updateStats = (id: string, newStats: CardStats) => {
-    const updated = { ...stats, [id]: newStats };
-    setStats(updated);
-    localStorage.setItem('flashcard-stats-v2', JSON.stringify(updated));
+  const updateCardStats = async (id: string, updates: Partial<Flashcard>) => {
+      // 1. Optimistic Update
+      setCards(prev => prev.map(c => c.id === id ? { ...c, ...updates } : c));
+
+      // 2. Persist to DB
+      // Need to map camelCase updates back to snake_case for DB
+      const dbUpdates: any = {};
+      if (updates.interval !== undefined) dbUpdates.interval = updates.interval;
+      if (updates.easeFactor !== undefined) dbUpdates.ease_factor = updates.easeFactor;
+      if (updates.nextReviewDate !== undefined) dbUpdates.next_review = new Date(updates.nextReviewDate).toISOString();
+      if (updates.state !== undefined) dbUpdates.state = updates.state;
+
+      const { error } = await supabase.from('cards').update(dbUpdates).eq('id', id);
+      if (error) console.error("Failed to save progress", error);
   };
 
-  const handleAddCard = (front: string, back: string) => {
-    const newCard: Flashcard = {
-        id: crypto.randomUUID(),
-        front,
-        back
-    };
-    
-    const updatedCards = [...cards, newCard];
-    setCards(updatedCards);
-    
-    // Persist custom cards
-    // Filter out file cards? For simple logic, we just store *new* cards in 'custom-cards'.
-    // We need to know which are custom. For this demo, let's just append to a stored list.
-    const localCardsJson = localStorage.getItem('custom-cards');
-    const localCards = localCardsJson ? JSON.parse(localCardsJson) : [];
-    localStorage.setItem('custom-cards', JSON.stringify([...localCards, newCard]));
+  const handleAddCard = async (front: string, back: string) => {
+      // Insert into DB
+      const newCard = {
+          front,
+          back,
+          state: 'NEW',
+          next_review: new Date().toISOString(),
+          interval: 0,
+          ease_factor: 2.5
+      };
 
-    setView('dashboard');
+      const { data, error } = await supabase.from('cards').insert(newCard).select().single();
+      
+      if (error) {
+          alert("Error adding card: " + error.message);
+          return;
+      }
+      
+      if (data) {
+          setCards(prev => [...prev, mapRowToCard(data)]);
+          setView('dashboard');
+      }
   };
 
   if (loading) {
     return (
         <div className="flex-center full-screen" style={{ color: 'var(--accent)' }}>
-            Loading your deck...
+            Loading your deck from Cloud...
         </div>
     );
   }
@@ -86,7 +89,6 @@ function App() {
       <div style={{ display: view === 'dashboard' ? 'block' : 'none', width: '100%', height: '100%' }}>
          <Dashboard 
             cards={cards} 
-            stats={stats} 
             onStartStudy={() => setView('study')} 
             onAddCard={() => setView('add')} 
          />
@@ -95,8 +97,7 @@ function App() {
       {view === 'study' && (
         <StudySession 
             cards={cards} 
-            stats={stats} 
-            onUpdateStats={updateStats} 
+            onUpdateStats={updateCardStats} 
             onSessionComplete={() => setView('dashboard')} 
             onExit={() => setView('dashboard')}
         />

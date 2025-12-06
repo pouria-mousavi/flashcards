@@ -1,3 +1,4 @@
+import type { Database } from '../types/supabase';
 
 export const CardState = {
   NEW: 'NEW',
@@ -8,25 +9,21 @@ export const CardState = {
 
 export type CardState = typeof CardState[keyof typeof CardState];
 
-export interface CardStats {
+// The shape of a card as used in the UI (camelCase)
+export interface Flashcard {
+  id: string;
+  front: string;
+  back: string;
+  pronunciation?: string;
+  tone?: string;
+  examples?: string[];
+  
+  // Stats
   state: CardState;
-  stepIndex: number; // For learning/relearning steps
-  interval: number; // In days (or minutes if < 1, but usually stored in minutes for learning)
-  easeFactor: number;
-  repetitions: number; // Consecutive correct
   nextReviewDate: number; // Timestamp
-  lapses: number; // How many times it was forgotten
+  interval: number;
+  easeFactor: number;
 }
-
-export const initialStats: CardStats = {
-  state: CardState.NEW,
-  stepIndex: 0,
-  interval: 0,
-  easeFactor: 2.5,
-  repetitions: 0,
-  nextReviewDate: 0, // 0 means "Ready now" for new cards
-  lapses: 0,
-};
 
 // Configuration similar to Anki defaults
 const SETTINGS = {
@@ -45,103 +42,112 @@ const SETTINGS = {
  * Rating: 0=Again, 3=Hard, 4=Good, 5=Easy
  */
 export function calculateSM2(
-  current: CardStats,
+  card: Flashcard,
   rating: number
-): CardStats {
+): Partial<Flashcard> {
   const now = Date.now();
-  let next = { ...current };
+  let next = { ...card };
+  
+  // We use a stepIndex in logic but typically state is enough for simple approximation.
+  // Real Anki stores 'step' index. For this simple app, we infer step from state/interval slightly or just simplify.
+  // Let's assume:
+  // LEARNING -> step 0 (1m).
+  // If we want 2 steps, we need to store step index in DB.
+  // Schema didn't have step_index.
+  // Simplification for V1 DB: 
+  // LEARNING means "in ephemeral steps". We can just use the 'interval' field to store 'minutes' when in learning?
+  // OR just cycle learning: Again -> 1m, Good -> 10m -> Review.
+  
+  // Let's use 'interval' as 'minutes' when in LEARNING state.
+  
+  let stepIndex = 0;
+  if (next.state === CardState.LEARNING) {
+      if (next.interval === 1) stepIndex = 0;
+      else if (next.interval === 10) stepIndex = 1;
+      else if (next.interval > 10) stepIndex = 1; // Cap
+  }
 
   // --- NEW or LEARNING ---
   if (next.state === CardState.NEW || next.state === CardState.LEARNING) {
     if (rating === 0) {
-        // Again: Reset step
+        // Again
         next.state = CardState.LEARNING;
-        next.stepIndex = 0;
-        next.nextReviewDate = now + SETTINGS.learningSteps[0] * 60 * 1000;
+        next.interval = SETTINGS.learningSteps[0]; // 1 min
+        next.nextReviewDate = now + next.interval * 60 * 1000;
     } else if (rating === 3) {
-        // Hard: Repeat step (no advance), allow slight delay? Anki usually treats Hard on learning as "avg of 2 steps".
-        // For simplicity: Stay on current step, review again effectively same time or slightly later.
-        // Let's just set it to current step interval.
-        const stepMin = SETTINGS.learningSteps[next.stepIndex];
+        // Hard (Repeat step)
         next.state = CardState.LEARNING;
-        next.nextReviewDate = now + stepMin * 60 * 1000;
+        // Keep current interval but update review time
+        if (next.interval === 0) next.interval = 1; 
+        next.nextReviewDate = now + next.interval * 60 * 1000;
     } else if (rating === 4) {
-        // Good: Advance step
-        if (next.stepIndex < SETTINGS.learningSteps.length - 1) {
-            // Move to next step
-            next.stepIndex++;
+        // Good
+        if (stepIndex < SETTINGS.learningSteps.length - 1) {
+            // Next step
+            next.interval = SETTINGS.learningSteps[stepIndex + 1];
             next.state = CardState.LEARNING;
-            const stepMin = SETTINGS.learningSteps[next.stepIndex];
-            next.nextReviewDate = now + stepMin * 60 * 1000;
+            next.nextReviewDate = now + next.interval * 60 * 1000;
         } else {
             // Graduate
             next.state = CardState.REVIEW;
-            next.stepIndex = 0;
-            next.interval = SETTINGS.graduatingInterval;
+            next.interval = SETTINGS.graduatingInterval; // 1 Day
             next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
         }
     } else if (rating === 5) {
-        // Easy: Graduate immediately (to Easy Interval)
+        // Easy
         next.state = CardState.REVIEW;
-        next.stepIndex = 0;
         next.interval = SETTINGS.easyInterval;
         next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
     }
-    return next;
-  }
-
-  // --- REVIEW or RELEARNING ---
-  // If Relearning, it behaves like Learning but keeps Review stats underneath
-  if (next.state === CardState.RELEARNING) {
-      if (rating === 0) {
-          next.stepIndex = 0;
-          next.nextReviewDate = now + SETTINGS.relearningSteps[0] * 60 * 1000;
-      } else if (rating === 4) {
-          if (next.stepIndex < SETTINGS.relearningSteps.length - 1) {
-              next.stepIndex++;
-              next.nextReviewDate = now + SETTINGS.relearningSteps[next.stepIndex] * 60 * 1000;
-          } else {
-              // Graduate back to Review
-              next.state = CardState.REVIEW;
-              // New interval = max(1, original_interval * new_interval_factor??)
-              // Anki reduces interval on lapse. default is 0% (reset to 1) or specific %.
-              // Let's set to 1 day for simplicity on lapse recovery, or keep it short.
-              next.interval = 1; 
-              next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
-          }
-      } else if (rating === 5) {
-          // Instant graduate
-          next.state = CardState.REVIEW;
-          next.interval = 4;
-          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
-      }
-      return next;
   }
 
   // --- REVIEW (Stable) ---
-  if (rating === 0) {
-      // Lapse
-      next.state = CardState.RELEARNING;
-      next.stepIndex = 0;
-      next.lapses++;
-      next.easeFactor = Math.max(1.3, next.easeFactor - 0.2); // Anki penalty
-      next.interval = 1; // Temporary placeholder, will be overridden by step
-      next.nextReviewDate = now + SETTINGS.relearningSteps[0] * 60 * 1000;
-  } else if (rating === 3) {
-      // Hard
-      next.interval = Math.max(1, next.interval * SETTINGS.hardInterval);
-      next.easeFactor = Math.max(1.3, next.easeFactor - 0.15);
-      next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
-  } else if (rating === 4) {
-      // Good
-      next.interval = Math.round(next.interval * next.easeFactor);
-      next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
-  } else if (rating === 5) {
-      // Easy
-      next.easeFactor += 0.15;
-      next.interval = Math.round(next.interval * next.easeFactor * SETTINGS.easyBonus);
-      next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+  else if (next.state === CardState.REVIEW || next.state === CardState.RELEARNING) {
+      if (rating === 0) {
+          // Lapse
+          next.state = CardState.RELEARNING;
+          next.easeFactor = Math.max(1.3, next.easeFactor - 0.2); 
+          next.interval = 10; // Relearn step (10m)
+          next.nextReviewDate = now + next.interval * 60 * 1000;
+      } else if (rating === 3) {
+          // Hard
+          next.interval = Math.max(1, Math.floor(next.interval * SETTINGS.hardInterval));
+          next.easeFactor = Math.max(1.3, next.easeFactor - 0.15);
+          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+      } else if (rating === 4) {
+          // Good
+                if (next.state === CardState.RELEARNING) {
+                     // Graduated back
+                     next.state = CardState.REVIEW;
+                     next.interval = 1; // Reset to 1 day or calculate based on lapse? Anki defaults to 1.
+                } else {
+                     next.interval = Math.round(next.interval * next.easeFactor);
+                }
+          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+      } else if (rating === 5) {
+          // Easy
+          if (next.state === CardState.RELEARNING) next.state = CardState.REVIEW;
+          next.easeFactor += 0.15;
+          next.interval = Math.round(next.interval * next.easeFactor * SETTINGS.easyBonus);
+          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+      }
   }
 
   return next;
+}
+
+// Mapper to convert DB Row -> App Flashcard
+export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']): Flashcard {
+    return {
+        id: row.id,
+        front: row.front,
+        back: row.back,
+        pronunciation: row.pronunciation || undefined,
+        tone: row.tone || undefined,
+        examples: row.examples || undefined,
+        state: row.state as CardState,
+        nextReviewDate: new Date(row.next_review).getTime(),
+        interval: row.interval,
+        easeFactor: row.ease_factor
+    }
 }

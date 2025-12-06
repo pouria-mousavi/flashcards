@@ -1,15 +1,13 @@
 import { CardState } from '../utils/sm2';
-import type { CardStats } from '../utils/sm2';
-import type { Flashcard } from '../utils/parser';
+import type { Flashcard } from '../utils/sm2';
 
 interface Props {
   cards: Flashcard[];
-  stats: Record<string, CardStats>;
   onStartStudy: () => void;
   onAddCard: () => void;
 }
 
-export default function Dashboard({ cards, stats, onStartStudy, onAddCard }: Props) {
+export default function Dashboard({ cards, onStartStudy, onAddCard }: Props) {
   // Compute Stats
   // const totalCards = cards.length;
   let newCards = 0;
@@ -20,20 +18,17 @@ export default function Dashboard({ cards, stats, onStartStudy, onAddCard }: Pro
   const now = Date.now();
 
   cards.forEach(card => {
-    const s = stats[card.id];
-    if (!s || s.state === CardState.NEW) {
+    // Stats are now direct properties of card
+    if (card.state === CardState.NEW) {
       newCards++;
-    } else if (s.state === CardState.LEARNING || s.state === CardState.RELEARNING) {
+    } else if (card.state === CardState.LEARNING || card.state === CardState.RELEARNING) {
       learning++;
-      if (s.nextReviewDate <= now) toReview++;
-    } else if (s.state === CardState.REVIEW) {
-      if (s.interval > 21) mature++;
-      if (s.nextReviewDate <= now) toReview++;
+      if (card.nextReviewDate <= now) toReview++;
+    } else if (card.state === CardState.REVIEW) {
+      if (card.interval > 21) mature++;
+      if (card.nextReviewDate <= now) toReview++;
     }
   });
-
-  // If no stats exist for a card, it's effectively "New" but might not be in the stats object yet.
-  // The counting above handles it (checks !s).
 
   return (
     <div className="flex-center full-screen" style={{ flexDirection: 'column', padding: '20px', gap: '24px' }}>
