@@ -77,8 +77,8 @@ async function migrate() {
             back,
             pronunciation,
             tone,
-            synonyms,
-            examples: examples ? JSON.stringify(examples) : null, // Store as JSON for Supabase
+            synonyms, 
+            examples: examples, // Pass array directly for JSONB
             state: 'NEW',
             next_review: new Date().toISOString(),
             interval: 0,
