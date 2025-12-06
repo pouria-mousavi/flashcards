@@ -74,9 +74,24 @@ async function migrate() {
         });
     }
 
-    console.log(`Found ${cards.length} cards. Uploading to Supabase...`);
+    console.log(`Found ${cards.length} cards. Deduplicating...`);
+    
+    const uniqueCards = [];
+    const seenMap = new Set();
+    
+    for (const c of cards) {
+        // Normalize front for dedupe check (optional, but good)
+        const key = c.front.trim().toLowerCase();
+        if (seenMap.has(key)) {
+            continue;
+        }
+        seenMap.add(key);
+        uniqueCards.push(c);
+    }
+    
+    console.log(`Unique cards: ${uniqueCards.length}. Uploading to Supabase...`);
 
-    const { error } = await supabase.from('cards').upsert(cards, { onConflict: 'front' });
+    const { error } = await supabase.from('cards').upsert(uniqueCards, { onConflict: 'front' });
 
     if (error) {
         console.error("Error uploading:", error);

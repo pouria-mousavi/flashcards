@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { supabase } from './lib/supabase';
+import { supabase, isConfigured } from './lib/supabase';
 import { mapRowToCard } from './utils/sm2';
 import type { Flashcard } from './utils/sm2';
 import StudySession from './components/StudySession';
@@ -51,6 +51,20 @@ function App() {
       const { error } = await supabase.from('cards').update(dbUpdates).eq('id', id);
       if (error) console.error("Failed to save progress", error);
   };
+
+  if (!isConfigured) {
+      return (
+          <div className="flex-center full-screen" style={{ flexDirection: 'column', color: 'var(--danger)', padding: '20px', textAlign: 'center' }}>
+              <h1>⚠️ Configuration Missing</h1>
+              <p>The App cannot connect to the Database.</p>
+              <p style={{ marginTop: '10px', fontSize: '0.8rem', color: '#888' }}>
+                Error: VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY is empty.<br/>
+                Please check your GitHub Repository Settings &gt; Secrets.<br/>
+                Ensure your workflow uses 'env' to pass secrets to 'npm run build'.
+              </p>
+          </div>
+      );
+  }
 
   const handleAddCard = async (front: string, back: string) => {
       // Insert into DB
