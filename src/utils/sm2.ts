@@ -146,7 +146,17 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         pronunciation: row.pronunciation || undefined,
         tone: row.tone || undefined,
         synonyms: row.synonyms || undefined,
-        examples: (row.examples as string[]) || undefined,
+        examples: (() => {
+            if (Array.isArray(row.examples)) return row.examples as string[];
+            if (typeof row.examples === 'string') {
+                try {
+                    return JSON.parse(row.examples) as string[];
+                } catch (e) {
+                    return [row.examples]; // Fallback if not JSON
+                }
+            }
+            return undefined;
+        })(),
         state: row.state as CardState,
         nextReviewDate: new Date(row.next_review).getTime(),
         interval: row.interval,
