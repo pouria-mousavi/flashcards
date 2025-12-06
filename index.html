@@ -9,6 +9,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      window.addEventListener('error', function(e) {
+        document.body.innerHTML += '<div style="position:fixed;top:0;left:0;background:rgba(255,0,0,0.9);color:white;padding:20px;z-index:9999;width:100%;font-family:monospace;"><h3>Runtime Error:</h3>' + e.message + '</div>';
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+        document.body.innerHTML += '<div style="position:fixed;top:0;left:0;background:rgba(255,165,0,0.9);color:black;padding:20px;z-index:9999;width:100%;font-family:monospace;"><h3>Promise Error:</h3>' + (e.reason ? e.reason.toString() : 'Unknown Promise Error') + '</div>';
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
