@@ -16,6 +16,73 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<View>('dashboard');
 
+  // --- Actions ---
+  const saveCard = async (newCard: Flashcard) => {
+      // Optimistic update
+      setCards(prev => [...prev, newCard]);
+      
+      const { error } = await supabase.from('cards').insert({
+          id: newCard.id,
+          front: newCard.front,
+          back: newCard.back,
+          pronunciation: newCard.pronunciation,
+          tone: newCard.tone,
+          synonyms: newCard.synonyms, // New field
+          examples: newCard.examples,
+          state: newCard.state,
+          next_review: new Date(newCard.nextReviewDate).toISOString(),
+          interval: newCard.interval,
+          ease_factor: newCard.easeFactor
+      });
+      if (error) console.error('Error saving:', error);
+  };
+
+  const updateCardStats = async (updatedCard: Flashcard) => {
+    setCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
+    const { error } = await supabase.from('cards').update({
+        state: updatedCard.state,
+        next_review: new Date(updatedCard.nextReviewDate).toISOString(),
+        interval: updatedCard.interval,
+        ease_factor: updatedCard.easeFactor
+    }).eq('id', updatedCard.id);
+
+    if (error) console.error('Error updating:', error);
+  };
+  
+  const resetProgress = async () => {
+    if (!confirm("Are you sure you want to reset ALL progress? This cannot be undone.")) return;
+    
+    // Reset local state
+    setCards(prev => prev.map(c => ({
+        ...c,
+        state: 'NEW',
+        nextReviewDate: Date.now(), // Due now
+        interval: 0,
+        easeFactor: 2.5
+    } as Flashcard)));
+    
+    // Reset DB
+    // Since we can't run bulk update easily without RPC or specific per-row loop if RLS is strict, 
+    // but usually user can update rows.
+    // 'next_review' to now, 'state' to NEW.
+    const { error } = await supabase.from('cards').update({
+        state: 'NEW',
+        next_review: new Date().toISOString(),
+        interval: 0,
+        ease_factor: 2.5
+    }).neq('id', '00000000-0000-0000-0000-000000000000'); // Update all (hacky neq check)
+    
+    if (error) alert("Error resetting DB: " + error.message);
+    else alert("Progress Reset!");
+  };
+
+  const [isShuffled, setIsShuffled] = useState(false);
+
+  const getDueCards = () => {
+    const due = cards.filter(c => c.nextReviewDate <= Date.now());
+    return isShuffled ? [...due].sort(() => Math.random() - 0.5) : due;
+  };
+
   // Load Data
   useEffect(() => {
     async function init() {
@@ -36,21 +103,7 @@ function App() {
     init();
   }, []);
 
-  const updateCardStats = async (id: string, updates: Partial<Flashcard>) => {
-      // 1. Optimistic Update
-      setCards(prev => prev.map(c => c.id === id ? { ...c, ...updates } : c));
-
-      // 2. Persist to DB
-      // Need to map camelCase updates back to snake_case for DB
-      const dbUpdates: any = {};
-      if (updates.interval !== undefined) dbUpdates.interval = updates.interval;
-      if (updates.easeFactor !== undefined) dbUpdates.ease_factor = updates.easeFactor;
-      if (updates.nextReviewDate !== undefined) dbUpdates.next_review = new Date(updates.nextReviewDate).toISOString();
-      if (updates.state !== undefined) dbUpdates.state = updates.state;
-
-      const { error } = await supabase.from('cards').update(dbUpdates).eq('id', id);
-      if (error) console.error("Failed to save progress", error);
-  };
+  // The old updateCardStats function is removed as it's replaced by the new one above.
 
   if (!isConfigured) {
       return (
@@ -66,29 +119,6 @@ function App() {
       );
   }
 
-  const handleAddCard = async (front: string, back: string) => {
-      // Insert into DB
-      const newCard = {
-          front,
-          back,
-          state: 'NEW',
-          next_review: new Date().toISOString(),
-          interval: 0,
-          ease_factor: 2.5
-      };
-
-      const { data, error } = await supabase.from('cards').insert(newCard).select().single();
-      
-      if (error) {
-          alert("Error adding card: " + error.message);
-          return;
-      }
-      
-      if (data) {
-          setCards(prev => [...prev, mapRowToCard(data)]);
-          setView('dashboard');
-      }
-  };
 
   if (loading) {
     return (
@@ -98,32 +128,47 @@ function App() {
     );
   }
 
-  return (
-    <>
-      <div style={{ display: view === 'dashboard' ? 'block' : 'none', width: '100%', height: '100%' }}>
-         <Dashboard 
-            cards={cards} 
-            onStartStudy={() => setView('study')} 
-            onAddCard={() => setView('add')} 
-         />
-      </div>
+  const handleAddCard = (front: string, back: string) => {
+      const newCard: Flashcard = {
+          id: crypto.randomUUID(),
+          front,
+          back,
+          state: 'NEW',
+          nextReviewDate: Date.now(),
+          interval: 0,
+          easeFactor: 2.5
+      };
+      saveCard(newCard);
+      setView('dashboard');
+  };
 
+  return (
+    <div className="app-container">
+      {view === 'dashboard' && (
+        <Dashboard 
+          cards={cards} 
+          onStartStudy={() => setView('study')} 
+          onAddCard={() => setView('add')}
+          onReset={resetProgress}
+          isShuffled={isShuffled}
+          onToggleShuffle={() => setIsShuffled(!isShuffled)}
+        />
+      )}
       {view === 'study' && (
         <StudySession 
-            cards={cards} 
-            onUpdateStats={updateCardStats} 
-            onSessionComplete={() => setView('dashboard')} 
-            onExit={() => setView('dashboard')}
+          cards={getDueCards()} 
+          onUpdateCard={updateCardStats} 
+          onExit={() => setView('dashboard')} 
+          onSessionComplete={() => setView('dashboard')}
         />
       )}
-
       {view === 'add' && (
         <AddCard 
-            onAdd={handleAddCard} 
-            onCancel={() => setView('dashboard')} 
+          onAdd={handleAddCard} 
+          onCancel={() => setView('dashboard')} 
         />
       )}
-    </>
+    </div>
   );
 }
 

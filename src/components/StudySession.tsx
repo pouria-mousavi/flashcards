@@ -7,12 +7,12 @@ import type { Flashcard } from '../utils/sm2';
 
 interface Props {
   cards: Flashcard[];
-  onUpdateStats: (id: string, updates: Partial<Flashcard>) => void;
+  onUpdateCard: (card: Flashcard) => void;
   onSessionComplete: () => void;
   onExit: () => void;
 }
 
-export default function StudySession({ cards, onUpdateStats, onSessionComplete, onExit }: Props) {
+export default function StudySession({ cards, onUpdateCard, onSessionComplete, onExit }: Props) {
   const [queue, setQueue] = useState<Flashcard[]>([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -43,7 +43,7 @@ export default function StudySession({ cards, onUpdateStats, onSessionComplete, 
     // Optimistically update the card in our queue if it's coming back
     const updatedCard = { ...currentCard, ...updates };
     
-    onUpdateStats(currentCard.id, updates);
+    onUpdateCard(updatedCard);
 
     // Confetti on "Easy" graduation
     if (rating === 5 && updates.state === CardState.REVIEW && currentCard.state !== CardState.REVIEW) {

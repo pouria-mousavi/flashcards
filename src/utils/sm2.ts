@@ -16,6 +16,7 @@ export interface Flashcard {
   back: string;
   pronunciation?: string;
   tone?: string;
+  synonyms?: string;
   examples?: string[];
   
   // Stats
@@ -144,7 +145,8 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         back: row.back,
         pronunciation: row.pronunciation || undefined,
         tone: row.tone || undefined,
-        examples: row.examples || undefined,
+        synonyms: row.synonyms || undefined,
+        examples: (row.examples as string[]) || undefined,
         state: row.state as CardState,
         nextReviewDate: new Date(row.next_review).getTime(),
         interval: row.interval,

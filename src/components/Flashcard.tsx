@@ -8,6 +8,14 @@ interface Props {
 }
 
 export default function Flashcard({ card, isFlipped, onFlip }: Props) {
+  
+  const handleTTS = (e: React.MouseEvent) => {
+      e.stopPropagation(); // Don't flip
+      const u = new SpeechSynthesisUtterance(card.back);
+      u.lang = 'en-US';
+      window.speechSynthesis.speak(u);
+  };
+
   return (
     <div className="card-container" style={{ perspective: 1000, cursor: 'pointer' }} onClick={onFlip}>
       <motion.div
@@ -16,8 +24,8 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
         style={{
-          width: '300px',
-          height: '450px',
+          width: '320px',
+          height: '480px',
           position: 'relative',
           transformStyle: 'preserve-3d',
         }}
@@ -29,21 +37,25 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
             width: '100%',
             height: '100%',
             backfaceVisibility: 'hidden',
-            backgroundColor: 'var(--card-bg)',
-            borderRadius: '24px',
-            boxShadow: 'var(--card-shadow)',
+            backgroundColor: '#1E1E1E', // Darker Noji-like
+            color: '#ffffff',
+            borderRadius: '32px',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '24px',
+            padding: '32px',
             boxSizing: 'border-box',
-            border: '1px solid rgba(255,255,255,0.05)'
+            border: '1px solid rgba(255,255,255,0.08)'
           }}
         >
-          <h2 style={{ fontSize: '2rem', textAlign: 'center', margin: 0 }}>{card.front}</h2>
-          <p style={{ marginTop: '16px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-            Tap to reveal
+          <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>
+            PERSIAN
+          </span>
+          <h2 style={{ fontSize: '2.5rem', textAlign: 'center', margin: 0, lineHeight: '1.2' }}>{card.front}</h2>
+          <p style={{ marginTop: 'auto', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem' }}>
+            Tap to flip
           </p>
         </div>
 
@@ -54,48 +66,100 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
             width: '100%',
             height: '100%',
             backfaceVisibility: 'hidden',
-            backgroundColor: 'var(--card-bg)',
-            borderRadius: '24px',
-            boxShadow: 'var(--card-shadow)',
+            backgroundColor: '#18181b', // Slightly darker back
+            color: '#fff',
+            borderRadius: '32px',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
             transform: 'rotateY(180deg)',
             display: 'flex',
             flexDirection: 'column',
             padding: '32px',
             boxSizing: 'border-box',
-            border: '1px solid rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.08)',
             overflowY: 'auto'
           }}
         >
-          <h3 style={{ fontSize: '1.5rem', margin: '0 0 8px 0', color: 'var(--accent)' }}>{card.back}</h3>
+          {/* Header with TTS */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', marginBottom: '10px' }}>
+             <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)' }}>
+                ENGLISH
+             </span>
+             <button 
+                onClick={handleTTS}
+                style={{
+                    background: 'rgba(255,255,255,0.1)',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '40px',
+                    height: '40px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1.2rem'
+                }}
+             >
+                🔊
+             </button>
+          </div>
+
+          <h3 style={{ fontSize: '2rem', margin: '0 0 8px 0', color: '#fff', fontWeight: '800' }}>{card.back}</h3>
           
           {card.pronunciation && (
-             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', color: 'var(--text-secondary)' }}>
-                <span>🗣</span>
-                <span>{card.pronunciation}</span>
+             <div style={{ fontSize: '1rem', color: 'var(--accent)', fontFamily: 'monospace', marginBottom: '16px' }}>
+                {card.pronunciation}
              </div>
           )}
 
-          {card.tone && (
-             <span style={{ 
-               alignSelf: 'flex-start',
-               background: 'rgba(255,255,255,0.1)', 
-               padding: '4px 8px', 
-               borderRadius: '4px',
-               fontSize: '0.8rem',
-               marginBottom: '16px'
-             }}>
-                {card.tone}
-             </span>
-          )}
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '24px' }}>
+            {card.tone && (
+                <span style={{ 
+                background: (() => {
+                    switch(card.tone.toLowerCase()) {
+                        case 'formal': return 'rgba(99, 102, 241, 0.2)'; // Indigo
+                        case 'informal': return 'rgba(236, 72, 153, 0.2)'; // Pink
+                        case 'curse': return 'rgba(239, 68, 68, 0.2)'; // Red
+                        default: return 'rgba(255,255,255,0.1)';
+                    }
+                })(),
+                color: (() => {
+                    switch(card.tone.toLowerCase()) {
+                        case 'formal': return '#818cf8';
+                        case 'informal': return '#f472b6'; 
+                        case 'curse': return '#f87171';
+                        default: return '#9ca3af';
+                    }
+                })(),
+                padding: '4px 10px', 
+                borderRadius: '8px',
+                fontSize: '0.75rem',
+                fontWeight: '600',
+                letterSpacing: '0.5px'
+                }}>
+                    {card.tone.toUpperCase()}
+                </span>
+            )}
+            {card.synonyms && (
+                <span style={{ 
+                    background: 'rgba(255,255,255,0.05)', 
+                    color: '#9ca3af',
+                    padding: '4px 10px', 
+                    borderRadius: '8px',
+                    fontSize: '0.75rem',
+                    fontStyle: 'italic'
+                }}>
+                    Syn: {card.synonyms}
+                </span>
+            )}
+          </div>
 
           <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '8px 0' }} />
 
           {card.examples && card.examples.length > 0 && (
             <div style={{ textAlign: 'left', marginTop: '16px' }}>
-              <strong style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Examples:</strong>
-              <ul style={{ paddingLeft: '20px', margin: 0 }}>
+              <ul style={{ paddingLeft: '16px', margin: 0, listStyle: 'circle' }}>
                 {card.examples.map((ex, i) => (
-                  <li key={i} style={{ marginBottom: '8px', fontSize: '0.95rem', lineHeight: '1.4' }}>{ex}</li>
+                  <li key={i} style={{ marginBottom: '12px', fontSize: '0.9rem', lineHeight: '1.5', color: '#d1d5db' }}>{ex}</li>
                 ))}
               </ul>
             </div>

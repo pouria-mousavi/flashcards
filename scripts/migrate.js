@@ -29,51 +29,62 @@ async function migrate() {
         if (!line) continue;
         const parts = line.split('|');
         if (parts.length < 2) continue;
-        const front = parts[0].trim();
-        
-        let rest = parts.slice(1).join('|').trim();
-        const backEndIndex = rest.indexOf(' -- ');
-        let back = rest;
-        let meta = '';
-        if (backEndIndex !== -1) {
-            back = rest.substring(0, backEndIndex).trim();
-            meta = rest.substring(backEndIndex);
-        }
 
-        // Extract basic metadata for 'back' content
-        // We will store the full 'back' + metadata as the 'back' field for now to preserve display logic,
-        // OR we split them if we updated schema. 
-        // The current App expects 'back', 'pronunciation', etc. 
-        // Let's just persist the RAW fields we parsed.
-        
-        // Actually, better to store structured data if possible.
-        // But for migration speed, let's replicate the structure the App expects.
-        // App expects: id, front, back, pronunciation, examples, tone.
-        
-        const pronunciationMatch = meta.match(/-- Pronunciation: (.*?) (--|$)/);
-        const examplesMatch = meta.match(/-- Ex: (.*?) (--|$)/);
-        const toneMatch = meta.match(/-- Tone: (.*?) (--|$)/);
+        // 1. Clean Front
+        let front = parts[0].trim();
+        // Remove prefixes like "Persian:", "Farsi:", "Meaning:", "Question:" (case insensitive)
+        front = front.replace(/^(Persian|Farsi|Meaning|Question|معنی|فارسی)\s*[:：]\s*/i, '').trim();
 
-        const pronunciation = pronunciationMatch ? pronunciationMatch[1].trim() : null;
-        const tone = toneMatch ? toneMatch[1].trim() : null;
-        let examples = [];
-        if (examplesMatch) {
-             examples = examplesMatch[1].trim().split(/\d+\.\s+/).filter(ex => ex.trim().length > 0);
+        // 2. Parse Rest (Back side chunks)
+        const rest = parts.slice(1).join('|').trim();
+        // Use a more robust split that respects the "-- Key: Value" structure
+        const segments = rest.split(/--(?=\s*\w+\s*[:：])/).map(s => s.trim()).filter(s => s);
+        
+        // Sometimes the first chunk is the definition without a key
+        // But in the file it might just be "Word -- Pronunciation: ..."
+        // Let's rely on the previous split logic which was working but buggy with variables.
+        
+        const rawSegments = rest.split('--').map(s => s.trim());
+        let back = rawSegments[0] || '';
+        back = back.replace(/^(English|Eng)\s*[:：]\s*/i, '').trim();
+
+        let pronunciation = null;
+        let tone = 'Neutral'; 
+        let synonyms = null;
+        let examples = null;
+
+        for (let i = 1; i < rawSegments.length; i++) {
+            const seg = rawSegments[i];
+            if (seg.match(/^Pronunciation\s*[:：]/i)) {
+                pronunciation = seg.replace(/^Pronunciation\s*[:：]\s*/i, '').trim();
+            } else if (seg.match(/^Tone\s*[:：]/i)) {
+                tone = seg.replace(/^Tone\s*[:：]\s*/i, '').trim();
+            } else if (seg.match(/^(Alt|Synonyms|Alternative)\s*[:：]/i)) {
+                synonyms = seg.replace(/^(Alt|Synonyms|Alternative)\s*[:：]\s*/i, '').trim();
+            } else if (seg.match(/^(Ex|Example|Examples)\s*[:：]/i)) {
+                const rawEx = seg.replace(/^(Ex|Example|Examples)\s*[:：]\s*/i, '').trim();
+                const matches = rawEx.match(/\d+\.\s*([^0-9]+)/g);
+                if (matches) {
+                    examples = matches.map(m => m.replace(/^\d+\.\s*/, '').trim());
+                } else {
+                    examples = [rawEx];
+                }
+            }
         }
 
         cards.push({
             front,
-            back, // The definition
+            back,
             pronunciation,
             tone,
-            examples, // JSON
+            synonyms,
+            examples: examples ? JSON.stringify(examples) : null, // Store as JSON for Supabase
             state: 'NEW',
+            next_review: new Date().toISOString(),
             interval: 0,
-            ease_factor: 2.5,
-            next_review: new Date().toISOString()
+            ease_factor: 2.5
         });
     }
-
     console.log(`Found ${cards.length} cards. Deduplicating...`);
     
     const uniqueCards = [];
@@ -90,6 +101,9 @@ async function migrate() {
     }
     
     console.log(`Unique cards: ${uniqueCards.length}. Uploading to Supabase...`);
+    if (uniqueCards.length > 0) {
+        console.log("Sample Card:", JSON.stringify(uniqueCards[0], null, 2));
+    }
 
     const { error } = await supabase.from('cards').upsert(uniqueCards, { onConflict: 'front' });
 

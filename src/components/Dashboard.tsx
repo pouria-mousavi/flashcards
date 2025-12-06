@@ -5,9 +5,12 @@ interface Props {
   cards: Flashcard[];
   onStartStudy: () => void;
   onAddCard: () => void;
+  onReset: () => void;
+  isShuffled: boolean;
+  onToggleShuffle: () => void;
 }
 
-export default function Dashboard({ cards, onStartStudy, onAddCard }: Props) {
+export default function Dashboard({ cards, onStartStudy, onAddCard, onReset, isShuffled, onToggleShuffle }: Props) {
   // Compute Stats
   // const totalCards = cards.length;
   let newCards = 0;
@@ -71,18 +74,53 @@ export default function Dashboard({ cards, onStartStudy, onAddCard }: Props) {
               {toReview > 0 ? `Study ${toReview} Cards` : (newCards > 0 ? "Learn New Cards" : "All Done!")}
           </button>
 
+          {/* Settings Row */}
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button
+                onClick={onToggleShuffle}
+                style={{
+                    flex: 1,
+                    padding: '16px',
+                    fontSize: '1rem',
+                    background: isShuffled ? 'var(--accent)' : 'rgba(255,255,255,0.05)',
+                    color: isShuffled ? '#fff' : 'var(--text-primary)',
+                    borderRadius: '20px',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    transition: 'all 0.2s'
+                }}
+            >
+                🔀 {isShuffled ? 'Shuffle On' : 'Shuffle Off'}
+            </button>
+             <button 
+                onClick={onAddCard}
+                style={{
+                    flex: 1,
+                    padding: '16px',
+                    fontSize: '1rem',
+                    background: 'rgba(255,255,255,0.05)',
+                    color: 'var(--text-primary)',
+                    borderRadius: '20px',
+                    border: '1px solid rgba(255,255,255,0.1)'
+                }}
+            >
+                + Add Card
+            </button>
+          </div>
+
           <button 
-             onClick={onAddCard}
+             onClick={onReset}
              style={{
                  padding: '16px',
-                 fontSize: '1rem',
-                 background: 'rgba(255,255,255,0.05)',
-                 color: 'var(--text-primary)',
+                 fontSize: '0.9rem',
+                 background: 'transparent',
+                 color: 'var(--danger)',
                  borderRadius: '24px',
-                 border: '1px solid rgba(255,255,255,0.1)'
+                 border: '1px solid var(--danger)',
+                 opacity: 0.7,
+                 marginTop: '10px'
              }}
           >
-              + Add New Card
+              🔄 Reset Progress
           </button>
       </div>
 

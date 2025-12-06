@@ -17,8 +17,9 @@ export interface Database {
           back: string
           pronunciation: string | null
           tone: string | null
-          examples: string[] | null
-          state: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
+          synonyms: string | null
+          examples: Json | null
+          state: string
           next_review: string
           interval: number
           ease_factor: number
