@@ -18,22 +18,10 @@ export default function StudySession({ cards, onUpdateCard, onSessionComplete, o
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    const now = Date.now();
-    // 1. Find cards due for review
-    const dueCards = cards.filter(card => {
-      // Ready if it's new (0) or due date is passed
-      return card.nextReviewDate <= now;
-    });
-
-    // 2. Sort by simple priority: Learn/Relearn first, then Review, then New
-    const sorted = dueCards.sort((a, b) => {
-        return a.nextReviewDate - b.nextReviewDate;
-    });
-
-    setQueue(sorted.slice(0, 50));
-  }, []); // Run only on mount. Note: if 'cards' updates externally, this won't reflect unless we depend on it, 
-          // but usually study session captures a snapshot. If using realtime, we might want to dependency.
-          // For now snapshot is safer for queue stability.
+    // We strictly use the order provided by the parent (App.tsx)
+    // This allows the parent to handle "Priority Sort" or "Shuffle" correctly.
+    setQueue(cards.slice(0, 50));
+  }, []); 
 
   const handleRate = (rating: number) => {
     const currentCard = queue[currentCardIndex];

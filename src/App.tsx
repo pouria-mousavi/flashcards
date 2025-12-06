@@ -79,8 +79,32 @@ function App() {
   const [isShuffled, setIsShuffled] = useState(false);
 
   const getDueCards = () => {
-    const due = cards.filter(c => c.nextReviewDate <= Date.now());
-    return isShuffled ? [...due].sort(() => Math.random() - 0.5) : due;
+    const now = Date.now();
+    const due = cards.filter(c => c.nextReviewDate <= now);
+    
+    if (isShuffled) {
+        return [...due].sort(() => Math.random() - 0.5);
+    }
+
+    // Smart Sort: Learning > Relearning > Review > New
+    return [...due].sort((a, b) => {
+        // 1. Priority by State
+        const priority = { 
+            'LEARNING': 0, 
+            'RELEARNING': 0, 
+            'REVIEW': 1, 
+            'NEW': 2 
+        };
+        // @ts-ignore
+        const pA = priority[a.state] ?? 99;
+        // @ts-ignore
+        const pB = priority[b.state] ?? 99;
+        
+        if (pA !== pB) return pA - pB;
+
+        // 2. Within same state, sort by time (Overdue first)
+        return a.nextReviewDate - b.nextReviewDate;
+    });
   };
 
   // Load Data
