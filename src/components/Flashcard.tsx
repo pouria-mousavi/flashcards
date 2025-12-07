@@ -103,7 +103,7 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
             PERSIAN
           </span>
           <h2 style={{ 
-              fontSize: card.front.length > 50 ? '1.5rem' : (card.front.length > 20 ? '2rem' : '2.5rem'), 
+              fontSize: (card.front?.length || 0) > 50 ? '1.5rem' : ((card.front?.length || 0) > 20 ? '2rem' : '2.5rem'), 
               textAlign: 'center', 
               margin: 0, 
               lineHeight: '1.4',
@@ -112,7 +112,7 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
               wordWrap: 'break-word',
               width: '100%'
           }}>
-            {card.front}
+            {card.front || 'Invalid Card'}
           </h2>
           <p style={{ marginTop: 'auto', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem' }}>
             Tap to flip
@@ -184,13 +184,13 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
           </div>
 
           <h3 style={{ 
-              fontSize: card.back.length > 50 ? '1.4rem' : '2rem', 
+              fontSize: (card.back?.length || 0) > 50 ? '1.4rem' : '2rem', 
               margin: '0 0 16px 0', 
               color: '#fff', 
               fontWeight: '800',
               lineHeight: '1.3'
           }}>
-            {card.back}
+            {card.back || 'No Definition'}
           </h3>
           
           {card.pronunciation && (
