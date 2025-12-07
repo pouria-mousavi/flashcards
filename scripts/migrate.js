@@ -33,7 +33,8 @@ async function migrate() {
         // 1. Clean Front
         let front = parts[0].trim();
         // Remove prefixes like "Persian:", "Farsi:", "Meaning:", "Question:" (case insensitive)
-        front = front.replace(/^(Persian|Farsi|Meaning|Question|معنی|فارسی)\s*[:：]\s*/i, '').trim();
+        // Also handles "Persian Meaning:", "English Meaning:" if present on front (rare but possible)
+        front = front.replace(/^(Persian|Farsi|Meaning|Question|معنی|فارسی)(\s*Meaning)?\s*[:：]\s*/i, '').trim();
 
         // 2. Parse Rest (Back side chunks)
         const rest = parts.slice(1).join('|').trim();
@@ -46,7 +47,7 @@ async function migrate() {
         
         const rawSegments = rest.split('--').map(s => s.trim());
         let back = rawSegments[0] || '';
-        back = back.replace(/^(English|Eng)\s*[:：]\s*/i, '').trim();
+        back = back.replace(/^(English|Eng)(\s*Meaning)?\s*[:：]\s*/i, '').trim();
 
         let pronunciation = null;
         let tone = 'Neutral'; 

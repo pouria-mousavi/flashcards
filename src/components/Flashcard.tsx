@@ -102,7 +102,18 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
           <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>
             PERSIAN
           </span>
-          <h2 style={{ fontSize: '2.5rem', textAlign: 'center', margin: 0, lineHeight: '1.2' }}>{card.front}</h2>
+          <h2 style={{ 
+              fontSize: card.front.length > 50 ? '1.5rem' : (card.front.length > 20 ? '2rem' : '2.5rem'), 
+              textAlign: 'center', 
+              margin: 0, 
+              lineHeight: '1.4',
+              fontFamily: 'Vazirmatn, sans-serif', // Explicitly Persian
+              padding: '0 20px',
+              wordWrap: 'break-word',
+              width: '100%'
+          }}>
+            {card.front}
+          </h2>
           <p style={{ marginTop: 'auto', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem' }}>
             Tap to flip
           </p>
@@ -172,7 +183,15 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
              </div>
           </div>
 
-          <h3 style={{ fontSize: '2rem', margin: '0 0 8px 0', color: '#fff', fontWeight: '800' }}>{card.back}</h3>
+          <h3 style={{ 
+              fontSize: card.back.length > 50 ? '1.4rem' : '2rem', 
+              margin: '0 0 16px 0', 
+              color: '#fff', 
+              fontWeight: '800',
+              lineHeight: '1.3'
+          }}>
+            {card.back}
+          </h3>
           
           {card.pronunciation && (
              <div style={{ fontSize: '1rem', color: 'var(--accent)', fontFamily: 'monospace', marginBottom: '16px' }}>
