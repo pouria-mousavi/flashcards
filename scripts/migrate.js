@@ -106,7 +106,54 @@ async function migrate() {
         console.log("Sample Card:", JSON.stringify(uniqueCards[0], null, 2));
     }
 
-    const { error } = await supabase.from('cards').upsert(uniqueCards, { onConflict: 'front' });
+    // 3. Batch Process
+    const batchSize = 100;
+    for (let i = 0; i < uniqueCards.length; i += batchSize) {
+        const batch = uniqueCards.slice(i, i + batchSize);
+        
+        // Strategy: We want to UPDATE content but KEEP stats if they exist.
+        // "upsert" in Supabase overwrites everything by default.
+        // So we must:
+        // 1. Fetch existing IDs for this batch (by Front text)
+        // 2. Map existing stats to the new objects
+        // 3. Upsert
+        
+        const fronts = batch.map(c => c.front);
+        const { data: existing, error: fetchErr } = await supabase
+            .from('cards')
+            .select('front, state, next_review, interval, ease_factor, id')
+            .in('front', fronts);
+            
+        if (fetchErr) {
+            console.error("Error fetching existing cards:", fetchErr);
+            continue;
+        }
+        
+        const existingMap = new Map();
+        if (existing) {
+            existing.forEach(e => existingMap.set(e.front, e));
+        }
+        
+        const finalBatch = batch.map(c => {
+            const old = existingMap.get(c.front);
+            if (old) {
+                // Preserve stats
+                return {
+                    ...c,
+                    id: old.id, // Reuse ID
+                    state: old.state,
+                    next_review: old.next_review,
+                    interval: old.interval,
+                    ease_factor: old.ease_factor
+                };
+            }
+            return c; // New card, keep defaults
+        });
+        
+        const { error: upsertErr } = await supabase.from('cards').upsert(finalBatch, { onConflict: 'front' });
+        if (upsertErr) console.error("Error upserting batch:", upsertErr);
+        else console.log(`Processed batch ${i} - ${i + batch.length}`);
+    }
 
     if (error) {
         console.error("Error uploading:", error);
