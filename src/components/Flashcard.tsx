@@ -9,33 +9,39 @@ interface Props {
 }
 
 export default function Flashcard({ card, isFlipped, onFlip }: Props) {
+  if (!card) return null; // Safety check
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
 
   useEffect(() => {
     const loadVoices = () => {
-        const voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
-        setAvailableVoices(voices);
-        
-        // Try to load saved preference
-        const saved = localStorage.getItem('preferred_voice_uri');
-        if (saved) {
-            const hit = voices.find(v => v.voiceURI === saved);
-            if (hit) {
-                setVoice(hit);
-                return;
+        try {
+            if (!window.speechSynthesis) return;
+            const voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+            setAvailableVoices(voices);
+            
+            // Try to load saved preference
+            const saved = localStorage.getItem('preferred_voice_uri');
+            if (saved) {
+                const hit = voices.find(v => v.voiceURI === saved);
+                if (hit) {
+                    setVoice(hit);
+                    return;
+                }
             }
-        }
 
-        // Fallback priority
-        const preferred = voices.find(v => v.name === 'Google US English') ||
-                          voices.find(v => v.name === 'Samantha') ||
-                          voices[0];
-        if (preferred) setVoice(preferred);
+            // Fallback priority
+            const preferred = voices.find(v => v.name === 'Google US English') ||
+                              voices.find(v => v.name === 'Samantha') ||
+                              voices[0];
+            if (preferred) setVoice(preferred);
+        } catch (e) {
+            console.error("Voice load error:", e);
+        }
     };
 
     loadVoices();
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+    if (window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined) {
         window.speechSynthesis.onvoiceschanged = loadVoices;
     }
   }, []);
