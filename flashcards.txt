@@ -695,3 +695,712 @@ Exact lookalike کپ اونه! | It's a dead ringer for Pouria -- Ex: 1. She's a
 -- Pronunciation: /rɪˈdʌndənsi/
 -- Tone: Technical
 -- Example: 1. We need server redundancy to prevent downtime. 2. Remove the redundancy in your code.
+مگر اینکه ... | Unless ...
+-- Pronunciation: /ənˈlɛs/
+-- Tone: Neutral
+-- Example: 1. I won't go unless you come with me. 2. Unless otherwise specified, all sales are final.
+
+بعید میدانم که ... | I doubt that ...
+-- Pronunciation: /daut/
+-- Tone: Neutral
+-- Synonyms: I'm skeptical
+-- Example: 1. I doubt that it will rain today. 2. He doubts that the project will succeed.
+
+به محض اینکه ... | No sooner had ... than ...
+-- Pronunciation: /noʊ ˈsuːnər/
+-- Tone: Formal/Literary
+-- Example: 1. No sooner had I arrived than the phone rang. 2. No sooner had she left the house than it started to storm.
+
+اگر نبود ... (مشکل/کمک کسی) | But for ...
+-- Pronunciation: /bʌt fɔr/
+-- Tone: Formal
+-- Example: 1. But for your help, I would have failed. 2. The project would be finished but for the funding issues.
+
+ای کاش ... (حسرت گذشته) | Should have + PP
+-- Pronunciation: /ʃʊd həv/
+-- Tone: Neutral
+-- Example: 1. I should have studied harder. 2. You should have told me earlier.
+
+غافل از اینکه ... | Little did he know ...
+-- Pronunciation: /ˈlɪtəl dɪd hi noʊ/
+-- Tone: Storytelling
+-- Example: 1. Little did he know that a surprise party was waiting for him.
+
+به فرض اینکه / گیریم که ... | Granted that ...
+-- Pronunciation: /ˈɡræntɪd ðæt/
+-- Tone: Formal
+-- Example: 1. Granted that the economy is improving, unemployment is still high.
+
+چاره ای نیست جز ... | There is no alternative but to ...
+-- Pronunciation: /ɔlˈtɜrnətɪv/
+-- Tone: Formal
+-- Example: 1. There is no alternative but to accept the offer.
+
+سر و کله زدن (با مشکل) | Grapple with
+-- Pronunciation: /ˈɡræpəl wɪð/
+-- Tone: Neutral
+-- Synonyms: Struggle with
+-- Example: 1. The government is grappling with the economic crisis.
+
+دست کم گرفتن | Undermine
+-- Pronunciation: /ˌʌndərˈmaɪn/
+-- Tone: Neutral
+-- Synonyms: Weaken
+-- Example: 1. Don't let their comments undermine your confidence.
+
+پیچیده / بغرنج | Intricate
+-- Pronunciation: /ˈɪntrɪkət/
+-- Tone: Neutral
+-- Synonyms: Complex
+-- Example: 1. The watch has an intricate mechanism. 2. The plot of the movie was very intricate.
+
+بدیهی است که ... | It goes without saying that ...
+-- Pronunciation: /ɡoʊz wɪˈðaʊt ˈseɪɪŋ/
+-- Tone: Formal
+-- Example: 1. It goes without saying that health is wealth.
+
+در کمال تعجب | To my surprise
+-- Pronunciation: /tə maɪ səˈpraɪz/
+-- Tone: Narrative
+-- Example: 1. To my surprise, the door was unlocked.
+
+ناگزیر / اجتناب ناپذیر | Inevitable
+-- Pronunciation: /ɪnˈɛvɪtəbl/
+-- Tone: Neutral
+-- Synonyms: Unavoidable
+-- Example: 1. Change is inevitable. 2. The scandal made his resignation inevitable.
+
+قابل لمس / واقعی | Tangible
+-- Pronunciation: /ˈtændʒəbl/
+-- Tone: Formal
+-- Synonyms: Palpable
+-- Example: 1. We need tangible results, not just promises. 2. There is no tangible evidence of the crime.
+
+از قضا / اتفاقا | As it happens
+-- Pronunciation: /æz ɪt ˈhæpənz/
+-- Tone: Conversational
+-- Example: 1. As it happens, I have a spare key.
+
+ظاهرا / آنطور که پیداست | Seemingly
+-- Pronunciation: /ˈsiːmɪŋli/
+-- Tone: Neutral
+-- Synonyms: Apparently
+-- Example: 1. It was a seemingly simple task that turned out to be difficult.
+
+تقویت کردن (با دلیل/نیرو) | Reinforce
+-- Pronunciation: /ˌriːɪnˈfɔrs/
+-- Tone: Neutral
+-- Synonyms: Strengthen
+-- Example: 1. We need to reinforce the walls. 2. His argument was reinforced by data.
+
+عواقب / پیامد | Repercussion
+-- Pronunciation: /ˌriːpərˈkʌʃən/
+-- Tone: Formal
+-- Synonyms: Consequence
+-- Example: 1. The decision could have serious repercussions for the company.
+
+گیره لباس | Clothespin
+-- Pronunciation: /ˈkloʊðzˌpɪn/
+-- Tone: Neutral
+-- Example: 1. Hang the wet shirt on the line with a clothespin.
+
+آبچکان (ظرفشویی) | Dish Rack
+-- Pronunciation: /dɪʃ ræk/
+-- Tone: Neutral
+-- Example: 1. Put the clean plates in the dish rack to dry.
+
+خاک انداز | Dustpan
+-- Pronunciation: /ˈdʌstˌpæn/
+-- Tone: Neutral
+-- Example: 1. Sweep the dirt into the dustpan.
+
+نردبان تاشو | Stepladder
+-- Pronunciation: /ˈstɛpˌlædər/
+-- Tone: Neutral
+-- Example: 1. I need a stepladder to change the light bulb.
+
+چسب زخم | Band-Aid / Plaster
+-- Pronunciation: /ˈbænd eɪd/
+-- Tone: Neutral
+-- Example: 1. Put a Band-Aid on that cut.
+
+موچین | Tweezers
+-- Pronunciation: /ˈtwiːzərz/
+-- Tone: Neutral
+-- Example: 1. She used tweezers to remove the splinter.
+
+سوهان ناخن | Nail File
+-- Pronunciation: /neɪl faɪl/
+-- Tone: Neutral
+-- Example: 1. Can I borrow your nail file?
+
+سرخ کن | Fryer
+-- Pronunciation: /ˈfraɪər/
+-- Tone: Neutral
+-- Example: 1. We made french fries in the deep fryer.
+
+همزن (دستی) | Whisk
+-- Pronunciation: /wɪsk/
+-- Tone: Neutral
+-- Example: 1. Use a whisk to beat the eggs.
+
+رنده | Grater
+-- Pronunciation: /ˈɡreɪtər/
+-- Tone: Neutral
+-- Example: 1. I need a cheese grater for the pasta.
+
+درب بازکن (کنسرو) | Can Opener
+-- Pronunciation: /kæn ˈoʊpənər/
+-- Tone: Neutral
+-- Example: 1. The can opener is in the drawer.
+
+وسیله / ابزار (مبهم) | Contraption
+-- Pronunciation: /kənˈtræpʃən/
+-- Tone: Informal
+-- Synonyms: Gadget, Gizmo
+-- Example: 1. What is that weird contraption in the garage?
+
+چرت و پرت / مهمل | Gibberish
+-- Pronunciation: /ˈdʒɪbərɪʃ/
+-- Tone: Informal
+-- Synonyms: Nonsense
+-- Example: 1. He was talking gibberish; I couldn't understand a word.
+
+طفره رفتن / معطل کردن | Procrastinate
+-- Pronunciation: /proʊˈkræstəˌneɪt/
+-- Tone: Neutral
+-- Synonyms: Delay
+-- Example: 1. I always procrastinate when I have a deadline.
+
+کینه | Grudge
+-- Pronunciation: /ɡrʌdʒ/
+-- Tone: Neutral
+-- Example: 1. She still holds a grudge against him for what he said.
+
+حس ششم | Gut feeling
+-- Pronunciation: /ɡʌt ˈfiːlɪŋ/
+-- Tone: Informal
+-- Synonyms: Intuition
+-- Example: 1. I have a gut feeling that something is wrong.
+
+بداهه / یهویی | Impromptu
+-- Pronunciation: /ɪmˈprɑmptu/
+-- Tone: Neutral
+-- Synonyms: Spontaneous
+-- Example: 1. They held an impromptu meeting in the hallway.
+
+مقرون به صرفه | Cost-effective
+-- Pronunciation: /kɔst ɪˈfɛktɪv/
+-- Tone: Corporate
+-- Synonyms: Economical
+-- Example: 1. This is the most cost-effective solution.
+
+سرمایه گذاری (ریسک) | Venture
+-- Pronunciation: /ˈvɛntʃər/
+-- Tone: Business
+-- Example: 1. Their new business venture failed.
+
+ذینفعان | Stakeholders
+-- Pronunciation: /ˈsteɪkˌhoʊldərz/
+-- Tone: Corporate
+-- Example: 1. We need to get approval from all stakeholders.
+
+پهنای باند (ظرفیت ذهنی) | Bandwidth
+-- Pronunciation: /ˈbændwɪdθ/
+-- Tone: Corporate/Slang
+-- Example: 1. I don't have the bandwidth to take on another project right now.
+
+نتیجه نهایی / سود خالص | Bottom line
+-- Pronunciation: /ˈbɑtəm laɪn/
+-- Tone: Corporate
+-- Example: 1. The bottom line is that we need to cut costs. 2. What's the impact on the bottom line?
+
+نوآوری / تحول بزرگ | Breakthrough
+-- Pronunciation: /ˈbreɪkˌθru/
+-- Tone: Neutral
+-- Example: 1. Scientists have made a major breakthrough in cancer research.
+
+بادوام / جان سخت | Resilient
+-- Pronunciation: /rɪˈzɪljənt/
+-- Tone: Positive
+-- Example: 1. She is very resilient; she bounces back from setbacks quickly.
+
+کمیاب | Scarce
+-- Pronunciation: /skɛrs/
+-- Tone: Neutral
+-- Synonyms: Rare
+-- Example: 1. Food was scarce during the war.
+
+فراوان | Abundant
+-- Pronunciation: /əˈbʌndənt/
+-- Tone: Neutral
+-- Synonyms: Plentiful
+-- Example: 1. We have abundant natural resources.
+
+منسجم / یکدست | Coherent
+-- Pronunciation: /koʊˈhɪrənt/
+-- Tone: Formal
+-- Example: 1. The team lacks a coherent strategy. 2. He couldn't speak in a coherent sentence.
+
+سازش / مصالحه | Compromise
+-- Pronunciation: /ˈkɑmprəˌmaɪz/
+-- Tone: Neutral
+-- Example: 1. We reached a compromise after hours of negotiation. 2. Don't compromise your values.
+
+تطبیق دادن / وفق دادن | Adapt
+-- Pronunciation: /əˈdæpt/
+-- Tone: Neutral
+-- Example: 1. You need to adapt to the new environment.
+
+کاهش دادن (اثر بد) | Mitigate
+-- Pronunciation: /ˈmɪtɪˌɡeɪt/
+-- Tone: Formal
+-- Synonyms: Alleviate
+-- Example: 1. We took steps to mitigate the risks.
+
+ابهام | Ambiguity
+-- Pronunciation: /ˌæmbɪˈɡjuɪti/
+-- Tone: Formal
+-- Example: 1. The contract is full of ambiguity.
+مصلحت اندیشی / تدبیر | Expediency
+-- Pronunciation: /ɪkˈspiːdiənsi/
+-- Tone: Formal
+-- Example: 1. The decision was made for reasons of expediency, not principle.
+
+سرسری / اجمالی | Cursory
+-- Pronunciation: /ˈkɜrsəri/
+-- Tone: Formal
+-- Synonyms: Superficial
+-- Example: 1. He gave the report a cursory glance.
+
+خوش‌بین (به آینده بازار) | Bullish
+-- Pronunciation: /ˈbʊlɪʃ/
+-- Tone: Financial
+-- Example: 1. Analysts are bullish on the tech sector.
+
+بدبین (به آینده بازار) | Bearish
+-- Pronunciation: /ˈbɛrɪʃ/
+-- Tone: Financial
+-- Example: 1. The market sentiment is bearish due to inflation.
+
+حاشیه سود | Profit Margin
+-- Pronunciation: /ˈprɑfɪt ˈmɑrdʒɪn/
+-- Tone: Business
+-- Example: 1. We need to increase our profit margin.
+
+نقدینگی | Liquidity
+-- Pronunciation: /lɪˈkwɪdɪti/
+-- Tone: Financial
+-- Example: 1. The company is facing a liquidity crisis.
+
+نقطه سر به سر | Break-even point
+-- Pronunciation: /ˈbreɪk ˈiːvən pɔɪnt/
+-- Tone: Business
+-- Example: 1. We expect to reach the break-even point in six months.
+
+برونسپاری | Outsourcing
+-- Pronunciation: /ˈaʊtˌsɔrsɪŋ/
+-- Tone: Business
+-- Example: 1. Outsourcing IT services can save money.
+
+مقیاس‌پذیر | Scalable
+-- Pronunciation: /ˈskeɪləbəl/
+-- Tone: Tech/Business
+-- Example: 1. Is this business model scalable?
+
+دست و پا گیر (سنگین) | Cumbersome
+-- Pronunciation: /ˈkʌmbərsəm/
+-- Tone: Neutral
+-- Synonyms: Unwieldy
+-- Example: 1. The old process was cumbersome and slow.
+
+بی‌نقص / تمیز | Impeccable
+-- Pronunciation: /ɪmˈpɛkəbəl/
+-- Tone: Positive
+-- Synonyms: Flawless
+-- Example: 1. Her English is impeccable. 2. He has impeccable taste.
+
+خوش‌صحبت / فصیح | Articulate
+-- Pronunciation: /ɑrˈtɪkjələt/
+-- Tone: Positive
+-- Example: 1. She is an articulate speaker.
+
+موذی / تدریجی (ولی مخرب) | Insidious
+-- Pronunciation: /ɪnˈsɪdiəs/
+-- Tone: Negative
+-- Example: 1. High blood pressure is an insidious disease.
+
+فراگیر / همه جا حاضر | Ubiquitous
+-- Pronunciation: /juˈbɪkwɪtəs/
+-- Tone: Formal
+-- Synonyms: Omnipresent
+-- Example: 1. Smartphones have become ubiquitous.
+
+زائد / اضافی | Superfluous
+-- Pronunciation: /suˈpɜrfluəs/
+-- Tone: Formal
+-- Synonyms: Unnecessary
+-- Example: 1. Remove any superfluous words from your essay.
+
+دقیق / وسواسی | Meticulous
+-- Pronunciation: /məˈtɪkjələs/
+-- Tone: Positive
+-- Synonyms: Careful
+-- Example: 1. He is meticulous about detail.
+
+بومی (منطقه خاص) | Indigenous
+-- Pronunciation: /ɪnˈdɪdʒənəs/
+-- Tone: Formal
+-- Synonyms: Native
+-- Example: 1. The kangaroo is indigenous to Australia.
+
+نوستالژیک / خاطره‌انگیز | Evocative
+-- Pronunciation: /ɪˈvɑkətɪv/
+-- Tone: Artistic
+-- Example: 1. The smell of baking bread is evocative of my childhood.
+
+زودگذر | Ephemeral
+-- Pronunciation: /əˈfɛmərəl/
+-- Tone: Literary
+-- Synonyms: Short-lived
+-- Example: 1. Fashion trends are ephemeral.
+
+حیاتی / محوری | Pivotal
+-- Pronunciation: /ˈpɪvətəl/
+-- Tone: Formal
+-- Synonyms: Crucial
+-- Example: 1. This is a pivotal moment in history.
+
+پیش‌پا افتاده / معمولی | Mundane
+-- Pronunciation: /mʌnˈdeɪn/
+-- Tone: Neutral
+-- Synonyms: Ordinary
+-- Example: 1. I’m tired of doing mundane tasks like washing dishes.
+
+پارادوکس / متناقض‌نما | Paradox
+-- Pronunciation: /ˈpærəˌdɑks/
+-- Tone: Neutral
+-- Example: 1. It’s a paradox that computers save time but we seem to have less of it.
+
+دوپهلو / مبهم | Ambivalent
+-- Pronunciation: /æmˈbɪvələnt/
+-- Tone: Psychological
+-- Example: 1. I feel ambivalent about moving to a new city. (Mixed feelings)
+
+بی‌تفاوت | Apathetic
+-- Pronunciation: /ˌæpəˈθɛtɪk/
+-- Tone: Negative
+-- Synonyms: Indifferent
+-- Example: 1. Voters are becoming increasingly apathetic.
+
+همدردی (درک احساس) | Empathy
+-- Pronunciation: /ˈɛmpəθi/
+-- Tone: Positive
+-- Example: 1. She showed great empathy for the victims.
+
+نوع‌دوستی | Altruism
+-- Pronunciation: /ˈæltruˌɪzəm/
+-- Tone: Positive
+-- Example: 1. His donation was an act of pure altruism.
+
+انعطاف‌پذیری (تطبیق) | Versatility
+-- Pronunciation: /ˌvɜrsəˈtɪlɪti/
+-- Tone: Positive
+-- Example: 1. I admire the versatility of this tool.
+
+استقامت / پشتکار | Perseverance
+-- Pronunciation: /ˌpɜrsəˈvɪrəns/
+-- Tone: Positive
+-- Synonyms: Persistence
+-- Example: 1. Success requires hard work and perseverance.
+
+صحت / درستی | Integrity
+-- Pronunciation: /ɪnˈtɛɡrɪti/
+-- Tone: Positive
+-- Example: 1. He is a man of high integrity. 2. Data integrity is crucial.
+
+تند / زننده (بو/مزه) | Pungent
+-- Pronunciation: /ˈpʌndʒənt/
+-- Tone: Neutral
+-- Example: 1. Onions have a pungent smell.
+
+جیغ / گوش‌خراش | Shrill
+-- Pronunciation: /ʃrɪl/
+-- Tone: Negative
+-- Example: 1. A shrill voice pierced the air.
+
+کر کننده | Deafening
+-- Pronunciation: /ˈdɛfənɪŋ/
+-- Tone: Vivid
+-- Example: 1. The explosion was deafening.
+
+خیره‌کننده | Dazzling
+-- Pronunciation: /ˈdæzlɪŋ/
+-- Tone: Positive
+-- Example: 1. A dazzling display of fireworks.
+
+کدر / مات | Opaque
+-- Pronunciation: /oʊˈpeɪk/
+-- Tone: Neutral
+-- Example: 1. The windows are opaque; you can't see through them. (Also used metaphorically for valid processes)
+
+شفاف (آینه‌ای) | Transparent
+-- Pronunciation: /trænsˈpɛrənt/
+-- Tone: Neutral
+-- Example: 1. We need a transparent hiring process.
+
+زمخت / زبر | Coarse
+-- Pronunciation: /kɔrs/
+-- Tone: Neutral
+-- Synonyms: Rough
+-- Example: 1. The fabric feels coarse.
+
+لطیف / ظریف | Delicate
+-- Pronunciation: /ˈdɛlɪkət/
+-- Tone: Positive
+-- Example: 1. A delicate flower. 2. A delicate situation.
+
+شکننده | Fragile
+-- Pronunciation: /ˈfrædʒəl/
+-- Tone: Neutral
+-- Synonyms: Breakable
+-- Example: 1. Handle with care; the contents are fragile.
+
+دست و پا چلفتی | Clumsy
+-- Pronunciation: /ˈklʌmzi/
+-- Tone: Negative
+-- Example: 1. I’m so clumsy; I keep dropping things.
+
+خجالتی / کمرو | Timid
+-- Pronunciation: /ˈtɪmɪd/
+-- Tone: Neutral
+-- Synonyms: Shy
+-- Example: 1. A timid child hiding behind his mother.
+
+جسور / بی پروا | Bold
+-- Pronunciation: /boʊld/
+-- Tone: Positive
+-- Synonyms: Daring
+-- Example: 1. It was a bold move to quit his job.
+
+محتاط | Cautious
+-- Pronunciation: /ˈkɔʃəs/
+-- Tone: Neutral
+-- Synonyms: Careful
+-- Example: 1. Be cautious when driving in the rain.
+
+کنجکاو | Inquisitive
+-- Pronunciation: /ɪnˈkwɪzɪtɪv/
+-- Tone: Positive
+-- Synonyms: Curious
+-- Example: 1. An inquisitive mind is essential for a scientist.
+
+بدبین (به نیات دیگران) | Cynical
+-- Pronunciation: /ˈsɪnɪkəl/
+-- Tone: Negative
+-- Example: 1. He is cynical about politicians' motives.
+
+خوش‌بین (به طور کلی) | Optimistic
+-- Pronunciation: /ˌɑptəˈmɪstɪk/
+-- Tone: Positive
+-- Example: 1. I am optimistic about the future.
+
+بدبین (به طور کلی) | Pessimistic
+-- Pronunciation: /ˌpɛsəˈmɪstɪk/
+-- Tone: Negative
+-- Example: 1. Don't be so pessimistic; things will work out.
+
+نوستالژی | Nostalgia
+-- Pronunciation: /nɔˈstældʒə/
+-- Tone: Neutral
+-- Example: 1. Viewing old photos filled him with nostalgia.
+
+حسرت / افسوس | Regret
+-- Pronunciation: /rɪˈɡrɛt/
+-- Tone: Negative
+-- Example: 1. I regret not learning a second language.
+
+پشیمانی (اخلاقی) | Remorse
+-- Pronunciation: /rɪˈmɔrs/
+-- Tone: Serious
+-- Example: 1. The killer showed no remorse.
+
+بی‌زار / متنفر | Loathe
+-- Pronunciation: /loʊð/
+-- Tone: Strong Negative
+-- Synonyms: Hate
+-- Example: 1. I loathe waking up early.
+گیر افتادن در ترافیک | Stuck in traffic
+-- Pronunciation: /stʌk ɪn ˈtræfɪk/
+-- Tone: Neutral
+-- Example: 1. Sorry I'm late; I got stuck in traffic.
+
+آنتن ندادن (موبایل) | No reception / No signal
+-- Pronunciation: /noʊ rɪˈsɛpʃən/
+-- Tone: Neutral
+-- Example: 1. I couldn't call you because I had no reception in the basement.
+
+شارژ تمام کردن | Run out of battery
+-- Pronunciation: /rʌn aʊt əv ˈbætəri/
+-- Tone: Neutral
+-- Example: 1. My phone ran out of battery halfway through the day.
+
+هنگ کردن (کامپیوتر/موبایل) | Freezing / Crashing
+-- Pronunciation: /ˈfriːzɪŋ/
+-- Tone: Neutral
+-- Example: 1. My laptop keeps freezing when I open too many tabs.
+
+صدایت قطع و وصل می‌شود | Breaking up
+-- Pronunciation: /ˈbreɪkɪŋ ʌp/
+-- Tone: Neutral
+-- Example: 1. You're breaking up; can you say that again?
+
+روی خط نگه داشتن | Put on hold
+-- Pronunciation: /pʊt ɑn hoʊld/
+-- Tone: Neutral
+-- Example: 1. The customer service rep put me on hold for 20 minutes.
+
+حساب و کتاب کردن (دوستانه) | Split the bill
+-- Pronunciation: /splɪt ðə bɪl/
+-- Tone: Neutral
+-- Example: 1. Let's split the bill evenly.
+
+مهمان من (حساب کردن) | On me
+-- Pronunciation: /ɑn mi/
+-- Tone: Casual
+-- Example: 1. Put your wallet away; lunch is on me.
+
+تعارف کردن (غذا/پول) | Insist
+-- Pronunciation: /ɪnˈsɪst/
+-- Tone: Neutral
+-- Example: 1. He insisted on paying for dinner.
+
+جا زدن (در برنامه) | Flake / Bail
+-- Pronunciation: /fleɪk/
+-- Tone: Slang
+-- Example: 1. He always flakes on us at the last minute. 2. Are you going to bail on the party?
+
+پیچوندن (کسی) | Blow off
+-- Pronunciation: /bloʊ ɔf/
+-- Tone: Slang
+-- Example: 1. She blew me off and didn't reply to my texts.
+
+ترافیک روان | Traffic is moving
+-- Pronunciation: /ˈtræfɪk ɪz ˈmuːvɪŋ/
+-- Tone: Neutral
+-- Example: 1. Surprisingly, traffic is moving smoothly today.
+
+ساعت اوج شلوغی | Rush hour
+-- Pronunciation: /rʌʃ aʊər/
+-- Tone: Neutral
+-- Example: 1. Avoid driving during rush hour if you can.
+
+راهبندان | Gridlock
+-- Pronunciation: /ˈɡrɪdlɑk/
+-- Tone: Neutral
+-- Example: 1. The accident caused total gridlock downtown.
+
+پارک دوبل | Parallel park
+-- Pronunciation: /ˈpærəlɛl pɑrk/
+-- Tone: Neutral
+-- Example: 1. I'm terrible at parallel parking.
+
+دنده عقب رفتن | Back up / Reverse
+-- Pronunciation: /bæk ʌp/
+-- Tone: Neutral
+-- Example: 1. Be careful when you back up out of the driveway.
+
+چرت زدن | Take a nap / Doze off
+-- Pronunciation: /doʊz ɔf/
+-- Tone: Neutral
+-- Example: 1. I dozed off during the meeting.
+
+سحرخیز | Early bird
+-- Pronunciation: /ˈɜrli bɜrd/
+-- Tone: Idiom
+-- Example: 1. I'm an early bird; I wake up at 5 AM.
+
+شب زنده دار | Night owl
+-- Pronunciation: /naɪt aʊl/
+-- Tone: Idiom
+-- Example: 1. My brother is a night owl; he sleeps at 3 AM.
+
+بیخوابی | Insomnia
+-- Pronunciation: /ɪnˈsɑmniə/
+-- Tone: Medical
+-- Example: 1. I suffer from insomnia when I'm stressed.
+
+خواب ماندن (ناخواسته) | Oversleep
+-- Pronunciation: /ˌoʊvərˈsliːp/
+-- Tone: Neutral
+-- Example: 1. I overslept and missed the bus.
+
+سرویس بهداشتی (عمومی) | Restroom
+-- Pronunciation: /ˈrɛstrum/
+-- Tone: Polite (US)
+-- Example: 1. Could you tell me where the restroom is?
+
+اشتها کور شدن | Lose appetite
+-- Pronunciation: /luːz ˈæpəˌtaɪt/
+-- Tone: Neutral
+-- Example: 1. The bad news made me lose my appetite.
+
+رژیم گرفتن | Go on a diet
+-- Pronunciation: /daɪət/
+-- Tone: Neutral
+-- Example: 1. I need to go on a diet to lose weight.
+
+پرخوری کردن | Overeat / Binge
+-- Pronunciation: /oʊvərˈiːt/
+-- Tone: Neutral
+-- Example: 1. I always overeat at buffets.
+
+تاریخ انقضا گذشتن | Expire / Go bad
+-- Pronunciation: /ɪkˈspaɪər/
+-- Tone: Neutral
+-- Example: 1. The milk has gone bad; throw it away.
+
+کپک زده | Moldy
+-- Pronunciation: /ˈmoʊldi/
+-- Tone: Neutral
+-- Example: 1. The bread is moldy.
+
+تهوع داشتن | Nauseous
+-- Pronunciation: /ˈnɔʃəs/
+-- Tone: Neutral
+-- Example: 1. I feel nauseous when I read in the car.
+
+سرگیجه | Dizzy
+-- Pronunciation: /ˈdɪzi/
+-- Tone: Neutral
+-- Example: 1. I stood up too fast and felt dizzy.
+
+خفیف (درد/بیماری) | Mild
+-- Pronunciation: /maɪld/
+-- Tone: Neutral
+-- Example: 1. I have mild symptoms of the flu.
+
+شدید (درد) | Severe / Acute
+-- Pronunciation: /səˈvɪr/
+-- Tone: Medical
+-- Example: 1. He has severe back pain.
+
+مسری | Contagious
+-- Pronunciation: /kənˈteɪdʒəs/
+-- Tone: Medical
+-- Example: 1. Is it contagious? Should I wear a mask?
+
+وقت دکتر گرفتن | Make an appointment
+-- Pronunciation: /əˈpɔɪntmənt/
+-- Tone: Neutral
+-- Example: 1. I need to make an appointment with the dentist.
+
+نسخه (دارو) | Prescription
+-- Pronunciation: /prɪˈskrɪpʃən/
+-- Tone: Neutral
+-- Example: 1. The doctor wrote me a prescription for antibiotics.
+
+عوارض جانبی | Side effects
+-- Pronunciation: /saɪd ɪˈfɛkts/
+-- Tone: Neutral
+-- Example: 1. Drowsiness is a common side effect of this medication.

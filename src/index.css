@@ -17,13 +17,17 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   overflow: hidden; /* Prevent scrolling on mobile */
+  overscroll-behavior-y: none;
+  height: 100vh;
+  height: 100dvh; /* Mobile viewport fix */
 }
 
 #root {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 button {

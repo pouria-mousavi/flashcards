@@ -1,0 +1,268 @@
+مصلحت اندیشی / تدبیر | Expediency
+-- Pronunciation: /ɪkˈspiːdiənsi/
+-- Tone: Formal
+-- Example: 1. The decision was made for reasons of expediency, not principle.
+
+سرسری / اجمالی | Cursory
+-- Pronunciation: /ˈkɜrsəri/
+-- Tone: Formal
+-- Synonyms: Superficial
+-- Example: 1. He gave the report a cursory glance.
+
+خوش‌بین (به آینده بازار) | Bullish
+-- Pronunciation: /ˈbʊlɪʃ/
+-- Tone: Financial
+-- Example: 1. Analysts are bullish on the tech sector.
+
+بدبین (به آینده بازار) | Bearish
+-- Pronunciation: /ˈbɛrɪʃ/
+-- Tone: Financial
+-- Example: 1. The market sentiment is bearish due to inflation.
+
+حاشیه سود | Profit Margin
+-- Pronunciation: /ˈprɑfɪt ˈmɑrdʒɪn/
+-- Tone: Business
+-- Example: 1. We need to increase our profit margin.
+
+نقدینگی | Liquidity
+-- Pronunciation: /lɪˈkwɪdɪti/
+-- Tone: Financial
+-- Example: 1. The company is facing a liquidity crisis.
+
+نقطه سر به سر | Break-even point
+-- Pronunciation: /ˈbreɪk ˈiːvən pɔɪnt/
+-- Tone: Business
+-- Example: 1. We expect to reach the break-even point in six months.
+
+برونسپاری | Outsourcing
+-- Pronunciation: /ˈaʊtˌsɔrsɪŋ/
+-- Tone: Business
+-- Example: 1. Outsourcing IT services can save money.
+
+مقیاس‌پذیر | Scalable
+-- Pronunciation: /ˈskeɪləbəl/
+-- Tone: Tech/Business
+-- Example: 1. Is this business model scalable?
+
+دست و پا گیر (سنگین) | Cumbersome
+-- Pronunciation: /ˈkʌmbərsəm/
+-- Tone: Neutral
+-- Synonyms: Unwieldy
+-- Example: 1. The old process was cumbersome and slow.
+
+بی‌نقص / تمیز | Impeccable
+-- Pronunciation: /ɪmˈpɛkəbəl/
+-- Tone: Positive
+-- Synonyms: Flawless
+-- Example: 1. Her English is impeccable. 2. He has impeccable taste.
+
+خوش‌صحبت / فصیح | Articulate
+-- Pronunciation: /ɑrˈtɪkjələt/
+-- Tone: Positive
+-- Example: 1. She is an articulate speaker.
+
+موذی / تدریجی (ولی مخرب) | Insidious
+-- Pronunciation: /ɪnˈsɪdiəs/
+-- Tone: Negative
+-- Example: 1. High blood pressure is an insidious disease.
+
+فراگیر / همه جا حاضر | Ubiquitous
+-- Pronunciation: /juˈbɪkwɪtəs/
+-- Tone: Formal
+-- Synonyms: Omnipresent
+-- Example: 1. Smartphones have become ubiquitous.
+
+زائد / اضافی | Superfluous
+-- Pronunciation: /suˈpɜrfluəs/
+-- Tone: Formal
+-- Synonyms: Unnecessary
+-- Example: 1. Remove any superfluous words from your essay.
+
+دقیق / وسواسی | Meticulous
+-- Pronunciation: /məˈtɪkjələs/
+-- Tone: Positive
+-- Synonyms: Careful
+-- Example: 1. He is meticulous about detail.
+
+بومی (منطقه خاص) | Indigenous
+-- Pronunciation: /ɪnˈdɪdʒənəs/
+-- Tone: Formal
+-- Synonyms: Native
+-- Example: 1. The kangaroo is indigenous to Australia.
+
+نوستالژیک / خاطره‌انگیز | Evocative
+-- Pronunciation: /ɪˈvɑkətɪv/
+-- Tone: Artistic
+-- Example: 1. The smell of baking bread is evocative of my childhood.
+
+زودگذر | Ephemeral
+-- Pronunciation: /əˈfɛmərəl/
+-- Tone: Literary
+-- Synonyms: Short-lived
+-- Example: 1. Fashion trends are ephemeral.
+
+حیاتی / محوری | Pivotal
+-- Pronunciation: /ˈpɪvətəl/
+-- Tone: Formal
+-- Synonyms: Crucial
+-- Example: 1. This is a pivotal moment in history.
+
+پیش‌پا افتاده / معمولی | Mundane
+-- Pronunciation: /mʌnˈdeɪn/
+-- Tone: Neutral
+-- Synonyms: Ordinary
+-- Example: 1. I’m tired of doing mundane tasks like washing dishes.
+
+پارادوکس / متناقض‌نما | Paradox
+-- Pronunciation: /ˈpærəˌdɑks/
+-- Tone: Neutral
+-- Example: 1. It’s a paradox that computers save time but we seem to have less of it.
+
+دوپهلو / مبهم | Ambivalent
+-- Pronunciation: /æmˈbɪvələnt/
+-- Tone: Psychological
+-- Example: 1. I feel ambivalent about moving to a new city. (Mixed feelings)
+
+بی‌تفاوت | Apathetic
+-- Pronunciation: /ˌæpəˈθɛtɪk/
+-- Tone: Negative
+-- Synonyms: Indifferent
+-- Example: 1. Voters are becoming increasingly apathetic.
+
+همدردی (درک احساس) | Empathy
+-- Pronunciation: /ˈɛmpəθi/
+-- Tone: Positive
+-- Example: 1. She showed great empathy for the victims.
+
+نوع‌دوستی | Altruism
+-- Pronunciation: /ˈæltruˌɪzəm/
+-- Tone: Positive
+-- Example: 1. His donation was an act of pure altruism.
+
+انعطاف‌پذیری (تطبیق) | Versatility
+-- Pronunciation: /ˌvɜrsəˈtɪlɪti/
+-- Tone: Positive
+-- Example: 1. I admire the versatility of this tool.
+
+استقامت / پشتکار | Perseverance
+-- Pronunciation: /ˌpɜrsəˈvɪrəns/
+-- Tone: Positive
+-- Synonyms: Persistence
+-- Example: 1. Success requires hard work and perseverance.
+
+صحت / درستی | Integrity
+-- Pronunciation: /ɪnˈtɛɡrɪti/
+-- Tone: Positive
+-- Example: 1. He is a man of high integrity. 2. Data integrity is crucial.
+
+تند / زننده (بو/مزه) | Pungent
+-- Pronunciation: /ˈpʌndʒənt/
+-- Tone: Neutral
+-- Example: 1. Onions have a pungent smell.
+
+جیغ / گوش‌خراش | Shrill
+-- Pronunciation: /ʃrɪl/
+-- Tone: Negative
+-- Example: 1. A shrill voice pierced the air.
+
+کر کننده | Deafening
+-- Pronunciation: /ˈdɛfənɪŋ/
+-- Tone: Vivid
+-- Example: 1. The explosion was deafening.
+
+خیره‌کننده | Dazzling
+-- Pronunciation: /ˈdæzlɪŋ/
+-- Tone: Positive
+-- Example: 1. A dazzling display of fireworks.
+
+کدر / مات | Opaque
+-- Pronunciation: /oʊˈpeɪk/
+-- Tone: Neutral
+-- Example: 1. The windows are opaque; you can't see through them. (Also used metaphorically for valid processes)
+
+شفاف (آینه‌ای) | Transparent
+-- Pronunciation: /trænsˈpɛrənt/
+-- Tone: Neutral
+-- Example: 1. We need a transparent hiring process.
+
+زمخت / زبر | Coarse
+-- Pronunciation: /kɔrs/
+-- Tone: Neutral
+-- Synonyms: Rough
+-- Example: 1. The fabric feels coarse.
+
+لطیف / ظریف | Delicate
+-- Pronunciation: /ˈdɛlɪkət/
+-- Tone: Positive
+-- Example: 1. A delicate flower. 2. A delicate situation.
+
+شکننده | Fragile
+-- Pronunciation: /ˈfrædʒəl/
+-- Tone: Neutral
+-- Synonyms: Breakable
+-- Example: 1. Handle with care; the contents are fragile.
+
+دست و پا چلفتی | Clumsy
+-- Pronunciation: /ˈklʌmzi/
+-- Tone: Negative
+-- Example: 1. I’m so clumsy; I keep dropping things.
+
+خجالتی / کمرو | Timid
+-- Pronunciation: /ˈtɪmɪd/
+-- Tone: Neutral
+-- Synonyms: Shy
+-- Example: 1. A timid child hiding behind his mother.
+
+جسور / بی پروا | Bold
+-- Pronunciation: /boʊld/
+-- Tone: Positive
+-- Synonyms: Daring
+-- Example: 1. It was a bold move to quit his job.
+
+محتاط | Cautious
+-- Pronunciation: /ˈkɔʃəs/
+-- Tone: Neutral
+-- Synonyms: Careful
+-- Example: 1. Be cautious when driving in the rain.
+
+کنجکاو | Inquisitive
+-- Pronunciation: /ɪnˈkwɪzɪtɪv/
+-- Tone: Positive
+-- Synonyms: Curious
+-- Example: 1. An inquisitive mind is essential for a scientist.
+
+بدبین (به نیات دیگران) | Cynical
+-- Pronunciation: /ˈsɪnɪkəl/
+-- Tone: Negative
+-- Example: 1. He is cynical about politicians' motives.
+
+خوش‌بین (به طور کلی) | Optimistic
+-- Pronunciation: /ˌɑptəˈmɪstɪk/
+-- Tone: Positive
+-- Example: 1. I am optimistic about the future.
+
+بدبین (به طور کلی) | Pessimistic
+-- Pronunciation: /ˌpɛsəˈmɪstɪk/
+-- Tone: Negative
+-- Example: 1. Don't be so pessimistic; things will work out.
+
+نوستالژی | Nostalgia
+-- Pronunciation: /nɔˈstældʒə/
+-- Tone: Neutral
+-- Example: 1. Viewing old photos filled him with nostalgia.
+
+حسرت / افسوس | Regret
+-- Pronunciation: /rɪˈɡrɛt/
+-- Tone: Negative
+-- Example: 1. I regret not learning a second language.
+
+پشیمانی (اخلاقی) | Remorse
+-- Pronunciation: /rɪˈmɔrs/
+-- Tone: Serious
+-- Example: 1. The killer showed no remorse.
+
+بی‌زار / متنفر | Loathe
+-- Pronunciation: /loʊð/
+-- Tone: Strong Negative
+-- Synonyms: Hate
+-- Example: 1. I loathe waking up early.

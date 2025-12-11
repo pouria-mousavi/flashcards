@@ -16,6 +16,38 @@ export default function StudySession({ cards, onUpdateCard, onSessionComplete, o
   const [queue, setQueue] = useState<Flashcard[]>([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
+
+  // Load Voice Preference (Strict US)
+  useEffect(() => {
+    const loadVoices = () => {
+         if (!window.speechSynthesis) return;
+         // Strict Filter: US Only + High Quality
+         const allVoices = window.speechSynthesis.getVoices();
+         const usVoices = allVoices.filter(v => v.lang === 'en-US');
+         
+         // Pick Top 2-3 Best
+         const best = usVoices.filter(v => 
+            v.name.includes('Google') || 
+            v.name.includes('Samantha') || 
+            v.name.includes('Premium')
+         );
+         
+         const candidate = best.length > 0 ? best[0] : usVoices[0];
+         if (candidate) setVoice(candidate);
+    };
+    loadVoices();
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }, []);
+
+  const handlePlayAudio = (text: string) => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    if (voice) u.voice = voice;
+    window.speechSynthesis.speak(u);
+  };
 
   useEffect(() => {
     // We strictly use the order provided by the parent (App.tsx)
@@ -121,33 +153,59 @@ export default function StudySession({ cards, onUpdateCard, onSessionComplete, o
           width: '100%', 
           maxWidth: '500px', 
           display: 'flex', 
+          flexDirection: 'column',
           alignItems: 'center', 
-          justifyContent: 'space-between',
-          gap: '8px'
+          justifyContent: 'flex-end',
+          gap: '12px',
+          paddingBottom: '20px'
       }}>
-        {!isFlipped ? (
-            <button 
-                onClick={() => setIsFlipped(true)}
-                style={{ 
-                    width: '100%', 
-                    padding: '20px', 
-                    borderRadius: '20px', 
-                    background: 'var(--accent)', 
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: '1.2rem',
-                    boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)'
-                }}>
-                Show Answer
-            </button>
-        ) : (
-            <>
-                <RateButton label="Again" color="var(--danger)" onClick={() => handleRate(0)} />
-                <RateButton label="Hard" color="var(--warning)" onClick={() => handleRate(3)} />
-                <RateButton label="Good" color="var(--accent)" onClick={() => handleRate(4)} />
-                <RateButton label="Easy" color="var(--success)" onClick={() => handleRate(5)} />
-            </>
-        )}
+        {/* Play Audio Button (Always Visible if Back is shown OR Front if desired, but user asked for Play Button at bottom) */}
+        {/* We show it always for convenience, or strictly on back. Let's start with Always for convenience. */}
+        <button 
+            onClick={(e) => { e.stopPropagation(); handlePlayAudio(currentCard.back); }}
+            style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: 'rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                color: 'white',
+                fontSize: '1.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                marginBottom: '10px'
+            }}
+        >
+            🔊
+        </button>
+
+        <div style={{ display: 'flex', width: '100%', gap: '8px' }}>
+            {!isFlipped ? (
+                <button 
+                    onClick={() => setIsFlipped(true)}
+                    style={{ 
+                        width: '100%', 
+                        padding: '20px', 
+                        borderRadius: '20px', 
+                        background: 'var(--accent)', 
+                        color: 'white',
+                        fontWeight: 'bold',
+                        fontSize: '1.2rem',
+                        boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)'
+                    }}>
+                    Show Answer
+                </button>
+            ) : (
+                <>
+                    <RateButton label="Again" color="var(--danger)" onClick={() => handleRate(0)} />
+                    <RateButton label="Hard" color="var(--warning)" onClick={() => handleRate(3)} />
+                    <RateButton label="Good" color="var(--accent)" onClick={() => handleRate(4)} />
+                    <RateButton label="Easy" color="var(--success)" onClick={() => handleRate(5)} />
+                </>
+            )}
+        </div>
       </div>
     </div>
   );

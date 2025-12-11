@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import type { Flashcard as IFlashcard } from '../utils/sm2';
 
@@ -10,78 +9,6 @@ interface Props {
 
 export default function Flashcard({ card, isFlipped, onFlip }: Props) {
   if (!card) return null; // Safety check
-  const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
-  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
-
-  useEffect(() => {
-    const loadVoices = () => {
-        try {
-            if (!window.speechSynthesis) return;
-            // Premium Filter: Only English voices that sound "Good"
-            // Start with all EN voices, then filter.
-            const allEn = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
-            
-            // Allow-list for high quality names. 
-            // Google = Chrome online voices (Natural)
-            // Samantha/Daniel/Karen = iOS/Mac High Quality
-            const premiumVoices = allEn.filter(v => 
-                v.name.includes('Google') || 
-                v.name.includes('Premium') ||
-                ['Samantha', 'Daniel', 'Karen', 'Rishi', 'Moira', 'Tessa'].some(n => v.name.includes(n))
-            );
-
-            // If we found good ones, use them. Otherwise fallback to all EN.
-            const finalSet = premiumVoices.length > 0 ? premiumVoices : allEn;
-            setAvailableVoices(finalSet);
-            
-            // Try to load saved preference
-            const saved = localStorage.getItem('preferred_voice_uri');
-            if (saved) {
-                const hit = finalSet.find(v => v.voiceURI === saved);
-                if (hit) {
-                    setVoice(hit);
-                    return;
-                }
-            }
-
-            // Default to first "Google" or first available
-            const preferred = finalSet.find(v => v.name.includes('Google')) || finalSet[0];
-            if (preferred) setVoice(preferred);
-        } catch (e) {
-            console.error("Voice load error:", e);
-        }
-    };
-
-    loadVoices();
-    if (window.speechSynthesis && window.speechSynthesis.onvoiceschanged !== undefined) {
-        window.speechSynthesis.onvoiceschanged = loadVoices;
-    }
-  }, []);
-
-  const handleTTS = (e: React.MouseEvent) => {
-      e.stopPropagation(); // Don't flip
-      const u = new SpeechSynthesisUtterance(card.back);
-      u.lang = 'en-US';
-      if (voice) u.voice = voice;
-      window.speechSynthesis.speak(u);
-  };
-
-  const cycleVoice = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      if (availableVoices.length === 0) return;
-      
-      const idx = availableVoices.findIndex(v => v === voice);
-      const nextIdx = (idx + 1) % availableVoices.length;
-      const nextVoice = availableVoices[nextIdx];
-      
-      setVoice(nextVoice);
-      localStorage.setItem('preferred_voice_uri', nextVoice.voiceURI);
-      
-      // Announce the new voice
-      const u = new SpeechSynthesisUtterance("Voice changed to " + nextVoice.name);
-      u.voice = nextVoice;
-      window.speechSynthesis.speak(u);
-  };
 
   return (
     <div className="card-container" style={{ perspective: 1000, cursor: 'pointer' }} onClick={onFlip}>
@@ -159,48 +86,11 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
             overflowY: 'auto'
           }}
         >
-          {/* Header with TTS */}
+          {/* Header */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', marginBottom: '10px' }}>
              <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)' }}>
                 ENGLISH
              </span>
-             <div style={{ display: 'flex', gap: '8px' }}>
-                <button 
-                    onClick={cycleVoice}
-                    style={{
-                        background: 'rgba(255,255,255,0.1)',
-                        border: 'none',
-                        borderRadius: '20px', // pill shape
-                        padding: '0 12px',
-                        height: '40px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'rgba(255,255,255,0.6)',
-                        fontSize: '0.8rem'
-                    }}
-                >
-                    {voice ? voice.name.slice(0, 8) + '..' : 'Voice'} 🔁
-                </button>
-                <button 
-                    onClick={handleTTS}
-                    style={{
-                        background: 'rgba(255,255,255,0.1)',
-                        border: 'none',
-                        borderRadius: '50%',
-                        width: '64px',
-                        height: '64px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '1.2rem'
-                    }}
-                >
-                    🔊
-                </button>
-             </div>
           </div>
 
           <h3 style={{ 

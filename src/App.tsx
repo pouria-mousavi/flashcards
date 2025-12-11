@@ -76,7 +76,7 @@ function App() {
     else alert("Progress Reset!");
   };
 
-  const [isShuffled, setIsShuffled] = useState(false);
+  const [isShuffled, setIsShuffled] = useState(true);
 
   const getDueCards = () => {
     const now = Date.now();
