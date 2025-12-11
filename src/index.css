@@ -16,10 +16,13 @@ body {
   background-color: var(--bg-color);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
-  overflow: hidden; /* Prevent scrolling on mobile */
-  overscroll-behavior-y: none;
-  height: 100vh;
-  height: 100dvh; /* Mobile viewport fix */
+  /* Allow scrolling but prevent bounce if possible, though 'auto' is safer for content access */
+  overflow-y: auto; 
+  overflow-x: hidden;
+  height: 100%;
+  min-height: 100dvh;
+  /* Safe area for mobile notch/home bar */
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 #root {

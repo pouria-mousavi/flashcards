@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import crypto from 'crypto';
 
 // Run with: node scripts/migrate.js <URL> <KEY>
 
@@ -21,70 +22,103 @@ async function migrate() {
     const filePath = path.join(__dirname, '../flashcards.txt');
     const text = fs.readFileSync(filePath, 'utf-8');
 
-    // Simple parser (duplicating logic to avoid TS complexity in raw node script)
+    // Hybrid Parser: Handles both single-line (V5) and multi-line (V6) formats
     const cards = [];
     const lines = text.split('\n');
+    let currentCard = null;
+
     for (let line of lines) {
         line = line.trim();
         if (!line) continue;
-        const parts = line.split('|');
-        if (parts.length < 2) continue;
 
-        // 1. Clean Front
-        let front = parts[0].trim();
-        // Remove prefixes like "Persian:", "Farsi:", "Meaning:", "Question:" (case insensitive)
-        // Also handles "Persian Meaning:", "English Meaning:" if present on front (rare but possible)
-        front = front.replace(/^(Persian|Farsi|Meaning|Question|معنی|فارسی)(\s*Meaning)?\s*[:：]\s*/i, '').trim();
-
-        // 2. Parse Rest (Back side chunks)
-        const rest = parts.slice(1).join('|').trim();
-        // Use a more robust split that respects the "-- Key: Value" structure
-        const segments = rest.split(/--(?=\s*\w+\s*[:：])/).map(s => s.trim()).filter(s => s);
-        
-        // Sometimes the first chunk is the definition without a key
-        // But in the file it might just be "Word -- Pronunciation: ..."
-        // Let's rely on the previous split logic which was working but buggy with variables.
-        
-        const rawSegments = rest.split('--').map(s => s.trim());
-        let back = rawSegments[0] || '';
-        back = back.replace(/^(English|Eng)(\s*Meaning)?\s*[:：]\s*/i, '').trim();
-
-        let pronunciation = null;
-        let tone = 'Neutral'; 
-        let synonyms = null;
-        let examples = null;
-
-        for (let i = 1; i < rawSegments.length; i++) {
-            const seg = rawSegments[i];
-            if (seg.match(/^Pronunciation\s*[:：]/i)) {
-                pronunciation = seg.replace(/^Pronunciation\s*[:：]\s*/i, '').trim();
-            } else if (seg.match(/^Tone\s*[:：]/i)) {
-                tone = seg.replace(/^Tone\s*[:：]\s*/i, '').trim();
-            } else if (seg.match(/^(Alt|Synonyms|Alternative)\s*[:：]/i)) {
-                synonyms = seg.replace(/^(Alt|Synonyms|Alternative)\s*[:：]\s*/i, '').trim();
-            } else if (seg.match(/^(Ex|Example|Examples)\s*[:：]/i)) {
-                const rawEx = seg.replace(/^(Ex|Example|Examples)\s*[:：]\s*/i, '').trim();
-                const matches = rawEx.match(/\d+\.\s*([^0-9]+)/g);
-                if (matches) {
-                    examples = matches.map(m => m.replace(/^\d+\.\s*/, '').trim());
-                } else {
-                    examples = [rawEx];
-                }
+        // Check if line is a metadata line (starts with --)
+        if (line.startsWith('--')) {
+            if (currentCard) {
+                // Parse metadata line
+                parseMetadata(line, currentCard);
             }
+            continue;
         }
 
-        cards.push({
-            front,
-            back,
-            pronunciation,
-            tone,
-            synonyms, 
-            examples: examples, // Pass array directly for JSONB
-            state: 'NEW',
-            next_review: new Date().toISOString(),
-            interval: 0,
-            ease_factor: 2.5
-        });
+        // Otherwise, assume it's a new card header "Front | Back"
+        if (line.includes('|')) {
+            // Push previous card if exists
+            if (currentCard) {
+                cards.push(currentCard);
+            }
+
+            // Start new card
+            const parts = line.split('|');
+            let front = parts[0].trim();
+            front = front.replace(/^(Persian|Farsi|Meaning|Question|معنی|فارسی)(\s*Meaning)?\s*[:：]\s*/i, '').trim();
+
+            let rest = parts.slice(1).join('|').trim();
+            
+            // Check for inline metadata (V5 style: "Back -- Key: Val")
+            let back = rest;
+            if (rest.includes('--')) {
+                const splitIdx = rest.indexOf('--');
+                back = rest.substring(0, splitIdx).trim();
+                const inlineMeta = rest.substring(splitIdx).trim();
+                // We'll process this inline meta after creating the object
+                // But simplified: extract back first.
+                
+                // We need to parse valid inline segments too
+                // Let's defer inline parsing to the common helper if possible, 
+                // but for now let's just clean the back and assume metadata lines follow.
+                // actually, for V5, the metadata IS inline.
+            }
+            back = back.replace(/^(English|Eng)(\s*Meaning)?\s*[:：]\s*/i, '').trim();
+
+            currentCard = {
+                front,
+                back, // Will be cleaned of inline meta below
+                pronunciation: null,
+                tone: 'Neutral',
+                synonyms: null,
+                examples: null,
+                state: 'NEW',
+                next_review: new Date().toISOString(),
+                interval: 0,
+                ease_factor: 2.5
+            };
+            
+            // Handle inline metadata if present in the header line
+            if (rest.includes('--')) {
+                 const segments = rest.split('--').map(s => s.trim());
+                 // segments[0] is back def, already handled. Start from 1.
+                 for (let i = 1; i < segments.length; i++) {
+                     parseMetadata('-- ' + segments[i], currentCard);
+                 }
+            }
+        }
+    }
+    // Push last card
+    if (currentCard) cards.push(currentCard);
+
+    function parseMetadata(line, card) {
+        // line expects "-- Key: Value" format
+        // remove leading dashes
+        const clean = line.replace(/^--\s*/, '');
+        
+        if (clean.match(/^Pronunciation\s*[:：]/i)) {
+            card.pronunciation = clean.replace(/^Pronunciation\s*[:：]\s*/i, '').trim();
+        } else if (clean.match(/^Tone\s*[:：]/i)) {
+            card.tone = clean.replace(/^Tone\s*[:：]\s*/i, '').trim();
+        } else if (clean.match(/^(Alt|Synonyms|Alternative)\s*[:：]/i)) {
+            card.synonyms = clean.replace(/^(Alt|Synonyms|Alternative)\s*[:：]\s*/i, '').trim();
+        } else if (clean.match(/^(Ex|Example|Examples)\s*[:：]/i)) {
+            const rawEx = clean.replace(/^(Ex|Example|Examples)\s*[:：]\s*/i, '').trim();
+            // Robust Example Splitter
+            const matches = rawEx.split(/\d+\.\s+/).filter(s => s.trim().length > 0);
+            if (matches.length > 0) {
+                 if (!card.examples) card.examples = [];
+                 card.examples.push(...matches.map(m => m.trim()));
+            } else {
+                 if (!card.examples) card.examples = [];
+                 card.examples.push(rawEx);
+            }
+        }
     }
     console.log(`Found ${cards.length} cards. Deduplicating...`);
     
@@ -147,9 +181,11 @@ async function migrate() {
                     ease_factor: old.ease_factor
                 };
             }
-            // New card: ensure NO ID is present to let DB generate it
-            const { id, ...rest } = c; 
-            return rest;
+            // New card: Generate ID explicitly to avoid DB errors if default is missing
+            return {
+                ...c,
+                id: crypto.randomUUID()
+            };
         });
         
         const { error: upsertErr } = await supabase.from('cards').upsert(finalBatch, { onConflict: 'front' });
