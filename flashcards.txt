@@ -1404,3 +1404,1045 @@ Exact lookalike کپ اونه! | It's a dead ringer for Pouria -- Ex: 1. She's a
 -- Pronunciation: /saɪd ɪˈfɛkts/
 -- Tone: Neutral
 -- Example: 1. Drowsiness is a common side effect of this medication.
+تردید کردن / نوسان داشتن | Vacillate
+-- Pronunciation: /ˈvæsəˌleɪt/
+-- Tone: Formal
+-- Synonyms: Waffle, Hesitate
+-- Example: 1. She vacillated between the two options for weeks.
+
+تحریک کردن (منفی) / دامن زدن | Instigate
+-- Pronunciation: /ˈɪnstəˌɡeɪt/
+-- Tone: Negative
+-- Example: 1. He was accused of instigating the riot.
+
+تسکین دادن (خشم) | Appease
+-- Pronunciation: /əˈpiːz/
+-- Tone: Formal
+-- Example: 1. They tried to appease the angry customers with free coupons.
+
+جعل کردن / ساختگی | Fabricate
+-- Pronunciation: /ˈfæbrɪˌkeɪt/
+-- Tone: Neutral
+-- Synonyms: Make up
+-- Example: 1. The evidence was completely fabricated.
+
+بررسی دقیق کردن | Scrutinize
+-- Pronunciation: /ˈskruːtəˌnaɪz/
+-- Tone: Formal
+-- Example: 1. The contract was scrutinized by lawyers.
+
+تکرار کردن (برای تاکید) | Reiterate
+-- Pronunciation: /riˈɪtəˌreɪt/
+-- Tone: Formal
+-- Example: 1. Let me reiterate my point.
+
+منحرف شدن (از موضوع) | Digress
+-- Pronunciation: /daɪˈɡrɛs/
+-- Tone: Formal
+-- Example: 1. Let me digress for a moment to explain the background.
+
+بدتر کردن / تشدید کردن | Exacerbate
+-- Pronunciation: /ɪɡˈzæsərˌbeɪt/
+-- Tone: Formal
+-- Synonyms: Worsen
+-- Example: 1. Stress can exacerbate the symptoms of the disease.
+
+تلقین کردن | Indoctrinate
+-- Pronunciation: /ɪnˈdɑktrəˌneɪt/
+-- Tone: Negative
+-- Example: 1. The cult indoctrinates its members with radical beliefs.
+
+سرسخت / کله‌شق | Obstinate
+-- Pronunciation: /ˈɑbstənət/
+-- Tone: Negative
+-- Synonyms: Stubborn
+-- Example: 1. He is too obstinate to admit he was wrong.
+
+بی‌دقت / سهل‌انگار | Negligent
+-- Pronunciation: /ˈnɛɡlɪdʒənt/
+-- Tone: Legal/Formal
+-- Example: 1. The company was negligent in safety procedures.
+
+مشتاق / آرزومند (با حسرت) | Wistful
+-- Pronunciation: /ˈwɪstfəl/
+-- Tone: Literary
+-- Example: 1. She gave a wistful smile as she looked at the old photo.
+
+بی‌تفاوت / خونسرد (بیش از حد) | Nonchalant
+-- Pronunciation: /ˌnɑnʃəˈlɑnt/
+-- Tone: Neutral
+-- Example: 1. He was surprisingly nonchalant about winning the lottery.
+
+بدنام | Notorious
+-- Pronunciation: /noʊˈtɔriəs/
+-- Tone: Negative
+-- Synonyms: Infamous
+-- Example: 1. The city is notorious for its traffic jams.
+
+خسته‌کننده / ملال‌آور | Mundane
+-- Pronunciation: /mʌnˈdeɪn/
+-- Tone: Neutral
+-- Example: 1. I need a break from my mundane routine.
+
+خاکی / فروتن (غیر رسمی) | Down-to-earth
+-- Pronunciation: /daʊn tu ɜrθ/
+-- Tone: Positive
+-- Example: 1. Despite his fame, he is very down-to-earth.
+
+بداخلاق / ترشرو | Grumpy
+-- Pronunciation: /ˈɡrʌmpi/
+-- Tone: Informal
+-- Example: 1. I'm always grumpy in the morning before coffee.
+
+سرسخت / مقاوم | Tenacious
+-- Pronunciation: /təˈneɪʃəs/
+-- Tone: Positive
+-- Example: 1. She is a tenacious negotiator.
+
+ساده‌لوح | Gullible
+-- Pronunciation: /ˈɡʌləbəl/
+-- Tone: Negative
+-- Example: 1. Don't be so gullible; he's lying to you.
+
+مرموز / مبهم | Enigmatic
+-- Pronunciation: /ˌɛnɪɡˈmætɪk/
+-- Tone: Literary
+-- Example: 1. The Mona Lisa has an enigmatic smile.
+
+بی‌شرمانه / آشکار | Blatant
+-- Pronunciation: /ˈbleɪtənt/
+-- Tone: Negative
+-- Example: 1. That was a blatant lie.
+
+منسوخ | Obsolete
+-- Pronunciation: /ˌɑbsəˈliːt/
+-- Tone: Neutral
+-- Example: 1. Floppy disks are obsolete.
+
+جامع / کامل | Comprehensive
+-- Pronunciation: /ˌkɑmpriˈhɛnsɪv/
+-- Tone: Formal
+-- Example: 1. We need a comprehensive study of the market.
+
+مختصر و مفید | Concise
+-- Pronunciation: /kənˈsaɪs/
+-- Tone: Positive
+-- Example: 1. Keep your report clear and concise.
+
+مبهم / دوپهلو | Vague
+-- Pronunciation: /veɪɡ/
+-- Tone: Negative
+-- Example: 1. His instructions were too vague.
+
+کنایه‌آمیز | Ironic
+-- Pronunciation: /aɪˈrɑnɪk/
+-- Tone: Neutral
+-- Example: 1. It’s ironic that a fire station burned down.
+
+خسته‌کننده (کار) | Grueling
+-- Pronunciation: /ˈɡruəlɪŋ/
+-- Tone: Negative
+-- Synonyms: Exhausting
+-- Example: 1. It was a grueling 10-hour hike.
+
+کثیف / چرک (مکان/لباس) | Filthy
+-- Pronunciation: /ˈfɪlθi/
+-- Tone: Strong
+-- Example: 1. Go wash your hands; they are filthy.
+
+بی‌عیب و نقص | Pristine
+-- Pronunciation: /ˈprɪstiːn/
+-- Tone: Positive
+-- Example: 1. The beach was in pristine condition.
+
+بدقلق / ایرادگیر | Fussy
+-- Pronunciation: /ˈfʌsi/
+-- Tone: Negative
+-- Example: 1. He is a fussy eater.
+
+ولخرج | Extravagant
+-- Pronunciation: /ɪkˈstrævəɡənt/
+-- Tone: Neutral
+-- Example: 1. An extravagant wedding party.
+
+خسیس | Stingy
+-- Pronunciation: /ˈstɪndʒi/
+-- Tone: Negative
+-- Synonyms: Cheap
+-- Example: 1. Don't be stingy with the tip.
+
+هوشیار (حواس جمع) | Alert
+-- Pronunciation: /əˈlɜrt/
+-- Tone: Neutral
+-- Example: 1. Drivers must remain alert at all times.
+
+بی‌قرار | Restless
+-- Pronunciation: /ˈrɛstləs/
+-- Tone: Neutral
+-- Example: 1. Detailed work makes me restless.
+
+کنجکاو (فضول) | Nosy
+-- Pronunciation: /ˈnoʊzi/
+-- Tone: Negative
+-- Example: 1. Stop being so nosy about my private life.
+
+خجالت‌آور | Embarrassing
+-- Pronunciation: /ɪmˈbærəsɪŋ/
+-- Tone: Neutral
+-- Example: 1. It was an embarrassing mistake.
+
+توهین‌آمیز | Offensive
+-- Pronunciation: /əˈfɛnsɪv/
+-- Tone: Negative
+-- Example: 1. His comments were deeply offensive.
+
+محترمانه | Respectful
+-- Pronunciation: /rɪˈspɛktfəl/
+-- Tone: Positive
+-- Example: 1. Be respectful to your elders.
+
+حیاتی / ضروری | Vital
+-- Pronunciation: /ˈvaɪtəl/
+-- Tone: Formal
+-- Example: 1. Water is vital for life.
+
+بسیار خوشحال | Ecstatic
+-- Pronunciation: /ɪkˈstætɪk/
+-- Tone: Strong Positive
+-- Example: 1. I was ecstatic when I heard the news.
+
+بسیار غمگین / ویران شده | Devastated
+-- Pronunciation: /ˈdɛvəˌsteɪtɪd/
+-- Tone: Strong Negative
+-- Example: 1. She was devastated by the loss of her dog.
+
+عصبانی (خشمگین) | Furious
+-- Pronunciation: /ˈfjʊriəs/
+-- Tone: Strong Negative
+-- Example: 1. He was furious about the damage to his car.
+
+وحشت‌زده | Terrified
+-- Pronunciation: /ˈtɛrəˌfaɪd/
+-- Tone: Strong Negative
+-- Example: 1. I am terrified of spiders.
+
+بی‌حس / کرخت | Numb
+-- Pronunciation: /nʌm/
+-- Tone: Neutral
+-- Example: 1. My fingers are numb from the cold.
+
+متورم / باد کرده | Swollen
+-- Pronunciation: /ˈswoʊlən/
+-- Tone: Medical
+-- Example: 1. His ankle is swollen.
+
+کبود | Bruised
+-- Pronunciation: /bruːzd/
+-- Tone: Medical
+-- Example: 1. Her arm is badly bruised.
+
+خارش داشتن | Itchy
+-- Pronunciation: /ˈɪtʃi/
+-- Tone: Neutral
+-- Example: 1. The sweater is wool and very itchy.
+
+ترش (مزه) | Sour
+-- Pronunciation: /ˈsaʊər/
+-- Tone: Neutral
+-- Example: 1. These grapes are sour.
+
+تلخ (مزه/حقیقت) | Bitter
+-- Pronunciation: /ˈbɪtər/
+-- Tone: Neutral
+-- Example: 1. Dark chocolate has a bitter taste. 2. A bitter disappointment.
+
+بی‌مزه | Bland
+-- Pronunciation: /blænd/
+-- Tone: Negative
+-- Example: 1. The soup was bland; it needs salt.
+
+تند (ادویه) | Spicy
+-- Pronunciation: /ˈspaɪsi/
+-- Tone: Neutral
+-- Example: 1. Do you like spicy food?
+
+ترد | Crispy
+-- Pronunciation: /ˈkrɪspi/
+-- Tone: Positive
+-- Example: 1. I love crispy fried chicken.
+
+چرب | Greasy
+-- Pronunciation: /ˈɡriːsi/
+-- Tone: Negative
+-- Example: 1. Keep greasy food away from my keyboard.
+
+فاسد (غذا) | Rotten
+-- Pronunciation: /ˈrɑtən/
+-- Tone: Negative
+-- Example: 1. A rotten apple.
+
+جاادار (بزرگ) | Spacious
+-- Pronunciation: /ˈspeɪʃəs/
+-- Tone: Positive
+-- Example: 1. A spacious apartment.
+
+تنگ (مکان) | Cramped
+-- Pronunciation: /kræmpt/
+-- Tone: Negative
+-- Example: 1. The airplane seat was very cramped.
+
+دنج | Cozy
+-- Pronunciation: /ˈkoʊzi/
+-- Tone: Positive
+-- Example: 1. A cozy little cafe.
+
+مرتب / منظم | Tidy
+-- Pronunciation: /ˈtaɪdi/
+-- Tone: Positive
+-- Example: 1. Keep your room tidy.
+
+درهم برهم | Messy
+-- Pronunciation: /ˈmɛsi/
+-- Tone: Negative
+-- Example: 1. His desk is always messy.
+
+مایل (کج) | Tilted
+-- Pronunciation: /ˈtɪltɪd/
+-- Tone: Neutral
+-- Example: 1. The picture on the wall is tilted.
+
+وارونه | Upside down
+-- Pronunciation: /ˈʌpsaɪd daʊn/
+-- Tone: Neutral
+-- Example: 1. You're holding the map upside down.
+
+برعکس (پشت و رو) | Inside out
+-- Pronunciation: /ɪnˈsaɪd aʊt/
+-- Tone: Neutral
+-- Example: 1. Your t-shirt is inside out.
+
+توخالی | Hollow
+-- Pronunciation: /ˈhɑloʊ/
+-- Tone: Neutral
+-- Example: 1. A hollow tree trunk.
+
+کم عمق | Shallow
+-- Pronunciation: /ˈʃæloʊ/
+-- Tone: Neutral
+-- Example: 1. The pool is shallow at this end.
+
+شیب‌دار (تند) | Steep
+-- Pronunciation: /stiːp/
+-- Tone: Neutral
+-- Example: 1. A steep hill.
+
+لغزنده | Slippery
+-- Pronunciation: /ˈslɪpəri/
+-- Tone: Negative
+-- Example: 1. Be careful; the floor is slippery.
+
+چسبناک | Sticky
+-- Pronunciation: /ˈstɪki/
+-- Tone: Neutral
+-- Example: 1. My hands are sticky from the honey.
+
+زبر / خشن | Rough
+-- Pronunciation: /rʌf/
+-- Tone: Neutral
+-- Example: 1. Sandpaper is rough.
+
+نرم (لطیف) | Smooth
+-- Pronunciation: /smuːð/
+-- Tone: Positive
+-- Example: 1. A smooth surface.
+
+کند (تیغ/چاقو) | Dull / Blunt
+-- Pronunciation: /dʌl/
+-- Tone: Negative
+-- Example: 1. This knife is dull; it won't cut.
+
+تیز | Sharp
+-- Pronunciation: /ʃɑrp/
+-- Tone: Neutral
+-- Example: 1. Watch out; the edge is sharp.
+
+شل (پیچ/لباس) | Loose
+-- Pronunciation: /luːs/
+-- Tone: Neutral
+-- Example: 1. A loose tooth. 2. Loose pants.
+
+سفت / تنگ | Tight
+-- Pronunciation: /taɪt/
+-- Tone: Neutral
+-- Example: 1. These shoes are too tight.
+
+ضدآب | Waterproof
+-- Pronunciation: /ˈwɔtərˌpruf/
+-- Tone: Neutral
+-- Example: 1. A waterproof jacket.
+
+عایق صدا | Soundproof
+-- Pronunciation: /ˈsaʊndˌpruf/
+-- Tone: Neutral
+-- Example: 1. The recording studio is soundproof.
+
+قابل حمل | Portable
+-- Pronunciation: /ˈpɔrtəbəl/
+-- Tone: Positive
+-- Example: 1. A portable speaker.
+
+قابل تنظیم | Adjustable
+-- Pronunciation: /əˈdʒʌstəbəl/
+-- Tone: Positive
+-- Example: 1. An adjustable chair.
+
+یکبار مصرف | Disposable
+-- Pronunciation: /dɪˈspoʊzəbəl/
+-- Tone: Neutral
+-- Example: 1. Disposable plates.
+
+قابل بازیافت | Recyclable
+-- Pronunciation: /riˈsaɪkləbəl/
+-- Tone: Positive
+-- Example: 1. Is this plastic recyclabale?
+
+قابل اشتعال | Flammable
+-- Pronunciation: /ˈflæməbəl/
+-- Tone: Warning
+-- Example: 1. Gasoline is highly flammable.
+
+سمی | Toxic
+-- Pronunciation: /ˈtɑksɪk/
+-- Tone: Warning
+-- Example: 1. Toxic chemicals.
+
+کشنده | Lethal
+-- Pronunciation: /ˈliːθəl/
+-- Tone: Warning
+-- Example: 1. A lethal dose of poison.
+
+بی‌ضرر | Harmless
+-- Pronunciation: /ˈhɑrmləs/
+-- Tone: Positive
+-- Example: 1. It's just a harmless garden spider.
+
+مفید | Beneficial
+-- Pronunciation: /ˌbɛnəˈfɪʃəl/
+-- Tone: Positive
+-- Example: 1. Exercise is beneficial for health.
+
+مضر | Detrimental
+-- Pronunciation: /ˌdɛtrəˈmɛntəl/
+-- Tone: negative
+-- Synonyms: Harmful
+-- Example: 1. Smoking is detrimental to your lungs.
+
+الزامی | Mandatory
+-- Pronunciation: /ˈmændəˌtɔri/
+-- Tone: Formal
+-- Example: 1. Attendance is mandatory.
+
+اختیاری | Optional
+-- Pronunciation: /ˈɑpʃənəl/
+-- Tone: Neutral
+-- Example: 1. The tour is optional.
+
+رسمی | Formal
+-- Pronunciation: /ˈfɔrməl/
+-- Tone: Neutral
+-- Example: 1. Formal attire is required.
+
+غیررسمی | Casual
+-- Pronunciation: /ˈkæʒuəl/
+-- Tone: Neutral
+-- Example: 1. Dress is casual.
+
+موقت | Temporary
+-- Pronunciation: /ˈtɛmpəˌrɛri/
+-- Tone: Neutral
+-- Example: 1. A temporary solution.
+
+دائمی | Permanent
+-- Pronunciation: /ˈpɜrmənənt/
+-- Tone: Neutral
+-- Example: 1. A permanent job.
+
+سریع / فوری | Instant
+-- Pronunciation: /ˈɪnstənt/
+-- Tone: Neutral
+-- Example: 1. Instant coffee. 2. Instant messaging.
+
+تدریجی | Gradual
+-- Pronunciation: /ˈɡrædʒuəl/
+-- Tone: Neutral
+-- Example: 1. A gradual improvement.
+
+ناگهانی | Sudden
+-- Pronunciation: /ˈsʌdən/
+-- Tone: Neutral
+-- Example: 1. A sudden stop.
+
+تصادفی | Accidental
+-- Pronunciation: /ˌæksəˈdɛntəl/
+-- Tone: Neutral
+-- Example: 1. An accidental meeting.
+
+عمدی | Deliberate
+-- Pronunciation: /dɪˈlɪbərət/
+-- Tone: Neutral
+-- Synonyms: Intentional
+-- Example: 1. A deliberate attack.
+
+مصنوعی | Artificial
+-- Pronunciation: /ˌɑrtəˈfɪʃəl/
+-- Tone: Neutral
+-- Example: 1. Artificial intelligence.
+
+طبیعی | Natural
+-- Pronunciation: /ˈnætʃərəl/
+-- Tone: Positive
+-- Example: 1. Natural ingredients.
+
+اصل / واقعی | Authentic
+-- Pronunciation: /ɔˈθɛntɪk/
+-- Tone: Positive
+-- Synonyms: Genuine
+-- Example: 1. Authentic Italian food.
+
+تقلبی | Fake / Counterfeit
+-- Pronunciation: /ˈkaʊntərˌfɪt/
+-- Tone: Negative
+-- Example: 1. Counterfeit money.
+
+انتزاعی | Abstract
+-- Pronunciation: /ˈæbstrækt/
+-- Tone: Neutral
+-- Example: 1. Abstract art. 2. Abstract concept.
+
+ملموس / عینی | Concrete
+-- Pronunciation: /ˈkɑnkriːt/
+-- Tone: Neutral
+-- Example: 1. Concrete evidence.
+
+پیچیده | Sophisticated
+-- Pronunciation: /səˈfɪstɪˌkeɪtɪd/
+-- Tone: Positive
+-- Example: 1. A sophisticated device.
+
+ساده / ابتدایی | Primitive
+-- Pronunciation: /ˈprɪmɪtɪv/
+-- Tone: Neutral/Negative
+-- Example: 1. Primitive technology.
+
+مدرن | Contemporary
+-- Pronunciation: /kənˈtɛmpəˌrɛri/
+-- Tone: Neutral
+-- Example: 1. Contemporary art.
+
+سنتی | Conventional
+-- Pronunciation: /kənˈvɛnʃənəl/
+-- Tone: Neutral
+-- Example: 1. Conventional medicine.
+
+غیرمتعارف | Unconventional
+-- Pronunciation: /ˌʌnkənˈvɛnʃənəl/
+-- Tone: Neutral
+-- Example: 1. Unconventional methods.
+آب از سر گذشتن | What's done is done / Miss the boat
+-- Pronunciation: /mɪs ðə boʊt/
+-- Tone: Idiom
+-- Example: 1. I missed the boat on buying Bitcoin when it was cheap.
+
+سنگ تمام گذاشتن | Go the extra mile
+-- Pronunciation: /ɡoʊ ðə ˈɛkstrə maɪl/
+-- Tone: Idiom
+-- Example: 1. She always goes the extra mile for her customers.
+
+دست روی دست گذاشتن | Sit on one's hands
+-- Pronunciation: /sɪt ɑn wʌnz hændz/
+-- Tone: Idiom
+-- Example: 1. We can't just sit on our hands while the problem gets worse.
+
+موش و گربه بازی درآوردن | Play cat and mouse
+-- Pronunciation: /pleɪ kæt æn maʊs/
+-- Tone: Idiom
+-- Example: 1. The police played cat and mouse with the criminal for weeks.
+
+از کاه کوه ساختن | Make a mountain out of a molehill
+-- Pronunciation: /ˈmoʊlˌhɪl/
+-- Tone: Idiom
+-- Example: 1. Don't worry about it; you're making a mountain out of a molehill.
+
+آبدیده شدن (در سختی) | Cut one's teeth
+-- Pronunciation: /kʌt wʌnz tiːθ/
+-- Tone: Idiom
+-- Example: 1. He cut his teeth on local politics before running for Congress.
+
+بر وفق مراد بودن | Go according to plan
+-- Pronunciation: /əˈkɔrdɪŋ tu plæn/
+-- Tone: Neutral
+-- Example: 1. Everything went according to plan.
+
+به سیم آخر زدن | Throw caution to the wind
+-- Pronunciation: /θroʊ ˈkɔʃən tu ðə wɪnd/
+-- Tone: Idiom
+-- Example: 1. He threw caution to the wind and quit his job to travel.
+
+پا پس کشیدن | Get cold feet
+-- Pronunciation: /ɡɛt koʊld fiːt/
+-- Tone: Idiom
+-- Example: 1. The groom got cold feet right before the wedding.
+
+حرف کسی را قطع کردن | Cut someone off
+-- Pronunciation: /kʌt ɔf/
+-- Tone: Neutral
+-- Example: 1. Sorry to cut you off, but we are out of time.
+
+خونسرد بودن | Keep one's cool
+-- Pronunciation: /kiːp wʌnz kuːl/
+-- Tone: Idiom
+-- Example: 1. He kept his cool despite the insults.
+
+دست و پا گم کردن | Panic / Lose one's head
+-- Pronunciation: /luːz wʌnz hɛd/
+-- Tone: Idiom
+-- Example: 1. Don't lose your head in an emergency.
+
+رو دست خوردن | Be taken for a ride
+-- Pronunciation: /teɪkən fɔr ə raɪd/
+-- Tone: Idiom
+-- Example: 1. I paid too much for this car; I was taken for a ride.
+
+زبانم مو درآورد | Sound like a broken record
+-- Pronunciation: /saʊnd laɪk ə ˈbroʊkən ˈrɛkərd/
+-- Tone: Idiom
+-- Example: 1. I know I sound like a broken record, but please clean your room.
+
+سر در آوردن (از کاری) | Get the hang of
+-- Pronunciation: /ɡɛt ðə hæŋ əv/
+-- Tone: Idiom
+-- Example: 1. Programming is hard at first, but you'll get the hang of it.
+
+شانه خالی کردن | Weasel out
+-- Pronunciation: /ˈwiːzəl aʊt/
+-- Tone: Informal/Negative
+-- Example: 1. He tried to weasel out of paying his share.
+
+قلق چیزی را داشتن | Have a knack for
+-- Pronunciation: /hæv ə næk fɔr/
+-- Tone: Idiom
+-- Example: 1. She has a knack for interior design.
+
+کاسه کوزه را سر کسی شکستن | Scapegoat
+-- Pronunciation: /ˈskeɪpˌɡoʊt/
+-- Tone: Neutral (Verb/Noun)
+-- Example: 1. Don't use me as a scapegoat for your mistakes.
+
+گرگ در لباس میش | Wolf in sheep's clothing
+-- Pronunciation: /wʊlf ɪn ʃiːps ˈkloʊðɪŋ/
+-- Tone: Idiom
+-- Example: 1. Be careful; he appears friendly but is a wolf in sheep's clothing.
+
+مو را از ماست کشیدن | Splitting hairs
+-- Pronunciation: /ˈsplɪtɪŋ hɛrz/
+-- Tone: Idiom
+-- Example: 1. Stop splitting hairs; the difference is negligible.
+
+همه چیز را به شوخی گرفتن | Take lightly
+-- Pronunciation: /teɪk ˈlaɪtli/
+-- Tone: Neutral
+-- Example: 1. This is a serious matter; don't take it lightly.
+
+یک کلاغ چهل کلاغ کردن | Exaggerate / Blow out of proportion
+-- Pronunciation: /bloʊ aʊt əv prəˈpɔrʃən/
+-- Tone: Idiom
+-- Example: 1. The media blew the story out of proportion.
+
+یه دستی زدن | Example (Bluff)
+-- Pronunciation: /blʌf/
+-- Tone: Neutral
+-- Example: 1. I think he's bluffing; he doesn't have a good hand.
+
+آتو دست کسی دادن | Give someone leverage / Give ammo
+-- Pronunciation: /ɡɪv ˈæmoʊ/
+-- Tone: Informal
+-- Example: 1. Don't post that photo; you're just giving your enemies ammo.
+
+پارتی بازی | Nepotism
+-- Pronunciation: /ˈnɛpəˌtɪzəm/
+-- Tone: Formal
+-- Example: 1. He got the job through nepotism; his uncle is the boss.
+
+پز دادن | Show off / Brag
+-- Pronunciation: /bræɡ/
+-- Tone: Negative
+-- Example: 1. Stop bragging about your new car.
+
+چشم و هم‌چشمی | Keeping up with the Joneses
+-- Pronunciation: /ˈkiːpɪŋ ʌp wɪð ðə ˈdʒoʊnzɪz/
+-- Tone: Idiom
+-- Example: 1. They bought a boat just to keep up with the Joneses.
+
+خاله زنک بازی | Gossip
+-- Pronunciation: /ˈɡɑsɪp/
+-- Tone: Neutral
+-- Example: 1. I hate office gossip.
+
+دست پیش گرفتن | Turn the tables
+-- Pronunciation: /tɜrn ðə ˈteɪbəlz/
+-- Tone: Idiom
+-- Example: 1. She turned the tables on her accuser.
+
+دندان گرد | Greedy
+-- Pronunciation: /ˈɡriːdi/
+-- Tone: Negative
+-- Example: 1. Don't be greedy.
+
+رک و پوست کنده | Blunt / Straightforward
+-- Pronunciation: /blʌnt/
+-- Tone: Neutral
+-- Example: 1. To be blunt, your work is not good enough.
+
+سر کیسه را شل کردن | Splurge
+-- Pronunciation: /splɜrdʒ/
+-- Tone: Informal
+-- Example: 1. I splurged on a new handbag.
+
+کم آوردن (در بحث) | Lose the argument
+-- Pronunciation: /luːz/
+-- Tone: Neutral
+-- Example: 1. You know you've lost the argument when you start shouting.
+
+لفت دادن | Stall / Drag one's feet
+-- Pronunciation: /dræɡ wʌnz fiːt/
+-- Tone: Idiom
+-- Example: 1. The government is dragging its feet on the new law.
+
+نان کسی را آجر کردن | Take the bread out of someone's mouth
+-- Pronunciation: /teɪk ðə brɛd aʊt əv mɑʊθ/
+-- Tone: Idiom
+-- Example: 1. By opening a store right next door, you're taking the bread out of my mouth.
+
+نق زدن | Nag
+-- Pronunciation: /næɡ/
+-- Tone: Negative
+-- Example: 1. Stop nagging me to clean my room.
+
+نمک نشناس | Ungrateful
+-- Pronunciation: /ʌnˈɡreɪtfəl/
+-- Tone: Negative
+-- Example: 1. She is so ungrateful for all your help.
+
+نور چشمی | Teacher's pet / Favorite
+-- Pronunciation: /ˈtiːtʃərz pɛt/
+-- Tone: Idiom
+-- Example: 1. Nobody likes him because he's the teacher's pet.
+
+هول شدن | Get flustered
+-- Pronunciation: /ɡɛt ˈflʌstərd/
+-- Tone: Neutral
+-- Example: 1. I got flustered during the interview and forgot my name.
+
+یک دنده | Stubborn / Headstrong
+-- Pronunciation: /ˈhɛdˌstrɔŋ/
+-- Tone: Negative
+-- Example: 1. She is too headstrong to listen to advice.
+
+آب زیر کاه | Sneaky / Underhanded
+-- Pronunciation: /ˈsniːki/
+-- Tone: Negative
+-- Example: 1. It was a sneaky trick to get my password.
+
+پاچه خواری | Brown-nosing / Suck up
+-- Pronunciation: /braʊn ˈnoʊzɪŋ/
+-- Tone: Slang/Vulgar
+-- Example: 1. He got the promotion by brown-nosing the boss.
+
+خالی بندی | Tall tale / Fabrication
+-- Pronunciation: /tɔl teɪl/
+-- Tone: Idiom
+-- Example: 1. That fish story sounds like a tall tale.
+
+حوصله نداشتن | Not in the mood
+-- Pronunciation: /nɑt ɪn ðə muːd/
+-- Tone: Neutral
+-- Example: 1. I'm not in the mood for a movie tonight.
+
+حال کسی را گرفتن | Rain on someone's parade
+-- Pronunciation: /reɪn ɑn pəˈreɪd/
+-- Tone: Idiom
+-- Example: 1. I hate to rain on your parade, but we can't afford it.
+
+دست به سر کردن | Brush off
+-- Pronunciation: /brʌʃ ɔf/
+-- Tone: Phrasal Verb
+-- Example: 1. He brushed off my concerns as unimportant.
+
+رو کم کنی | One-upmanship
+-- Pronunciation: /wʌn ˈʌpmənˌʃɪp/
+-- Tone: Formal
+-- Example: 1. Their relationship is full of constant one-upmanship.
+
+شیر تو شیر | Chaos / Haywire
+-- Pronunciation: /ˈheɪˌwaɪər/
+-- Tone: Informal
+-- Example: 1. Everything went haywire after the power outage.
+
+قسر در رفتن | Get off scot-free
+-- Pronunciation: /skɑt friː/
+-- Tone: Idiom
+-- Example: 1. The burglar got off scot-free because of a lack of evidence.
+
+ماست مالی کردن | Cover up / Gloss over
+-- Pronunciation: /ɡlɔs ˈoʊvər/
+-- Tone: Idiom
+-- Example: 1. The report glossed over the company's financial problems.
+از آنجایی که ... | Inasmuch as ...
+-- Pronunciation: /ɪnəzˈmʌtʃ æz/
+-- Tone: Formal
+-- Example: 1. Inasmuch as you are their leader, you are responsible.
+
+به موجب این ... | Hereby
+-- Pronunciation: /hɪrˈbaɪ/
+-- Tone: Legal/Formal
+-- Example: 1. I hereby resign from my position.
+
+از این به بعد | Henceforth
+-- Pronunciation: /hɛnsˈfɔrθ/
+-- Tone: Formal
+-- Example: 1. Henceforth, all meetings will be recorded.
+
+با وجود این | Notwithstanding
+-- Pronunciation: /ˌnɑtwɪθˈstændɪŋ/
+-- Tone: Formal
+-- Example: 1. Notwithstanding the criticism, the project proceeded.
+
+به ضررِ ... | At the expense of ...
+-- Pronunciation: /æt ðə ɪkˈspɛns əv/
+-- Tone: Neutral
+-- Example: 1. He focused on his career at the expense of his family life.
+
+در نهایتِ ... | In the event of ...
+-- Pronunciation: /ɪn ðə ɪˈvɛnt əv/
+-- Tone: Formal
+-- Example: 1. In the event of fire, use the stairs.
+
+به شرط آنکه ... | Provided that ...
+-- Pronunciation: /prəˈvaɪdɪd ðæt/
+-- Tone: Formal
+-- Example: 1. You can go out provided that you finish your homework.
+
+لزوماً | Necessarily
+-- Pronunciation: /ˌnɛsəˈsɛrəli/
+-- Tone: Neutral
+-- Example: 1. That is not necessarily true.
+
+متعاقباً | Subsequently
+-- Pronunciation: /ˈsʌbsɪkwəntli/
+-- Tone: Formal
+-- Example: 1. The book was subsequently translated into 15 languages.
+
+همزمان | Simultaneously
+-- Pronunciation: /ˌsaɪməlˈteɪniəsli/
+-- Tone: Neutral
+-- Example: 1. The two events happened simultaneously.
+
+در تضاد با ... | In stark contrast to ...
+-- Pronunciation: /ɪn stɑrk ˈkɑntræst tu/
+-- Tone: Formal
+-- Example: 1. His wealth stands in stark contrast to the poverty around him.
+
+تا حدی که ... | To the extent that ...
+-- Pronunciation: /tu ðə ɪkˈstɛnt ðæt/
+-- Tone: Formal
+-- Example: 1. He was helpful to the extent that he could be.
+
+صرف نظر از ... | Regardless of ...
+-- Pronunciation: /rɪˈɡɑrdləs əv/
+-- Tone: Neutral
+-- Example: 1. Regardless of the cost, we need to fix it.
+
+با توجه به ... | In light of ...
+-- Pronunciation: /ɪn laɪt əv/
+-- Tone: Formal
+-- Example: 1. In light of the new evidence, we are reopening the case.
+
+به جای ... | In lieu of ...
+-- Pronunciation: /ɪn luː əv/
+-- Tone: Formal
+-- Example: 1. They gave a donation in lieu of flowers.
+
+روی لبه تیغ | On the razor's edge
+-- Pronunciation: /ɑn ðə ˈreɪzərz ɛdʒ/
+-- Tone: Idiom
+-- Example: 1. The company is teetering on the razor's edge of bankruptcy.
+
+بین دو راهی | At a crossroads
+-- Pronunciation: /æt ə ˈkrɔsˌroʊdz/
+-- Tone: Idiom
+-- Example: 1. I am at a crossroads in my career.
+
+گیر کردن در برزخ (بلاتکلیفی) | In limbo
+-- Pronunciation: /ɪn ˈlɪmboʊ/
+-- Tone: Idiom
+-- Example: 1. The project has been in limbo for months.
+
+تیر در تاریکی (حدس) | Shot in the dark
+-- Pronunciation: /ʃɑt ɪn ðə dɑrk/
+-- Tone: Idiom
+-- Example: 1. It was just a shot in the dark, but I guessed right.
+
+آرامش قبل از طوفان | Calm before the storm
+-- Pronunciation: /kɑm bɪˈfɔr ðə stɔrm/
+-- Tone: Idiom
+-- Example: 1. The silence was the calm before the storm.
+
+شروع تازه | Clean slate
+-- Pronunciation: /kliːn sleɪt/
+-- Tone: Idiom
+-- Example: 1. Moving to a new city gave me a clean slate.
+
+سنگ جلوی پای کسی انداختن | Throw a wrench in the works
+-- Pronunciation: /θroʊ ə rɛntʃ/
+-- Tone: Idiom
+-- Example: 1. The bad weather threw a wrench in our plans.
+
+آب پاکی روی دست ریختن | Set the record straight
+-- Pronunciation: /sɛt ðə ˈrɛkərd streɪt/
+-- Tone: Idiom
+-- Example: 1. Let me set the record straight; I never said that.
+
+دست به سیاه و سفید نزدن | Lift a finger
+-- Pronunciation: /lɪft ə ˈfɪŋɡər/
+-- Tone: Idiom
+-- Example: 1. He didn't lift a finger to help us.
+
+بی گدار به آب زدن | Jump the gun
+-- Pronunciation: /dʒʌmp ðə ɡʌn/
+-- Tone: Idiom
+-- Example: 1. Don't jump the gun; wait for the official announcement.
+
+سماجت کردن | Stick to one's guns
+-- Pronunciation: /stɪk tu wʌnz ɡʌnz/
+-- Tone: Idiom
+-- Example: 1. Despite the pressure, she stuck to her guns.
+
+کفگیر به ته دیگ خوردن | Scrape the bottom of the barrel
+-- Pronunciation: /skreɪp ðə ˈbɑtəm əv ðə ˈbærəl/
+-- Tone: Idiom
+-- Example: 1. We are really scraping the bottom of the barrel for ideas now.
+
+از کوره در رفتن | Fly off the handle
+-- Pronunciation: /flaɪ ɔf ðə ˈhændəl/
+-- Tone: Idiom
+-- Example: 1. He flies off the handle at the slightest provocation.
+
+به دل گرفتن | Take to heart
+-- Pronunciation: /teɪk tu hɑrt/
+-- Tone: Idiom
+-- Example: 1. Don't take his criticism to heart.
+
+از سر باز کردن | Get it over with
+-- Pronunciation: /ɡɛt ɪt ˈoʊvər wɪð/
+-- Tone: Neutral
+-- Example: 1. I want to take the test and get it over with.
+
+پا تو کفش کسی کردن | Step on someone's toes
+-- Pronunciation: /stɛp ɑn ˈtoʊz/
+-- Tone: Idiom
+-- Example: 1. I don't want to step on your toes, but I have a suggestion.
+
+دل و جیگر داشتن (شجاعت) | Have the guts
+-- Pronunciation: /hæv ðə ɡʌts/
+-- Tone: Informal
+-- Example: 1. He didn't have the guts to tell her the truth.
+
+رگ خواب کسی را داشتن | Know what makes someone tick
+-- Pronunciation: /noʊ wʌt meɪks ˈsʌmwʌn tɪk/
+-- Tone: Idiom
+-- Example: 1. I'm trying to figure out what makes him tick.
+
+زیر آب زدن | Badmouth / Backstab
+-- Pronunciation: /ˈbædˌmaʊθ/
+-- Tone: Negative
+-- Example: 1. Stop badmouthing your colleagues behind their backs.
+
+شاخ و شانه کشیدن | Flex one's muscles
+-- Pronunciation: /flɛks wʌnz ˈmʌsəlz/
+-- Tone: Idiom
+-- Example: 1. The country is flexing its military muscles.
+
+صورت مسئله را پاک کردن | Sweep under the rug
+-- Pronunciation: /swiːp ˈʌndər ðə rʌɡ/
+-- Tone: Idiom
+-- Example: 1. You can't just sweep your problems under the rug.
+
+قسر در رفتن (از قانون) | Beat the rap
+-- Pronunciation: /biːt ðə ræp/
+-- Tone: Slang
+-- Example: 1. He hired a good lawyer and beat the rap.
+
+گلیم خود را از آب بیرون کشیدن | Fend for oneself
+-- Pronunciation: /fɛnd fɔr wʌnˈsɛlf/
+-- Tone: Neutral
+-- Example: 1. The children had to fend for themselves while their parents were away.
+
+مچ کسی را گرفتن | Catch red-handed
+-- Pronunciation: /kætʃ rɛd ˈhændɪd/
+-- Tone: Idiom
+-- Example: 1. He was caught red-handed stealing the money.
+
+نخود هر آش | Have a finger in every pie
+-- Pronunciation: /hæv ə ˈfɪŋɡər ɪn ˈɛvri paɪ/
+-- Tone: Idiom
+-- Example: 1. She loves to govern; she has a finger in every pie.
+
+هلو بپر تو گلو | Handed on a silver platter
+-- Pronunciation: /ˈsɪlvər ˈplætər/
+-- Tone: Idiom
+-- Example: 1. Success won't be handed to you on a silver platter.
+
+یک تیر و دو نشان | Kill two birds with one stone
+-- Pronunciation: /kɪl tuː bɜrdz wɪð wʌn stoʊn/
+-- Tone: Idiom
+-- Example: 1. I can drop off the mail and pick up lunch; kill two birds with one stone.
+
+یک دستی (بلوف) | Bluff
+-- Pronunciation: /blʌf/
+-- Tone: Neutral
+-- Example: 1. Is he telling the truth or just bluffing?
+
+آبروریزی | Scandal / Disgrace
+-- Pronunciation: /ˈskændəl/
+-- Tone: Negative
+-- Example: 1. The political scandal shocked the nation.
+
+اتفاقی (شانسی) | Coincidence
+-- Pronunciation: /koʊˈɪnsɪdəns/
+-- Tone: Neutral
+-- Example: 1. What a coincidence! I was just thinking about you.
+
+اجتناب ناپذیر | Unavoidable
+-- Pronunciation: /ˌʌnəˈvɔɪdəbəl/
+-- Tone: Neutral
+-- Example: 1. Delays are unavoidable due to the weather.
+
+احتمال (شانس) | Probability / Odds
+-- Pronunciation: /ˌprɑbəˈbɪlɪti/
+-- Tone: Neutral
+-- Example: 1. The odds of winning are slim.
+
+اختلال (وقفه) | Disruption
+-- Pronunciation: /dɪsˈrʌpʃən/
+-- Tone: Negative
+-- Example: 1. A disruption in the supply chain.
+
+استثنا | Exception
+-- Pronunciation: /ɪkˈsɛpʃən/
+-- Tone: Neutral
+-- Example: 1. Everyone must go, with no exceptions.
+
+اشتباه لپی | Slip of the tongue
+-- Pronunciation: /slɪp əv ðə tʌŋ/
+-- Tone: Idiom
+-- Example: 1. It was just a slip of the tongue; I didn't mean it.

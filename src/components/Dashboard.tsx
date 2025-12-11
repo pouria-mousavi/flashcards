@@ -34,7 +34,18 @@ export default function Dashboard({ cards, onStartStudy, onAddCard, onReset, isS
   });
 
   return (
-    <div className="flex-center full-screen" style={{ flexDirection: 'column', padding: '20px', gap: '24px' }}>
+    <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        padding: '40px 20px', 
+        gap: '24px',
+        width: '100%',
+        minHeight: '100dvh', // Ensure it takes full height but grows
+        overflowY: 'auto', // Allow scrolling
+        background: 'var(--bg-color)'
+    }}>
       
       {/* Header */}
       <h1 style={{ fontSize: '2.5rem', fontWeight: '800', margin: 0 }}>My Deck</h1>

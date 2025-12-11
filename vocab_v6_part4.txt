@@ -1,0 +1,544 @@
+تردید کردن / نوسان داشتن | Vacillate
+-- Pronunciation: /ˈvæsəˌleɪt/
+-- Tone: Formal
+-- Synonyms: Waffle, Hesitate
+-- Example: 1. She vacillated between the two options for weeks.
+
+تحریک کردن (منفی) / دامن زدن | Instigate
+-- Pronunciation: /ˈɪnstəˌɡeɪt/
+-- Tone: Negative
+-- Example: 1. He was accused of instigating the riot.
+
+تسکین دادن (خشم) | Appease
+-- Pronunciation: /əˈpiːz/
+-- Tone: Formal
+-- Example: 1. They tried to appease the angry customers with free coupons.
+
+جعل کردن / ساختگی | Fabricate
+-- Pronunciation: /ˈfæbrɪˌkeɪt/
+-- Tone: Neutral
+-- Synonyms: Make up
+-- Example: 1. The evidence was completely fabricated.
+
+بررسی دقیق کردن | Scrutinize
+-- Pronunciation: /ˈskruːtəˌnaɪz/
+-- Tone: Formal
+-- Example: 1. The contract was scrutinized by lawyers.
+
+تکرار کردن (برای تاکید) | Reiterate
+-- Pronunciation: /riˈɪtəˌreɪt/
+-- Tone: Formal
+-- Example: 1. Let me reiterate my point.
+
+منحرف شدن (از موضوع) | Digress
+-- Pronunciation: /daɪˈɡrɛs/
+-- Tone: Formal
+-- Example: 1. Let me digress for a moment to explain the background.
+
+بدتر کردن / تشدید کردن | Exacerbate
+-- Pronunciation: /ɪɡˈzæsərˌbeɪt/
+-- Tone: Formal
+-- Synonyms: Worsen
+-- Example: 1. Stress can exacerbate the symptoms of the disease.
+
+تلقین کردن | Indoctrinate
+-- Pronunciation: /ɪnˈdɑktrəˌneɪt/
+-- Tone: Negative
+-- Example: 1. The cult indoctrinates its members with radical beliefs.
+
+سرسخت / کله‌شق | Obstinate
+-- Pronunciation: /ˈɑbstənət/
+-- Tone: Negative
+-- Synonyms: Stubborn
+-- Example: 1. He is too obstinate to admit he was wrong.
+
+بی‌دقت / سهل‌انگار | Negligent
+-- Pronunciation: /ˈnɛɡlɪdʒənt/
+-- Tone: Legal/Formal
+-- Example: 1. The company was negligent in safety procedures.
+
+مشتاق / آرزومند (با حسرت) | Wistful
+-- Pronunciation: /ˈwɪstfəl/
+-- Tone: Literary
+-- Example: 1. She gave a wistful smile as she looked at the old photo.
+
+بی‌تفاوت / خونسرد (بیش از حد) | Nonchalant
+-- Pronunciation: /ˌnɑnʃəˈlɑnt/
+-- Tone: Neutral
+-- Example: 1. He was surprisingly nonchalant about winning the lottery.
+
+بدنام | Notorious
+-- Pronunciation: /noʊˈtɔriəs/
+-- Tone: Negative
+-- Synonyms: Infamous
+-- Example: 1. The city is notorious for its traffic jams.
+
+خسته‌کننده / ملال‌آور | Mundane
+-- Pronunciation: /mʌnˈdeɪn/
+-- Tone: Neutral
+-- Example: 1. I need a break from my mundane routine.
+
+خاکی / فروتن (غیر رسمی) | Down-to-earth
+-- Pronunciation: /daʊn tu ɜrθ/
+-- Tone: Positive
+-- Example: 1. Despite his fame, he is very down-to-earth.
+
+بداخلاق / ترشرو | Grumpy
+-- Pronunciation: /ˈɡrʌmpi/
+-- Tone: Informal
+-- Example: 1. I'm always grumpy in the morning before coffee.
+
+سرسخت / مقاوم | Tenacious
+-- Pronunciation: /təˈneɪʃəs/
+-- Tone: Positive
+-- Example: 1. She is a tenacious negotiator.
+
+ساده‌لوح | Gullible
+-- Pronunciation: /ˈɡʌləbəl/
+-- Tone: Negative
+-- Example: 1. Don't be so gullible; he's lying to you.
+
+مرموز / مبهم | Enigmatic
+-- Pronunciation: /ˌɛnɪɡˈmætɪk/
+-- Tone: Literary
+-- Example: 1. The Mona Lisa has an enigmatic smile.
+
+بی‌شرمانه / آشکار | Blatant
+-- Pronunciation: /ˈbleɪtənt/
+-- Tone: Negative
+-- Example: 1. That was a blatant lie.
+
+منسوخ | Obsolete
+-- Pronunciation: /ˌɑbsəˈliːt/
+-- Tone: Neutral
+-- Example: 1. Floppy disks are obsolete.
+
+جامع / کامل | Comprehensive
+-- Pronunciation: /ˌkɑmpriˈhɛnsɪv/
+-- Tone: Formal
+-- Example: 1. We need a comprehensive study of the market.
+
+مختصر و مفید | Concise
+-- Pronunciation: /kənˈsaɪs/
+-- Tone: Positive
+-- Example: 1. Keep your report clear and concise.
+
+مبهم / دوپهلو | Vague
+-- Pronunciation: /veɪɡ/
+-- Tone: Negative
+-- Example: 1. His instructions were too vague.
+
+کنایه‌آمیز | Ironic
+-- Pronunciation: /aɪˈrɑnɪk/
+-- Tone: Neutral
+-- Example: 1. It’s ironic that a fire station burned down.
+
+خسته‌کننده (کار) | Grueling
+-- Pronunciation: /ˈɡruəlɪŋ/
+-- Tone: Negative
+-- Synonyms: Exhausting
+-- Example: 1. It was a grueling 10-hour hike.
+
+کثیف / چرک (مکان/لباس) | Filthy
+-- Pronunciation: /ˈfɪlθi/
+-- Tone: Strong
+-- Example: 1. Go wash your hands; they are filthy.
+
+بی‌عیب و نقص | Pristine
+-- Pronunciation: /ˈprɪstiːn/
+-- Tone: Positive
+-- Example: 1. The beach was in pristine condition.
+
+بدقلق / ایرادگیر | Fussy
+-- Pronunciation: /ˈfʌsi/
+-- Tone: Negative
+-- Example: 1. He is a fussy eater.
+
+ولخرج | Extravagant
+-- Pronunciation: /ɪkˈstrævəɡənt/
+-- Tone: Neutral
+-- Example: 1. An extravagant wedding party.
+
+خسیس | Stingy
+-- Pronunciation: /ˈstɪndʒi/
+-- Tone: Negative
+-- Synonyms: Cheap
+-- Example: 1. Don't be stingy with the tip.
+
+هوشیار (حواس جمع) | Alert
+-- Pronunciation: /əˈlɜrt/
+-- Tone: Neutral
+-- Example: 1. Drivers must remain alert at all times.
+
+بی‌قرار | Restless
+-- Pronunciation: /ˈrɛstləs/
+-- Tone: Neutral
+-- Example: 1. Detailed work makes me restless.
+
+کنجکاو (فضول) | Nosy
+-- Pronunciation: /ˈnoʊzi/
+-- Tone: Negative
+-- Example: 1. Stop being so nosy about my private life.
+
+خجالت‌آور | Embarrassing
+-- Pronunciation: /ɪmˈbærəsɪŋ/
+-- Tone: Neutral
+-- Example: 1. It was an embarrassing mistake.
+
+توهین‌آمیز | Offensive
+-- Pronunciation: /əˈfɛnsɪv/
+-- Tone: Negative
+-- Example: 1. His comments were deeply offensive.
+
+محترمانه | Respectful
+-- Pronunciation: /rɪˈspɛktfəl/
+-- Tone: Positive
+-- Example: 1. Be respectful to your elders.
+
+حیاتی / ضروری | Vital
+-- Pronunciation: /ˈvaɪtəl/
+-- Tone: Formal
+-- Example: 1. Water is vital for life.
+
+بسیار خوشحال | Ecstatic
+-- Pronunciation: /ɪkˈstætɪk/
+-- Tone: Strong Positive
+-- Example: 1. I was ecstatic when I heard the news.
+
+بسیار غمگین / ویران شده | Devastated
+-- Pronunciation: /ˈdɛvəˌsteɪtɪd/
+-- Tone: Strong Negative
+-- Example: 1. She was devastated by the loss of her dog.
+
+عصبانی (خشمگین) | Furious
+-- Pronunciation: /ˈfjʊriəs/
+-- Tone: Strong Negative
+-- Example: 1. He was furious about the damage to his car.
+
+وحشت‌زده | Terrified
+-- Pronunciation: /ˈtɛrəˌfaɪd/
+-- Tone: Strong Negative
+-- Example: 1. I am terrified of spiders.
+
+بی‌حس / کرخت | Numb
+-- Pronunciation: /nʌm/
+-- Tone: Neutral
+-- Example: 1. My fingers are numb from the cold.
+
+متورم / باد کرده | Swollen
+-- Pronunciation: /ˈswoʊlən/
+-- Tone: Medical
+-- Example: 1. His ankle is swollen.
+
+کبود | Bruised
+-- Pronunciation: /bruːzd/
+-- Tone: Medical
+-- Example: 1. Her arm is badly bruised.
+
+خارش داشتن | Itchy
+-- Pronunciation: /ˈɪtʃi/
+-- Tone: Neutral
+-- Example: 1. The sweater is wool and very itchy.
+
+ترش (مزه) | Sour
+-- Pronunciation: /ˈsaʊər/
+-- Tone: Neutral
+-- Example: 1. These grapes are sour.
+
+تلخ (مزه/حقیقت) | Bitter
+-- Pronunciation: /ˈbɪtər/
+-- Tone: Neutral
+-- Example: 1. Dark chocolate has a bitter taste. 2. A bitter disappointment.
+
+بی‌مزه | Bland
+-- Pronunciation: /blænd/
+-- Tone: Negative
+-- Example: 1. The soup was bland; it needs salt.
+
+تند (ادویه) | Spicy
+-- Pronunciation: /ˈspaɪsi/
+-- Tone: Neutral
+-- Example: 1. Do you like spicy food?
+
+ترد | Crispy
+-- Pronunciation: /ˈkrɪspi/
+-- Tone: Positive
+-- Example: 1. I love crispy fried chicken.
+
+چرب | Greasy
+-- Pronunciation: /ˈɡriːsi/
+-- Tone: Negative
+-- Example: 1. Keep greasy food away from my keyboard.
+
+فاسد (غذا) | Rotten
+-- Pronunciation: /ˈrɑtən/
+-- Tone: Negative
+-- Example: 1. A rotten apple.
+
+جاادار (بزرگ) | Spacious
+-- Pronunciation: /ˈspeɪʃəs/
+-- Tone: Positive
+-- Example: 1. A spacious apartment.
+
+تنگ (مکان) | Cramped
+-- Pronunciation: /kræmpt/
+-- Tone: Negative
+-- Example: 1. The airplane seat was very cramped.
+
+دنج | Cozy
+-- Pronunciation: /ˈkoʊzi/
+-- Tone: Positive
+-- Example: 1. A cozy little cafe.
+
+مرتب / منظم | Tidy
+-- Pronunciation: /ˈtaɪdi/
+-- Tone: Positive
+-- Example: 1. Keep your room tidy.
+
+درهم برهم | Messy
+-- Pronunciation: /ˈmɛsi/
+-- Tone: Negative
+-- Example: 1. His desk is always messy.
+
+مایل (کج) | Tilted
+-- Pronunciation: /ˈtɪltɪd/
+-- Tone: Neutral
+-- Example: 1. The picture on the wall is tilted.
+
+وارونه | Upside down
+-- Pronunciation: /ˈʌpsaɪd daʊn/
+-- Tone: Neutral
+-- Example: 1. You're holding the map upside down.
+
+برعکس (پشت و رو) | Inside out
+-- Pronunciation: /ɪnˈsaɪd aʊt/
+-- Tone: Neutral
+-- Example: 1. Your t-shirt is inside out.
+
+توخالی | Hollow
+-- Pronunciation: /ˈhɑloʊ/
+-- Tone: Neutral
+-- Example: 1. A hollow tree trunk.
+
+کم عمق | Shallow
+-- Pronunciation: /ˈʃæloʊ/
+-- Tone: Neutral
+-- Example: 1. The pool is shallow at this end.
+
+شیب‌دار (تند) | Steep
+-- Pronunciation: /stiːp/
+-- Tone: Neutral
+-- Example: 1. A steep hill.
+
+لغزنده | Slippery
+-- Pronunciation: /ˈslɪpəri/
+-- Tone: Negative
+-- Example: 1. Be careful; the floor is slippery.
+
+چسبناک | Sticky
+-- Pronunciation: /ˈstɪki/
+-- Tone: Neutral
+-- Example: 1. My hands are sticky from the honey.
+
+زبر / خشن | Rough
+-- Pronunciation: /rʌf/
+-- Tone: Neutral
+-- Example: 1. Sandpaper is rough.
+
+نرم (لطیف) | Smooth
+-- Pronunciation: /smuːð/
+-- Tone: Positive
+-- Example: 1. A smooth surface.
+
+کند (تیغ/چاقو) | Dull / Blunt
+-- Pronunciation: /dʌl/
+-- Tone: Negative
+-- Example: 1. This knife is dull; it won't cut.
+
+تیز | Sharp
+-- Pronunciation: /ʃɑrp/
+-- Tone: Neutral
+-- Example: 1. Watch out; the edge is sharp.
+
+شل (پیچ/لباس) | Loose
+-- Pronunciation: /luːs/
+-- Tone: Neutral
+-- Example: 1. A loose tooth. 2. Loose pants.
+
+سفت / تنگ | Tight
+-- Pronunciation: /taɪt/
+-- Tone: Neutral
+-- Example: 1. These shoes are too tight.
+
+ضدآب | Waterproof
+-- Pronunciation: /ˈwɔtərˌpruf/
+-- Tone: Neutral
+-- Example: 1. A waterproof jacket.
+
+عایق صدا | Soundproof
+-- Pronunciation: /ˈsaʊndˌpruf/
+-- Tone: Neutral
+-- Example: 1. The recording studio is soundproof.
+
+قابل حمل | Portable
+-- Pronunciation: /ˈpɔrtəbəl/
+-- Tone: Positive
+-- Example: 1. A portable speaker.
+
+قابل تنظیم | Adjustable
+-- Pronunciation: /əˈdʒʌstəbəl/
+-- Tone: Positive
+-- Example: 1. An adjustable chair.
+
+یکبار مصرف | Disposable
+-- Pronunciation: /dɪˈspoʊzəbəl/
+-- Tone: Neutral
+-- Example: 1. Disposable plates.
+
+قابل بازیافت | Recyclable
+-- Pronunciation: /riˈsaɪkləbəl/
+-- Tone: Positive
+-- Example: 1. Is this plastic recyclabale?
+
+قابل اشتعال | Flammable
+-- Pronunciation: /ˈflæməbəl/
+-- Tone: Warning
+-- Example: 1. Gasoline is highly flammable.
+
+سمی | Toxic
+-- Pronunciation: /ˈtɑksɪk/
+-- Tone: Warning
+-- Example: 1. Toxic chemicals.
+
+کشنده | Lethal
+-- Pronunciation: /ˈliːθəl/
+-- Tone: Warning
+-- Example: 1. A lethal dose of poison.
+
+بی‌ضرر | Harmless
+-- Pronunciation: /ˈhɑrmləs/
+-- Tone: Positive
+-- Example: 1. It's just a harmless garden spider.
+
+مفید | Beneficial
+-- Pronunciation: /ˌbɛnəˈfɪʃəl/
+-- Tone: Positive
+-- Example: 1. Exercise is beneficial for health.
+
+مضر | Detrimental
+-- Pronunciation: /ˌdɛtrəˈmɛntəl/
+-- Tone: negative
+-- Synonyms: Harmful
+-- Example: 1. Smoking is detrimental to your lungs.
+
+الزامی | Mandatory
+-- Pronunciation: /ˈmændəˌtɔri/
+-- Tone: Formal
+-- Example: 1. Attendance is mandatory.
+
+اختیاری | Optional
+-- Pronunciation: /ˈɑpʃənəl/
+-- Tone: Neutral
+-- Example: 1. The tour is optional.
+
+رسمی | Formal
+-- Pronunciation: /ˈfɔrməl/
+-- Tone: Neutral
+-- Example: 1. Formal attire is required.
+
+غیررسمی | Casual
+-- Pronunciation: /ˈkæʒuəl/
+-- Tone: Neutral
+-- Example: 1. Dress is casual.
+
+موقت | Temporary
+-- Pronunciation: /ˈtɛmpəˌrɛri/
+-- Tone: Neutral
+-- Example: 1. A temporary solution.
+
+دائمی | Permanent
+-- Pronunciation: /ˈpɜrmənənt/
+-- Tone: Neutral
+-- Example: 1. A permanent job.
+
+سریع / فوری | Instant
+-- Pronunciation: /ˈɪnstənt/
+-- Tone: Neutral
+-- Example: 1. Instant coffee. 2. Instant messaging.
+
+تدریجی | Gradual
+-- Pronunciation: /ˈɡrædʒuəl/
+-- Tone: Neutral
+-- Example: 1. A gradual improvement.
+
+ناگهانی | Sudden
+-- Pronunciation: /ˈsʌdən/
+-- Tone: Neutral
+-- Example: 1. A sudden stop.
+
+تصادفی | Accidental
+-- Pronunciation: /ˌæksəˈdɛntəl/
+-- Tone: Neutral
+-- Example: 1. An accidental meeting.
+
+عمدی | Deliberate
+-- Pronunciation: /dɪˈlɪbərət/
+-- Tone: Neutral
+-- Synonyms: Intentional
+-- Example: 1. A deliberate attack.
+
+مصنوعی | Artificial
+-- Pronunciation: /ˌɑrtəˈfɪʃəl/
+-- Tone: Neutral
+-- Example: 1. Artificial intelligence.
+
+طبیعی | Natural
+-- Pronunciation: /ˈnætʃərəl/
+-- Tone: Positive
+-- Example: 1. Natural ingredients.
+
+اصل / واقعی | Authentic
+-- Pronunciation: /ɔˈθɛntɪk/
+-- Tone: Positive
+-- Synonyms: Genuine
+-- Example: 1. Authentic Italian food.
+
+تقلبی | Fake / Counterfeit
+-- Pronunciation: /ˈkaʊntərˌfɪt/
+-- Tone: Negative
+-- Example: 1. Counterfeit money.
+
+انتزاعی | Abstract
+-- Pronunciation: /ˈæbstrækt/
+-- Tone: Neutral
+-- Example: 1. Abstract art. 2. Abstract concept.
+
+ملموس / عینی | Concrete
+-- Pronunciation: /ˈkɑnkriːt/
+-- Tone: Neutral
+-- Example: 1. Concrete evidence.
+
+پیچیده | Sophisticated
+-- Pronunciation: /səˈfɪstɪˌkeɪtɪd/
+-- Tone: Positive
+-- Example: 1. A sophisticated device.
+
+ساده / ابتدایی | Primitive
+-- Pronunciation: /ˈprɪmɪtɪv/
+-- Tone: Neutral/Negative
+-- Example: 1. Primitive technology.
+
+مدرن | Contemporary
+-- Pronunciation: /kənˈtɛmpəˌrɛri/
+-- Tone: Neutral
+-- Example: 1. Contemporary art.
+
+سنتی | Conventional
+-- Pronunciation: /kənˈvɛnʃənəl/
+-- Tone: Neutral
+-- Example: 1. Conventional medicine.
+
+غیرمتعارف | Unconventional
+-- Pronunciation: /ˌʌnkənˈvɛnʃənəl/
+-- Tone: Neutral
+-- Example: 1. Unconventional methods.
