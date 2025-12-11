@@ -576,3 +576,122 @@ question source markdown | answer source markdown
 مچاله کردن | Crumpling [ˈkrʌmplɪŋ] -- Ex: 1. He was crumpling the paper in his hand. 2. The sound of crumpling paper filled the room. -- Tone: Neutral -- Alt: Crushing
 100% accurate | It's spot on! -- Ex: 1. Your guess was spot on. 2. The analysis is spot on. -- Tone: Informal -- Alt: It's perfectly accurate
 Exact lookalike کپ اونه! | It's a dead ringer for Pouria -- Ex: 1. She's a dead ringer for her mother. 2. That painting is a dead ringer for the original. -- Tone: Informal -- Alt: It looks exactly like Pouria
+لولا | Hinge
+-- Pronunciation: /hɪndʒ/
+-- Tone: Neutral
+-- Example: 1. The door hinge is squeaky; it needs some oil. 2. The entire project hinges on this decision.
+
+سیم سیار | Extension Cord
+-- Pronunciation: /ɪkˈstɛnʃən kɔrd/
+-- Tone: Neutral
+-- Synonyms: Power strip
+-- Example: 1. Do we have an extension cord? The outlet is too far.
+
+سه راهی برق | Power Strip
+-- Pronunciation: /paʊər strɪp/
+-- Tone: Neutral
+-- Example: 1. Plug the computer into the power strip to protect it from surges.
+
+زیرلیوانی | Coaster
+-- Pronunciation: /ˈkoʊstər/
+-- Tone: Neutral
+-- Example: 1. Please use a coaster to avoid staining the wooden table.
+
+در بطری | Bottle Cap
+-- Pronunciation: /ˈbɑtəl kæp/
+-- Tone: Neutral
+-- Example: 1. He twisted off the bottle cap and took a sip.
+
+کفگیر | Spatula
+-- Pronunciation: /ˈspætʃələ/
+-- Tone: Neutral
+-- Example: 1. Use a spatula to flip the pancakes.
+
+ملاقه | Ladle
+-- Pronunciation: /ˈleɪdəl/
+-- Tone: Neutral
+-- Example: 1. She used a ladle to serve the soup.
+
+نیمه باز (در/پنجره) | Ajar
+-- Pronunciation: /əˈdʒɑr/
+-- Tone: Neutral
+-- Example: 1. I left the door ajar so the cat could get in.
+
+بهم ریخته / شلوغ | Cluttered
+-- Pronunciation: /ˈklʌtərd/
+-- Tone: Neutral
+-- Synonyms: Messy, Disorganized
+-- Example: 1. My desk is too cluttered; I can't find my pen. 2. A cluttered interface confuses the user.
+
+خسته کننده / طاقت فرسا | Tedious
+-- Pronunciation: /ˈtiːdiəs/
+-- Tone: Neutral
+-- Synonyms: Boring, Monotonous
+-- Example: 1. Data entry is a tedious job. 2. The process was long and tedious.
+
+مبهم | Ambiguous
+-- Pronunciation: /æmˈbɪɡjuəs/
+-- Tone: Formal
+-- Synonyms: Unclear, Vague
+-- Example: 1. The instructions were ambiguous, so I didn't know what to do. 2. We need to disambiguate this variable name.
+
+دلبخواهی / شانسی / قراردادی | Arbitrary
+-- Pronunciation: /ˈɑrbɪtrɛri/
+-- Tone: Formal
+-- Synonyms: Random
+-- Example: 1. The decision seemed arbitrary and unfair. 2. Avoid using arbitrary numbers in the code; use constants.
+
+پیش نیاز | Prerequisite
+-- Pronunciation: /ˌpriːˈrɛkwəzɪt/
+-- Tone: Formal
+-- Synonyms: Requirement
+-- Example: 1. Calculus is a prerequisite for this physics course. 2. Installation of Node.js is a prerequisite.
+
+منسوخ (شده) | Deprecated
+-- Pronunciation: /ˈdɛprəkeɪtɪd/
+-- Tone: Technical
+-- Synonyms: Obsolete
+-- Example: 1. This API method is deprecated and will be removed in the next version.
+
+نقطه گریز | Vanishing Point
+-- Pronunciation: /ˈvænɪʃɪŋ pɔɪnt/
+-- Tone: Technical
+-- Example: 1. In perspective drawing, parallel lines seem to converge at the vanishing point.
+
+بصری / دلی (بدون استدلال) | Intuitively
+-- Pronunciation: /ɪnˈtuːɪtɪvli/
+-- Tone: Neutral
+-- Example: 1. He understood the problem intuitively without needing calculations. 2. The UI should be designed intuitively.
+
+برخلاف عقل سلیم / غیرمنتظره | Counter-intuitive
+-- Pronunciation: /ˌkaʊntər ɪnˈtuːɪtɪv/
+-- Tone: Neutral
+-- Example: 1. It seems counter-intuitive, but adding more people to a late project makes it later.
+
+هماهنگ شدن (نظرات) | Align (on something)
+-- Pronunciation: /əˈlaɪn/
+-- Tone: Corporate
+-- Synonyms: Agree, Sync
+-- Example: 1. Let's have a meeting to align on the quarterly goals. 2. Our incentives are not aligned.
+
+منحنی یادگیری (پیشرفت) | Learning Curve
+-- Pronunciation: /ˈlɜrnɪŋ kɜrv/
+-- Tone: Neutral
+-- Example: 1. This framework has a steep learning curve, but it's powerful.
+
+مزیت / اهرم فشار | Leverage
+-- Pronunciation: /ˈlɛvərɪdʒ/
+-- Tone: Corporate
+-- Synonyms: Advantage
+-- Example: 1. We should leverage our existing user base to launch the new product. 2. He has no leverage in this negotiation.
+
+تنگنا / گلوگاه | Bottleneck
+-- Pronunciation: /ˈbɑtəlˌnɛk/
+-- Tone: Technical
+-- Synonyms: Obstacle, blockage
+-- Example: 1. The database write speed is the bottleneck of our system.
+
+افزونگی / یدکی | Redundancy
+-- Pronunciation: /rɪˈdʌndənsi/
+-- Tone: Technical
+-- Example: 1. We need server redundancy to prevent downtime. 2. Remove the redundancy in your code.

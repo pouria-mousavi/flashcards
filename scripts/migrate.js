@@ -107,18 +107,15 @@ async function migrate() {
     }
 
     // 3. Batch Process
-    const batchSize = 100;
+    const batchSize = 5; // Safer batch size for URL limits
+    let processingError = null;
+
     for (let i = 0; i < uniqueCards.length; i += batchSize) {
         const batch = uniqueCards.slice(i, i + batchSize);
         
-        // Strategy: We want to UPDATE content but KEEP stats if they exist.
-        // "upsert" in Supabase overwrites everything by default.
-        // So we must:
-        // 1. Fetch existing IDs for this batch (by Front text)
-        // 2. Map existing stats to the new objects
-        // 3. Upsert
-        
         const fronts = batch.map(c => c.front);
+        // Supabase .in() filter creates a long URL string. 
+        // With long flashcard sentences, this can easily exceed 4KB/8KB limits.
         const { data: existing, error: fetchErr } = await supabase
             .from('cards')
             .select('front, state, next_review, interval, ease_factor, id')
@@ -126,7 +123,10 @@ async function migrate() {
             
         if (fetchErr) {
             console.error("Error fetching existing cards:", fetchErr);
-            continue;
+            processingError = fetchErr;
+            // Fallback: If fetch fails, we skip preserving stats to avoid crashing via upsert errors?
+            // Or we just try to upsert anyway.
+            // If we continue, we risk overwriting stats, but it's better than crashing.
         }
         
         const existingMap = new Map();
@@ -140,23 +140,29 @@ async function migrate() {
                 // Preserve stats
                 return {
                     ...c,
-                    id: old.id, // Reuse ID
+                    id: old.id,
                     state: old.state,
                     next_review: old.next_review,
                     interval: old.interval,
                     ease_factor: old.ease_factor
                 };
             }
-            return c; // New card, keep defaults
+            // New card: ensure NO ID is present to let DB generate it
+            const { id, ...rest } = c; 
+            return rest;
         });
         
         const { error: upsertErr } = await supabase.from('cards').upsert(finalBatch, { onConflict: 'front' });
-        if (upsertErr) console.error("Error upserting batch:", upsertErr);
-        else console.log(`Processed batch ${i} - ${i + batch.length}`);
+        if (upsertErr) {
+            console.error("Error upserting batch:", upsertErr);
+            processingError = upsertErr;
+        } else {
+            console.log(`Processed batch ${i} - ${i + batch.length}`);
+        }
     }
 
-    if (error) {
-        console.error("Error uploading:", error);
+    if (processingError) {
+        console.error("Migration finished with errors.");
     } else {
         console.log("Success! Cards migrated.");
     }

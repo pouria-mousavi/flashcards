@@ -17,23 +17,35 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
     const loadVoices = () => {
         try {
             if (!window.speechSynthesis) return;
-            const voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
-            setAvailableVoices(voices);
+            // Premium Filter: Only English voices that sound "Good"
+            // Start with all EN voices, then filter.
+            const allEn = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+            
+            // Allow-list for high quality names. 
+            // Google = Chrome online voices (Natural)
+            // Samantha/Daniel/Karen = iOS/Mac High Quality
+            const premiumVoices = allEn.filter(v => 
+                v.name.includes('Google') || 
+                v.name.includes('Premium') ||
+                ['Samantha', 'Daniel', 'Karen', 'Rishi', 'Moira', 'Tessa'].some(n => v.name.includes(n))
+            );
+
+            // If we found good ones, use them. Otherwise fallback to all EN.
+            const finalSet = premiumVoices.length > 0 ? premiumVoices : allEn;
+            setAvailableVoices(finalSet);
             
             // Try to load saved preference
             const saved = localStorage.getItem('preferred_voice_uri');
             if (saved) {
-                const hit = voices.find(v => v.voiceURI === saved);
+                const hit = finalSet.find(v => v.voiceURI === saved);
                 if (hit) {
                     setVoice(hit);
                     return;
                 }
             }
 
-            // Fallback priority
-            const preferred = voices.find(v => v.name === 'Google US English') ||
-                              voices.find(v => v.name === 'Samantha') ||
-                              voices[0];
+            // Default to first "Google" or first available
+            const preferred = finalSet.find(v => v.name.includes('Google')) || finalSet[0];
             if (preferred) setVoice(preferred);
         } catch (e) {
             console.error("Voice load error:", e);
@@ -79,8 +91,10 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
         style={{
-          width: '320px',
-          height: '480px',
+          width: '90vw',
+          maxWidth: '340px',
+          height: '65vh',
+          maxHeight: '520px',
           position: 'relative',
           transformStyle: 'preserve-3d',
         }}
@@ -175,8 +189,8 @@ export default function Flashcard({ card, isFlipped, onFlip }: Props) {
                         background: 'rgba(255,255,255,0.1)',
                         border: 'none',
                         borderRadius: '50%',
-                        width: '40px',
-                        height: '40px',
+                        width: '64px',
+                        height: '64px',
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
