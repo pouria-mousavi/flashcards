@@ -238,14 +238,7 @@ function App() {
       )}
     </div>
   );
-      {view === 'add' && (
-        <AddCard 
-          onAdd={handleAddCard} 
-          onCancel={() => setView('dashboard')} 
-        />
-      )}
-    </div>
-  );
+
 }
 
 export default App;

@@ -19,7 +19,36 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
   const [isFlipped, setIsFlipped] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
 
-  // ... (Voice Logic remains same)
+  // Load Voice Preference (Strict US)
+  useEffect(() => {
+    const loadVoices = () => {
+         if (!window.speechSynthesis) return;
+         // Strict Filter: US Only + High Quality
+         const allVoices = window.speechSynthesis.getVoices();
+         const usVoices = allVoices.filter(v => v.lang === 'en-US');
+         
+         // Pick Top 2-3 Best
+         const best = usVoices.filter(v => 
+            v.name.includes('Google') || 
+            v.name.includes('Samantha') || 
+            v.name.includes('Premium')
+         );
+         
+         const candidate = best.length > 0 ? best[0] : usVoices[0];
+         if (candidate) setVoice(candidate);
+    };
+    loadVoices();
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }, []);
+
+  const handlePlayAudio = (text: string) => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    if (voice) u.voice = voice;
+    window.speechSynthesis.speak(u);
+  };
 
   useEffect(() => {
     // Queue is passed directly now (restored or new)
