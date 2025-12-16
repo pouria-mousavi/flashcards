@@ -107,7 +107,11 @@ function App() {
     });
   };
 
-  // Load Data
+  // Session Persistence
+  const SESSION_KEY = 'flashcards_active_session';
+  const [restoredSession, setRestoredSession] = useState<{ queue: Flashcard[], index: number } | null>(null);
+
+  // Load Data & Check Session
   useEffect(() => {
     async function init() {
       try {
@@ -117,6 +121,25 @@ function App() {
         if (data) {
             const mappedCards = data.map(mapRowToCard);
             setCards(mappedCards);
+
+            // Check for active session *after* loading cards
+            const saved = localStorage.getItem(SESSION_KEY);
+            if (saved) {
+                try {
+                    const session = JSON.parse(saved);
+                    // Validate timestamp (expire after 24h?) - Optional, let's keep it simple for now.
+                    if (session.cardIds && Array.isArray(session.cardIds)) {
+                        const queue = session.cardIds.map((id: string) => mappedCards.find(c => c.id === id)).filter((c: Flashcard | undefined): c is Flashcard => !!c);
+                        if (queue.length > 0) {
+                            setRestoredSession({ queue, index: session.currentIndex || 0 });
+                            setView('study');
+                        }
+                    }
+                } catch (err) {
+                    console.error("Failed to restore session", err);
+                    localStorage.removeItem(SESSION_KEY);
+                }
+            }
         }
       } catch (e) {
         console.error("Failed to load data", e);
@@ -127,32 +150,52 @@ function App() {
     init();
   }, []);
 
-  // The old updateCardStats function is removed as it's replaced by the new one above.
+  const handleStartStudy = () => {
+    const due = getDueCards().slice(0, 50); // Limit batch size
+    if (due.length === 0) {
+        alert("No cards due!");
+        return;
+    }
+    
+    // Save new session
+    const sessionData = {
+        cardIds: due.map(c => c.id),
+        currentIndex: 0,
+        timestamp: Date.now()
+    };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+    
+    setRestoredSession({ queue: due, index: 0 });
+    setView('study');
+  };
+
+  const handleSessionEnd = () => {
+      localStorage.removeItem(SESSION_KEY);
+      setRestoredSession(null);
+      setView('dashboard');
+  };
+
+  // ... (Update Card Stats logic remains same)
 
   if (!isConfigured) {
+      // ... (Error View)
       return (
           <div className="flex-center full-screen" style={{ flexDirection: 'column', color: 'var(--danger)', padding: '20px', textAlign: 'center' }}>
               <h1>⚠️ Configuration Missing</h1>
               <p>The App cannot connect to the Database.</p>
-              <p style={{ marginTop: '10px', fontSize: '0.8rem', color: '#888' }}>
-                Error: VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY is empty.<br/>
-                Please check your GitHub Repository Settings &gt; Secrets.<br/>
-                Ensure your workflow uses 'env' to pass secrets to 'npm run build'.
-              </p>
           </div>
       );
   }
 
-
   if (loading) {
-    return (
-        <div className="flex-center full-screen" style={{ color: 'var(--accent)' }}>
-            Loading your deck from Cloud...
-        </div>
-    );
+     return <div className="flex-center full-screen" style={{ color: 'var(--accent)' }}>Loading...</div>;
   }
+  
+  // Helpers
+  // ...
 
   const handleAddCard = (front: string, back: string) => {
+      // ... (Keep existing)
       const newCard: Flashcard = {
           id: crypto.randomUUID(),
           front,
@@ -171,21 +214,30 @@ function App() {
       {view === 'dashboard' && (
         <Dashboard 
           cards={cards} 
-          onStartStudy={() => setView('study')} 
+          onStartStudy={handleStartStudy} 
           onAddCard={() => setView('add')}
           onReset={resetProgress}
           isShuffled={isShuffled}
           onToggleShuffle={() => setIsShuffled(!isShuffled)}
         />
       )}
-      {view === 'study' && (
+      {view === 'study' && restoredSession && (
         <StudySession 
-          cards={getDueCards()} 
+          cards={restoredSession.queue}
+          startIndex={restoredSession.index}
           onUpdateCard={updateCardStats} 
-          onExit={() => setView('dashboard')} 
-          onSessionComplete={() => setView('dashboard')}
+          onExit={handleSessionEnd} 
+          onSessionComplete={handleSessionEnd}
         />
       )}
+      {view === 'add' && (
+        <AddCard 
+          onAdd={handleAddCard} 
+          onCancel={() => setView('dashboard')} 
+        />
+      )}
+    </div>
+  );
       {view === 'add' && (
         <AddCard 
           onAdd={handleAddCard} 
