@@ -6,8 +6,9 @@ import type { Flashcard } from './utils/sm2';
 import StudySession from './components/StudySession';
 import Dashboard from './components/Dashboard';
 import AddCard from './components/AddCard';
+import BookMode from './components/BookMode';
 
-type View = 'dashboard' | 'study' | 'add';
+type View = 'dashboard' | 'study' | 'add' | 'book';
 
 function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
@@ -216,6 +217,7 @@ function App() {
           cards={cards} 
           onStartStudy={handleStartStudy} 
           onAddCard={() => setView('add')}
+          onOpenBookMode={() => setView('book')}
           onReset={resetProgress}
           isShuffled={isShuffled}
           onToggleShuffle={() => setIsShuffled(!isShuffled)}
@@ -235,6 +237,14 @@ function App() {
           onAdd={handleAddCard} 
           onCancel={() => setView('dashboard')} 
         />
+      )}
+      {view === 'book' && (
+          <BookMode 
+              onExit={() => setView('dashboard')}
+              onSaveCard={(term, def) => {
+                  handleAddCard(term, def); // Reuse the Add Card logic but direct
+              }}
+          />
       )}
     </div>
   );

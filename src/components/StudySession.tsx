@@ -19,86 +19,51 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
   const [currentCardIndex, setCurrentCardIndex] = useState(startIndex);
   const [isFlipped, setIsFlipped] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
-  // Load Voice Preference (Strict US)
   useEffect(() => {
-    const loadVoices = () => {
-         if (!window.speechSynthesis) return;
-         // Strict Filter: US Only + High Quality
-         const allVoices = window.speechSynthesis.getVoices();
-         const usVoices = allVoices.filter(v => v.lang === 'en-US');
-         
-         // Pick Top 2-3 Best
-         const best = usVoices.filter(v => 
-            v.name.includes('Google') || 
-            v.name.includes('Samantha') || 
-            v.name.includes('Premium')
-         );
-         
-         const candidate = best.length > 0 ? best[0] : usVoices[0];
-         if (candidate) setVoice(candidate);
-    };
-    loadVoices();
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
-        window.speechSynthesis.onvoiceschanged = loadVoices;
-    }
+    setQueue(cards);
+  }, [cards]);
+
+  useEffect(() => {
+      const loadVoices = () => {
+          const vs = window.speechSynthesis.getVoices();
+          setVoices(vs);
+          const preferred = vs.find(v => v.name.includes('Google US English') || v.name.includes('Samantha'));
+          if (preferred) setVoice(preferred);
+      };
+      
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
   }, []);
 
-  const handlePlayAudio = (text: string) => {
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US';
-    if (voice) u.voice = voice;
-    window.speechSynthesis.speak(u);
+  const handlePlayAudio = (text?: string) => {
+      if (!text) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      if (voice) utterance.voice = voice;
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
   };
-
-  useEffect(() => {
-    // Queue is passed directly now (restored or new)
-    setQueue(cards);
-    // Ensure index is valid
-    if (startIndex < cards.length) {
-        setCurrentCardIndex(startIndex);
-    }
-  }, [cards, startIndex]); 
 
   const handleRate = (rating: number) => {
     const currentCard = queue[currentCardIndex];
     if (!currentCard) return;
 
+    // Calculate new stats
     const updates = calculateSM2(currentCard, rating);
     const updatedCard = { ...currentCard, ...updates };
-    
+
+    // Update Parent/DB
     onUpdateCard(updatedCard);
-
-    // Sync Progress to Storage
-    try {
-        const SESSION_KEY = 'flashcards_active_session';
-        const saved = localStorage.getItem(SESSION_KEY);
-        if (saved) {
-            const session = JSON.parse(saved);
-            // We are moving TO the next card index (current + 1)
-            // But if we re-queue (Again), the total length increases.
-            // Simplest logic: just save currentCardIndex + 1
-            
-            // NOTE: If we re-queue, we append to `cards` in memory (queue).
-            // But `App.tsx` restoration logic uses the *saved ID list*.
-            // If we append here, we must also append the ID to storage!
-            
-            // Let's handle the Re-queue logic carefully below.
-            
-            session.currentIndex = currentCardIndex + 1;
-            localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-        }
-    } catch (e) {
-        console.error("Failed to sync persistence", e);
-    }
-
-    // Confetti logic...
-    if (rating === 5 && updates.state === CardState.REVIEW && currentCard.state !== CardState.REVIEW) {
+    
+    // Confetti for "Easy"
+    if (rating === 5) {
       confetti({
         particleCount: 50,
         spread: 60,
-        origin: { y: 0.8 },
-        colors: ['#22c55e', '#ffffff']
+        origin: { y: 0.7 },
+        colors: ['#10b981', '#34d399']
       });
     }
 
@@ -110,25 +75,13 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
         // Re-queue in memory
         setQueue(prev => [...prev, updatedCard]);
         
-        // Update Storage Queue so it persists!
+        // Update Storage Queue Logic
         try {
             const SESSION_KEY = 'flashcards_active_session';
             const saved = localStorage.getItem(SESSION_KEY);
             if (saved) {
                 const session = JSON.parse(saved);
-                if (session.cardIds && !session.cardIds.includes(updatedCard.id)) {
-                     // Wait, ID is already in list? 
-                     // No, "re-queue" usually means "do it again at the end".
-                     // If we just append the ID, the restoration mapped it.
-                     // But duplicate IDs in ID list? 
-                     // Actually, simplified: "Resume" just resumes the *original* list order.
-                     // If user got "Again", and we reload app, should we remember they need to do it again?
-                     // Yes. So append ID to session.cardIds
-                     session.cardIds.push(updatedCard.id);
-                     localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-                } else if (session.cardIds) {
-                     // Even if ID exists (it does, at current index), we want it *again* at the end.
-                     // Allowing duplicates in ID list is fine for "queue".
+                if (session.cardIds) {
                      session.cardIds.push(updatedCard.id);
                      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
                 }
@@ -211,7 +164,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
                     isFlipped={isFlipped} 
                     onFlip={() => setIsFlipped(!isFlipped)} 
                     onSaveNote={handleSaveNote}
-                    onPlayAudio={handlePlayAudio}
+                    onPlayAudio={() => handlePlayAudio(currentCard.back)}
                 />
             </motion.div>
         </AnimatePresence>
@@ -229,66 +182,33 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
           gap: '12px',
           paddingBottom: '20px'
       }}>
-        {/* Play Audio Button (Always Visible if Back is shown OR Front if desired, but user asked for Play Button at bottom) */}
-        {/* We show it always for convenience, or strictly on back. Let's start with Always for convenience. */}
-        <button 
-            onClick={(e) => { e.stopPropagation(); handlePlayAudio(currentCard.back); }}
-            style={{
-                width: '60px',
-                height: '60px',
-                borderRadius: '50%',
-                background: 'rgba(255,255,255,0.1)',
-                border: '1px solid rgba(255,255,255,0.2)',
-                color: 'white',
-                fontSize: '1.5rem',
-                display: 'flex',
-                alignItems: 'center',
-      {/* Play Audio Button (Always Visible if Back is shown OR Front if desired, but user asked for Play Button at bottom) */}
-      {/* We show it always for convenience, or strictly on back. Let's start with Always for convenience. */}
-      <button 
-          onClick={(e) => { e.stopPropagation(); handlePlayAudio(currentCard.back); }}
-          style={{
-              width: '60px',
-              height: '60px',
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.1)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: 'white',
-              fontSize: '1.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              marginBottom: '10px'
-          }}
-      >
-          🔊
-      </button>
-
-      <div style={{ display: 'flex', width: '100%', gap: '8px' }}>
-          {!isFlipped ? (
-              <button 
-                  onClick={() => setIsFlipped(true)}
-                  style={{ 
-                      width: '100%', 
-                      padding: '20px', 
-                      borderRadius: '20px', 
-                      background: 'var(--accent)', 
-                      color: 'white',
-                      fontWeight: 'bold',
-                      fontSize: '1.2rem',
-                      boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)'
-                  }}>
-                  Show Answer
-              </button>
-          ) : (
-              <>
-                  <RateButton label="Again" color="var(--danger)" onClick={() => handleRate(0)} />
-                  <RateButton label="Hard" color="var(--warning)" onClick={() => handleRate(3)} />
-                  <RateButton label="Good" color="var(--accent)" onClick={() => handleRate(4)} />
-                  <RateButton label="Easy" color="var(--success)" onClick={() => handleRate(5)} />
-              </>
-          )}
+        <div style={{ display: 'flex', width: '100%', gap: '8px' }}>
+            {!isFlipped ? (
+                <button 
+                    onClick={() => setIsFlipped(true)}
+                    style={{ 
+                        width: '100%', 
+                        padding: '20px', 
+                        borderRadius: '20px', 
+                        background: 'var(--accent)', 
+                        color: 'white',
+                        fontWeight: 'bold',
+                        fontSize: '1.2rem',
+                        boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)',
+                        border: 'none',
+                        cursor: 'pointer'
+                    }}>
+                    Show Answer
+                </button>
+            ) : (
+                <>
+                    <RateButton label="Again" color="var(--danger)" onClick={() => handleRate(0)} />
+                    <RateButton label="Hard" color="var(--warning)" onClick={() => handleRate(3)} />
+                    <RateButton label="Good" color="var(--accent)" onClick={() => handleRate(4)} />
+                    <RateButton label="Easy" color="var(--success)" onClick={() => handleRate(5)} />
+                </>
+            )}
+        </div>
       </div>
     </div>
   );
@@ -309,9 +229,13 @@ function RateButton({ label, color, onClick }: { label: string, color: string, o
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'transform 0.1s',
+                border: 'none',
+                cursor: 'pointer'
             }}
             onMouseDown={e => e.currentTarget.style.transform = 'scale(0.95)'}
             onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+            onTouchStart={e => e.currentTarget.style.transform = 'scale(0.95)'}
+            onTouchEnd={e => e.currentTarget.style.transform = 'scale(1)'}
         >
             <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{label}</span>
         </button>
