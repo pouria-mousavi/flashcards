@@ -162,25 +162,6 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
       ));
   };
 
-  const handleSaveNote = async (cardId: string, note: string) => {
-      // 1. Update in Supabase (Partial update)
-      const { error } = await supabase
-        .from('cards')
-        .update({ user_notes: note }) // ONLY updating notes
-        .eq('id', cardId);
-
-      if (error) {
-          console.error("Error saving note:", error);
-          alert("Failed to save note!");
-          return;
-      }
-      
-      // Update local queue state so UI reflects change immediately
-      setQueue(prev => prev.map(c => 
-          c.id === cardId ? { ...c, user_notes: note } : c
-      ));
-  };
-
   if (queue.length === 0) return <div className="flex-center full-screen">All caught up! 🎉</div>;
   
   if (currentCardIndex >= queue.length) {
