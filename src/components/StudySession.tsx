@@ -211,6 +211,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
                     isFlipped={isFlipped} 
                     onFlip={() => setIsFlipped(!isFlipped)} 
                     onSaveNote={handleSaveNote}
+                    onPlayAudio={handlePlayAudio}
                 />
             </motion.div>
         </AnimatePresence>
@@ -242,39 +243,52 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
                 fontSize: '1.5rem',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                marginBottom: '10px'
-            }}
-        >
-            🔊
-        </button>
+      {/* Play Audio Button (Always Visible if Back is shown OR Front if desired, but user asked for Play Button at bottom) */}
+      {/* We show it always for convenience, or strictly on back. Let's start with Always for convenience. */}
+      <button 
+          onClick={(e) => { e.stopPropagation(); handlePlayAudio(currentCard.back); }}
+          style={{
+              width: '60px',
+              height: '60px',
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.1)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              color: 'white',
+              fontSize: '1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              marginBottom: '10px'
+          }}
+      >
+          🔊
+      </button>
 
-        <div style={{ display: 'flex', width: '100%', gap: '8px' }}>
-            {!isFlipped ? (
-                <button 
-                    onClick={() => setIsFlipped(true)}
-                    style={{ 
-                        width: '100%', 
-                        padding: '20px', 
-                        borderRadius: '20px', 
-                        background: 'var(--accent)', 
-                        color: 'white',
-                        fontWeight: 'bold',
-                        fontSize: '1.2rem',
-                        boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)'
-                    }}>
-                    Show Answer
-                </button>
-            ) : (
-                <>
-                    <RateButton label="Again" color="var(--danger)" onClick={() => handleRate(0)} />
-                    <RateButton label="Hard" color="var(--warning)" onClick={() => handleRate(3)} />
-                    <RateButton label="Good" color="var(--accent)" onClick={() => handleRate(4)} />
-                    <RateButton label="Easy" color="var(--success)" onClick={() => handleRate(5)} />
-                </>
-            )}
-        </div>
+      <div style={{ display: 'flex', width: '100%', gap: '8px' }}>
+          {!isFlipped ? (
+              <button 
+                  onClick={() => setIsFlipped(true)}
+                  style={{ 
+                      width: '100%', 
+                      padding: '20px', 
+                      borderRadius: '20px', 
+                      background: 'var(--accent)', 
+                      color: 'white',
+                      fontWeight: 'bold',
+                      fontSize: '1.2rem',
+                      boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)'
+                  }}>
+                  Show Answer
+              </button>
+          ) : (
+              <>
+                  <RateButton label="Again" color="var(--danger)" onClick={() => handleRate(0)} />
+                  <RateButton label="Hard" color="var(--warning)" onClick={() => handleRate(3)} />
+                  <RateButton label="Good" color="var(--accent)" onClick={() => handleRate(4)} />
+                  <RateButton label="Easy" color="var(--success)" onClick={() => handleRate(5)} />
+              </>
+          )}
       </div>
     </div>
   );

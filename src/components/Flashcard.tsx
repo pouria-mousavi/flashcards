@@ -7,13 +7,14 @@ interface Props {
   isFlipped: boolean;
   onFlip: () => void;
   onSaveNote: (cardId: string, note: string) => Promise<void>;
+  onPlayAudio: () => void; // Pass this down from StudySession to keep logic there
 }
 
-export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props) {
+export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayAudio }: Props) {
   const [isNoteOpen, setIsNoteOpen] = useState(false);
   const [noteText, setNoteText] = useState(card.user_notes || '');
   const [isRecording, setIsRecording] = useState(false);
-  const [recognition, setRecognition] = useState<any>(null); // Use any to avoid TS errors for experimental API
+  const [recognition, setRecognition] = useState<any>(null);
 
   useEffect(() => {
      setNoteText(card.user_notes || '');
@@ -24,22 +25,18 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         const recog = new SpeechRecognition();
         recog.continuous = true;
-        recog.interimResults = true;
-        recog.lang = 'en-US'; // Default to English for notes, or let user speak freely? Best start with English for "Add example".
+        recog.interimResults = false; // Fix: Only accept final results to avoid weird partials
+        recog.lang = 'en-US'; 
         
         recog.onresult = (event: any) => {
-            let interimTranscript = '';
             let finalTranscript = '';
-
             for (let i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     finalTranscript += event.results[i][0].transcript;
-                } else {
-                    interimTranscript += event.results[i][0].transcript;
                 }
             }
             if (finalTranscript) {
-                setNoteText(prev => prev + ' ' + finalTranscript);
+                setNoteText(prev => (prev + ' ' + finalTranscript).trim());
             }
         };
 
@@ -67,8 +64,13 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
           recognition.stop();
           setIsRecording(false);
       } else {
-          recognition.start();
-          setIsRecording(true);
+          try {
+            recognition.start();
+            setIsRecording(true);
+          } catch(err) {
+              console.error(err);
+              setIsRecording(false);
+          }
       }
   };
   
@@ -78,10 +80,10 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
       setIsNoteOpen(false);
   };
   
-  if (!card) return null; // Safety check
+  if (!card) return null;
 
   return (
-    <div className="card-container" style={{ perspective: 1000, cursor: 'pointer' }} onClick={onFlip}>
+    <div className="card-container" style={{ perspective: 1000 }} onClick={onFlip}>
       <motion.div
         className="card-inner"
         initial={false}
@@ -96,14 +98,14 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
           transformStyle: 'preserve-3d',
         }}
       >
-        {/* FRONT */}
+        {/* FRONT (Persian) */}
         <div
           style={{
             position: 'absolute',
             width: '100%',
             height: '100%',
             backfaceVisibility: 'hidden',
-            backgroundColor: '#1E1E1E', // Darker Noji-like
+            backgroundColor: '#1E1E1E', 
             color: '#ffffff',
             borderRadius: '32px',
             boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
@@ -116,31 +118,8 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
             border: '1px solid rgba(255,255,255,0.08)'
           }}
         >
-          <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10 }}>
-             <button 
-                onClick={(e) => { 
-                    e.stopPropagation(); 
-                    setIsNoteOpen(true); 
-                    if (!isFlipped) onFlip(); // Flip to back if currently on front
-                }} 
-                style={{
-                    background: 'rgba(0,0,0,0.3)',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    borderRadius: '50%',
-                    width: '36px',
-                    height: '36px',
-                    color: '#fff',
-                    cursor: 'pointer',
-                    fontSize: '1rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
-             >
-                📝
-             </button>
-          </div>
-
+          {/* Removed Front Note Button as requested */}
+          
           <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>
             PERSIAN
           </span>
@@ -149,7 +128,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
               textAlign: 'center', 
               margin: 0, 
               lineHeight: '1.4',
-              fontFamily: 'Vazirmatn, sans-serif', // Explicitly Persian
+              fontFamily: 'Vazirmatn, sans-serif', 
               padding: '0 20px',
               wordWrap: 'break-word',
               width: '100%'
@@ -161,14 +140,14 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
           </p>
         </div>
 
-        {/* BACK */}
+        {/* BACK (English) */}
         <div
           style={{
             position: 'absolute',
             width: '100%',
             height: '100%',
             backfaceVisibility: 'hidden',
-            backgroundColor: '#18181b', // Slightly darker back
+            backgroundColor: '#18181b', 
             color: '#fff',
             borderRadius: '32px',
             boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
@@ -176,33 +155,18 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
             display: 'flex',
             flexDirection: 'column',
             padding: '32px',
+            paddingBottom: '100px', // Extra padding for footer buttons
             boxSizing: 'border-box',
             border: '1px solid rgba(255,255,255,0.08)',
-            overflowY: 'auto'
+            overflowY: 'auto',
+            position: 'relative' // For absolute footer
           }}
+          onClick={(e) => e.stopPropagation()} // Prevent flip when clicking inside back (optional, but good for scrolling)
         >
-          {/* Header */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', marginBottom: '10px' }}>
              <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)' }}>
                 ENGLISH
              </span>
-             {/* Note Toggle Button */}
-             <button 
-                onClick={(e) => { e.stopPropagation(); setIsNoteOpen(!isNoteOpen); }}
-                style={{
-                    background: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    borderRadius: '8px',
-                    padding: '4px 8px',
-                    color: isNoteOpen || card.user_notes ? 'var(--accent, #f472b6)' : '#fff',
-                    cursor: 'pointer',
-                    fontSize: '0.9rem',
-                    fontWeight: 'bold',
-                    zIndex: 10
-                }}
-             >
-                {isNoteOpen ? '❌ Close' : (card.user_notes ? '📝 Edit Note' : '➕ Note')}
-             </button>
           </div>
 
           {!isNoteOpen ? (
@@ -226,41 +190,14 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '24px' }}>
                     {card.tone && (
                         <span style={{ 
-                        background: (() => {
-                            switch(card.tone.toLowerCase()) {
-                                case 'formal': return 'rgba(99, 102, 241, 0.2)'; // Indigo
-                                case 'informal': return 'rgba(236, 72, 153, 0.2)'; // Pink
-                                case 'curse': return 'rgba(239, 68, 68, 0.2)'; // Red
-                                default: return 'rgba(255,255,255,0.1)';
-                            }
-                        })(),
-                        color: (() => {
-                            switch(card.tone.toLowerCase()) {
-                                case 'formal': return '#818cf8';
-                                case 'informal': return '#f472b6'; 
-                                case 'curse': return '#f87171';
-                                default: return '#9ca3af';
-                            }
-                        })(),
+                        background: 'rgba(255,255,255,0.1)',
+                        color: '#9ca3af',
                         padding: '4px 10px', 
                         borderRadius: '8px',
                         fontSize: '0.75rem',
                         fontWeight: '600',
-                        letterSpacing: '0.5px'
                         }}>
                             {card.tone.toUpperCase()}
-                        </span>
-                    )}
-                    {card.synonyms && (
-                        <span style={{ 
-                            background: 'rgba(255,255,255,0.05)', 
-                            color: '#9ca3af',
-                            padding: '4px 10px', 
-                            borderRadius: '8px',
-                            fontSize: '0.75rem',
-                            fontStyle: 'italic'
-                        }}>
-                            Syn: {card.synonyms}
                         </span>
                     )}
                 </div>
@@ -277,13 +214,64 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
                     </div>
                 )}
                 
-                {/* Note Preview if exists but closed */}
                 {card.user_notes && (
                      <div style={{ marginTop: '20px', padding: '10px', background: 'rgba(255,200,0,0.1)', borderRadius: '8px', borderLeft: '3px solid gold' }}>
                          <small style={{ color: 'gold', display: 'block', marginBottom: '4px' }}>YOUR NOTE:</small>
                          <div style={{ fontSize: '0.9rem', fontStyle: 'italic', color: '#eee' }}>{card.user_notes}</div>
                      </div>
                 )}
+
+                 {/* FOOTER BUTTONS (Speaker + Note) */}
+                 <div style={{ 
+                     position: 'absolute', 
+                     bottom: '20px', 
+                     left: '0', 
+                     width: '100%', 
+                     display: 'flex', 
+                     justifyContent: 'center', 
+                     gap: '20px',
+                     padding: '0 20px',
+                     boxSizing: 'border-box'
+                 }}>
+                    <button 
+                        onClick={onPlayAudio}
+                        style={{
+                            background: 'rgba(255,255,255,0.1)',
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            borderRadius: '50%',
+                            width: '60px',
+                            height: '60px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '1.5rem',
+                            cursor: 'pointer',
+                            color: '#fff'
+                        }}
+                    >
+                        🔊
+                    </button>
+                    
+                    <button 
+                         onClick={() => setIsNoteOpen(true)}
+                         style={{
+                             background: card.user_notes ? 'rgba(244, 114, 182, 0.2)' : 'rgba(255,255,255,0.1)',
+                             border: `1px solid ${card.user_notes ? '#f472b6' : 'rgba(255,255,255,0.2)'}`,
+                             borderRadius: '50%',
+                             width: '60px',
+                             height: '60px',
+                             display: 'flex',
+                             alignItems: 'center',
+                             justifyContent: 'center',
+                             fontSize: '1.5rem',
+                             cursor: 'pointer',
+                             color: card.user_notes ? '#f472b6' : '#fff'
+                         }}
+                    >
+                        📝
+                    </button>
+                 </div>
+
               </>
           ) : (
               // NOTE EDITOR MODE
@@ -292,7 +280,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
                   <textarea
                     value={noteText}
                     onChange={(e) => setNoteText(e.target.value)}
-                    placeholder="Speak or type translation corrections here..."
+                    placeholder="Speak..."
                     style={{
                         flex: 1,
                         background: 'rgba(0,0,0,0.3)',
@@ -306,45 +294,41 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote }: Props
                         marginBottom: '10px'
                     }}
                   />
-                  <div style={{ display: 'flex', gap: '10px' }}>
+                  <div style={{ display: 'flex', gap: '10px', height: '60px' }}>
                       <button
                         onClick={toggleRecording}
                         style={{
                             flex: 1,
-                            padding: '12px',
                             borderRadius: '12px',
                             border: 'none',
                             background: isRecording ? '#ef4444' : '#3b82f6',
                             color: '#fff',
                             fontWeight: 'bold',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '8px'
+                            fontSize: '1.2rem',
+                            cursor: 'pointer'
                         }}
                       >
-                          {isRecording ? 'Listening... (Stop)' : '🎤 Start Mic'}
+                          {isRecording ? '🛑' : '🎤'}
                       </button>
                       
                       <button
                         onClick={handleSave}
                         style={{
                             flex: 1,
-                            padding: '12px',
                             borderRadius: '12px',
                             border: 'none',
                             background: '#10b981',
                             color: '#fff',
                             fontWeight: 'bold',
+                            fontSize: '1.2rem',
                             cursor: 'pointer'
                         }}
                       >
-                          Save Note
+                          💾
                       </button>
                   </div>
                   <button 
-                     onClick={(e) => { e.stopPropagation(); setIsNoteOpen(false); }}
+                     onClick={() => setIsNoteOpen(false)}
                      style={{
                          background: 'transparent', border: 'none', color: '#aaa', marginTop: '10px', cursor: 'pointer'
                      }}
