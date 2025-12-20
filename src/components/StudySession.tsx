@@ -4,6 +4,7 @@ import confetti from 'canvas-confetti';
 import FlashcardComponent from './Flashcard';
 import { calculateSM2, CardState } from '../utils/sm2';
 import type { Flashcard } from '../utils/sm2';
+import { supabase } from '../lib/supabase';
 
 interface Props {
   cards: Flashcard[];
@@ -140,6 +141,25 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
     } else {
       onSessionComplete();
     }
+  };
+
+  const handleSaveNote = async (cardId: string, note: string) => {
+      // 1. Update in Supabase (Partial update)
+      const { error } = await supabase
+        .from('cards')
+        .update({ user_notes: note }) // ONLY updating notes
+        .eq('id', cardId);
+
+      if (error) {
+          console.error("Error saving note:", error);
+          alert("Failed to save note!");
+          return;
+      }
+      
+      // Update local queue state so UI reflects change immediately
+      setQueue(prev => prev.map(c => 
+          c.id === cardId ? { ...c, user_notes: note } : c
+      ));
   };
 
   const handleSaveNote = async (cardId: string, note: string) => {
