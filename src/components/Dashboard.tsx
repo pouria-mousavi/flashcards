@@ -136,7 +136,7 @@ export default function Dashboard({ cards, onStartStudy, onAddCard, onOpenBookMo
                  gap: '8px'
              }}
           >
-              book Mode 📖
+              Book Mode 📖
           </button>
 
           <button 
