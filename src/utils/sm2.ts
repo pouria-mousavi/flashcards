@@ -24,6 +24,9 @@ export interface Flashcard {
   nextReviewDate: number; // Timestamp
   interval: number;
   easeFactor: number;
+  
+  // V9: User Feedback
+  user_notes?: string;
 }
 
 // Configuration similar to Anki defaults
@@ -160,6 +163,8 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         state: row.state as CardState,
         nextReviewDate: new Date(row.next_review).getTime(),
         interval: row.interval,
-        easeFactor: row.ease_factor
+        easeFactor: row.ease_factor,
+        // @ts-ignore - Supabase types might not be regenerated yet
+        user_notes: row.user_notes || undefined 
     }
 }

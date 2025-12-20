@@ -1,0 +1,351 @@
+حالم جا اومد | That hit the spot
+-- Tone: Spoken
+-- Example: 1. (Drinking cold water on a hot day) Ah, that hit the spot.
+
+گرسنه ام (خیلی) | I'm starving
+-- Tone: Spoken
+-- Example: 1. When is dinner ready? I'm starving.
+
+ترکیدم (از پرخوری) | I'm stuffed
+-- Tone: Spoken
+-- Example: 1. I can't eat another bite. I'm stuffed.
+
+هوس (...) کردم | I'm craving ...
+-- Tone: Spoken
+-- Example: 1. I'm really craving pizza right now.
+
+عاشقشم (دیوونشم) | I'm crazy about it
+-- Tone: Spoken
+-- Example: 1. Have you tried sushi? I'm crazy about it.
+
+حالم ازش بهم میخوره | It makes me sick
+-- Tone: Spoken
+-- Example: 1. The way he treats people makes me sick.
+
+حوصله شو ندارم | I'm not in the mood
+-- Tone: Spoken
+-- Example: 1. Do you want to go dancing? "Nah, I'm not in the mood."
+
+اعصابم خورده | I'm pissed off
+-- Tone: Spoken / Vulgar
+-- Example: 1. Keep away from him; he's pissed off about losing the game.
+
+قاطی کردم (عصبی شدم) | I lost it
+-- Tone: Spoken
+-- Example: 1. When he insulted my mom, I just lost it.
+
+داغونم (خسته/نابود) | I'm wrecked / I'm beat
+-- Tone: Spoken
+-- Example: 1. Double shift today. I'm absolutely wrecked. 2. I'm beat; I'm going to bed.
+
+کلافه شدم | I'm fed up
+-- Tone: Spoken
+-- Example: 1. I'm fed up with this traffic every single day.
+
+به سیم آخر زدم | I'm at the end of my rope
+-- Tone: Spoken
+-- Example: 1. The baby hasn't stopped crying for hours. I'm at the end of my rope.
+
+کم آوردم (تحملم تموم شد) | I can't take it anymore
+-- Tone: Spoken
+-- Example: 1. Stop screaming! I can't take it anymore!
+
+تسلیم شدم | I give up
+-- Tone: Spoken
+-- Example: 1. Okay, you win. I give up.
+
+بی‌خیالش شدم | I'm over it
+-- Tone: Spoken
+-- Example: 1. I used to be sad about the breakup, but now I'm over it.
+
+دلم براش تنگ شده | I miss him/her terribly
+-- Tone: Spoken
+-- Example: 1. It's been a month since she left. I miss her terribly.
+
+دلم گرفت (غمگین شدم) | It bummed me out
+-- Tone: Spoken
+-- Example: 1. Hearing about his accident really bummed me out.
+
+اشکم در اومد | It moved me to tears
+-- Tone: Spoken
+-- Example: 1. That movie was so beautiful, it moved me to tears.
+
+مو به تنم سیخ شد | It gave me goosebumps
+-- Tone: Spoken
+-- Example: 1. Her singing was so good it gave me goosebumps.
+
+زهره ترک شدم | It scared the hell out of me
+-- Tone: Spoken
+-- Example: 1. Don't sneak up on me like that! It scared the hell out of me.
+
+شوکه شدم | I was floored
+-- Tone: Spoken
+-- Example: 1. When I heard the news, I was absolutely floored.
+
+جا خوردم | I was taken aback
+-- Tone: Spoken
+-- Example: 1. I was taken aback by his sudden rudeness.
+
+دهنم باز موند | My jaw dropped
+-- Tone: Spoken
+-- Example: 1. When she walked in wearing that dress, my jaw dropped.
+
+گیج شدم | I'm lost / I'm confused
+-- Tone: Spoken
+-- Example: 1. Wait, explain that again. I'm lost.
+
+مخم سوت کشید | It blew my mind
+-- Tone: Spoken
+-- Example: 1. The special effects in that movie blew my mind.
+
+سر در نمیارم | I don't get it
+-- Tone: Spoken
+-- Example: 1. Why is everyone laughing? I don't get it.
+
+حالیم نمیشه (درک نمیکنم) | It beats me
+-- Tone: Spoken
+-- Example: 1. "How did he escape?" "It beats me."
+
+برام روشن شد (فهمیدم) | It dawned on me
+-- Tone: Spoken
+-- Example: 1. Suddenly it dawned on me that I had left the oven on.
+
+دوزاریم افتاد | The penny dropped
+-- Tone: Spoken
+-- Example: 1. He explained it three times before the penny finally dropped.
+
+تو باغ نیستی (نمیفهمی) | You're out to lunch
+-- Tone: Spoken
+-- Example: 1. If you think I'm going to agree to that, you're out to lunch.
+
+دیوونه شدی؟ | Are you out of your mind?
+-- Tone: Spoken
+-- Example: 1. You spent all our savings on a boat? Are you out of your mind?
+
+عقلت رو از دست دادی؟ | Have you lost your marbles?
+-- Tone: Spoken
+-- Example: 1. Quit your job with no backup plan? Have you lost your marbles?
+
+خل و چل | Nuts / Bonkers
+-- Tone: Spoken
+-- Example: 1. This idea is nuts! 2. That guy is totally bonkers.
+
+عجب گیری افتادیم | What a mess
+-- Tone: Spoken
+-- Example: 1. I locked my keys in the car. What a mess.
+
+بدبخت شدیم | We're screwed
+-- Tone: Spoken / Slang
+-- Example: 1. If the boss finds out, we're screwed.
+
+کارمون تمومه | We're done for
+-- Tone: Spoken
+-- Example: 1. The cops are here! We're done for!
+
+بیچاره شدم | I'm doomed
+-- Tone: Spoken
+-- Example: 1. I forgot to study for the final. I'm doomed.
+
+خاک تو سرم | My bad
+-- Tone: Spoken
+-- Example: 1. "You stepped on my foot!" "Oops, my bad."
+
+شرمندتم | My apologies
+-- Tone: Spoken
+-- Example: 1. My apologies, I didn't mean to offend you.
+
+منظور بدی نداشتم | No offense meant
+-- Tone: Spoken
+-- Example: 1. You look tired. No offense meant, just concerned.
+
+به دل نگیر | Don't take it personal
+-- Tone: Spoken
+-- Example: 1. He's grumpy with everyone today. Don't take it personal.
+
+حقته (لایقشی) | You deserve it
+-- Tone: Spoken
+-- Example: 1. You worked hard for this promotion. You deserve it.
+
+چشمات قشنگ میبینه | Beauty is in the eye of the beholder
+-- Tone: Spoken
+-- Example: 1. "He's not very handsome." "Well, beauty is in the eye of the beholder."
+
+بهت میاد (لباس) | It suits you
+-- Tone: Spoken
+-- Example: 1. That color really suits you.
+
+خیلی بهت میاد | It looks great on you
+-- Tone: Spoken
+-- Example: 1. That new haircut looks great on you.
+
+خوش تیپ شدی | You look sharp
+-- Tone: Spoken
+-- Example: 1. Suit and tie? You look sharp today!
+
+کولاک کردی | You rocked it
+-- Tone: Spoken
+-- Example: 1. I heard about your performance. You rocked it!
+
+دست مریزاد | Hats off to you
+-- Tone: Spoken
+-- Example: 1. You solved the puzzle in record time. Hats off to you.
+
+ناامیدم نکن | Don't let me down
+-- Tone: Spoken
+-- Example: 1. I'm trusting you with this. Don't let me down.
+
+روم رو زمین ننداز | Do me a solid
+-- Tone: Spoken / Slang
+-- Example: 1. Hey man, can you do me a solid and give me a ride?
+
+هوای منو داشته باش | Stick up for me
+-- Tone: Spoken
+-- Example: 1. Thanks for sticking up for me when they were making fun of me.
+
+پشتم بهت گرمه | I'm counting on you
+-- Tone: Spoken
+-- Example: 1. We need this deal to go through. I'm counting on you.
+
+تنهات نمیذارم | I won't leave your side
+-- Tone: Spoken
+-- Example: 1. Don't be scared. I won't leave your side.
+
+تا آخرش باهاتم | I'm with you till the end
+-- Tone: Spoken
+-- Example: 1. Whatever happens, I'm with you till the end.
+
+پات وایسادم | I stand by you
+-- Tone: Spoken
+-- Example: 1. Even if the whole world is against you, I stand by you.
+
+به من تکیه کن | Lean on me
+-- Tone: Spoken
+-- Example: 1. You can lean on me whenever you're weak.
+
+خیالت راحت | Rest assured
+-- Tone: Spoken
+-- Example: 1. Rest assured, the problem will be solved.
+
+قول مردونه | I give you my word
+-- Tone: Spoken
+-- Example: 1. I won't tell anyone. I give you my word.
+
+حرف حرف توئه | You're the boss
+-- Tone: Spoken
+-- Example: 1. "We're eating Italian tonight." "Okay, you're the boss."
+
+هر چی تو بگی | Whatever you say
+-- Tone: Spoken
+-- Example: 1. "Stop calculating." "Whatever you say."
+
+سمت من نیا | Stay away from me
+-- Tone: Spoken
+-- Example: 1. You're dangerous. Stay away from me.
+
+به من دست نزن | Don't touch me
+-- Tone: Spoken
+-- Example: 1. I said don't touch me!
+
+ولم کن | Let me go
+-- Tone: Spoken
+-- Example: 1. You're hurting my arm. Let me go!
+
+خفه شو | Shut up
+-- Tone: Spoken
+-- Example: 1. Shut up and listen to me!
+
+گم شو بیرون | Get out
+-- Tone: Spoken
+-- Example: 1. Get out of my house right now!
+
+حالم ازت بهم میخوره | I hate your guts
+-- Tone: Spoken
+-- Example: 1. You ruined my life. I hate your guts.
+
+برام مهم نیست | I don't give a damn
+-- Tone: Spoken
+-- Example: 1. Frankly my dear, I don't give a damn.
+
+هر کاری دلت میخواد بکن | Do whatever you want
+-- Tone: Spoken
+-- Example: 1. I'm done arguing. Do whatever you want.
+
+مسئله مرگ و زندگیه | It's a matter of life and death
+-- Tone: Spoken
+-- Example: 1. Please help me, it's a matter of life and death.
+
+وقت طلاست | Time is money
+-- Tone: Spoken
+-- Example: 1. Hurry up! Time is money.
+
+شانس در خونت رو زده | Opportunity knocks
+-- Tone: Spoken
+-- Example: 1. Opportunity knocks but once.
+
+دیر رسیدن بهتر از هرگز نرسیدنه | Better late than never
+-- Tone: Spoken
+-- Example: 1. You're finally here! Well, better late than never.
+
+کار نشد نداره | Nothing is impossible
+-- Tone: Spoken
+-- Example: 1. Don't accept defeat. Nothing is impossible.
+
+هر چه پیش آید خوش آید | What will be, will be
+-- Tone: Spoken
+-- Example: 1. Don't worry about the future. What will be, will be.
+
+دنیا کوچیکه | It's a small world
+-- Tone: Spoken
+-- Example: 1. I met my neighbor in Paris! It's a small world.
+
+از دل برود هر آنکه از دیده برفت | Out of sight, out of mind
+-- Tone: Spoken
+-- Example: 1. He moved away and stopped calling. Out of sight, out of mind.
+
+سحرخیز باش تا کامروا باشی | The early bird catches the worm
+-- Tone: Spoken
+-- Example: 1. I want to get to the sale first. The early bird catches the worm.
+
+بادآورده را باد می‌برد | Easy come, easy go
+-- Tone: Spoken
+-- Example: 1. I won $50 and spent it all on dinner. Easy come, easy go.
+
+وقتی تو رم هستی مثل رمی‌ها رفتار کن | When in Rome
+-- Tone: Spoken
+-- Example: 1. Everyone is eating with their hands? Well, when in Rome...
+
+ظاهر بین نباش | Don't judge a book by its cover
+-- Tone: Spoken
+-- Example: 1. He looks messy but he's a genius. Don't judge a book by its cover.
+
+تمرین باعث تسلط میشه | Practice makes perfect
+-- Tone: Spoken
+-- Example: 1. Keep playing that scale. Practice makes perfect.
+
+نابرده رنج گنج میسر نمی‌شود | No pain, no gain
+-- Tone: Spoken
+-- Example: 1. My muscles hurt from the gym. No pain, no gain!
+
+به عمل کار برآید به سخندانی نیست | Actions speak louder than words
+-- Tone: Spoken
+-- Example: 1. Stop promising and start doing. Actions speak louder than words.
+
+صبر داشته باش (عجله کار شیطونه) | Haste makes waste
+-- Tone: Spoken
+-- Example: 1. Slow down and measure twice. Haste makes waste.
+
+خنده بر هر درد بی درمان دواست | Laughter is the best medicine
+-- Tone: Spoken
+-- Example: 1. Watch a comedy when you're sad. Laughter is the best medicine.
+
+صداقت بهترین سیاست است | Honesty is the best policy
+-- Tone: Spoken
+-- Example: 1. Just tell him the truth. Honesty is the best policy.
+
+سکوت علامت رضاست (گاهی) | Silence is golden
+-- Tone: Spoken
+-- Example: 1. I just want some peace and quiet. Silence is golden.
+
+دانش قدرته | Knowledge is power
+-- Tone: Spoken
+-- Example: 1. Read as much as you can. Knowledge is power.

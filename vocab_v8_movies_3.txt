@@ -1,0 +1,375 @@
+برنامه چیه؟ | What's the plan?
+-- Tone: Spoken
+-- Example: 1. Okay, we're here. What's the plan?
+
+پایه بیرون رفتن هستی؟ | Wanna hang out?
+-- Tone: Spoken
+-- Example: 1. Do you wanna hang out after school?
+
+بریم یه دوری بزنیم | Let's go for a spin
+-- Tone: Spoken
+-- Example: 1. New car? Nice! Let's go for a spin.
+
+بزن بریم بیرون (شهر) | Let's hit the town
+-- Tone: Spoken
+-- Example: 1. It's Friday night! Let's hit the town and celebrate.
+
+بریم یه رستوران | Let's grab a bite
+-- Tone: Spoken
+-- Example: 1. I'm hungry. Let's grab a bite to eat.
+
+بعداً بهت ملحق میشم | I'll catch up with you later
+-- Tone: Spoken
+-- Example: 1. You guys go ahead. I'll catch up with you later.
+
+خوش بگذره (حال کن) | Enjoy yourself
+-- Tone: Spoken
+-- Example: 1. You're on vacation. Relax and enjoy yourself.
+
+خوش گذشت؟ | Did you have fun?
+-- Tone: Spoken
+-- Example: 1. You're back late. Did you have fun?
+
+جای همه خالی | Wish you were here
+-- Tone: Spoken
+-- Example: 1. The view is amazing. Wish you were here.
+
+بیا بزنیم به جاده | Let's hit the road
+-- Tone: Spoken
+-- Example: 1. Bags are packed. Let's hit the road before traffic gets bad.
+
+سفرت بخیر | Safe travels
+-- Tone: Spoken
+-- Example: 1. Call me when you land. Safe travels!
+
+رسیدی خبر بده | Text me when you get there
+-- Tone: Spoken
+-- Example: 1. Don't forget to text me when you get there.
+
+جات امنه؟ | Are you safe?
+-- Tone: Spoken
+-- Example: 1. I heard about the storm. Are you safe?
+
+مواظب خودت باش | Watch out
+-- Tone: Spoken
+-- Example: 1. Watch out! That car almost hit you.
+
+احتیاط کن | Be careful
+-- Tone: Spoken
+-- Example: 1. The floor is wet. Be careful.
+
+عجله نکن | Take your time
+-- Tone: Spoken
+-- Example: 1. We aren't in a rush. Take your time.
+
+کمک لازم داری؟ | Need a hand?
+-- Tone: Spoken
+-- Example: 1. That box looks heavy. Need a hand?
+
+بذار کمکت کنم | Let me help you out
+-- Tone: Spoken
+-- Example: 1. You look confused. Let me help you out.
+
+ممنون بابت کمکت | Thanks for your help
+-- Tone: Spoken
+-- Example: 1. I couldn't have done it without you. Thanks for your help.
+
+خیلی لطف کردی | That's very kind of you
+-- Tone: Spoken
+-- Example: 1. You bought me a gift? That's very kind of you.
+
+قابل نداره (خواهش میکنم) | Don't mention it
+-- Tone: Spoken
+-- Example: 1. "Thanks for the ride." "Don't mention it."
+
+مشکلی نیست (اشکال نداره) | No problem
+-- Tone: Spoken
+-- Example: 1. "Can you pass the salt?" "No problem."
+
+هر زمان (کاری داشتی بگو) | Anytime
+-- Tone: Spoken
+-- Example: 1. "Thank you for listening." "Anytime."
+
+خدا خیرت بده | God bless you
+-- Tone: Spoken
+-- Example: 1. (After sneezing) God bless you. 2. You saved my cat! God bless you.
+
+دمت گرم | Cheers
+-- Tone: Spoken
+-- Example: 1. (Toasting drinks) Cheers! 2. (British) Thanks, cheers mate.
+
+ببخشید (عذر می‌خوام) | Excuse me
+-- Tone: Spoken
+-- Example: 1. Excuse me, can I get past?
+
+متاسفم (شرمنده) | I'm sorry
+-- Tone: Spoken
+-- Example: 1. I'm sorry I broke your vase.
+
+ببخشید که دیر کردم | Sorry I'm late
+-- Tone: Spoken
+-- Example: 1. Traffic was terrible. Sorry I'm late.
+
+تقصیر من بود | It was my fault
+-- Tone: Spoken
+-- Example: 1. Don't blame him. It was my fault.
+
+منو ببخش | Forgive me
+-- Tone: Spoken
+-- Example: 1. Please forgive me for what I said.
+
+می‌شه یه لطفی بکنی؟ | Do me a favor?
+-- Tone: Spoken
+-- Example: 1. Can you do me a favor and feed my dog?
+
+سرا پا گوشم | I'm listening
+-- Tone: Spoken
+-- Example: 1. Go ahead, I'm listening.
+
+متوجه نمیشم | I don't follow
+-- Tone: Spoken
+-- Example: 1. You're talking too fast. I don't follow.
+
+میشه تکرار کنی؟ | Can you repeat that?
+-- Tone: Spoken
+-- Example: 1. It's noisy in here. Can you repeat that?
+
+منظورت چیه؟ | What do you mean?
+-- Tone: Spoken
+-- Example: 1. What do you mean you quit?
+
+نکته‌ش چیه؟ | What's the point?
+-- Tone: Spoken
+-- Example: 1. Arguing is useless. What's the point?
+
+به کجا میخوای برسی؟ | Where are you going with this?
+-- Tone: Spoken
+-- Example: 1. You're rambling. Where are you going with this?
+
+صاف و پوست کنده بگو | Get to the point
+-- Tone: Spoken
+-- Example: 1. Stop wasting time and get to the point.
+
+منظورم اینه که ... | What I mean is ...
+-- Tone: Spoken
+-- Example: 1. I like him. What I mean is, I think he's a good guy.
+
+به عبارت دیگه | In other words
+-- Tone: Spoken
+-- Example: 1. He was fired. In other words, he's unemployed.
+
+راستش رو بخوای | To be honest / Honestly
+-- Tone: Spoken
+-- Example: 1. To be honest, I don't like it.
+
+بین خودمون باشه | Just between us
+-- Tone: Spoken
+-- Example: 1. Just between us, I think he's lying.
+
+از من نشنیده بگیر | Don't quote me on that
+-- Tone: Spoken
+-- Example: 1. I think they are dating, but don't quote me on that.
+
+شایعه شده که ... | Rumor has it ...
+-- Tone: Spoken
+-- Example: 1. Rumor has it they are shutting down the company.
+
+خبرش دهن به دهن پیچیده | Word on the street is ...
+-- Tone: Spoken
+-- Example: 1. Word on the street is you're looking for a job.
+
+یه کلاغ چهل کلاغ نکن | Don't exaggerate
+-- Tone: Spoken
+-- Example: 1. It was a small spider, not a monster. Don't exaggerate.
+
+پیاز داغشو زیاد نکن | Don't make a scene
+-- Tone: Spoken
+-- Example: 1. Please, don't make a scene in the restaurant.
+
+حوصله بحث ندارم | I don't want to argue
+-- Tone: Spoken
+-- Example: 1. I'm tired. I don't want to argue tonight.
+
+بسه دیگه (تمومش کن) | Cut it out
+-- Tone: Spoken
+-- Example: 1. You two stop fighting! Cut it out!
+
+دست بردار (کافیه) | Give it a rest
+-- Tone: Spoken
+-- Example: 1. You've been complaining for hours. Give it a rest.
+
+ول کن ماجرا نیست | He won't let it go
+-- Tone: Spoken
+-- Example: 1. I apologized, but he won't let it go.
+
+بی‌خیال شو (بگذر) | Let it go
+-- Tone: Spoken
+-- Example: 1. Holding a grudge hurts you. Just let it go.
+
+فراموشش کن (بیخیال) | Forget about it
+-- Tone: Spoken
+-- Example: 1. "I owe you $5." "Forget about it."
+
+سخت نگیر | Lighten up
+-- Tone: Spoken
+-- Example: 1. Why so serious? Lighten up!
+
+شوخی کردم | I was only joking
+-- Tone: Spoken
+-- Example: 1. Don't get mad. I was only joking.
+
+جنبه داشته باش | Can't take a joke?
+-- Tone: Spoken
+-- Example: 1. Why are you offended? Can't take a joke?
+
+به دل نگیر | No hard feelings
+-- Tone: Spoken
+-- Example: 1. It's just business. No hard feelings.
+
+آشتی کردیم؟ | We good?
+-- Tone: Spoken
+-- Example: 1. I'm sorry I yelled. We good?
+
+همه چی روبراهه | It's all good
+-- Tone: Spoken
+-- Example: 1. "Sorry I spilled the water." "It's all good."
+
+نگران نباش | Don't worry about it
+-- Tone: Spoken
+-- Example: 1. "I can't pay you back yet." "Don't worry about it."
+
+همه چی درست میشه | Everything will be fine
+-- Tone: Spoken
+-- Example: 1. Take a breath. Everything will be fine.
+
+به خودت مسلط باش | Pull yourself together
+-- Tone: Spoken
+-- Example: 1. Stop crying and pull yourself together!
+
+مرد باش (قوی باش) | Man up
+-- Tone: Spoken
+-- Example: 1. It's just a little needle. Man up!
+
+تحمل کن (دووم بیار) | Hang in there
+-- Tone: Spoken
+-- Example: 1. I know school is hard, but hang in there.
+
+ناامید نشو | Don't give up
+-- Tone: Spoken
+-- Example: 1. Keep trying. Don't give up.
+
+ادامه بده | Keep going
+-- Tone: Spoken
+-- Example: 1. You're almost at the finish line. Keep going!
+
+تو میتونی | You got this
+-- Tone: Spoken
+-- Example: 1. You're prepared for the interview. You got this.
+
+ایول (حرکتت عالی بود) | Nice move
+-- Tone: Spoken
+-- Example: 1. You tricked him? Nice move.
+
+فکر خوبیه | Good thinking
+-- Tone: Spoken
+-- Example: 1. Bringing an umbrella was good thinking.
+
+چه فکر بکری | What a bright idea
+-- Tone: Spoken
+-- Example: 1. (Sometimes sarcastic) Leaving the door open was a bright idea.
+
+کی فکرشو میکرد؟ | Who would have thought?
+-- Tone: Spoken
+-- Example: 1. He became a doctor? Who would have thought?
+
+عجب دنیاییه | What a world
+-- Tone: Spoken
+-- Example: 1. Robots cleaning houses. What a world.
+
+باورت میشه؟ | Can you believe it?
+-- Tone: Spoken
+-- Example: 1. He won twice in a row. Can you believe it?
+
+شوخیت گرفته؟ (امکان نداره) | You gotta be kidding me
+-- Tone: Spoken
+-- Example: 1. The flight is cancelled? You gotta be kidding me.
+
+غیر ممکنه | No way
+-- Tone: Spoken
+-- Example: 1. "I got tickets to the show!" "No way!"
+
+واقعاً؟ | For real?
+-- Tone: Spoken
+-- Example: 1. "Is that a diamond?" "For real?"
+
+دروغ نگو (برو بابا) | Shut up (Surprise)
+-- Tone: Spoken
+-- Example: 1. "I'm pregnant!" "Shut up! Really?" (Friendly slang)
+
+حتما شوخی میکنی | You must be joking
+-- Tone: Spoken
+-- Example: 1. $100 for a sandwich? You must be joking.
+
+منظوری ندارم | I mean no harm
+-- Tone: Spoken
+-- Example: 1. The dog is barking but he means no harm.
+
+قصد بدی نداشتم | I didn't mean to
+-- Tone: Spoken
+-- Example: 1. I didn't mean to hurt your feelings.
+
+از قصد نبود | It wasn't on purpose
+-- Tone: Spoken
+-- Example: 1. I dropped it, but it wasn't on purpose.
+
+تصادفی بود | It was an accident
+-- Tone: Spoken
+-- Example: 1. I didn't verify break the window; it was an accident.
+
+تقصیر من نیست | It's not my fault
+-- Tone: Spoken
+-- Example: 1. Don't look at me. It's not my fault.
+
+من اینکارو نکردم | I didn't do it
+-- Tone: Spoken
+-- Example: 1. "Who ate the cake?" "I didn't do it."
+
+مدرک داری؟ | Can you prove it?
+-- Tone: Spoken
+-- Example: 1. You say I stole it? Can you prove it?
+
+حرفت رو باور میکنم | I believe you
+-- Tone: Spoken
+-- Example: 1. You don't have to swear. I believe you.
+
+بهت اعتماد دارم | I trust you
+-- Tone: Spoken
+-- Example: 1. I know you'll do the right thing. I trust you.
+
+بهت ایمان دارم | I have faith in you
+-- Tone: Spoken
+-- Example: 1. You can win this race. I have faith in you.
+
+شک دارم | I doubt it
+-- Tone: Spoken
+-- Example: 1. "Will he be on time?" "I doubt it."
+
+بعید میدونم | I don't think so
+-- Tone: Spoken
+-- Example: 1. "Is it going to rain?" "I don't think so."
+
+مطمئن نیستم | I'm not sure
+-- Tone: Spoken
+-- Example: 1. "Where did he go?" "I'm not sure."
+
+شاید | Maybe / Perhaps
+-- Tone: Spoken
+-- Example: 1. "Are you coming?" "Maybe."
+
+ببینیم چی میشه | We'll see
+-- Tone: Spoken
+-- Example: 1. "Can I have a pony?" "We'll see."
+
+بستگی داره | It depends
+-- Tone: Spoken
+-- Example: 1. "Are you going out?" "It depends on the weather."
