@@ -158,9 +158,11 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             paddingBottom: '100px', // Extra padding for footer buttons
             boxSizing: 'border-box',
             border: '1px solid rgba(255,255,255,0.08)',
-            overflowY: 'auto',
-            position: 'relative' // For absolute footer
-          }}
+            overflowY: 'auto'
+             // Removed redundant position: relative (already absolute from top)
+             // Wait, it WAS absolute. But I see 'position: absolute' at the top of the style object usually.
+             // Let's just check the view output.
+           }}
           onClick={(e) => e.stopPropagation()} // Prevent flip when clicking inside back (optional, but good for scrolling)
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', marginBottom: '10px' }}>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import FlashcardComponent from './Flashcard';
-import { calculateSM2, CardState } from '../utils/sm2';
+import { calculateSM2 } from '../utils/sm2';
 import type { Flashcard } from '../utils/sm2';
 import { supabase } from '../lib/supabase';
 
@@ -19,7 +19,6 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
   const [currentCardIndex, setCurrentCardIndex] = useState(startIndex);
   const [isFlipped, setIsFlipped] = useState(false);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
   useEffect(() => {
     setQueue(cards);
@@ -28,7 +27,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
   useEffect(() => {
       const loadVoices = () => {
           const vs = window.speechSynthesis.getVoices();
-          setVoices(vs);
+          // setVoices(vs); // Unused
           const preferred = vs.find(v => v.name.includes('Google US English') || v.name.includes('Samantha'));
           if (preferred) setVoice(preferred);
       };
