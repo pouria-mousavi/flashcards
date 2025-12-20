@@ -10,6 +10,9 @@ export default function BookMode({ onSaveCard, onExit }: { onSaveCard: (term: st
     const [isRecording, setIsRecording] = useState(false);
     const [transcript, setTranscript] = useState('');
     const [result, setResult] = useState<{ term: string, def: string } | null>(null);
+    const [queue, setQueue] = useState<string[]>([]);
+    const [batchResults, setBatchResults] = useState<any[] | null>(null);
+    const [isBatchProcessing, setIsBatchProcessing] = useState(false);
     const [loading, setLoading] = useState(false);
     const recognitionRef = useRef<any>(null);
 
@@ -83,17 +86,130 @@ export default function BookMode({ onSaveCard, onExit }: { onSaveCard: (term: st
 
             setResult({ term, def });
 
-        } catch (error) {
+        } catch (error: any) {
             console.error("Gemini Error:", error);
-            alert("AI Lookup failed. check API Key or Internet.");
+            // If Rate Limit (429) or Network Error (fetch failed), Queue it
+            if (error.message?.includes('429') || error.message?.includes('fetch') || error.message?.includes('Quota')) {
+                 setQueue(prev => [...prev, text]);
+                 alert(`⚠️ API Busy (429). "${text}" added to Queue!`);
+            } else {
+                 alert("AI Lookup failed. check API Key or Internet.");
+            }
         } finally {
             setLoading(false);
         }
     };
 
+    const processBatch = async () => {
+         if (queue.length === 0) return;
+         setIsBatchProcessing(true);
+         
+         try {
+            const model = genAI.getGenerativeModel({ model: "gemini-flash-latest"});
+            const prompt = `
+                I have a list of words/phrases: ${JSON.stringify(queue)}.
+                
+                For EACH word, act as a dictionary and provide:
+                1. Corrected term.
+                2. Concise Definition.
+                3. Example sentence.
+                4. Persian translation.
+                
+                Return ONLY a JSON Array of objects:
+                [
+                  { "term": "...", "def": "...", "example": "...", "persian": "..." }
+                ]
+            `;
+            
+            const result = await model.generateContent(prompt);
+            const text = result.response.text().replace(/```json/g, '').replace(/```/g, '').trim();
+            const data = JSON.parse(text);
+            
+            // Format for UI
+            const formatted = data.map((item: any) => ({
+                term: item.term,
+                def: `📖 ${item.def}\n💡 ${item.example}\n🇮🇷 ${item.persian}`
+            }));
+            
+            setBatchResults(formatted);
+            setQueue([]); 
+            
+         } catch (e: any) {
+             console.error("Batch Error:", e);
+             alert("Batch process failed. Try again later.");
+         } finally {
+             setIsBatchProcessing(false);
+         }
+    };
+
+    const saveAllBatch = () => {
+        if (!batchResults) return;
+        batchResults.forEach(r => onSaveCard(r.term, r.def));
+        setBatchResults(null); 
+        alert("Saved all items!");
+    };
+
     return (
-        <div style={{ padding: '20px', height: '100dvh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#0f172a' }}>
+        <div style={{ padding: '20px', height: '100dvh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#0f172a', position: 'relative' }}>
              <button onClick={onExit} style={{ position: 'absolute', top: 20, left: 20, background: 'none', border: 'none', color: '#fff', fontSize: '1.2rem', cursor: 'pointer', zIndex: 10 }}>← Back</button>
+
+             {/* QUEUE FLOB */}
+             {queue.length > 0 && !batchResults && (
+                 <motion.button
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={processBatch}
+                    disabled={isBatchProcessing}
+                    style={{
+                        position: 'absolute',
+                        top: 20,
+                        right: 20,
+                        background: isBatchProcessing ? '#94a3b8' : '#f59e0b',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '20px',
+                        padding: '10px 20px',
+                        fontWeight: 'bold',
+                        cursor: 'pointer',
+                        zIndex: 20,
+                        boxShadow: '0 4px 12px rgba(245, 158, 11, 0.4)'
+                    }}
+                 >
+                     {isBatchProcessing ? "Processing..." : `📂 Process Queue (${queue.length})`}
+                 </motion.button>
+             )}
+
+             {/* BATCH RESULTS MODAL */}
+             {batchResults && (
+                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.9)', zIndex: 50, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                     <h2 style={{ color: '#fff' }}>Review Batch ({batchResults.length})</h2>
+                     
+                     <div style={{ width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                         {batchResults.map((item, idx) => (
+                             <div key={idx} style={{ background: '#1e293b', padding: '15px', borderRadius: '12px', color: '#fff' }}>
+                                 <h4 style={{ margin: '0 0 5px 0', color: '#38bdf8' }}>{item.term}</h4>
+                                 <div style={{ whiteSpace: 'pre-wrap', fontSize: '0.9rem', color: '#cbd5e1' }}>{item.def}</div>
+                             </div>
+                         ))}
+                     </div>
+
+                     <div style={{ display: 'flex', gap: '20px', marginTop: '20px', paddingBottom: '40px' }}>
+                         <button 
+                             onClick={() => setBatchResults(null)}
+                             style={{ padding: '15px 30px', borderRadius: '12px', background: '#dc2626', color: '#fff', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
+                         >
+                             Discard All
+                         </button>
+                         <button 
+                             onClick={saveAllBatch}
+                             style={{ padding: '15px 30px', borderRadius: '12px', background: '#10b981', color: '#fff', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
+                         >
+                             Confirm & Save All
+                         </button>
+                     </div>
+                 </div>
+             )}
              
              {!result && !loading && (
                  <div style={{ textAlign: 'center', marginBottom: '40px', opacity: 0.7 }}>
