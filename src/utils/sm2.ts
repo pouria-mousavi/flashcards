@@ -34,7 +34,7 @@ const SETTINGS = {
   learningSteps: [1, 10], // Minutes
   relearningSteps: [10], // Minutes
   graduatingInterval: 1, // Days
-  easyInterval: 2, // Days (Reduced from 4 based on user feedback)
+  easyInterval: 4, // Days (Restored to default SM-2)
   minimumInterval: 1,
   easyBonus: 1.3,
   intervalModifier: 1.0,
