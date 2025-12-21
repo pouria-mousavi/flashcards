@@ -236,7 +236,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
                      boxSizing: 'border-box'
                  }}>
                     <button 
-                        onClick={onPlayAudio}
+                        onClick={(e) => { e.stopPropagation(); onPlayAudio(e); }}
                         style={{
                             background: 'rgba(255,255,255,0.1)',
                             border: '1px solid rgba(255,255,255,0.2)',
@@ -255,7 +255,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
                     </button>
                     
                     <button 
-                         onClick={() => setIsNoteOpen(true)}
+                         onClick={(e) => { e.stopPropagation(); setIsNoteOpen(true); }}
                          style={{
                              background: card.user_notes ? 'rgba(244, 114, 182, 0.2)' : 'rgba(255,255,255,0.1)',
                              border: `1px solid ${card.user_notes ? '#f472b6' : 'rgba(255,255,255,0.2)'}`,
