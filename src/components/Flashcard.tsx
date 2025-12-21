@@ -236,7 +236,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
                      boxSizing: 'border-box'
                  }}>
                     <button 
-                        onClick={(e) => { e.stopPropagation(); onPlayAudio(e); }}
+                        onClick={(e) => { e.stopPropagation(); onPlayAudio(); }}
                         style={{
                             background: 'rgba(255,255,255,0.1)',
                             border: '1px solid rgba(255,255,255,0.2)',
