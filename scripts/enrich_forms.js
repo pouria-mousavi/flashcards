@@ -64,8 +64,8 @@ async function main() {
             
             processed += batch.length;
             console.log(`Completed ${processed} cards.`);
-            // Pause for Rate Limit
-            await delay(10000); 
+            // Pause for Rate Limit (Optimized to 1s)
+            await delay(1000); 
             
         } catch (e) {
             console.error("Batch Failed:", e.message);
