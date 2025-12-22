@@ -27,6 +27,16 @@ export interface Flashcard {
   
   // V9: User Feedback
   user_notes?: string;
+
+  // V17: Word Forms
+  word_forms?: {
+      noun?: string;
+      verb?: string;
+      adj?: string;
+      adv?: string;
+      past?: string;
+      pp?: string;
+  };
 }
 
 // Configuration similar to Anki defaults
@@ -165,6 +175,8 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         interval: row.interval,
         easeFactor: row.ease_factor,
         // @ts-ignore - Supabase types might not be regenerated yet
-        user_notes: row.user_notes || undefined 
+        user_notes: row.user_notes || undefined,
+        // @ts-ignore
+        word_forms: row.word_forms || undefined
     }
 }
