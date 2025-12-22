@@ -204,6 +204,38 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
                     )}
                 </div>
 
+                {/* Word Forms Section (V17) */}
+                {card.word_forms && Object.values(card.word_forms).some(v => !!v) && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+                        {Object.entries(card.word_forms).map(([pos, val]) => (
+                            val && (
+                                <div key={pos} style={{ 
+                                    background: 'rgba(255, 255, 255, 0.05)', 
+                                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    borderRadius: '8px', 
+                                    padding: '6px 10px', 
+                                    fontSize: '0.9rem', 
+                                    color: '#e5e7eb',
+                                    display: 'flex',
+                                    alignItems: 'baseline',
+                                    gap: '6px'
+                                }}>
+                                    <span style={{ 
+                                        textTransform: 'uppercase', 
+                                        fontSize: '0.65rem', 
+                                        color: '#9ca3af', 
+                                        fontWeight: 'bold',
+                                        letterSpacing: '0.5px'
+                                    }}>
+                                        {pos}
+                                    </span>
+                                    <span style={{ fontFamily: 'monospace' }}>{val}</span>
+                                </div>
+                            )
+                        ))}
+                    </div>
+                )}
+
                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '8px 0' }} />
 
                 {card.examples && card.examples.length > 0 && (
