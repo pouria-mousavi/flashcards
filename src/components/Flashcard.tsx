@@ -155,7 +155,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             display: 'flex',
             flexDirection: 'column',
             padding: '32px',
-            paddingBottom: '120px', // Increased from 100px for safety
+            paddingBottom: '32px',
             boxSizing: 'border-box',
             border: '1px solid rgba(255,255,255,0.08)',
             overflowY: 'auto'
@@ -254,6 +254,8 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
                          <div style={{ fontSize: '0.9rem', fontStyle: 'italic', color: '#eee' }}>{card.user_notes}</div>
                      </div>
                 )}
+
+                 <div style={{ height: '140px', flexShrink: 0, width: '100%' }} />
 
                  {/* FOOTER BUTTONS (Speaker + Note) */}
                  <div style={{ 
