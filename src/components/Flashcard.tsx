@@ -91,17 +91,21 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
         transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
         style={{
           width: '90vw',
-          maxWidth: '400px', // Increased from 340px
-          height: '70vh', // Increased from 65vh
-          maxHeight: '650px', // Increased from 520px
+          maxWidth: '400px', 
+          // height: '70vh', // REMOVED fixed height
+          // maxHeight: '650px', // REMOVED max height
+          minHeight: '400px', // Ensure it has some substance
           position: 'relative',
           transformStyle: 'preserve-3d',
+          paddingBottom: '0px'
         }}
       >
-        {/* FRONT (Persian) */}
+        {/* FRONT (Persian) - Absolute so it overlays (or lies behind) the Back which dictates height */}
         <div
           style={{
             position: 'absolute',
+            top: 0,
+            left: 0,
             width: '100%',
             height: '100%',
             backfaceVisibility: 'hidden',
@@ -115,7 +119,8 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             alignItems: 'center',
             padding: '32px',
             boxSizing: 'border-box',
-            border: '1px solid rgba(255,255,255,0.08)'
+            border: '1px solid rgba(255,255,255,0.08)',
+            zIndex: 2
           }}
         >
           {/* Removed Front Note Button as requested */}
@@ -140,12 +145,12 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
           </p>
         </div>
 
-        {/* BACK (English) */}
+        {/* BACK (English) - Relative so it drives the height of the card-inner container */}
         <div
           style={{
-            position: 'absolute',
+            position: 'relative', // Changed to relative so it pushes the parent height
             width: '100%',
-            height: '100%',
+            minHeight: '400px', // Match parent min
             backfaceVisibility: 'hidden',
             backgroundColor: '#18181b', 
             color: '#fff',
@@ -158,10 +163,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             paddingBottom: '32px',
             boxSizing: 'border-box',
             border: '1px solid rgba(255,255,255,0.08)',
-            overflowY: 'auto'
-             // Removed redundant position: relative (already absolute from top)
-             // Wait, it WAS absolute. But I see 'position: absolute' at the top of the style object usually.
-             // Let's just check the view output.
+            // overflowY: 'auto' // REMOVED scroll
            }}
           // onClick={(e) => e.stopPropagation()} // Removed so user can flip back
         >

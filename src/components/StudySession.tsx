@@ -24,11 +24,13 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
     setQueue(cards);
   }, [cards]);
 
-  useEffect(() => {
+   useEffect(() => {
       const loadVoices = () => {
           const vs = window.speechSynthesis.getVoices();
-          // setVoices(vs); // Unused
-          const preferred = vs.find(v => v.name.includes('Google US English') || v.name.includes('Samantha'));
+          // Prefer "Google US English", then any "en-US", then fallback
+          let preferred = vs.find(v => v.name === 'Google US English');
+          if (!preferred) preferred = vs.find(v => v.lang === 'en-US');
+
           if (preferred) setVoice(preferred);
       };
       
@@ -70,23 +72,27 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
     
     // Anki Re-queue Logic
     const now = Date.now();
+    let isRequeued = false;
+    
     if (updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now < 10 * 60 * 1000)) {
         // Re-queue in memory
         setQueue(prev => [...prev, updatedCard]);
-        
-        // Update Storage Queue Logic
-        try {
-            const SESSION_KEY = 'flashcards_active_session';
-            const saved = localStorage.getItem(SESSION_KEY);
-            if (saved) {
-                const session = JSON.parse(saved);
-                if (session.cardIds) {
-                     session.cardIds.push(updatedCard.id);
-                     localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-                }
-            }
-        } catch (e) { console.error("Re-queue sync failed", e); }
+        isRequeued = true;
     }
+
+    // Sync Session State to LocalStorage (Progress Saving)
+    try {
+        const SESSION_KEY = 'flashcards_active_session';
+        const saved = localStorage.getItem(SESSION_KEY);
+        if (saved) {
+            const session = JSON.parse(saved);
+            session.currentIndex = currentCardIndex + 1; // Update index
+            if (isRequeued && session.cardIds) {
+                 session.cardIds.push(updatedCard.id);
+            }
+            localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+        }
+    } catch (e) { console.error("Session sync failed", e); }
 
     if (currentCardIndex < queue.length - 1) {
       setTimeout(() => setCurrentCardIndex(prev => prev + 1), 200);
@@ -125,7 +131,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
   const cardsLeft = queue.length - currentCardIndex;
 
   return (
-    <div className="flex-center full-screen" style={{ flexDirection: 'column', padding: '20px', position: 'relative' }}>
+    <div className="flex-center full-screen" style={{ flexDirection: 'column', position: 'relative', height: '100vh', overflow: 'hidden' }}>
       
       {/* Header Controls */}
       <div style={{ position: 'absolute', top: '20px', left: '20px', right: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
@@ -148,8 +154,17 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
         </div>
       </div>
 
-      {/* Card Area */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {/* Card Area - Scrollable */}
+      <div style={{ 
+          flex: 1, 
+          display: 'flex', 
+          alignItems: 'flex-start', // Align start to allow scrolling if tall
+          paddingTop: '80px', // Space for header
+          justifyContent: 'center', 
+          width: '100%',
+          overflowY: 'auto',
+          paddingBottom: '160px' // Space for fixed footer
+      }}>
         <AnimatePresence mode='wait'>
             <motion.div
                 key={`${currentCard.id}-${currentCardIndex}`} 
@@ -157,6 +172,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
                 transition={{ duration: 0.2 }}
+                style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
             >
                 <FlashcardComponent 
                     card={currentCard} 
@@ -169,19 +185,20 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
         </AnimatePresence>
       </div>
 
-      {/* Controls */}
+      {/* Controls - Sticky Footer */}
       <div style={{ 
-          height: '140px', 
-          width: '100%', 
-          maxWidth: '500px', 
-          display: 'flex', 
-          flexDirection: 'column',
-          alignItems: 'center', 
-          justifyContent: 'flex-end',
-          gap: '12px',
-          paddingBottom: '20px'
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          padding: '20px',
+          paddingBottom: 'max(20px, env(safe-area-inset-bottom))',
+          background: 'linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.8) 80%, transparent)',
+          zIndex: 20,
+          display: 'flex',
+          justifyContent: 'center'
       }}>
-        <div style={{ display: 'flex', width: '100%', gap: '8px' }}>
+        <div style={{ width: '100%', maxWidth: '500px', display: 'flex', gap: '8px' }}>
             {!isFlipped ? (
                 <button 
                     onClick={() => setIsFlipped(true)}
