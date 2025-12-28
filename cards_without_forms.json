@@ -1,0 +1,1417 @@
+[
+  {
+    "id": "a42ecf60-afe5-459d-8d2d-b06b8ce68a6b",
+    "word": "Unless ...",
+    "front": "مگر اینکه ..."
+  },
+  {
+    "id": "8f5cdca2-9c81-4eb4-99c2-784e7f839d46",
+    "word": "To my surprise",
+    "front": "در کمال تعجب"
+  },
+  {
+    "id": "b7900809-353c-4864-8e0c-f6698e97e1bd",
+    "word": "It goes without saying that ...",
+    "front": "بدیهی است که ..."
+  },
+  {
+    "id": "7e905d55-25c3-45c1-9b71-98728dee53d1",
+    "word": "No reception / No signal",
+    "front": "آنتن ندادن (موبایل)"
+  },
+  {
+    "id": "b1c1e985-6926-4194-bfdb-ba1dfde3d4bf",
+    "word": "What's done is done / Miss the boat",
+    "front": "آب از سر گذشتن"
+  },
+  {
+    "id": "2d1523a4-5611-4e85-b8eb-b826a317dad8",
+    "word": "You're splitting hairs",
+    "front": "گیر دادی ها (ول نمیکنی)"
+  },
+  {
+    "id": "35ed0130-d594-4bec-9b51-f36258ef9366",
+    "word": "Everyone thinks they have a say in design",
+    "front": "همه فکر می‌کنن حرفی برای گفتن دارن تو دیزاین "
+  },
+  {
+    "id": "e3307e3d-8c7e-491e-b786-07119be342ba",
+    "word": "Inasmuch as ...",
+    "front": "از آنجایی که ..."
+  },
+  {
+    "id": "23710e33-60d9-4b19-815f-506ab846fbe7",
+    "word": "moving the goalposts",
+    "front": "**Def**: unfairly changing the agreed rules or conditions du"
+  },
+  {
+    "id": "7e304650-781e-4588-9c99-6c737710b109",
+    "word": "against all (the) odds",
+    "front": "**Def**: if something happens against all odds, it happens o"
+  },
+  {
+    "id": "848acc74-d066-4f9f-82e3-624fb0c14f36",
+    "word": "caught a glimpse of",
+    "front": "**Def**: Saw something briefly or partially.\n**Farsi**: نگاه"
+  },
+  {
+    "id": "236744a0-6710-49e5-9545-d3e69fd22f0b",
+    "word": "It's time to end this",
+    "front": "وقتشه تمومش کنیم"
+  },
+  {
+    "id": "9d156f05-3eaa-44db-a207-eea95cb01c3b",
+    "word": "in one piece [ɪn wʌn piːs]",
+    "front": "بی‌خطر و سالم بودن"
+  },
+  {
+    "id": "edefe02d-67d9-4620-b91f-85ade1b41536",
+    "word": "get the hang of [ɡet ðə hæŋ əv]",
+    "front": "یه چیزی رو سریع فهمیدن"
+  },
+  {
+    "id": "9a0be74b-e8ca-4c40-ad9e-917e44a390e1",
+    "word": "c/o (care of)",
+    "front": "**Def**: Used in addresses when the recipient is staying at "
+  },
+  {
+    "id": "de5ae042-54a6-415b-bd8e-85dc7161f28e",
+    "word": "On me",
+    "front": "مهمان من (حساب کردن)"
+  },
+  {
+    "id": "8b0708a2-2118-40a6-b8b7-db0b7c284185",
+    "word": "Go the extra mile",
+    "front": "سنگ تمام گذاشتن"
+  },
+  {
+    "id": "5e7ac4cc-8019-4a8a-a7ed-6bd05174f4e9",
+    "word": "Go according to plan",
+    "front": "بر وفق مراد بودن"
+  },
+  {
+    "id": "0acd1930-bc32-42d3-a3fd-bc43fb58863a",
+    "word": "My lips are sealed",
+    "front": "**Def**: I promise not to tell anyone (informal idiom).\n**Fa"
+  },
+  {
+    "id": "bb8c04f5-e7e4-498b-90a0-996f21b34492",
+    "word": "Keep one's cool",
+    "front": "خونسرد بودن"
+  },
+  {
+    "id": "35adae77-c5e4-4929-99d5-eb99ac45c774",
+    "word": "Have a knack for",
+    "front": "قلق چیزی را داشتن"
+  },
+  {
+    "id": "3eec35ef-8f7b-4661-b214-6c9524f45d09",
+    "word": "Wolf in sheep's clothing",
+    "front": "گرگ در لباس میش"
+  },
+  {
+    "id": "b3789ce7-972c-4fb5-a6db-ba2e09818ca9",
+    "word": "Have a crush on",
+    "front": "خاطرخواه شدن"
+  },
+  {
+    "id": "cf2e5678-2407-4bf8-9d4e-4ccd1ae33931",
+    "word": "I doubt that ...",
+    "front": "بعید میدانم که ..."
+  },
+  {
+    "id": "86753e0d-6926-4a8b-b572-90cfab1d30a5",
+    "word": "Don't let me down",
+    "front": "ناامیدم نکن"
+  },
+  {
+    "id": "baea2677-a351-45ac-8e3d-462656e52046",
+    "word": "Sound like a broken record",
+    "front": "زبانم مو درآورد"
+  },
+  {
+    "id": "1463324e-1796-430a-8881-7a5780602684",
+    "word": "Out of sight, out of mind",
+    "front": "از دل برود هر آنکه از دیده برفت"
+  },
+  {
+    "id": "f7c5fab7-64b8-436c-9734-2421c1a2f669",
+    "word": "Play cat and mouse",
+    "front": "موش و گربه بازی درآوردن"
+  },
+  {
+    "id": "823b47b3-9be5-410d-a023-4372515afde1",
+    "word": "Not in the mood",
+    "front": "حوصله نداشتن"
+  },
+  {
+    "id": "25ae23cb-d731-4eee-ad63-fa4c604d1fc1",
+    "word": "Tall tale / Fabrication",
+    "front": "خالی بندی"
+  },
+  {
+    "id": "f509f431-d323-4ee2-a288-0878f5fda0c2",
+    "word": "Take the bread out of someone's mouth",
+    "front": "نان کسی را آجر کردن"
+  },
+  {
+    "id": "0366283b-afd4-4893-a3d8-63d1b40e18b6",
+    "word": "At the expense of ...",
+    "front": "به ضررِ ..."
+  },
+  {
+    "id": "2c00444d-201c-4e61-8316-f1905a1449cc",
+    "word": "Rain on someone's parade",
+    "front": "حال کسی را گرفتن"
+  },
+  {
+    "id": "4df9ea51-084f-48bb-950e-5613a7a1f23b",
+    "word": "In lieu of ...",
+    "front": "به جای ..."
+  },
+  {
+    "id": "c5efc470-7abb-49b7-97f9-6accf2bb3e00",
+    "word": "In light of ...",
+    "front": "با توجه به ..."
+  },
+  {
+    "id": "8a568b27-7c0b-48d3-904a-717588df7da4",
+    "word": "not to mention — /nɑːt tə ˈmenʃən/",
+    "front": "برای تأکید، با آوردن یک مورد اضافی و اغلب شدیدتر؛ English: U"
+  },
+  {
+    "id": "e24673a7-f231-4c12-99a4-723081a0ea48",
+    "word": "Stick to one's guns",
+    "front": "سماجت کردن"
+  },
+  {
+    "id": "a5f9d4c1-c0c3-45e2-8925-274372c68366",
+    "word": "Scrape the bottom of the barrel",
+    "front": "کفگیر به ته دیگ خوردن"
+  },
+  {
+    "id": "c93773e3-8ea4-4cf9-a949-9080da000025",
+    "word": "Step on someone's toes",
+    "front": "پا تو کفش کسی کردن"
+  },
+  {
+    "id": "2b02c2c4-27c3-415a-92e2-aeb2ae2e867e",
+    "word": "Sweep under the rug",
+    "front": "صورت مسئله را پاک کردن"
+  },
+  {
+    "id": "02056d9d-085b-4553-8ef0-0472538cb7fb",
+    "word": "Kill two birds with one stone",
+    "front": "یک تیر و دو نشان"
+  },
+  {
+    "id": "440ec442-50ee-4268-9a8d-2d8117674245",
+    "word": "a fish out of water (idiom)",
+    "front": "**Def**: a person who feels uneasy and out of place in their"
+  },
+  {
+    "id": "398a8808-ac92-4202-a41d-1d4b311c1ef9",
+    "word": "That's a bummer [ðæts ə ˈbʌm.ər]",
+    "front": "عبارتی برای ابراز ناامیدی یا همدردی نسبت به یک اتفاق ناخوشای"
+  },
+  {
+    "id": "5c6e38df-706c-48cd-a9f9-3fc436dabc27",
+    "word": "It is a 10 million to 1 shot",
+    "front": "احتمال موفقیتمون یک در ده میلیونه"
+  },
+  {
+    "id": "8facf25d-4ed1-4283-a723-fa572ddf3b0b",
+    "word": "the person or thing that receives or is affected by an actio",
+    "front": "شخص یا چیزی که عمل یا رویدادی بر آن انجام می‌شود یا متأثر می"
+  },
+  {
+    "id": "81b68ff8-48ad-4cd8-ab24-794c492c1ad6",
+    "word": "get rid of [ɡet rɪd əv]",
+    "front": "از چیزی خلاص شدن; To throw away or remove something unwanted"
+  },
+  {
+    "id": "ce8654f2-8c79-4d0e-9dc2-cf630fa7be8c",
+    "word": "head out [hed aʊt]",
+    "front": "از جایی رفتن یا بیرون رفتن; To leave a place or situation."
+  },
+  {
+    "id": "37574f2f-49ac-4abd-a975-83eb8d0e4e69",
+    "word": "Still (nevertheless)",
+    "front": "**Def**: nevertheless; even so (used to introduce a contrast"
+  },
+  {
+    "id": "2a89b9c4-73d7-4889-aa99-97d54efeab6e",
+    "word": "live up to [lɪv ʌp tuː]",
+    "front": "کسی را ناامید نکردن; To meet expectations successfully."
+  },
+  {
+    "id": "9e247c1e-1269-4ead-80f0-53a1c3cc0c1f",
+    "word": "cut to the chase [kʌt tuː ðə tʃeɪs]",
+    "front": "به نکته‌ای رسیدن یا خلاصه کردن; To get directly to the main "
+  },
+  {
+    "id": "807453bd-744d-4a03-8bbf-7f3e83a13b1b",
+    "word": "still (even/yet)",
+    "front": "**Def**: even; yet (used to emphasize a comparison).\n**Farsi"
+  },
+  {
+    "id": "a1129913-9470-486d-af64-8ab89faa8ef6",
+    "word": "under the microscope",
+    "front": "**Def**: subject to intense scrutiny or investigation (figur"
+  },
+  {
+    "id": "115461f9-5158-453b-aa8c-531a3f8bd6c8",
+    "word": "What have you been up to?",
+    "front": "چه خبرا؟ (مشغول چه کاری هستی)"
+  },
+  {
+    "id": "d3732cb0-d79d-4977-bdcc-422e378164ed",
+    "word": "Tell me something I don't know",
+    "front": "یه چیزی بگو که نمی‌دونم"
+  },
+  {
+    "id": "bd878fe5-5033-4f3c-b7b9-11de3b125d7d",
+    "word": "highly unlikely",
+    "front": "**Def**: it's very unlikely he'll come.\n**Farsi**: بسیار بعی"
+  },
+  {
+    "id": "0a97ae11-b0e0-4dbd-ad47-819fa4cb93cb",
+    "word": "What's the story?",
+    "front": "داستان چیه؟ (قضیه چیه)"
+  },
+  {
+    "id": "3c69fbfb-3e40-4cce-835a-cc5e246b6fd8",
+    "word": "old friend",
+    "front": "**Def**: a friend I have known for a long time.\n**Farsi**: د"
+  },
+  {
+    "id": "6e8dc356-4d63-4c55-b412-85ab942db3b5",
+    "word": "torrential rainfall",
+    "front": "**Def**: very heavy rain.\n**Farsi**: بارش سیل‌آسا"
+  },
+  {
+    "id": "07304aff-ad4f-49b2-aac0-9697930b62bc",
+    "word": "It felt less like flying than it did like falling. [ɪt fɛlt ",
+    "front": "حسی بیشتر شبیه پایین‌آمدنِ سریع و کنترل‌نشده بود تا حسِ شناو"
+  },
+  {
+    "id": "95623bfc-6f02-4d9a-a0a4-3a50d01cbf00",
+    "word": "a drop in the ocean",
+    "front": "**Def**: a tiny amount compared to what is needed.\n**Farsi**"
+  },
+  {
+    "id": "86f88b37-2495-414b-9467-3961ddc85fd7",
+    "word": "To take an action to avoid something happening; out of fear ",
+    "front": "برای جلوگیری از وقوع چیزی؛ از ترس اینکه اتفاق بیفتد"
+  },
+  {
+    "id": "555f11b2-eca4-4ec6-8ba0-5afc979d678f",
+    "word": "First and foremost",
+    "front": "**Def**: most importantly.\n**Farsi**: اول و مهمتر از همه"
+  },
+  {
+    "id": "53f1fc8e-84fe-4a1a-a312-09769a113a0f",
+    "word": "a foregone conclusion",
+    "front": "**Def**: a result that is obvious before it happens.\n**Farsi"
+  },
+  {
+    "id": "3b087686-5f4a-4571-9525-6c45e294e31d",
+    "word": "on the cards",
+    "front": "**Def**: likely to happen.\n**Farsi**: محتمل، در شرف وقوع"
+  },
+  {
+    "id": "671133bc-1223-487e-8cb2-934339b7609e",
+    "word": "explore the idea in more depth",
+    "front": "**Def**: To examine a concept more thoroughly and in detail."
+  },
+  {
+    "id": "143fa84c-f3d6-4ccb-bd52-3e09a6f6b1d0",
+    "word": "Cut to the chase",
+    "front": "برو سر اصل مطلب"
+  },
+  {
+    "id": "5e492662-0ff6-499c-a1b1-34c295611f97",
+    "word": "sat on the fence",
+    "front": "**Def**: Avoided making a decision or stating a clear opinio"
+  },
+  {
+    "id": "07f38894-2546-4246-bc46-e382740b4123",
+    "word": "needless to say",
+    "front": "**Def**: obviously.\n**Farsi**: ناگفته پیداست، معلوم است که"
+  },
+  {
+    "id": "0629c60a-2f0d-46ca-a16e-4c789c242c7f",
+    "word": "Give it to me straight",
+    "front": "رک و پوست کنده بگو"
+  },
+  {
+    "id": "0f82f1ef-b0f4-450b-930e-451b099bd461",
+    "word": "I'm down / I'm game",
+    "front": "من پایم (هستم)"
+  },
+  {
+    "id": "7fcdbca3-d052-4e88-84eb-c54e2383aa82",
+    "word": "Count me in",
+    "front": "روی من حساب کن"
+  },
+  {
+    "id": "c5f9e1cf-0986-4be9-95f6-988e2757b580",
+    "word": "Count me out",
+    "front": "من نیستم (منو حساب نکن)"
+  },
+  {
+    "id": "234459d4-1b48-475f-8a33-9785846027ba",
+    "word": "good as gold",
+    "front": "**Def**: Behaving perfectly (usually children); well-behaved"
+  },
+  {
+    "id": "b7a14d9a-c48b-4d27-9f20-9d64d4a5971d",
+    "word": "Hold your horses",
+    "front": "دست نزن (صبر کن)"
+  },
+  {
+    "id": "ebb14727-9885-448e-99de-061cc630157e",
+    "word": "try out [traɪ aʊt]",
+    "front": "چیزی را امتحان کردن برای دیدن نتیجه; To test or try somethin"
+  },
+  {
+    "id": "bc478ca9-506d-4741-aed7-9abcdd914b26",
+    "word": "Mind you [maɪnd juː]",
+    "front": "عبارتی برای افزودن یک نکته‌ی تکمیلی، توضیح یا تضاد که توجه ر"
+  },
+  {
+    "id": "21a7a408-cc8b-4d5b-874b-1a15b572f507",
+    "word": "Never mind",
+    "front": "بی‌خیال (ولش کن)"
+  },
+  {
+    "id": "e0b2d092-57e3-4bcc-8232-cfc78215b463",
+    "word": "Never in my life have I thought... [ˈnɛvər ɪn maɪ laɪf hæv a",
+    "front": "معنای فارسی: تعبیری برای بیان تعجب یا شگفتی شدید از چیزی که "
+  },
+  {
+    "id": "12420da9-193e-4458-a9f3-f75d4ef39d3b",
+    "word": "follow through [ˈfɒləʊ θruː]",
+    "front": "چیزی را دنبال کردن تا نتیجه بگیری; To continue doing somethi"
+  },
+  {
+    "id": "c2e86125-517f-492c-bdc8-9adf318c7181",
+    "word": "completely useless; lacking any useful function | serve no p",
+    "front": "کاملاً بی‌فایده یا فاقد کاربرد مفید"
+  },
+  {
+    "id": "32518fef-413d-4031-8fcb-a52df4b7b76b",
+    "word": "a (real) pain (INF)",
+    "front": "**Def**: an annoying person or situation. (SYN a pain in the"
+  },
+  {
+    "id": "73947944-a814-49a1-a8db-850c2697e234",
+    "word": "Take it easy",
+    "front": "سخت نگیر"
+  },
+  {
+    "id": "9915a61e-a54f-4953-9d88-f80fa08660c5",
+    "word": "lean on someone [liːn ɒn]",
+    "front": "به کسی وابسته بودن از نظر احساسی یا مالی; To depend heavily "
+  },
+  {
+    "id": "211e7bb3-83c9-4d14-9c2f-0bea3bae1437",
+    "word": "too good to be true",
+    "front": "**Def**: used to express doubts about a surprisingly good si"
+  },
+  {
+    "id": "767bd094-aca4-4bae-8795-2cbd934adcbb",
+    "word": "a dark horse [ə dɑːk hɔːs]",
+    "front": "آب زیر کاه بودن; To be more dangerous or clever than appears"
+  },
+  {
+    "id": "7c8b6c93-d2c4-433c-b1a0-e67be20153a6",
+    "word": "call off [kɔːl ɒf]",
+    "front": "چیزی را لغو کردن; To cancel something."
+  },
+  {
+    "id": "161d7b1b-a625-4833-96cf-7675626dfbda",
+    "word": "Power Strip",
+    "front": "سه راهی برق"
+  },
+  {
+    "id": "97f5b0ce-cf20-4438-a98a-fb71d38c1bd3",
+    "word": "take it easy [teɪk ɪt ˈiːzi]",
+    "front": "خیلی راحت و بی‌دغدغه بودن; To be relaxed and not worried."
+  },
+  {
+    "id": "737a8786-dd2d-4b53-92af-3591ab389be0",
+    "word": "the damage is done [ðə ˈdæmɪdʒ ɪz dʌn]",
+    "front": "کار از کار گذشته است; Too late to change something."
+  },
+  {
+    "id": "4f44b247-eacd-4c9c-a020-0b0e26c0ad7f",
+    "word": "Learning Curve",
+    "front": "منحنی یادگیری (پیشرفت)"
+  },
+  {
+    "id": "eccac478-e9c0-469e-bac7-775b2c9b9de6",
+    "word": "Bottle Cap",
+    "front": "در بطری"
+  },
+  {
+    "id": "bba88cfa-e2a9-4015-9fa2-e3d8c48a8b97",
+    "word": "fall flat on your face [fɔːl flæt ɒn jɔː feɪs]",
+    "front": "به طور کامل شکست خوردن"
+  },
+  {
+    "id": "6cde093e-e67e-4327-a77f-77e7cc5b5301",
+    "word": "Ajar",
+    "front": "نیمه باز (در/پنجره)"
+  },
+  {
+    "id": "3731b95a-7205-4804-aa53-5bc79e018baf",
+    "word": "Way to go",
+    "front": "دمت گرم (کارت درسته)"
+  },
+  {
+    "id": "7ec9060b-7884-4beb-b957-9aede4ab2fdb",
+    "word": "Run into [rʌn ˈɪntuː]",
+    "front": "ملاقات یا دیدار ناگهانی و غیرمنتظره با کسی؛ برخورد یا تصادف "
+  },
+  {
+    "id": "317febed-0834-4c09-ab8e-346055578ab1",
+    "word": "You're kidding",
+    "front": "**Def**: used to say that you think sth cannot be true and m"
+  },
+  {
+    "id": "355d1b3b-fc6a-424e-a210-e3a917482cea",
+    "word": "you never know",
+    "front": "**Def**: used to say that you can never be certain about fut"
+  },
+  {
+    "id": "eccccdcc-a59f-4456-b786-077be98606d7",
+    "word": "old-fashioned",
+    "front": "**Def**: no longer modern or fashionable. SYN dated. OPP in "
+  },
+  {
+    "id": "ceab59f0-c6e6-4b07-aae0-89838b5f5d89",
+    "word": "You got a point",
+    "front": "حق با توئه"
+  },
+  {
+    "id": "832ae589-33ad-4a62-93fb-21b1933c8442",
+    "word": "admitted to hospital",
+    "front": "**Def**: taken there and treated.\n**Farsi**: بستری شدن در بی"
+  },
+  {
+    "id": "63433a68-25bf-4896-824b-b614fbc51acd",
+    "word": "You nailed it",
+    "front": "گل کاشتی"
+  },
+  {
+    "id": "20bfe6ca-cf40-4583-b71a-6e1d26c9b30f",
+    "word": "talk someone into doing something",
+    "front": "**Def**: persuade them to do it.\n**Farsi**: کسی را برای انجا"
+  },
+  {
+    "id": "dc3ba584-59d4-41a4-8e4b-2362b5866706",
+    "word": "What makes it tick? [wʌt meɪks ɪt tɪk]",
+    "front": "عامل یا انگیزهٔ اصلی که باعث عملکرد یا کار کردن یک چیز می‌شو"
+  },
+  {
+    "id": "9b3773b9-5b05-4300-b3cb-5746b0fd5ab6",
+    "word": "Knock on wood",
+    "front": "خدا کنه (بزن به تخته)"
+  },
+  {
+    "id": "a33759e2-aaef-4e3a-a202-7e73bb8d9903",
+    "word": "Darn it!",
+    "front": "لعنت بهش(مودبانه)"
+  },
+  {
+    "id": "484a9b16-d134-4de6-b550-f5a7c9621cc3",
+    "word": "as clear as day [æz klɪə æz deɪ]",
+    "front": "مثل روز روشن بودن; Very clear or obvious."
+  },
+  {
+    "id": "1541dd32-8b30-478e-9c8d-6b7f96793309",
+    "word": "Look forward to [lʊk ˈfɔːrwərd tuː]",
+    "front": "مشتاق بودن برای وقوع یا تجربهٔ یک رویداد آینده یا دیدار کسی "
+  },
+  {
+    "id": "75f790ea-6acd-4d91-91d4-792de7978f26",
+    "word": "Turns out... [tɜrnz aʊt]",
+    "front": "مشخص یا معلوم می‌شود که چیزی چنین است\\English: It becomes cl"
+  },
+  {
+    "id": "63e30267-b18e-448d-a8df-7a37eb54567b",
+    "word": "black sheep [ˌblæk ˈʃiːp]",
+    "front": "عضوی از خانواده یا گروه که با بقیه تفاوت دارد و اغلب پذیرفته"
+  },
+  {
+    "id": "f3be292d-ba2c-4580-854b-65661a4bb16b",
+    "word": "Vanishing Point",
+    "front": "نقطه گریز"
+  },
+  {
+    "id": "bdad399f-3669-400f-813b-81241318d96c",
+    "word": "put up with [pʊt ʌp wɪð]",
+    "front": "کسی را تحمل کردن; To tolerate someone you dislike."
+  },
+  {
+    "id": "7b327501-38da-4da9-9c74-c52ed7110c9e",
+    "word": "You're driving me crazy",
+    "front": "دیوونم کردی"
+  },
+  {
+    "id": "7df9e621-9997-4b43-830f-7214a4090e39",
+    "word": "It gets on my nerves",
+    "front": "اعصابم رو خورد میکنه"
+  },
+  {
+    "id": "19058da4-4ed1-4fc5-9c5f-4b0224bdffd2",
+    "word": "mind like a sieve",
+    "front": "**Def**: a bad memory.\n**Farsi**: حافظه ضعیف/مثل آبکش (ذهن)"
+  },
+  {
+    "id": "74b9f509-09b9-4301-9a1e-fe57a7d535c2",
+    "word": "You got lucky",
+    "front": "شانس آوردی"
+  },
+  {
+    "id": "e8cfda1e-fc56-4f13-9491-d7338c7dd8b6",
+    "word": "Watch your back",
+    "front": "حواست جمع باشه"
+  },
+  {
+    "id": "8fb61062-5840-40d0-a0a0-b45a822cce51",
+    "word": "Settle down",
+    "front": "آروم بگیر (بشین سر جات)"
+  },
+  {
+    "id": "0d90b80a-9d1b-4f3e-a004-b11bde26843f",
+    "word": "poke fun at",
+    "front": "**Def**: make jokes about them in an unkind way.\n**Farsi**: "
+  },
+  {
+    "id": "dc4ba2b6-4b16-45b4-b467-1e4c8937d25b",
+    "word": "I'm all ears",
+    "front": "گوشم با توئه"
+  },
+  {
+    "id": "8860373b-5520-4cf7-9da2-a8ff2f63de9b",
+    "word": "You hit the nail on the head",
+    "front": "زدی تو خال"
+  },
+  {
+    "id": "840565b8-b864-41fa-990f-201fa764649b",
+    "word": "Don't stick your nose where it doesn't belong",
+    "front": "خودتو نخود آش نکن"
+  },
+  {
+    "id": "681c3a9d-0d3a-4475-bf0a-7b79f452b612",
+    "word": "It's on the tip of my tongue",
+    "front": "نوک زبونمه"
+  },
+  {
+    "id": "0a981511-d807-4594-818b-10477bdd169e",
+    "word": "Don't hold back",
+    "front": "رک بگو (تعارف نکن)"
+  },
+  {
+    "id": "f5b9d401-05ae-4bc1-b908-314380f7ca9d",
+    "word": "Grow up",
+    "front": "بزرگ شو (بچگی نکن)"
+  },
+  {
+    "id": "0bdfa617-dc92-4907-893b-5ca15d3dcdd0",
+    "word": "Behave yourself",
+    "front": "مودب باش"
+  },
+  {
+    "id": "bad7249d-b359-4691-9744-fab1009df3e0",
+    "word": "make fun of someone",
+    "front": "**Def**: make jokes about them in an unkind way.\n**Farsi**: "
+  },
+  {
+    "id": "dd3fa278-20d7-4a84-b5fe-a169a26d4d89",
+    "word": "Don't put words in my mouth",
+    "front": "حرف تو دهنم نذار"
+  },
+  {
+    "id": "7d4c5c00-837b-4ef2-a87a-590188535698",
+    "word": "That's not what I meant",
+    "front": "منظورم این نبود"
+  },
+  {
+    "id": "d49ad4b7-3bfd-4f41-9ded-9b44f89c0736",
+    "word": "It slipped my mind",
+    "front": "از ذهنم پرید"
+  },
+  {
+    "id": "5ad59d6e-125d-44bc-955d-7045b38284de",
+    "word": "Don't be ridiculous",
+    "front": "مسخره بازی در نیار"
+  },
+  {
+    "id": "72cce5e2-cdaf-4307-8c31-7141a58ba65a",
+    "word": "Forget I asked",
+    "front": "نشنیده بگیر"
+  },
+  {
+    "id": "f4c70b0d-538e-4d55-8724-b2e35a7ea4be",
+    "word": "You took the words right out of my mouth",
+    "front": "حرف دلم رو زدی"
+  },
+  {
+    "id": "984552c1-e07d-41fa-a390-5cb89e09e1bf",
+    "word": "I had to get it off my chest",
+    "front": "رو دلم مونده بود (باید میگفتم)"
+  },
+  {
+    "id": "581c7d2c-827c-4f78-ac3f-9778278dcb9e",
+    "word": "Have my back",
+    "front": "هوای منو داشته باش"
+  },
+  {
+    "id": "7fb3d642-3f60-4150-8cb2-d7c6ceb7cab0",
+    "word": "I got your back",
+    "front": "من هواتو دارم"
+  },
+  {
+    "id": "c84efd18-abda-4e16-974c-80e773900697",
+    "word": "Don't leave me hanging",
+    "front": "تنهام نذار"
+  },
+  {
+    "id": "3861a1c4-3b94-4a4d-99bc-4c9d2081d1e9",
+    "word": "I'm in",
+    "front": "پایه هستم"
+  },
+  {
+    "id": "c58ea89f-f4db-42bf-889e-a08b7822af8b",
+    "word": "Don't be a baby",
+    "front": "خودتو لوس نکن"
+  },
+  {
+    "id": "55e62b05-4044-4f58-ba00-1b5d97d5409e",
+    "word": "Don't raise your voice at me",
+    "front": "داد نزن"
+  },
+  {
+    "id": "57958f07-46ad-462d-885b-973491341d15",
+    "word": "It is what it is",
+    "front": "همینه که هست"
+  },
+  {
+    "id": "c95a8ea3-6bfe-4dec-a33e-c8a808ba4945",
+    "word": "Beat it",
+    "front": "بزن به چاک (گمشو)"
+  },
+  {
+    "id": "55a55835-4af5-4c45-825d-b8e4bf9b3418",
+    "word": "Get out of my face",
+    "front": "از جلو چشمم دور شو"
+  },
+  {
+    "id": "306c6e75-78ea-4a6d-8067-19475b611b44",
+    "word": "Watch your mouth / Watch your language",
+    "front": "حواست به دهنت باشه (مودب باش)"
+  },
+  {
+    "id": "4a7b77f7-ef4f-4912-be79-596ab1a6246b",
+    "word": "What's on your mind?",
+    "front": "چی تو فکرته؟"
+  },
+  {
+    "id": "6cfc17b7-151a-4754-81a2-20fe69839174",
+    "word": "Get off my back",
+    "front": "ولم کن (دست از سرم بردار)"
+  },
+  {
+    "id": "0d53228c-d743-4821-9a01-08f75dd3f099",
+    "word": "I lost it",
+    "front": "قاطی کردم (عصبی شدم)"
+  },
+  {
+    "id": "0bb60c3b-dc7b-4cdc-95c5-2ee67697bcb3",
+    "word": "I owe you one",
+    "front": "بدهکارتم (جبران میکنم)"
+  },
+  {
+    "id": "169b5bfa-6aa0-442a-8416-560d11b63606",
+    "word": "I'm over it",
+    "front": "بی‌خیالش شدم"
+  },
+  {
+    "id": "3609e7d4-5e1c-4191-92a1-e3182cc91817",
+    "word": "I can't take it anymore",
+    "front": "کم آوردم (تحملم تموم شد)"
+  },
+  {
+    "id": "acdf87ce-d78d-43f2-84dd-0982d668b880",
+    "word": "It makes me sick",
+    "front": "حالم ازش بهم میخوره"
+  },
+  {
+    "id": "7e50cb1e-c035-48b8-b3e1-3da66eabdfb4",
+    "word": "I give up",
+    "front": "تسلیم شدم"
+  },
+  {
+    "id": "f9d539df-ddfd-47e5-ab6b-69542e40261e",
+    "word": "I'm crazy about it",
+    "front": "عاشقشم (دیوونشم)"
+  },
+  {
+    "id": "bfc09b6f-25eb-401e-8947-7dd2ec68457e",
+    "word": "It's on me",
+    "front": "مهمون من"
+  },
+  {
+    "id": "e3d29585-44a5-47f1-bd52-4fb146b07ee3",
+    "word": "be in two minds about sth",
+    "front": "**Def**: be unable to decide what to do about sth.\n**Farsi**"
+  },
+  {
+    "id": "473a3b18-63e7-49be-a037-e046958f3c67",
+    "word": "I'll get back to you",
+    "front": "بهت خبر میدم"
+  },
+  {
+    "id": "d86a7036-4df8-4baa-95dc-ad8ad720a11f",
+    "word": "Keep in touch",
+    "front": "در تماس باش"
+  },
+  {
+    "id": "4f777cd3-565c-45dd-8e14-457ec6a3ccde",
+    "word": "Have a blast",
+    "front": "خوش بگذره"
+  },
+  {
+    "id": "24291652-e5fc-4f08-a830-82461cd9363f",
+    "word": "Take care",
+    "front": "مراقب خودت باش"
+  },
+  {
+    "id": "9e2d687f-5f2a-430a-a9c3-41d8e3d89bc8",
+    "word": "At your service",
+    "front": "چاکرم (ارادت)"
+  },
+  {
+    "id": "0f99269e-796b-45d8-b8c1-a7bfe4ea136c",
+    "word": "Be my guest",
+    "front": "اختیار دارید (خواهش میکنم)"
+  },
+  {
+    "id": "4cca6fed-fd06-47b6-984f-c4c6fb7144c5",
+    "word": "After you",
+    "front": "بفرما (بعد از شما)"
+  },
+  {
+    "id": "d87c7414-0815-4953-9d2e-f825ff2ac44a",
+    "word": "You're too kind",
+    "front": "از شماست (لطف شماست)"
+  },
+  {
+    "id": "53d8af93-3681-42ab-9037-2c11d2f38108",
+    "word": "You're making me blush",
+    "front": "خجالتم نده"
+  },
+  {
+    "id": "911b9843-f873-4177-b87e-cd2b786b3b5f",
+    "word": "Stick around",
+    "front": "همین دور و برا باش"
+  },
+  {
+    "id": "4c684601-a52b-4f5e-9bea-dabc56fd7bed",
+    "word": "That hit the spot",
+    "front": "حالم جا اومد"
+  },
+  {
+    "id": "c70c2d38-376e-433b-960a-0eb7962d6b15",
+    "word": "Let me sleep on it",
+    "front": "بذار فکرامو بکنم"
+  },
+  {
+    "id": "0f90531c-e1b2-43ee-8033-e78760e558c1",
+    "word": "You're a lifesaver",
+    "front": "زندگیم رو نجات دادی"
+  },
+  {
+    "id": "d236825b-88f6-493f-9160-fdf8384970ec",
+    "word": "I'm fed up",
+    "front": "کلافه شدم"
+  },
+  {
+    "id": "a7c9b1aa-c500-42a8-abf1-2cde5aa673ce",
+    "word": "I'm not in the mood",
+    "front": "حوصله شو ندارم"
+  },
+  {
+    "id": "51239955-c619-4b76-9bcf-3849ec1a867b",
+    "word": "I'm pissed off",
+    "front": "اعصابم خورده"
+  },
+  {
+    "id": "e2859986-f0af-425a-8d4e-ce212bd02171",
+    "word": "I'm wrecked / I'm beat",
+    "front": "داغونم (خسته/نابود)"
+  },
+  {
+    "id": "ab01b90a-2432-47bd-b70a-ad7105ef452f",
+    "word": "I'm at the end of my rope",
+    "front": "به سیم آخر زدم"
+  },
+  {
+    "id": "ebc28578-1de0-4a83-bcd7-84122f8a9613",
+    "word": "sweet (of sb)",
+    "front": "**Def**: kind (of sb).\n**Farsi**: مهربانانه، از روی لطف"
+  },
+  {
+    "id": "45e0729d-5a0a-4aa9-8636-91b4a07eb9fb",
+    "word": "I'll make it up to you",
+    "front": "جبران میکنم"
+  },
+  {
+    "id": "6751225e-7a09-4588-a01b-32866ba0c61a",
+    "word": "Even steven / We're even",
+    "front": "حساب بی حساب"
+  },
+  {
+    "id": "2599be4d-c702-4c4a-b415-d6a08ee0c531",
+    "word": "Let's split the bill / Go Dutch",
+    "front": "دنگی دونگی حساب کنیم"
+  },
+  {
+    "id": "f1dbc443-a8cd-4b85-84eb-908f8e7258e8",
+    "word": "It's not the end of the world",
+    "front": "دنیا به آخر نرسیده"
+  },
+  {
+    "id": "f8b7350c-ac0b-438b-aaf7-6730d6be8e6a",
+    "word": "be tied up",
+    "front": "**Def**: be busy and unable to do other things.\n**Farsi**: گ"
+  },
+  {
+    "id": "22e9c1a2-33ef-41ee-bf23-39c7123c25a4",
+    "word": "My jaw dropped",
+    "front": "دهنم باز موند"
+  },
+  {
+    "id": "6f32f7f1-28b5-4fc2-91bb-82a845614561",
+    "word": "I'm lost / I'm confused",
+    "front": "گیج شدم"
+  },
+  {
+    "id": "98a0c55c-f0a0-4ba0-ac6a-94f49baa0427",
+    "word": "It beats me",
+    "front": "حالیم نمیشه (درک نمیکنم)"
+  },
+  {
+    "id": "e555be6d-2089-495a-b051-dbf22c93fedc",
+    "word": "My bad",
+    "front": "خاک تو سرم"
+  },
+  {
+    "id": "6f91d69f-5e2a-4842-b719-463c4a69a0b6",
+    "word": "be the last thing on sb's mind",
+    "front": "**Def**: be the thing that sb is least likely to be thinking"
+  },
+  {
+    "id": "d0311de6-f6b6-4dbd-bf3a-1fd4ca23f5bb",
+    "word": "as dry as a bone",
+    "front": "**Def**: extremely dry.\n**Farsi**: مثل استخوان خشک"
+  },
+  {
+    "id": "55a1487f-92bc-4b86-aba1-8f66e15b3549",
+    "word": "It bummed me out",
+    "front": "دلم گرفت (غمگین شدم)"
+  },
+  {
+    "id": "483061ff-a6d7-4183-b465-a4d928624109",
+    "word": "I don't get it",
+    "front": "سر در نمیارم"
+  },
+  {
+    "id": "e9b46b7a-ee0a-4177-b182-692447cca70b",
+    "word": "ulterior motive",
+    "front": "**Def**: a reason for doing sth that you keep hidden.\n**Fars"
+  },
+  {
+    "id": "38583854-a18e-4a8e-923f-b42d8c412487",
+    "word": "Beauty is in the eye of the beholder",
+    "front": "چشمات قشنگ میبینه"
+  },
+  {
+    "id": "ba5f7e3d-684d-44ae-a7bc-5ff76aca7142",
+    "word": "The penny dropped",
+    "front": "دوزاریم افتاد"
+  },
+  {
+    "id": "cf70ac35-22e0-4e69-96f6-96689b6b37dc",
+    "word": "You're out to lunch",
+    "front": "تو باغ نیستی (نمیفهمی)"
+  },
+  {
+    "id": "ed308e63-9bae-4c9f-9761-bfb1d679b272",
+    "word": "Have you lost your marbles?",
+    "front": "عقلت رو از دست دادی؟"
+  },
+  {
+    "id": "669b9cd6-4f1f-4990-ad78-133aaaed0d84",
+    "word": "What a mess",
+    "front": "عجب گیری افتادیم"
+  },
+  {
+    "id": "f275a918-070a-4eec-9ee7-7c29c80836db",
+    "word": "We're screwed",
+    "front": "بدبخت شدیم"
+  },
+  {
+    "id": "5eb3208d-323e-4706-a39e-f86b561b83fc",
+    "word": "We're done for",
+    "front": "کارمون تمومه"
+  },
+  {
+    "id": "d975b463-fd44-44f3-b536-044153434a13",
+    "word": "It gave me goosebumps",
+    "front": "مو به تنم سیخ شد"
+  },
+  {
+    "id": "763ccc6d-cac1-4ae6-bc3d-dfd5952f3fec",
+    "word": "My apologies",
+    "front": "شرمندتم"
+  },
+  {
+    "id": "14e2e33d-19be-4615-988a-c2b6ac102aa0",
+    "word": "No offense meant",
+    "front": "منظور بدی نداشتم"
+  },
+  {
+    "id": "8fd557ca-e68e-4073-b9e4-439c16146bb1",
+    "word": "I was taken aback",
+    "front": "جا خوردم"
+  },
+  {
+    "id": "f336e179-d1b2-4d23-81bb-aba5214f8166",
+    "word": "I miss him/her terribly",
+    "front": "دلم براش تنگ شده"
+  },
+  {
+    "id": "903309ca-40a3-4b4f-a6f4-20f08ed7b45d",
+    "word": "Don't take it personal",
+    "front": "به دل نگیر"
+  },
+  {
+    "id": "caaa2434-f35a-486a-bfb6-0ce432771491",
+    "word": "It moved me to tears",
+    "front": "اشکم در اومد"
+  },
+  {
+    "id": "34a730bd-27cb-4323-aec2-e4da9f728965",
+    "word": "It dawned on me",
+    "front": "برام روشن شد (فهمیدم)"
+  },
+  {
+    "id": "704fb8c4-7bab-4cf9-9659-f094c4b02928",
+    "word": "It blew my mind",
+    "front": "مخم سوت کشید"
+  },
+  {
+    "id": "dc7151d5-1ab2-45ba-8b7a-8c71a4d6512f",
+    "word": "I'm with you till the end",
+    "front": "تا آخرش باهاتم"
+  },
+  {
+    "id": "5a98d1d6-25e4-456d-bfee-b629919c66f2",
+    "word": "Whatever you say",
+    "front": "هر چی تو بگی"
+  },
+  {
+    "id": "98f60100-e012-4ccb-bbb6-5d808c778fcf",
+    "word": "I give you my word",
+    "front": "قول مردونه"
+  },
+  {
+    "id": "9edcbb8e-d7a8-4fb9-b224-4b4a82df0dd9",
+    "word": "I'm counting on you",
+    "front": "پشتم بهت گرمه"
+  },
+  {
+    "id": "ef054397-6de5-4543-994d-9796c4c5414a",
+    "word": "I stand by you",
+    "front": "پات وایسادم"
+  },
+  {
+    "id": "12498236-2408-4165-b8ca-7bb1ebde8a61",
+    "word": "Don't touch me",
+    "front": "به من دست نزن"
+  },
+  {
+    "id": "9c76556e-627d-435e-9999-d1b4e6d5d40d",
+    "word": "I don't give a damn",
+    "front": "برام مهم نیست"
+  },
+  {
+    "id": "71b380e5-cb08-485d-8222-85570be6ca57",
+    "word": "I won't leave your side",
+    "front": "تنهات نمیذارم"
+  },
+  {
+    "id": "0c564784-38ae-4cbb-8f4f-424897e503a7",
+    "word": "you're not gonna believe this",
+    "front": "**Def**: used to introduce surprising and often unwelcome ne"
+  },
+  {
+    "id": "a6b84bae-05e6-4289-b2d7-8eadaef6c483",
+    "word": "Easy come, easy go",
+    "front": "بادآورده را باد می‌برد"
+  },
+  {
+    "id": "42b12fb2-0ba0-4d87-8e78-93530b0df89e",
+    "word": "Lean on me",
+    "front": "به من تکیه کن"
+  },
+  {
+    "id": "33d0aeac-b76b-4bf8-97a0-87766556b233",
+    "word": "Rest assured",
+    "front": "خیالت راحت"
+  },
+  {
+    "id": "bb5aa297-d2a6-4f17-aaa7-c13938f31266",
+    "word": "Stay away from me",
+    "front": "سمت من نیا"
+  },
+  {
+    "id": "d0b8fad3-3f6a-4de4-ba3d-f2051fe9e9e3",
+    "word": "in view of sth",
+    "front": "**Def**: used to introduce the reason for a decision. SYN co"
+  },
+  {
+    "id": "f209ce3f-12e9-47fd-be2f-17b8cc8df4b0",
+    "word": "Get out",
+    "front": "گم شو بیرون"
+  },
+  {
+    "id": "6b215789-2194-4268-ae7d-8c76a96f0bb5",
+    "word": "I hate your guts",
+    "front": "حالم ازت بهم میخوره"
+  },
+  {
+    "id": "eaa33531-afd6-4741-b83e-911546ea7d26",
+    "word": "Let me go",
+    "front": "ولم کن"
+  },
+  {
+    "id": "3fa6e333-9f68-40f7-8a57-9ab47316524b",
+    "word": "Do whatever you want",
+    "front": "هر کاری دلت میخواد بکن"
+  },
+  {
+    "id": "a81154ed-bf9f-4a6e-ba8c-8527c9c1f77e",
+    "word": "It's a matter of life and death",
+    "front": "مسئله مرگ و زندگیه"
+  },
+  {
+    "id": "1f6ab1ec-ffd8-4af9-b87c-b895db264f1a",
+    "word": "Time is money",
+    "front": "وقت طلاست"
+  },
+  {
+    "id": "d5e75ca1-45db-4774-9377-986568e1bdbc",
+    "word": "Opportunity knocks",
+    "front": "شانس در خونت رو زده"
+  },
+  {
+    "id": "fba6a550-925a-4acb-9fbf-abad759cba6b",
+    "word": "Better late than never",
+    "front": "دیر رسیدن بهتر از هرگز نرسیدنه"
+  },
+  {
+    "id": "76449c3a-cd42-4321-ad3b-26511b6dec7e",
+    "word": "Nothing is impossible",
+    "front": "کار نشد نداره"
+  },
+  {
+    "id": "0455ca58-3c76-4d4a-bb0d-7bb8c07af11c",
+    "word": "What will be, will be",
+    "front": "هر چه پیش آید خوش آید"
+  },
+  {
+    "id": "f4c07e11-8f65-4a08-8dff-f4ecd0056e47",
+    "word": "It's a small world",
+    "front": "دنیا کوچیکه"
+  },
+  {
+    "id": "ec9d2330-1db8-4b1e-abf4-522ec25db784",
+    "word": "The early bird catches the worm",
+    "front": "سحرخیز باش تا کامروا باشی"
+  },
+  {
+    "id": "dbc35d76-6af4-4f66-aa59-4c80a46e1577",
+    "word": "When in Rome",
+    "front": "وقتی تو رم هستی مثل رمی‌ها رفتار کن"
+  },
+  {
+    "id": "4c7b2142-8d34-4b7d-aac5-8ae4023f04eb",
+    "word": "No pain, no gain",
+    "front": "نابرده رنج گنج میسر نمی‌شود"
+  },
+  {
+    "id": "3ad02fb3-8fc8-442c-926d-91341702364a",
+    "word": "Practice makes perfect",
+    "front": "تمرین باعث تسلط میشه"
+  },
+  {
+    "id": "6fcb5710-775e-410b-ac4d-2179e4b4600d",
+    "word": "Don't judge a book by its cover",
+    "front": "ظاهر بین نباش"
+  },
+  {
+    "id": "f79e6037-193a-4cb4-8b64-8dae5f5a4ef3",
+    "word": "Haste makes waste",
+    "front": "صبر داشته باش (عجله کار شیطونه)"
+  },
+  {
+    "id": "5fafd1d8-84a5-4674-a75f-a4204f7d3daf",
+    "word": "It looks great on you",
+    "front": "خیلی بهت میاد"
+  },
+  {
+    "id": "9f274ebc-9c89-44ae-8ed0-383198488747",
+    "word": "You look sharp",
+    "front": "خوش تیپ شدی"
+  },
+  {
+    "id": "490e8fe2-16fb-438c-a0d4-47218b439140",
+    "word": "You're the boss",
+    "front": "حرف حرف توئه"
+  },
+  {
+    "id": "1aed3780-ac46-4f3e-99a0-e4ee2e5c760c",
+    "word": "keep sb going",
+    "front": "**Def**: be enough for sb until a later time.\n**Farsi**: کاف"
+  },
+  {
+    "id": "8c457157-ef07-40ec-a667-ba5931b9e1ca",
+    "word": "put sth (into words)",
+    "front": "**Def**: say or write sth in a particular way.\n**Farsi**: بی"
+  },
+  {
+    "id": "f80a4f3a-eaa4-4e53-ad97-7c4098a30511",
+    "word": "push sb/oneself",
+    "front": "**Def**: make sb work harder.\n**Farsi**: فشار آوردن، تشویق ب"
+  },
+  {
+    "id": "417c9b10-fc70-40a2-ad52-30ee657f5869",
+    "word": "leave sth to/with sb",
+    "front": "**Def**: allow sb to take care of sth.\n**Farsi**: سپردن کاری"
+  },
+  {
+    "id": "e53f6d7d-5b4f-461e-81c1-82b146a08e1f",
+    "word": "make sth sth",
+    "front": "**Def**: think or calculate sth to be a particular time or n"
+  },
+  {
+    "id": "a9245df5-b9d3-4c5f-a41b-7d7c8aa33e59",
+    "word": "bring sb somewhere",
+    "front": "**Def**: cause sb to reach a particular condition or place.\n"
+  },
+  {
+    "id": "3ae74a6c-9091-4721-834c-37d160253314",
+    "word": "come with",
+    "front": "**Def**: be sold or produced with a particular feature.\n**Fa"
+  },
+  {
+    "id": "4aba9429-7199-4f9a-87be-74ba45d5cd76",
+    "word": "come in (colours/sizes)",
+    "front": "**Def**: be sold or produced in different variations (colour"
+  },
+  {
+    "id": "889258eb-c788-4a4b-a500-f14643fb9347",
+    "word": "do (for sb/sth)",
+    "front": "**Def**: be enough or be acceptable in a particular situatio"
+  },
+  {
+    "id": "c12e4c1e-aed6-44f3-85f9-8a20a843e1da",
+    "word": "Laughter is the best medicine",
+    "front": "خنده بر هر درد بی درمان دواست"
+  },
+  {
+    "id": "04e36bb0-fa5a-43fd-8e5e-58893ca8af31",
+    "word": "Honesty is the best policy",
+    "front": "صداقت بهترین سیاست است"
+  },
+  {
+    "id": "5b503175-7e75-4ed6-9ad2-89b13713fda0",
+    "word": "keep (remain fresh)",
+    "front": "**Def**: remain fresh.\n**Farsi**: تازه ماندن، خراب نشدن"
+  },
+  {
+    "id": "6b20cc74-9f73-47c5-9ddb-1c03777dad54",
+    "word": "Knowledge is power",
+    "front": "دانش قدرته"
+  },
+  {
+    "id": "741574ab-c600-4096-a95c-4f51d1d3f12a",
+    "word": "What's the plan?",
+    "front": "برنامه چیه؟"
+  },
+  {
+    "id": "475e191e-26c2-49a6-a4d4-35e0d578ba4d",
+    "word": "Let's hit the town",
+    "front": "بزن بریم بیرون (شهر)"
+  },
+  {
+    "id": "429895a6-73c7-437a-b1fc-b68ffb6fd63a",
+    "word": "I'll catch up with you later",
+    "front": "بعداً بهت ملحق میشم"
+  },
+  {
+    "id": "d9f69489-dc60-47f1-886e-d2aed10bb557",
+    "word": "Wish you were here",
+    "front": "جای همه خالی"
+  },
+  {
+    "id": "dd978cbf-db47-412b-b5fb-03c5da64847d",
+    "word": "Let's hit the road",
+    "front": "بیا بزنیم به جاده"
+  },
+  {
+    "id": "4c75a54d-a8e6-4ee6-831f-1ed47e9ccc93",
+    "word": "God bless you",
+    "front": "خدا خیرت بده"
+  },
+  {
+    "id": "2bb58c2e-dc1d-42e8-8838-69c51f85d95b",
+    "word": "Silence is golden",
+    "front": "سکوت علامت رضاست (گاهی)"
+  },
+  {
+    "id": "fac6ebec-499e-416f-b67e-8b68ebb6135f",
+    "word": "Get to the point",
+    "front": "صاف و پوست کنده بگو"
+  },
+  {
+    "id": "c652f61f-33a0-4f65-ae9d-5db06596c001",
+    "word": "He won't let it go",
+    "front": "ول کن ماجرا نیست"
+  },
+  {
+    "id": "3b753cbe-d87e-41bc-817c-c87f90c14893",
+    "word": "Let it go",
+    "front": "بی‌خیال شو (بگذر)"
+  },
+  {
+    "id": "c43f4545-e997-40c3-aab5-bb74358811c6",
+    "word": "Just between us",
+    "front": "بین خودمون باشه"
+  },
+  {
+    "id": "51408ff7-4a27-45c6-a317-7dfdb2242222",
+    "word": "What a bright idea",
+    "front": "چه فکر بکری"
+  },
+  {
+    "id": "842d4ac0-4acc-4837-a236-dc0416aca483",
+    "word": "It's all good",
+    "front": "همه چی روبراهه"
+  },
+  {
+    "id": "5f802e34-2857-43e2-ad5e-c692d9e5f434",
+    "word": "Don't quote me on that",
+    "front": "از من نشنیده بگیر"
+  },
+  {
+    "id": "fa58153e-d854-4663-9e08-bafadcc1d93c",
+    "word": "Can't take a joke?",
+    "front": "جنبه داشته باش"
+  },
+  {
+    "id": "98fb298c-00f5-4a01-ac0f-456df89a1ffb",
+    "word": "Pull yourself together",
+    "front": "به خودت مسلط باش"
+  },
+  {
+    "id": "83642800-3c81-4b0c-afe3-cfe3ae327c6c",
+    "word": "Man up",
+    "front": "مرد باش (قوی باش)"
+  },
+  {
+    "id": "54edfff9-9f80-423d-af48-6ce9070a78ca",
+    "word": "Hang in there",
+    "front": "تحمل کن (دووم بیار)"
+  },
+  {
+    "id": "5113e9bc-9bbd-4cea-bbbe-5834813fe513",
+    "word": "Who would have thought?",
+    "front": "کی فکرشو میکرد؟"
+  },
+  {
+    "id": "d696912d-4959-4ae7-b84f-c14b7e132ded",
+    "word": "Can you believe it?",
+    "front": "باورت میشه؟"
+  },
+  {
+    "id": "a0fdf501-50d6-466d-8a42-fe8982d22a1f",
+    "word": "You gotta be kidding me",
+    "front": "شوخیت گرفته؟ (امکان نداره)"
+  },
+  {
+    "id": "24eb082b-39ff-4d48-b917-29e4fb772f8a",
+    "word": "Where are you going with this?",
+    "front": "به کجا میخوای برسی؟"
+  },
+  {
+    "id": "39df9585-2817-4f71-a73e-2b5af1338a0d",
+    "word": "Nice move",
+    "front": "ایول (حرکتت عالی بود)"
+  },
+  {
+    "id": "8e0fd8f3-4143-4100-a7c6-31a84cc6f283",
+    "word": "In other words",
+    "front": "به عبارت دیگه"
+  },
+  {
+    "id": "639bc553-443d-4270-9e34-c9737441900c",
+    "word": "What a world",
+    "front": "عجب دنیاییه"
+  },
+  {
+    "id": "215e6e5a-decb-4a9a-ac10-5f09de07d0f6",
+    "word": "Word on the street is ...",
+    "front": "خبرش دهن به دهن پیچیده"
+  },
+  {
+    "id": "a0994f45-336c-45a2-bf7b-11bad8732e95",
+    "word": "Don't exaggerate",
+    "front": "یه کلاغ چهل کلاغ نکن"
+  },
+  {
+    "id": "98e55338-03b9-4ea1-84b5-9df1a0830eeb",
+    "word": "Don't make a scene",
+    "front": "پیاز داغشو زیاد نکن"
+  },
+  {
+    "id": "4facd917-0cc0-4698-a236-52bb2febf7c6",
+    "word": "I don't want to argue",
+    "front": "حوصله بحث ندارم"
+  },
+  {
+    "id": "1b33e63d-1ffd-4603-b161-a8a1ddeaa117",
+    "word": "Give it a rest",
+    "front": "دست بردار (کافیه)"
+  },
+  {
+    "id": "3b66b514-45bb-4b84-8783-f0aa8019d564",
+    "word": "Rumor has it ...",
+    "front": "شایعه شده که ..."
+  },
+  {
+    "id": "6572b5ea-60cc-4453-a322-906dd0db6ba4",
+    "word": "No way",
+    "front": "غیر ممکنه"
+  },
+  {
+    "id": "27d1351f-694e-4b44-85ed-5bf26044f1a0",
+    "word": "I have faith in you",
+    "front": "بهت ایمان دارم"
+  }
+]

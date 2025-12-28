@@ -1,23 +1,9 @@
 [
   {
-    "id": "275b1b4f-8f22-483e-82d0-617ebe56eedb",
-    "word": "Conjugate [kənˈdʒuːɡeɪt]",
-    "forms": {
-      "noun": "test",
-      "verb": "test"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "ed7b9d85-01bc-4c1a-9a9e-2856702e64ea",
     "word": "Restroom",
     "forms": {
-      "pp": null,
-      "adj": null,
-      "adv": null,
-      "noun": "restroom",
-      "past": null,
-      "verb": null
+      "noun": "restroom"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -25,12 +11,8 @@
     "id": "d14deffd-4f5e-4bb6-852f-7cb216c2e68e",
     "word": "Insomnia",
     "forms": {
-      "pp": null,
       "adj": "insomniac",
-      "adv": null,
-      "noun": "insomnia",
-      "past": null,
-      "verb": null
+      "noun": "insomnia"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -38,12 +20,7 @@
     "id": "ee67888b-3a84-4aa4-b61e-5e0c15501b25",
     "word": "thus/hence",
     "forms": {
-      "pp": null,
-      "adj": null,
-      "adv": "thus",
-      "noun": null,
-      "past": null,
-      "verb": null
+      "adv": "thus"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -51,12 +28,8 @@
     "id": "fa00fb8c-741d-4714-86eb-8c4477be0550",
     "word": "criterion",
     "forms": {
-      "pp": null,
       "adj": "criterial",
-      "adv": null,
-      "noun": "criterion",
-      "past": null,
-      "verb": null
+      "noun": "criterion"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -64,12 +37,8 @@
     "id": "de8274f6-900b-41eb-b69a-5d82b39c1298",
     "word": "Repercussion",
     "forms": {
-      "pp": null,
       "adj": "repercussive",
-      "adv": null,
-      "noun": "repercussion",
-      "past": null,
-      "verb": null
+      "noun": "repercussion"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -77,24 +46,10 @@
     "id": "5d68d6bf-ae9b-4375-81f8-729d08eb2205",
     "word": "self-contained",
     "forms": {
-      "pp": null,
       "adj": "self-contained",
-      "adv": null,
-      "noun": "self-containment",
-      "past": null,
-      "verb": null
+      "noun": "self-containment"
     },
     "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "617f6e4e-46b0-471a-879e-93423c35a92e",
-    "word": "Seemingly",
-    "forms": {
-      "adj": "seeming",
-      "adv": "seemingly",
-      "verb": "seem"
-    },
-    "reason": "Verb missing Past/PP"
   },
   {
     "id": "bbebdd98-0009-483b-82a6-8ba8f68b30fa",
@@ -119,6 +74,17 @@
       "adj": "down-to-earth"
     },
     "reason": "Sparse Data (<3 forms)"
+  },
+  {
+    "id": "81e997e0-c966-4a5f-9188-353a928e40e9",
+    "word": "Comprehensive",
+    "forms": {
+      "adj": "comprehensive",
+      "adv": "comprehensively",
+      "noun": "comprehension",
+      "verb": "comprehend"
+    },
+    "reason": "Verb missing Past/PP"
   },
   {
     "id": "fa529dd0-e8bb-434c-b3e9-acbd50148780",
@@ -153,41 +119,13 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "c2aa70f8-c27f-47a3-9132-3e92299e2e76",
-    "word": "Fryer",
+    "id": "3452d60d-0121-4698-814a-e9d6122860cb",
+    "word": "excessive (ADJ)",
     "forms": {
-      "noun": "fryer",
-      "verb": "fry"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "899ea962-98f7-42b2-ac41-9e237e2392cc",
-    "word": "Cost-effective",
-    "forms": {
-      "adj": "cost-effective",
-      "noun": "cost-effectiveness"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "391575e6-2c51-4244-b581-86d8b17278c3",
-    "word": "Grudge",
-    "forms": {
-      "adj": "grudging",
-      "adv": "grudgingly",
-      "noun": "grudge",
-      "verb": "grudge"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "854343c4-d113-41da-94df-9fe40ac55d1a",
-    "word": "count (2) (FIND TOTAL)",
-    "forms": {
-      "adj": "countable",
-      "noun": "count",
-      "verb": "count"
+      "adj": "excessive",
+      "adv": "excessively",
+      "noun": "excess",
+      "verb": "exceed"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -211,6 +149,15 @@
     "reason": "Verb missing Past/PP"
   },
   {
+    "id": "8051e820-77a0-43c3-85cd-cb77011c7860",
+    "word": "Grueling",
+    "forms": {
+      "adj": "grueling",
+      "adv": "gruelingly"
+    },
+    "reason": "Sparse Data (<3 forms)"
+  },
+  {
     "id": "26459dda-8b4a-4ab6-85f0-28fd57527cab",
     "word": "Breakthrough",
     "forms": {
@@ -219,10 +166,11 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "8051e820-77a0-43c3-85cd-cb77011c7860",
-    "word": "Grueling",
+    "id": "899ea962-98f7-42b2-ac41-9e237e2392cc",
+    "word": "Cost-effective",
     "forms": {
-      "adj": "grueling"
+      "adj": "cost-effective",
+      "noun": "cost-effectiveness"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -233,63 +181,6 @@
       "noun": "stakeholder"
     },
     "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "565473b0-fc2c-46bf-95a5-baa94d0b4f00",
-    "word": "Procrastinate",
-    "forms": {
-      "adj": "procrastinating",
-      "noun": "procrastination",
-      "verb": "procrastinate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "123f1860-d333-437e-9077-07fd9da70822",
-    "word": "Yearn [jɝn]",
-    "forms": {
-      "noun": "yearning",
-      "verb": "yearn"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "ca064a8b-27e2-4640-a881-2944ef63c954",
-    "word": "Parallel park",
-    "forms": {
-      "noun": "parking",
-      "verb": "park"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "651c695d-265e-4cff-a35d-1782302bdc01",
-    "word": "imply sth (V)",
-    "forms": {
-      "adj": "implied",
-      "noun": "implication",
-      "verb": "imply"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "34ad10df-df20-4b9a-b949-b2a0167a461e",
-    "word": "fancy sb (V)",
-    "forms": {
-      "adj": "fancy",
-      "noun": "fancy",
-      "verb": "fancy"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "456b9d20-542c-4835-99ab-7467423e70f8",
-    "word": "lodge (in sth)",
-    "forms": {
-      "noun": "lodge",
-      "verb": "lodge"
-    },
-    "reason": "Verb missing Past/PP"
   },
   {
     "id": "1c6860c9-7a4b-4c4b-93f2-82da3e53726a",
@@ -310,46 +201,6 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "5a717cd3-a112-405b-923d-fa3db8477ee7",
-    "word": "harbor /ˈhɑː.bər/ HAR-bər",
-    "forms": {
-      "noun": "harbor",
-      "verb": "harbor"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "7ef1c2c0-838d-410d-a5be-8dda47533fb5",
-    "word": "Swindle [ˈswɪn.dəl]",
-    "forms": {
-      "noun": "swindle",
-      "verb": "swindle"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "0cf345aa-ef10-4c14-b162-fc659cfa9918",
-    "word": "Alert",
-    "forms": {
-      "adj": "alert",
-      "adv": "alertly",
-      "noun": "alert",
-      "verb": "alert"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "b46a9d0d-a261-4b8e-b342-00a225c81947",
-    "word": "Respectful",
-    "forms": {
-      "adj": "respectful",
-      "adv": "respectfully",
-      "noun": "respect",
-      "verb": "respect"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "12b8582b-89fc-481e-bd75-12d5fc4b7d69",
     "word": "Gridlock",
     "forms": {
@@ -366,39 +217,13 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "566a740e-76f3-42bf-868a-84a431225636",
-    "word": "stroke sth (V)",
-    "forms": {
-      "noun": "stroke",
-      "verb": "stroke"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "bc2f6a94-21fb-4c89-8406-800a27188f1c",
-    "word": "Mitigate",
-    "forms": {
-      "adj": "mitigating",
-      "noun": "mitigation",
-      "verb": "mitigate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "e2fc97de-54cf-47dd-97fb-eefc1255bc3e",
     "word": "Greasy",
     "forms": {
       "adj": "greasy",
-      "noun": "grease"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "ff0b4d9e-6fca-4e81-a9f1-d1f73d18acfa",
-    "word": "Apprised\nKeep the apprised",
-    "forms": {
-      "adj": "apprised",
-      "verb": "apprise"
+      "adv": "greasily",
+      "noun": "grease",
+      "verb": "grease"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -407,15 +232,8 @@
     "word": "Moldy",
     "forms": {
       "adj": "moldy",
-      "noun": "mold"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "18a70bab-ab55-4565-9760-07189d8401fa",
-    "word": "fiddle with sth (V)",
-    "forms": {
-      "verb": "fiddle"
+      "noun": "mold",
+      "verb": "mold"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -433,6 +251,7 @@
     "word": "Sour",
     "forms": {
       "adj": "sour",
+      "adv": "sourly",
       "noun": "sourness",
       "verb": "sour"
     },
@@ -443,203 +262,29 @@
     "word": "Nauseous",
     "forms": {
       "adj": "nauseous",
-      "noun": "nausea"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "2dc8f245-282b-4b0c-a819-6a0411bcfb9d",
-    "word": "Paled [peɪld]",
-    "forms": {
-      "adj": "pale",
-      "verb": "pale"
+      "adv": "nauseously",
+      "noun": "nausea",
+      "verb": "nauseate"
     },
     "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "e443fc65-0b4c-4d6a-b263-cb0cc9b16461",
-    "word": "Flared [fleəd]",
-    "forms": {
-      "noun": "flare",
-      "verb": "flare"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "bc3d07a5-f3ef-432c-b52b-84ef20c6583f",
-    "word": "Dizzy",
-    "forms": {
-      "adj": "dizzy",
-      "noun": "dizziness",
-      "verb": "dizzy"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "baec3ac8-17ba-4d87-aafc-a1e9bcbf0d5b",
-    "word": "Compromise",
-    "forms": {
-      "noun": "compromise",
-      "verb": "compromise"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "b9605899-4f30-48f2-9616-507a510211ae",
-    "word": "Terrified",
-    "forms": {
-      "adj": "terrified",
-      "noun": "terror",
-      "verb": "terrify"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "00836b31-8646-4d88-937d-d0e76c892121",
-    "word": "Adapt",
-    "forms": {
-      "adj": "adaptable",
-      "noun": "adaptation",
-      "verb": "adapt"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "6bdd6888-14d5-4dfd-a923-63138ef0dc73",
-    "word": "Bland",
-    "forms": {
-      "adj": "bland",
-      "noun": "blandness"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "04a3de63-49b2-4a8d-81d3-c9f79d8ade5f",
-    "word": "creep (V)",
-    "forms": {
-      "adj": "creepy",
-      "noun": "creep",
-      "verb": "creep"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "66cf7f4c-ccc1-45f1-87dd-c5058273700a",
-    "word": "Capsize ",
-    "forms": {
-      "verb": "capsize"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "10aaafbb-3048-440c-8ba9-789b85fb8776",
-    "word": "pry into sth",
-    "forms": {
-      "adj": "prying",
-      "verb": "pry"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "fd3467eb-c77c-4847-b369-3a184e26ee59",
-    "word": "Conjugate [kənˈdʒuːɡeɪt]",
-    "forms": {
-      "noun": "conjugation",
-      "verb": "conjugate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "e6d5f345-39b8-46b7-bc36-47e90f5c8fe9",
-    "word": "Grumpy",
-    "forms": {
-      "adj": "grumpy",
-      "noun": "grumpiness"
-    },
-    "reason": "Sparse Data (<3 forms)"
   },
   {
     "id": "85d17561-a433-40ae-8059-20c516621857",
     "word": "Fussy",
     "forms": {
       "adj": "fussy",
+      "adv": "fussily",
       "noun": "fussiness",
       "verb": "fuss"
     },
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "6accd548-c30e-4212-adbf-978ad09cd58c",
-    "word": "Praise [preɪz]",
-    "forms": {
-      "adj": "praiseworthy",
-      "noun": "praise",
-      "verb": "praise"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "deafd570-5402-4673-be56-0e1fdf06c8fa",
-    "word": "Slippery",
-    "forms": {
-      "adj": "slippery",
-      "noun": "slipperiness",
-      "verb": "slip"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "7f28775b-7e7a-4acb-ae11-881b70e2bb56",
-    "word": "stroll (V)",
-    "forms": {
-      "noun": "stroll",
-      "verb": "stroll"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "010590f1-8c69-41e9-b6e9-faf44b520ca0",
-    "word": "limp (V)",
-    "forms": {
-      "adj": "limp",
-      "noun": "limp",
-      "verb": "limp"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "7f09e845-bd24-449a-b5a1-8b89d4691e08",
-    "word": "allegedly",
-    "forms": {
-      "adj": "alleged",
-      "adv": "allegedly",
-      "verb": "allege"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "7bd5019f-62b8-4059-915f-b2c72f1ac82c",
-    "word": "Stingy",
-    "forms": {
-      "adj": "stingy",
-      "noun": "stinginess"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "98735591-325c-41ab-8435-4d6f9e567db5",
-    "word": "Vacillate",
-    "forms": {
-      "noun": "vacillation",
-      "verb": "vacillate"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
     "id": "3fb77456-2fc3-475f-9b23-affa24727a71",
     "word": "Numb",
     "forms": {
       "adj": "numb",
+      "adv": "numbly",
       "noun": "numbness",
       "verb": "numb"
     },
@@ -651,92 +296,19 @@
     "forms": {
       "adj": "hollow",
       "adv": "hollowly",
-      "noun": "hollow",
+      "noun": "hollowness",
       "verb": "hollow"
     },
     "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "f35a7c03-aeb3-45ed-a2c5-18a5f6e22772",
-    "word": "Tidy",
-    "forms": {
-      "adj": "tidy",
-      "noun": "tidiness",
-      "verb": "tidy"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "939de1d9-bb1a-4920-9ede-16454806d24d",
-    "word": "Conferred [kənˈfɜːrd]",
-    "forms": {
-      "noun": "conference",
-      "verb": "confer"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "70721e9d-d48c-4e3b-b94c-fc48a10392ad",
-    "word": "Cramped",
-    "forms": {
-      "adj": "cramped",
-      "verb": "cramp"
-    },
-    "reason": "Sparse Data (<3 forms)"
   },
   {
     "id": "4c6c0890-1d33-4214-a20b-4e4b0fa92934",
     "word": "Itchy",
     "forms": {
       "adj": "itchy",
+      "adv": "itchily",
       "noun": "itch",
       "verb": "itch"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "ba615440-63f7-4341-82c3-d97e8e4e42ed",
-    "word": "Swollen",
-    "forms": {
-      "adj": "swollen",
-      "verb": "swell"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "d37b13af-3ba7-4b72-9f42-dc5d868bda8e",
-    "word": "Bruised",
-    "forms": {
-      "adj": "bruised",
-      "noun": "bruise",
-      "verb": "bruise"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "d2c46c4f-d2a3-43aa-8b34-c9a983ea846f",
-    "word": "chase sb/sth (V)",
-    "forms": {
-      "noun": "chase",
-      "verb": "chase"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "f1f0190c-7b43-41b4-bfc8-64bbf89cef51",
-    "word": "Crispy",
-    "forms": {
-      "adj": "crispy",
-      "noun": "crispiness"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "3af5ece5-f3b0-4093-b359-4aef894173bc",
-    "word": "dash (V)",
-    "forms": {
-      "noun": "dash",
-      "verb": "dash"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -748,33 +320,6 @@
       "verb": "nap"
     },
     "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "646e5d7d-da17-46e9-a93e-a0cf5f817a39",
-    "word": "Riffling [ˈrɪf.lɪŋ]",
-    "forms": {
-      "verb": "riffle"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "55f44f82-1716-4b7d-b184-d4c0210726e5",
-    "word": "finalize (V)",
-    "forms": {
-      "adj": "final",
-      "noun": "finalization",
-      "verb": "finalize"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "05f862c5-a95b-43e6-b98e-b43fed422d18",
-    "word": "Waterproof",
-    "forms": {
-      "adj": "waterproof",
-      "verb": "waterproof"
-    },
-    "reason": "Sparse Data (<3 forms)"
   },
   {
     "id": "c9f3e12a-e0c2-4e4e-a0fe-fe0c599ad350",
@@ -798,25 +343,6 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "5baf4080-2192-45c6-a427-5e0b3a540656",
-    "word": "march (V)",
-    "forms": {
-      "noun": "march",
-      "verb": "march"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "d62128c2-1488-460f-a71a-dce9ec4c4416",
-    "word": "Adjustable",
-    "forms": {
-      "adj": "adjustable",
-      "noun": "adjustment",
-      "verb": "adjust"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "45f4e373-ee8d-4b0a-8a2a-33946c044db6",
     "word": "Portable",
     "forms": {
@@ -826,38 +352,22 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "81ecbcdf-ffca-47e7-8c34-416ab8b1954a",
-    "word": "handling (N)",
-    "forms": {
-      "noun": "handling",
-      "verb": "handle"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "4c9fece7-b00e-410c-81cf-fbae1f3ee573",
-    "word": "gallop (V)",
-    "forms": {
-      "noun": "gallop",
-      "verb": "gallop"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "2012d70a-ee56-4c1e-9f1a-201de07ab690",
-    "word": "charge (V)",
-    "forms": {
-      "noun": "charge",
-      "verb": "charge"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "e5d51ad9-5d19-4b9a-91cf-2c86312c637a",
     "word": "Apprentice [əˈprɛn.tɪs]",
     "forms": {
-      "noun": "apprenticeship",
-      "verb": "apprentice"
+      "noun": "apprentice",
+      "verb": "apprentice",
+      "noun2": "apprenticeship"
+    },
+    "reason": "Verb missing Past/PP"
+  },
+  {
+    "id": "d62128c2-1488-460f-a71a-dce9ec4c4416",
+    "word": "Adjustable",
+    "forms": {
+      "adj": "adjustable",
+      "noun": "adjustability",
+      "verb": "adjust"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -866,25 +376,6 @@
     "word": "stroll up [stroʊl ʌp]",
     "forms": {
       "verb": "stroll"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "8818b0a5-d821-43c1-99ae-910a153996db",
-    "word": "excel (V)",
-    "forms": {
-      "adj": "excellent",
-      "noun": "excellence",
-      "verb": "excel"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "c2fff742-7cfd-4d24-845d-bdd1079017ad",
-    "word": "Breed [briːd]",
-    "forms": {
-      "noun": "breed",
-      "verb": "breed"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -909,54 +400,6 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "1a59be12-dca3-460f-a461-bc5ae863d8dd",
-    "word": "Loose",
-    "forms": {
-      "adj": "loose",
-      "adv": "loosely",
-      "noun": "looseness",
-      "verb": "loosen"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "83a427b1-0362-48ef-94da-3aa2ba3d9c72",
-    "word": "Mandatory",
-    "forms": {
-      "adj": "mandatory",
-      "noun": "mandate"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "bb75a76f-5eeb-4f63-8983-bb80edc84aab",
-    "word": "indicate sth",
-    "forms": {
-      "adj": "indicative",
-      "noun": "indication",
-      "verb": "indicate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "69fa2bce-80fc-439d-8d5e-57e2885af3ba",
-    "word": "gaze at sth (V)",
-    "forms": {
-      "noun": "gaze",
-      "verb": "gaze"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "500dec4a-f617-48f6-9eb2-a3ac9854253a",
-    "word": "Toxic",
-    "forms": {
-      "adj": "toxic",
-      "noun": "toxicity"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
     "id": "d4506e84-ba87-4056-8fe4-a511033bb1a4",
     "word": "Flammable",
     "forms": {
@@ -975,40 +418,35 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "b27c874e-5290-474d-ab7b-9391ce1b4130",
-    "word": "Reinforce",
+    "id": "06fda1c8-a43d-422f-aa54-a703f6d022f1",
+    "word": "Optional",
     "forms": {
-      "noun": "reinforcement",
-      "verb": "reinforce"
+      "adj": "optional",
+      "adv": "optionally",
+      "noun": "option",
+      "verb": "opt"
     },
-    "reason": "Sparse Data (<3 forms)"
+    "reason": "Verb missing Past/PP"
   },
   {
-    "id": "168e3417-1a8c-4a9d-bc24-8c0355db0cb3",
-    "word": "Scapegoat",
+    "id": "14a10095-d5dc-43ac-a637-efab90d6f953",
+    "word": "Offensive",
     "forms": {
-      "noun": "scapegoat",
-      "verb": "scapegoat"
+      "adj": "offensive",
+      "adv": "offensively",
+      "noun": "offense",
+      "verb": "offend"
     },
-    "reason": "Sparse Data (<3 forms)"
+    "reason": "Verb missing Past/PP"
   },
   {
-    "id": "1ed7c94a-1f56-4ca9-8d4d-c7765e7e1bc0",
-    "word": "disorder",
+    "id": "9aceb02d-6843-4d60-b8f2-351d5a4351a6",
+    "word": "mouth water (PHR)",
     "forms": {
-      "adj": "disorderly",
-      "noun": "disorder"
+      "adj": "mouth-watering",
+      "verb": "mouth water"
     },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "2a86b598-e555-4093-8173-21efab244d88",
-    "word": "Gradual",
-    "forms": {
-      "adj": "gradual",
-      "adv": "gradually"
-    },
-    "reason": "Sparse Data (<3 forms)"
+    "reason": "Verb missing Past/PP"
   },
   {
     "id": "9b234aa9-fab7-4e48-a486-9d23732b8434",
@@ -1028,14 +466,6 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "6b6d008b-553f-4f35-abbd-269ce718cac1",
-    "word": "Cut someone off",
-    "forms": {
-      "verb": "cut off"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "582d9499-af69-4dec-9eed-e09a69f06a6f",
     "word": "Nepotism",
     "forms": {
@@ -1043,24 +473,6 @@
       "noun": "nepotism"
     },
     "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "af4e7f89-43e5-47cf-9815-4a7b7b55ec97",
-    "word": "Unconventional",
-    "forms": {
-      "adj": "unconventional",
-      "adv": "unconventionally"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "db5473eb-8b19-4b13-bbae-27ea8250bdab",
-    "word": "Get flustered",
-    "forms": {
-      "adj": "flustered",
-      "verb": "fluster"
-    },
-    "reason": "Verb missing Past/PP"
   },
   {
     "id": "f4cb63ff-e030-46c5-9dc9-c44a826fa6dd",
@@ -1072,79 +484,13 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "efd10ec6-8427-4299-9be2-95d0e797016e",
-    "word": "Splurge",
+    "id": "a6d58083-921f-42fd-8ded-e0bdf8359b38",
+    "word": "Conventional",
     "forms": {
-      "noun": "splurge",
-      "verb": "splurge"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "965d4c9d-cda0-491f-9a0e-a252d7b8c9b9",
-    "word": "Deliberate",
-    "forms": {
-      "adj": "deliberate",
-      "adv": "deliberately",
-      "noun": "deliberation",
-      "verb": "deliberate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "bef24a5b-5aa9-4d69-b69f-6a8b81eb6309",
-    "word": "Abstract",
-    "forms": {
-      "adj": "abstract",
-      "adv": "abstractly",
-      "noun": "abstraction",
-      "verb": "abstract"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "27439e78-fbce-4ba7-b93d-bbb853dd64b2",
-    "word": "Venture /ˈven.tʃər/ VEN-CHUR",
-    "forms": {
-      "noun": "venture",
-      "verb": "venture"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "7c3fea71-f16b-4f7c-afbd-6ab28073355a",
-    "word": "confide in sb",
-    "forms": {
-      "noun": "confidence",
-      "verb": "confide"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "18c83666-4954-4979-a232-4d6450f61f7e",
-    "word": "stiff (ADJ)",
-    "forms": {
-      "adj": "stiff",
-      "adv": "stiffly",
-      "noun": "stiffness",
-      "verb": "stiffen"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "3c22cfd9-df6a-466c-8db9-28da70e0fade",
-    "word": "raked /reɪkt/ RAYKT",
-    "forms": {
-      "noun": "rake",
-      "verb": "rake"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "2f7866ef-6b58-4eb8-8803-2aed8255cdd3",
-    "word": "Brown-nosing / Suck up",
-    "forms": {
-      "verb": "brown-nose"
+      "adj": "conventional",
+      "adv": "conventionally",
+      "noun": "convention",
+      "verb": "conventionalize"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -1157,102 +503,10 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "ac6fc36e-1828-45f0-9d5a-5e137e6e622d",
-    "word": "devise sth (V)",
+    "id": "2f7866ef-6b58-4eb8-8803-2aed8255cdd3",
+    "word": "Brown-nosing / Suck up",
     "forms": {
-      "noun": "device",
-      "verb": "devise"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "df888d4f-7d82-4850-a203-45142f565d4a",
-    "word": "bend (V)",
-    "forms": {
-      "adj": "bent",
-      "noun": "bend",
-      "verb": "bend"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "f232bb54-31f5-47c6-b338-93ff68201e43",
-    "word": "disclose sth (to sb) (SYN reveal sth)",
-    "forms": {
-      "noun": "disclosure",
-      "verb": "disclose"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "7a4fb4e0-cec3-4124-aecd-8b2bdfa70e79",
-    "word": "Weasel out",
-    "forms": {
-      "verb": "weasel"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "c64f69ad-b315-477f-9970-f719e3646028",
-    "word": "burglar /ˈbɜːr.ɡlər/",
-    "forms": {
-      "noun": "burglary",
-      "verb": "burgle"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "a79e1373-9e91-4097-8fdf-3a11962274d3",
-    "word": "loosen up (PHR V)",
-    "forms": {
-      "verb": "loosen"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "8073d6db-d67c-485d-ae61-ec6a2b0de503",
-    "word": "Gossip",
-    "forms": {
-      "noun": "gossip",
-      "verb": "gossip"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "35e433e4-7847-4ab7-a714-d56e0325c6dc",
-    "word": "endowed /ɪnˈdaʊd/",
-    "forms": {
-      "adj": "endowed",
-      "noun": "endowment",
-      "verb": "endow"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "eb58f796-af2d-481b-b224-d6343e3c00e9",
-    "word": "brimmed /brɪmd/",
-    "forms": {
-      "noun": "brim",
-      "verb": "brim"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "15f6b397-4fc6-46fe-9f53-02f37aff831e",
-    "word": "dedication (N)",
-    "forms": {
-      "adj": "dedicated",
-      "noun": "dedication",
-      "verb": "dedicate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "fb9c8e3f-c431-48fb-9993-1f20078d74b8",
-    "word": "Cover up / Gloss over",
-    "forms": {
-      "noun": "cover-up",
-      "verb": "cover up"
+      "verb": "brown-nose"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -1265,40 +519,11 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "775d51a5-a07d-4b03-a02d-2a12788bc041",
-    "word": "eavesdrop /ˈiːvz.drɒp/",
+    "id": "fb9c8e3f-c431-48fb-9993-1f20078d74b8",
+    "word": "Cover up / Gloss over",
     "forms": {
-      "noun": "eavesdropper",
-      "verb": "eavesdrop"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "1a9cc6cb-ffd1-4383-8590-1e8d69cc9cf2",
-    "word": "recurrent (ADJ)",
-    "forms": {
-      "adj": "recurrent",
-      "adv": "recurrently",
-      "noun": "recurrence",
-      "verb": "recur"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "81eaa1e5-ef5a-43b7-a771-d3503300cf97",
-    "word": "Word: Scowling [ˈskaʊ.lɪŋ]",
-    "forms": {
-      "noun": "scowl",
-      "verb": "scowl"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "b959384b-fb73-41d0-a352-322319f4d71a",
-    "word": "Word: Heralds [ˈher.əldz]",
-    "forms": {
-      "noun": "herald",
-      "verb": "herald"
+      "noun": "cover-up",
+      "verb": "cover up"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -1314,273 +539,10 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "352e3f53-553a-45b0-9dfd-ec8f84c4b48c",
-    "word": "sprint (V)",
+    "id": "c6f8ab32-095e-4a9b-b56f-68fb22c149c2",
+    "word": "be into sth (INF)",
     "forms": {
-      "noun": "sprint",
-      "verb": "sprint"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "eed681c4-b804-4450-a68a-18de73d2cf4e",
-    "word": "Word: flushed [flʌʃt]",
-    "forms": {
-      "adj": "flushed",
-      "noun": "flush",
-      "verb": "flush"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "df498917-7971-4f20-8929-c3935b07b303",
-    "word": "subdued; /səbˈduːd/",
-    "forms": {
-      "adj": "subdued",
-      "verb": "subdue"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "a985249c-adc7-4817-9e57-37e203eddf20",
-    "word": "view (v, FML)",
-    "forms": {
-      "noun": "view",
-      "verb": "view"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "015d7041-8e09-45e6-a65c-a5f7bc031843",
-    "word": "narrator",
-    "forms": {
-      "noun": "narration",
-      "verb": "narrate"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "bf928ac5-c531-4d4a-9f03-a580080a511a",
-    "word": "rattle (V)",
-    "forms": {
-      "adj": "rattled",
-      "noun": "rattle",
-      "verb": "rattle"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "06f7bc57-6860-414f-956d-9eca70880fae",
-    "word": "rumble (N)",
-    "forms": {
-      "noun": "rumble",
-      "verb": "rumble"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "ef18f91d-35a5-4ba4-912a-5effc2c6d2d3",
-    "word": "rustle (V)",
-    "forms": {
-      "adj": "rustling",
-      "noun": "rustle",
-      "verb": "rustle"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "dcb6d3ac-087c-4072-bd70-09cd8070b04c",
-    "word": "presentation",
-    "forms": {
-      "adj": "representational",
-      "noun": "presentation",
-      "verb": "present"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "4ac7f231-2b11-49ff-90f2-b371b053c180",
-    "word": "splash on/onto sth (V)",
-    "forms": {
-      "adj": "splashy",
-      "noun": "splash",
-      "verb": "splash"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "d6cabff6-9f0a-4b96-884b-688a9ef744fb",
-    "word": "impact (on sth)",
-    "forms": {
-      "noun": "impact",
-      "verb": "impact"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "2fc00d34-b248-475d-b836-69b7dfff2f97",
-    "word": "Word: Ruefully [ˈruː.fəl.i]",
-    "forms": {
-      "adj": "rueful",
-      "adv": "ruefully",
-      "noun": "ruefulness",
-      "verb": "rue"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "22e1d901-1850-409c-9076-7f95a2a74868",
-    "word": "stir-fry",
-    "forms": {
-      "noun": "stir-fry",
-      "verb": "stir-fry"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "43ee0dfb-21a9-4a12-943b-4a56955aaa4d",
-    "word": "Implications, /ˌɪmplɪˈkeɪʃənz/",
-    "forms": {
-      "adj": "implicit",
-      "noun": "implication",
-      "verb": "imply"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "1cf0e89c-2557-472a-bfc2-53d036a4027f",
-    "word": "beep (V)",
-    "forms": {
-      "noun": "beep",
-      "verb": "beep"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "b71fb0ef-1b75-48ef-8208-08bd25f9ecd5",
-    "word": "screech (N)",
-    "forms": {
-      "adj": "screeching",
-      "noun": "screech",
-      "verb": "screech"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "eb22f2de-7fb7-455f-ae8a-98dffa9fdd39",
-    "word": "slam sth (shut) (V)",
-    "forms": {
-      "noun": "slam",
-      "verb": "slam"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "bde68238-34c1-4083-b68e-fdfac31f9017",
-    "word": "squelch (V)",
-    "forms": {
-      "noun": "squelch",
-      "verb": "squelch"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "8ad15974-14f8-453e-8a7f-4bb819dd6ee1",
-    "word": "Sputtered, /ˈspʌtərd/",
-    "forms": {
-      "noun": "sputter",
-      "verb": "sputter"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "2eb04285-80d1-48a5-9b43-8d74ff901e2d",
-    "word": "Crested [ˈkrɛs.tɪd]",
-    "forms": {
-      "noun": "crest",
-      "verb": "crest"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "9f839aa5-f1f7-43a8-8b24-e9f4996393c3",
-    "word": "creak (V)",
-    "forms": {
-      "adj": "creaky",
-      "noun": "creak",
-      "verb": "creak"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "3ff93036-1e67-4662-938c-6b984e6901bb",
-    "word": "bark (N/V)",
-    "forms": {
-      "noun": "bark",
-      "verb": "bark"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "77ad4f28-c958-49b3-9bda-ddf62d83dab0",
-    "word": "Welding",
-    "forms": {
-      "noun": "welder",
-      "verb": "weld"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "08757d81-7b6c-4f6f-954c-0b818eba581a",
-    "word": "Julienne",
-    "forms": {
-      "adj": "julienne",
-      "verb": "julienne"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "bc27f1e3-4485-4ce9-8da1-951bc5cc92b4",
-    "word": "restrained, /rɪˈstreɪnd/",
-    "forms": {
-      "adj": "restrained",
-      "noun": "restraint",
-      "verb": "restrain"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "4b6d3ceb-e292-445f-855b-fa951e7ae087",
-    "word": "prospect [ˈprɒs.pekt]",
-    "forms": {
-      "adj": "prospective",
-      "noun": "prospect",
-      "verb": "prospect"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "64b71898-41e9-4be9-8aa7-cd5b29fe56a7",
-    "word": "Hurtling [ˈhɜː.təl.ɪŋ]",
-    "forms": {
-      "verb": "hurtle"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "defbdfe8-5a61-465a-ab52-c2334fdfa709",
-    "word": "Going bust",
-    "forms": {
-      "verb": "go bust"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "2ac52e37-1eb4-4eaa-ac09-eb4fe1e38767",
-    "word": "nibble, /ˈnɪb.əl/",
-    "forms": {
-      "noun": "nibble",
-      "verb": "nibble"
+      "verb": "be into"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -1604,110 +566,6 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "cc61c2a0-d32a-4518-a043-18c328690ad7",
-    "word": "growl (V)",
-    "forms": {
-      "noun": "growl",
-      "verb": "growl"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "c9c5d8ef-c1bc-4b71-86dc-8410b22aec03",
-    "word": "appeal [əˈpiːl]",
-    "forms": {
-      "adj": "appealing",
-      "noun": "appeal",
-      "verb": "appeal"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "d7b6b11e-c5a6-4f53-8a3d-c64239430c6b",
-    "word": "Steering [ˈstɪərɪŋ]",
-    "forms": {
-      "noun": "steering",
-      "verb": "steer"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "71776a02-8d17-4047-be01-e421e9d5c73b",
-    "word": "buzz (V)",
-    "forms": {
-      "adj": "buzzing",
-      "noun": "buzz",
-      "verb": "buzz"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "3bcb435f-2686-4630-bfa4-009ad9b7896c",
-    "word": "curable ADJ.",
-    "forms": {
-      "adj": "curable",
-      "noun": "cure",
-      "verb": "cure"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "17e0c92f-dce6-4b92-b493-be24efc52d28",
-    "word": "howl (N/V)",
-    "forms": {
-      "adj": "howling",
-      "noun": "howl",
-      "verb": "howl"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "754f9c66-271c-4b45-8e87-219b860b9da5",
-    "word": "bring sth about",
-    "forms": {
-      "verb": "bring about"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "51484d75-23d6-4c8c-bbaa-c66c8a299ca6",
-    "word": "Juxtaposition [juhk-stuh-puh-ZISH-uhn]",
-    "forms": {
-      "noun": "juxtaposition",
-      "verb": "juxtapose"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "e28614b7-2c3c-4a86-9758-c8046f4481e9",
-    "word": "roar (N/V)",
-    "forms": {
-      "adj": "roaring",
-      "noun": "roar",
-      "verb": "roar"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "214b62d6-054a-4c5b-b9d2-4bc01a75444c",
-    "word": "squeak (V)",
-    "forms": {
-      "adj": "squeaky",
-      "noun": "squeak",
-      "verb": "squeak"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "63abbd28-95ed-4eb2-994a-d833b77ec894",
-    "word": "miscast",
-    "forms": {
-      "adj": "miscast",
-      "verb": "miscast"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
     "id": "d89a26f8-8824-4d20-b879-395a76339d7b",
     "word": "leaping into action, /ˈliː.pɪŋ ˈɪn.tuː ˈæk.ʃən/",
     "forms": {
@@ -1726,43 +584,6 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "d449399d-e1f6-4d07-ac88-03973ca55343",
-    "word": "hedge",
-    "forms": {
-      "noun": "hedge",
-      "verb": "hedge"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "03998000-29ab-4d24-ac15-2d87ef2249f0",
-    "word": "incentive [/ɪnˈsen.tɪv/]",
-    "forms": {
-      "adj": "incentivized",
-      "noun": "incentive",
-      "verb": "incentivize"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "c01143d0-3a44-4d96-9dd2-cb0f9a3ef8ad",
-    "word": "crow (V)",
-    "forms": {
-      "noun": "crow",
-      "verb": "crow"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "55843edc-da78-4f76-809f-721e9a3fe6ee",
-    "word": "crouch [kraʊtʃ]",
-    "forms": {
-      "noun": "crouch",
-      "verb": "crouch"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "d644859b-fac2-4f9d-8591-c2d09c362222",
     "word": "Cumbersome",
     "forms": {
@@ -1770,125 +591,6 @@
       "noun": "cumbersomeness"
     },
     "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "66a3497d-ddee-4865-be5b-fe869a6c6a8c",
-    "word": "Scalable",
-    "forms": {
-      "adj": "scalable",
-      "noun": "scalability",
-      "verb": "scale"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "85796349-e6ec-45bd-be9c-d55ed1889205",
-    "word": "temptation, /tɛmpˈteɪ.ʃən/",
-    "forms": {
-      "adj": "tempting",
-      "noun": "temptation",
-      "verb": "tempt"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "fdc5c308-04f2-4a75-b342-98af735c7eb9",
-    "word": "Outsourcing",
-    "forms": {
-      "noun": "outsourcing",
-      "verb": "outsource"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "70a00c25-652a-42ad-bd50-b1dc76f99edb",
-    "word": "Articulate",
-    "forms": {
-      "adj": "articulate",
-      "noun": "articulation",
-      "verb": "articulate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "8e87f3e1-4dc0-499b-bb75-7fd6ad357256",
-    "word": "apprehension [/ˌæp.rɪˈhen.ʃən/]",
-    "forms": {
-      "adj": "apprehensive",
-      "noun": "apprehension",
-      "verb": "apprehend"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "b40ed67b-b965-432a-a9ac-c27123ebcd01",
-    "word": "hoot (V)",
-    "forms": {
-      "noun": "hoot",
-      "verb": "hoot"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "801e3805-d4c7-4977-9274-1fd8e4c13b0b",
-    "word": "Shrill",
-    "forms": {
-      "adj": "shrill",
-      "adv": "shrilly",
-      "noun": "shrillness",
-      "verb": "shrill"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "ecf3a4f4-d07f-40bd-ae1b-6889631cc6dc",
-    "word": "Regret",
-    "forms": {
-      "adj": "regretful",
-      "noun": "regret",
-      "verb": "regret"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "cdfad4e8-7129-4f44-aab4-eeec75f2da17",
-    "word": "Perseverance",
-    "forms": {
-      "adj": "persevering",
-      "noun": "perseverance",
-      "verb": "persevere"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "2f5f7ad9-375e-4e34-bee5-27f8863941c1",
-    "word": "Pivotal",
-    "forms": {
-      "adj": "pivotal",
-      "noun": "pivot",
-      "verb": "pivot"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "6a10ed95-a0c2-466f-a3ba-bafbef6249d6",
-    "word": "Deafening",
-    "forms": {
-      "adj": "deafening",
-      "adv": "deafeningly",
-      "verb": "deafen"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "5591a348-3402-4e29-bc30-41846378e4f0",
-    "word": "Dazzling",
-    "forms": {
-      "adj": "dazzling",
-      "adv": "dazzlingly",
-      "verb": "dazzle"
-    },
-    "reason": "Verb missing Past/PP"
   },
   {
     "id": "8db5e7b3-ec8f-4d13-9f67-fc79d4a48c0e",
@@ -1900,61 +602,12 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "35daf9c0-02ed-4c97-8ab5-245b134b7fee",
-    "word": "Huff [hʌf]",
+    "id": "9cafaeff-d71a-4951-b650-b8c02fc05790",
+    "word": "Inquisition [ˌɪn.kwɪˈzɪʃ.ən]",
     "forms": {
-      "adj": "huffy",
-      "noun": "huff",
-      "verb": "huff"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "1aaf324c-4f3a-4811-a11b-fa38c649a6d9",
-    "word": "captivating [ˈkæp.tɪ.veɪ.tɪŋ]",
-    "forms": {
-      "adj": "captivating",
-      "noun": "captivation",
-      "verb": "captivate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "f316feca-8a6d-4577-8c94-fb1d01d40dba",
-    "word": "Enticing /ɪnˈtaɪ.sɪŋ/ EN-TY-SING",
-    "forms": {
-      "adj": "enticing",
-      "adv": "enticingly",
-      "verb": "entice"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "2f02ea1c-4d2b-415b-9c89-4079c28e3fa5",
-    "word": "Waddling [ˈwɒd.lɪŋ]",
-    "forms": {
-      "noun": "waddle",
-      "verb": "waddle"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "407adc3a-ca8e-408a-84c4-d478f1cf5a61",
-    "word": "implement sth",
-    "forms": {
-      "adj": "implementable",
-      "noun": "implementation",
-      "verb": "implement"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "df9cc182-98e1-4647-aabb-7097e6cb749c",
-    "word": "leaked",
-    "forms": {
-      "adj": "leaky",
-      "noun": "leak",
-      "verb": "leak"
+      "adj": "inquisitive",
+      "noun": "inquisition",
+      "verb": "inquire"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -1965,15 +618,6 @@
       "adj": "frowning",
       "noun": "frown",
       "verb": "frown"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "7e41bab6-49ff-43ef-88e4-2b97b16ef800",
-    "word": "Muttered [ˈmʌt.ərd]",
-    "forms": {
-      "noun": "mutter",
-      "verb": "mutter"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -2004,84 +648,12 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "708f6827-42bd-4486-90b5-043cd1e565ae",
-    "word": "Frowned [fraʊnd]",
-    "forms": {
-      "noun": "frown",
-      "verb": "frown"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "555383c4-d6a3-4733-a5aa-c0f20f508f8f",
-    "word": "flooding",
-    "forms": {
-      "noun": "flooding",
-      "verb": "flood"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "97bd39d8-ed99-4624-a28c-e3b3ffd4e7ff",
-    "word": "Conservation",
-    "forms": {
-      "noun": "conservation",
-      "verb": "conserve"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "36c51975-72be-4c90-9272-8cf54b9d3572",
-    "word": "Waning /ˈweɪ.nɪŋ/ WAY-NING",
-    "forms": {
-      "adj": "waning",
-      "verb": "wane"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "5e6d091e-858a-4301-8b48-f9f8403fae74",
-    "word": "Bomb",
-    "forms": {
-      "noun": "bomb",
-      "verb": "bomb"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "74fe2620-86c7-438f-aba7-8c98973cb7fe",
-    "word": "Flee [fliː]",
-    "forms": {
-      "noun": "flight",
-      "verb": "flee"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "2f0ddbe8-eb24-4958-86d7-fec6fab6ea11",
     "word": "Duck away /dʌk əˈweɪ/ DUK-uh-WAY",
     "forms": {
       "verb": "duck"
     },
     "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "185296a9-aaa3-458b-a419-1f56a75b9117",
-    "word": "Slung [slʌŋ]",
-    "forms": {
-      "past": "slung",
-      "verb": "sling"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "e678ed77-3efb-441d-9ee8-fcdf6a37887c",
-    "word": "assertion",
-    "forms": {
-      "noun": "assertion",
-      "verb": "assert"
-    },
-    "reason": "Sparse Data (<3 forms)"
   },
   {
     "id": "0aca1e91-ab2f-4bfe-aa8b-6c7cb9e7a7c4",
@@ -2094,222 +666,10 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "37068f6b-a5b8-40a0-a1b3-0a50b5e2c40d",
-    "word": "recede [rɪˈsiːd]",
-    "forms": {
-      "noun": "recession",
-      "verb": "recede"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "ea30c189-3f30-474d-92f9-8497468d000f",
     "word": "Scurried off [ˈskʌr.id ɒf]",
     "forms": {
       "verb": "scurry"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "871ebb8e-9b1d-4636-8c26-a767074f5163",
-    "word": "condemnation",
-    "forms": {
-      "noun": "condemnation",
-      "verb": "condemn"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "7eef7e2c-e7a2-4c4c-a5f3-ea83b99676cf",
-    "word": "Frowned [fraʊnd]",
-    "forms": {
-      "noun": "frown",
-      "verb": "frown"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "191386a3-95ab-45b4-8a13-0eadfc788aa7",
-    "word": "outlined",
-    "forms": {
-      "noun": "outline",
-      "verb": "outline"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "4747acc1-0bc4-4a67-9f57-a90432e3c9bc",
-    "word": "Enticing [ɪnˈtaɪ.sɪŋ]",
-    "forms": {
-      "adj": "enticing",
-      "adv": "enticingly",
-      "verb": "entice"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "b922958d-f9e4-4f4a-911d-5ed26367d353",
-    "word": "pool our resources",
-    "forms": {
-      "verb": "pool"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "e5431ced-6800-407f-a3f6-00a4a19d0165",
-    "word": "condone",
-    "forms": {
-      "verb": "condone"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "55df23ed-8827-42d3-846a-05dd7cdca84d",
-    "word": "Unyielding /ʌnˈjiːl.dɪŋ/ UN-YEEL-DING",
-    "forms": {
-      "adj": "unyielding",
-      "verb": "yield"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "467657aa-5ea2-4462-80ab-c31e76a521b0",
-    "word": "eradicate sth",
-    "forms": {
-      "noun": "eradication",
-      "verb": "eradicate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "0f5b1726-69ab-44c0-9e8d-2d1a0c94a999",
-    "word": "hack into sth",
-    "forms": {
-      "verb": "hack"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "4962520e-5ab8-459e-bb81-182c38fc66bb",
-    "word": "be uprooted",
-    "forms": {
-      "verb": "uproot"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "ff6639a7-7f8f-43d2-a082-32a125a4457f",
-    "word": "deteriorate",
-    "forms": {
-      "noun": "deterioration",
-      "verb": "deteriorate"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "45d4ee42-6ef9-44eb-a1a3-17a3e3e8f8d7",
-    "word": "interrogation",
-    "forms": {
-      "noun": "interrogation",
-      "verb": "interrogate"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "08a74700-4108-4829-af77-dde6f4ffb443",
-    "word": "stir [stɜːr]",
-    "forms": {
-      "noun": "stir",
-      "verb": "stir"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "12f82455-194f-4fda-9db5-4b25a6c96cd5",
-    "word": "restrict sth (to sth)",
-    "forms": {
-      "adj": "restrictive",
-      "noun": "restriction",
-      "verb": "restrict"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "e5ef57fc-6cb6-40ce-8e80-4f340311fcc7",
-    "word": "vaccine",
-    "forms": {
-      "noun": "vaccination",
-      "verb": "vaccinate"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "0aac5f73-c405-4bab-941e-e4068d4d827d",
-    "word": "Forges /fɔː.dʒɪz/ FOR-jiz",
-    "forms": {
-      "noun": "forge",
-      "verb": "forge"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "4821e6c5-de8b-405d-b778-2951bd48989e",
-    "word": "Incline [ɪnˈklaɪn]",
-    "forms": {
-      "noun": "incline",
-      "verb": "incline"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "f409d87b-b6ce-4ac5-b182-d4fc9f18aa6b",
-    "word": "portrayal",
-    "forms": {
-      "noun": "portrayal",
-      "verb": "portray"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "5286fa6b-73a2-46ee-9e32-2627fbdf0231",
-    "word": "Stride [straɪd]",
-    "forms": {
-      "noun": "stride",
-      "verb": "stride"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "39d0e725-7b36-4849-b8e3-8b22967cc65d",
-    "word": "Haul [hɔːl]",
-    "forms": {
-      "noun": "haul",
-      "verb": "haul"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "b99cb505-bd36-4b3c-a1d8-86752604619e",
-    "word": "Pounded [ˈpaʊn.dɪd]",
-    "forms": {
-      "noun": "pound",
-      "verb": "pound"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "26144646-f330-483b-876d-60e54db00da6",
-    "word": "Munched [mʌntʃt]",
-    "forms": {
-      "verb": "munch"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "f0c8d95f-765a-43a7-a73f-52eb1b753729",
-    "word": "catch sb out",
-    "forms": {
-      "verb": "catch out"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -2324,100 +684,26 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "83f725f6-5391-4838-ae13-2849ee34901f",
-    "word": "rummaging /ˈrʌm.ɪ.dʒɪŋ/",
+    "id": "fcf81480-7a04-4749-a752-0d06ff3fed5f",
+    "word": "provocative",
     "forms": {
-      "verb": "rummage"
+      "adj": "provocative",
+      "adv": "provocatively",
+      "noun": "provocation",
+      "verb": "provoke"
     },
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "52ea8ac7-e195-4d0e-ae9a-dc9ef00d7374",
-    "word": "Word: Musingly [ˈmjuː.zɪŋ.li]",
+    "id": "85e2e739-9e2c-4192-b848-a066b69bbb09",
+    "word": "defiance",
     "forms": {
-      "adv": "musingly",
-      "verb": "muse"
+      "adj": "defiant",
+      "adv": "defiantly",
+      "noun": "defiance",
+      "verb": "defy"
     },
     "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "a276aaef-8128-4449-b07a-c19049c9432b",
-    "word": "Rivals",
-    "forms": {
-      "noun": "rivalry"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "76abcebf-d45f-4261-907f-e96ab3fb6dde",
-    "word": "scrutinize",
-    "forms": {
-      "noun": "scrutiny",
-      "verb": "scrutinize"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "798c07fe-cc67-478f-962e-72957eb61328",
-    "word": "embodiment",
-    "forms": {
-      "noun": "embodiment",
-      "verb": "embody"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "b8130d06-7df9-41f3-ac23-19bfea7023e4",
-    "word": "Pondering /ˈpɒn.dər.ɪŋ/",
-    "forms": {
-      "verb": "ponder"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "60750c4f-06d5-45ef-abcf-c25dec8ef92f",
-    "word": "Grumbling, /ˈɡrʌmblɪŋ/",
-    "forms": {
-      "noun": "grumble",
-      "verb": "grumble"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "12116f8f-44d0-40ca-b637-0ee3761a1d28",
-    "word": "Punctuated /ˈpʌŋk.tʃu.eɪ.tɪd/ PUNK-CHOO-AY-TID",
-    "forms": {
-      "noun": "punctuation",
-      "verb": "punctuate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "20fff2c6-1687-4343-89e1-5632f8c07f02",
-    "word": "illumination [ɪˌluː.mɪˈneɪ.ʃən]",
-    "forms": {
-      "adj": "illuminated",
-      "noun": "illumination",
-      "verb": "illuminate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "fd3001d0-fa59-47bd-9ee8-c03029fea0e5",
-    "word": "toppling [ˈtɒp.lɪŋ]",
-    "forms": {
-      "verb": "topple"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "869b9136-6cea-40a2-b8e7-b054a4496fa9",
-    "word": "anonymity",
-    "forms": {
-      "adj": "anonymous",
-      "noun": "anonymity"
-    },
-    "reason": "Sparse Data (<3 forms)"
   },
   {
     "id": "2f2478d0-6038-4d2f-934e-3d35a0d2e4ae",
@@ -2429,101 +715,19 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "1590e105-84af-4413-b915-3ff68377bb59",
-    "word": "ambiguous",
+    "id": "869b9136-6cea-40a2-b8e7-b054a4496fa9",
+    "word": "anonymity",
     "forms": {
-      "adj": "ambiguous",
-      "noun": "ambiguity"
+      "adj": "anonymous",
+      "noun": "anonymity"
     },
     "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "c7849676-8399-495c-8370-c75647db1673",
-    "word": "scorched [skɔːrtʃt]",
-    "forms": {
-      "adj": "scorched",
-      "verb": "scorch"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "e55bdec0-99c9-4c60-99c4-49beb9291a95",
-    "word": "huddled [ˈhʌd.əld]",
-    "forms": {
-      "verb": "huddle"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "c226df1e-196b-46eb-974e-eb31bb0cbd23",
-    "word": "Wandering [ˈwɒn.dər.ɪŋ]",
-    "forms": {
-      "adj": "wandering",
-      "noun": "wanderer",
-      "verb": "wander"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "59fbc936-7779-448f-9ce5-91e98b05823d",
-    "word": "Implication [ˌɪm.plɪˈkeɪ.ʃən]",
-    "forms": {
-      "adj": "implicit",
-      "noun": "implication",
-      "verb": "imply"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "f8b75852-9e2d-4e00-9f93-ef8f259edb8c",
-    "word": "distort sth",
-    "forms": {
-      "adj": "distorted",
-      "noun": "distortion",
-      "verb": "distort"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "9dc45fd3-987d-4b2f-a8f9-b1817b69fe89",
-    "word": "gamble [ /ˈɡæm.bəl/]",
-    "forms": {
-      "noun": "gamble",
-      "verb": "gamble"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "a821d90f-53fb-4d0f-b693-db476f2ac472",
-    "word": "Chill out",
-    "forms": {
-      "verb": "chill"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "874feea2-f035-4bca-8fe8-e66502e845cf",
-    "word": "interpret sth",
-    "forms": {
-      "noun": "interpretation",
-      "verb": "interpret"
-    },
-    "reason": "Verb missing Past/PP"
   },
   {
     "id": "21f417ac-0ae8-4ef9-b694-dc1c0aca698a",
     "word": "self-explanatory",
     "forms": {
       "adv": "self-explanatorily"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "798dd82a-5f58-462f-881e-fdb03f606154",
-    "word": "precise",
-    "forms": {
-      "adv": "precisely",
-      "noun": "precision"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -2536,72 +740,19 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "656c33eb-8fa0-478b-a793-e0d886d6cc03",
-    "word": "Brace [breɪs]",
-    "forms": {
-      "noun": "brace",
-      "verb": "brace"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "18a1e871-bd6b-4964-a5c4-3bd657b85b15",
-    "word": "transparent",
-    "forms": {
-      "adv": "transparently",
-      "noun": "transparency"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
     "id": "4dd58d8f-5ece-4372-83c0-a16b5763c548",
     "word": "figurative",
     "forms": {
+      "adj": "figurative",
       "adv": "figuratively"
     },
     "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "5faf2075-5a86-4d19-854d-c95e3cbc48d1",
-    "word": "Arbitrary",
-    "forms": {
-      "adv": "arbitrarily",
-      "noun": "arbitrariness"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "e4421875-c3ef-4e0c-8976-b5d0da76de9e",
-    "word": "Align (on something)",
-    "forms": {
-      "noun": "alignment",
-      "verb": "align"
-    },
-    "reason": "Verb missing Past/PP"
   },
   {
     "id": "2cc498d5-0705-4676-8483-c927cd7e6a2f",
     "word": "Spatula",
     "forms": {
       "noun": "spatula"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "82f9e6ca-8ded-4695-9ee7-a001e564cece",
-    "word": "Hinge",
-    "forms": {
-      "noun": "hinge",
-      "verb": "hinge"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "937efe5a-beb9-4cdd-81cc-1ec826219c26",
-    "word": "Intuitively",
-    "forms": {
-      "adj": "intuitive",
-      "noun": "intuition"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -2638,83 +789,13 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "0038768e-c3c0-48ac-ae86-049ff1850a27",
-    "word": "Deprecated",
-    "forms": {
-      "adj": "deprecating",
-      "noun": "deprecation",
-      "verb": "deprecate"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "2d17be45-5540-40f0-8f84-05a99651f947",
-    "word": "Ushered [ˈʌʃ.ərd]",
-    "forms": {
-      "verb": "usher"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "6e02147d-5479-46cc-83e1-8972980331f2",
-    "word": "Spike [spaɪk]",
-    "forms": {
-      "noun": "spike",
-      "verb": "spike"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "fb970b8c-530e-47e2-aa2f-3e85e1b9d4a9",
-    "word": "Lingered [ˈlɪŋ.ɡɚd]",
-    "forms": {
-      "verb": "linger"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "f0066d95-4b96-4425-9fb4-81ebdb17956e",
-    "word": "Toiled [tɔɪld]",
-    "forms": {
-      "noun": "toil",
-      "verb": "toil"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "8242df24-6fc1-482c-85cd-b2ca74f87ae2",
-    "word": "Forestall [fɔːrˈstɔːl]",
-    "forms": {
-      "noun": "forestallment",
-      "verb": "forestall"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "1ebb14b8-0f9e-4e01-801c-0e22e0d80e50",
-    "word": "merciful/merciless",
-    "forms": {
-      "noun": "mercy"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
     "id": "80fb85b6-e4d7-4a31-9b4d-d8349cf96d84",
     "word": "literary",
     "forms": {
+      "adj": "literary",
       "noun": "literature"
     },
     "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "78852559-96aa-4fb9-946b-4dc6c1f2a32b",
-    "word": "disapproving",
-    "forms": {
-      "adv": "disapprovingly",
-      "noun": "disapproval",
-      "verb": "disapprove"
-    },
-    "reason": "Verb missing Past/PP"
   },
   {
     "id": "eccccdcc-a59f-4456-b786-077be98606d7",
@@ -2723,30 +804,12 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "54595e52-ef06-49b9-ae51-eb9da6b9bcc3",
-    "word": "Unadorned [ˌʌn.əˈdɔːrnd]",
-    "forms": {
-      "noun": "adornment",
-      "verb": "adorn"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "d5a879ea-c2ed-42d7-8fec-ab35ffca2b03",
     "word": "Jutted out [ˈdʒʌt.ɪd aʊt]",
     "forms": {
       "verb": "jut"
     },
     "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "cd21331f-1290-48e6-abe8-15343c5fb26f",
-    "word": "discharged",
-    "forms": {
-      "noun": "discharge",
-      "verb": "discharge"
-    },
-    "reason": "Sparse Data (<3 forms)"
   },
   {
     "id": "4ff055b1-f5f3-4091-8be6-ecf97560fbb0",
@@ -2766,38 +829,10 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "ba86c95d-f666-4e38-a703-2ec61a246885",
-    "word": "tainted [ˈteɪn.tɪd]",
-    "forms": {
-      "noun": "taint",
-      "verb": "taint"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "27fbfb66-937d-4921-8a12-6bd92b33fec0",
     "word": "To waste money, time, or resources in a careless or reckless way. | Squander [ˈskwɒn.dər]",
     "forms": {
       "verb": "squander"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "e94e8aea-206e-4080-9294-de63e2086ddb",
-    "word": "Word: Con [kɒn/kɑːn]",
-    "forms": {
-      "noun": "con",
-      "verb": "con"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "93ffed31-547d-4294-831d-7b8f52c6b6c5",
-    "word": "Intrigued, /ɪnˈtriːɡd/",
-    "forms": {
-      "adj": "intriguing",
-      "noun": "intrigue",
-      "verb": "intrigue"
     },
     "reason": "Verb missing Past/PP"
   },
@@ -2807,25 +842,6 @@
     "forms": {
       "adv": "resiliently",
       "noun": "resilience"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "48716fef-9486-4fc6-b1d8-25bd16d85b22",
-    "word": "Evocative",
-    "forms": {
-      "adj": "evocative",
-      "noun": "evocation",
-      "verb": "evoke"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "76ff569d-e5f5-40e9-be4a-9378b0d9d087",
-    "word": "Contemplate",
-    "forms": {
-      "adj": "contemplative",
-      "noun": "contemplation"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -2847,63 +863,19 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "3fd64c4a-e627-4652-876e-9922d8605d83",
-    "word": "insulting",
+    "id": "ac7f9d49-5cf8-4338-a01e-c9ae81b710bf",
+    "word": "straightforward",
     "forms": {
-      "noun": "insult",
-      "verb": "insult"
+      "adj": "straightforward",
+      "noun": "straightforwardness"
     },
     "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "0597a9d4-79b5-4e8f-bb60-f3a01429f444",
-    "word": "depicted",
-    "forms": {
-      "noun": "depiction",
-      "verb": "depict"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "1bfd685e-b8f4-4501-be8b-a87a1cb23aab",
-    "word": "endows (with)",
-    "forms": {
-      "noun": "endowment",
-      "verb": "endow"
-    },
-    "reason": "Verb missing Past/PP"
   },
   {
     "id": "a2933d11-b361-4f9c-95ee-d2f3c1d2dadc",
     "word": "slang",
     "forms": {
       "noun": "slang"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "7a27f517-82b8-4b85-8840-6ec8abab436a",
-    "word": "Tedious",
-    "forms": {
-      "adv": "tediously",
-      "noun": "tedium"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "ac7f9d49-5cf8-4338-a01e-c9ae81b710bf",
-    "word": "straightforward",
-    "forms": {
-      "noun": "straightforwardness"
-    },
-    "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "50aa84ce-700d-45c7-bf9b-0a5430b04581",
-    "word": "crawl",
-    "forms": {
-      "noun": "crawl",
-      "verb": "crawl"
     },
     "reason": "Sparse Data (<3 forms)"
   },
@@ -2917,38 +889,12 @@
     "reason": "Verb missing Past/PP"
   },
   {
-    "id": "18a4e7ab-c88a-4e94-899d-7f27700e031a",
-    "word": "You deserve it",
-    "forms": {
-      "verb": "deserve"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
-    "id": "b02693ad-e91a-4db5-910d-d02fa12a1bf0",
-    "word": "Institutionalised ",
-    "forms": {
-      "noun": "institutionalisation",
-      "verb": "institutionalise"
-    },
-    "reason": "Verb missing Past/PP"
-  },
-  {
     "id": "2457991f-cfcc-4f98-a2fe-23aa47035fb8",
     "word": "passer-by",
     "forms": {
       "noun": "passer-by"
     },
     "reason": "Sparse Data (<3 forms)"
-  },
-  {
-    "id": "841cf609-1526-49b2-b876-5c36033c7ab9",
-    "word": "recuperation N",
-    "forms": {
-      "noun": "recuperation",
-      "verb": "recuperate"
-    },
-    "reason": "Verb missing Past/PP"
   },
   {
     "id": "05133aa7-2da6-4442-b673-64a955571a66",
@@ -2991,12 +937,29 @@
     "reason": "Sparse Data (<3 forms)"
   },
   {
-    "id": "31d6c13b-8433-49b5-af7e-06701af47a37",
-    "word": "defy sth/sb",
+    "id": "363aabef-3861-421e-8f66-00be59242c1b",
+    "word": "verify, verification",
     "forms": {
-      "noun": "defiance",
-      "verb": "defy"
+      "noun": "verification",
+      "verb": "verify"
     },
     "reason": "Verb missing Past/PP"
+  },
+  {
+    "id": "c80344e1-e804-4633-bb41-c388bf7b8ae2",
+    "word": "scrutinize, scrutiny",
+    "forms": {
+      "noun": "scrutiny",
+      "verb": "scrutinize"
+    },
+    "reason": "Verb missing Past/PP"
+  },
+  {
+    "id": "fba9d777-3cfc-474e-8c2e-7a3d57928dbe",
+    "word": "facet",
+    "forms": {
+      "noun": "facet"
+    },
+    "reason": "Sparse Data (<3 forms)"
   }
 ]

@@ -80,7 +80,9 @@ export default function Dashboard({ cards, onStartStudy, onAddCard, onOpenBookMo
                 border: toReview === 0 ? '1px solid rgba(255,255,255,0.1)' : 'none'
             }}
           >
-              {toReview > 0 ? `Study ${toReview} Cards` : (newCards > 0 ? "Learn New Cards" : "All Done!")}
+              {toReview > 0 
+                  ? `Study ${Math.min(toReview, 50)} / ${toReview} Cards` 
+                  : (newCards > 0 ? "Learn New Cards" : "All Done!")}
           </button>
 
           {/* Settings Row */}

@@ -91,9 +91,9 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
         transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
         style={{
           width: '90vw',
-          maxWidth: '340px',
-          height: '65vh',
-          maxHeight: '520px',
+          maxWidth: '400px', // Increased from 340px
+          height: '70vh', // Increased from 65vh
+          maxHeight: '650px', // Increased from 520px
           position: 'relative',
           transformStyle: 'preserve-3d',
         }}
@@ -155,7 +155,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             display: 'flex',
             flexDirection: 'column',
             padding: '32px',
-            paddingBottom: '100px', // Extra padding for footer buttons
+            paddingBottom: '120px', // Increased from 100px for safety
             boxSizing: 'border-box',
             border: '1px solid rgba(255,255,255,0.08)',
             overflowY: 'auto'
