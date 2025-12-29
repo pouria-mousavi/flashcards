@@ -190,13 +190,14 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
           position: 'fixed',
           bottom: 0,
           left: 0,
-          width: '100%',
+          right: 0,
           padding: '20px',
           paddingBottom: 'max(20px, env(safe-area-inset-bottom))',
           background: 'linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.8) 80%, transparent)',
           zIndex: 20,
           display: 'flex',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          boxSizing: 'border-box'
       }}>
         <div style={{ width: '100%', maxWidth: '500px', display: 'flex', gap: '8px' }}>
             {!isFlipped ? (
