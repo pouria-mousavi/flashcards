@@ -35,54 +35,65 @@ export default function AddCard({ onAdd, onCancel }: Props) {
 
       if (words.length === 0) return;
 
-      const prompt = `
-      Analyze the following English words/phrases: ${JSON.stringify(words)}.
-      For EACH word, generate a flashcard for a Persian learner.
-      
-      Output strictly a VALID JSON ARRAY of objects. Each object must have:
-      - front: The natural, native Persian translation.
-      - back: The English word/phrase (standardized).
-      - pronunciation: English pronunciation/IPA (e.g., "/ˈdʒɛnɪsɪs/").
-      - tone: "Formal", "Informal", "Slang", or "Neutral".
-      - synonyms: Array of strings (Persian synonyms).
-      - word_forms: Object with keys like "noun", "verb", "adj", "adv", "past", "pp" (if applicable).
-      - examples: Array of strings. "Persian Sentence (English Translation)".
+      // Reset
+      setGeneratedCards([]);
 
-      RETURN ONLY THE JSON ARRAY. NO MARKDOWN.
-      `;
+      // Process in chunks of 4 to avoid token limits (4 * ~500 tokens approx 2000, safe within 4096)
+      const CHUNK_SIZE = 4;
+      for (let i = 0; i < words.length; i += CHUNK_SIZE) {
+          const chunk = words.slice(i, i + CHUNK_SIZE);
+          
+          try {
+              const prompt = `
+              Analyze the following English words/phrases: ${JSON.stringify(chunk)}.
+              For EACH word, generate a flashcard for a Persian learner.
+              
+              Output strictly a VALID JSON ARRAY of objects. Each object must have:
+              - front: The natural, native Persian translation.
+              - back: The English word/phrase (standardized).
+              - pronunciation: English pronunciation/IPA (e.g., "/ˈdʒɛnɪsɪs/").
+              - tone: "Formal", "Informal", "Slang", or "Neutral".
+              - synonyms: Array of strings (Persian synonyms).
+              - word_forms: Object with keys like "noun", "verb", "adj", "adv", "past", "pp" (if applicable).
+              - examples: Array of strings. "Persian Sentence (English Translation)".
 
-      const msg = await anthropic.messages.create({
-        model: MODEL,
-        max_tokens: 4096, // Increased for batch
-        messages: [{ role: "user", content: prompt }]
-      });
+              RETURN ONLY THE JSON ARRAY. NO MARKDOWN.
+              `;
 
-      const content = (msg.content[0] as any).text;
-      const cleanJson = content.replace(/```json/g, '').replace(/```/g, '').trim();
-      const result = JSON.parse(cleanJson);
-      
-      // Ensure array
-      const cards = Array.isArray(result) ? result : [result];
+              const msg = await anthropic.messages.create({
+                model: MODEL,
+                max_tokens: 4096, 
+                messages: [{ role: "user", content: prompt }]
+              });
 
-      const processed = cards.map((json: any) => ({
-        front: json.front,
-        back: json.back,
-        pronunciation: json.pronunciation,
-        tone: json.tone,
-        synonyms: Array.isArray(json.synonyms) ? json.synonyms.join(', ') : json.synonyms, // Flatten for display/storage if needed, or keep array. 
-        // Note: App expects synonyms string in some places, array in others? 
-        // Based on previous code, we cast to string join.
-        // Actually, let's keep it consistent with previous fix:
-        // previous fix: synonyms: Array.isArray(json.synonyms) ? json.synonyms.join(', ') : json.synonyms
-        word_forms: json.word_forms,
-        examples: json.examples
-      }));
+              const content = (msg.content[0] as any).text;
+              const cleanJson = content.replace(/```json/g, '').replace(/```/g, '').trim();
+              const result = JSON.parse(cleanJson);
+              
+              const cards = Array.isArray(result) ? result : [result];
 
-      setGeneratedCards(processed);
+              const processed = cards.map((json: any) => ({
+                front: json.front,
+                back: json.back,
+                pronunciation: json.pronunciation,
+                tone: json.tone,
+                synonyms: Array.isArray(json.synonyms) ? json.synonyms.join(', ') : json.synonyms,
+                word_forms: json.word_forms,
+                examples: json.examples
+              }));
+
+              setGeneratedCards(prev => [...prev, ...processed]);
+
+          } catch (chunkError: any) {
+              console.error("Chunk failed", chunkError);
+              setError(prev => (prev ? prev + "\n" : "") + `Failed to generate specific words: ${chunk.join(", ")}. Reason: ${chunkError.message}`);
+              // Continue to next chunk
+          }
+      }
 
     } catch (err: any) {
       console.error(err);
-      setError("AI Generation failed. " + (err.message || ''));
+      setError("Critical Error: " + (err.message || ''));
     } finally {
       setLoading(false);
     }
