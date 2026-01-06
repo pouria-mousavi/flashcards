@@ -5,10 +5,9 @@ interface Props {
   cards: Flashcard[];
   onStartStudy: () => void;
   onAddCard: () => void;
-  onOpenBookMode: () => void;
 }
 
-export default function Dashboard({ cards, onStartStudy, onAddCard, onOpenBookMode }: Props) {
+export default function Dashboard({ cards, onStartStudy, onAddCard }: Props) {
   // Compute Stats
   // const totalCards = cards.length;
   let newCards = 0;
@@ -103,25 +102,7 @@ export default function Dashboard({ cards, onStartStudy, onAddCard, onOpenBookMo
             </button>
           </div>
 
-          <button 
-             onClick={onOpenBookMode}
-             style={{
-                 padding: '16px',
-                 fontSize: '1rem',
-                 background: 'linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%)',
-                 color: '#fff',
-                 fontWeight: 'bold',
-                 borderRadius: '24px',
-                 border: 'none',
-                 boxShadow: '0 8px 20px rgba(59, 130, 246, 0.3)',
-                 display: 'flex',
-                 alignItems: 'center',
-                 justifyContent: 'center',
-                 gap: '8px'
-             }}
-          >
-              Book Mode 📖
-          </button>
+
       </div>
 
     </div>

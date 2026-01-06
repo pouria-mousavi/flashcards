@@ -6,9 +6,8 @@ import type { Flashcard } from './utils/sm2';
 import StudySession from './components/StudySession';
 import Dashboard from './components/Dashboard';
 import AddCard from './components/AddCard';
-import BookMode from './components/BookMode';
 
-type View = 'dashboard' | 'study' | 'add' | 'book';
+type View = 'dashboard' | 'study' | 'add';
 
 function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
@@ -146,16 +145,20 @@ function App() {
   // Helpers
   // ...
 
-  const handleAddCard = (front: string, back: string) => {
-      // ... (Keep existing)
+  const handleAddCard = (partialCard: Partial<Flashcard>) => {
       const newCard: Flashcard = {
           id: crypto.randomUUID(),
-          front,
-          back,
+          front: partialCard.front || '',
+          back: partialCard.back || '',
           state: 'NEW',
           nextReviewDate: Date.now(),
           interval: 0,
-          easeFactor: 2.5
+          easeFactor: 2.5,
+          pronunciation: partialCard.pronunciation || '',
+          tone: partialCard.tone || '',
+          word_forms: partialCard.word_forms,
+          synonyms: partialCard.synonyms,
+          examples: partialCard.examples || []
       };
       saveCard(newCard);
       setView('dashboard');
@@ -168,7 +171,6 @@ function App() {
           cards={cards} 
           onStartStudy={handleStartStudy} 
           onAddCard={() => setView('add')}
-          onOpenBookMode={() => setView('book')}
         />
       )}
       {view === 'study' && restoredSession && (
@@ -185,14 +187,6 @@ function App() {
           onAdd={handleAddCard} 
           onCancel={() => setView('dashboard')} 
         />
-      )}
-      {view === 'book' && (
-          <BookMode 
-              onExit={() => setView('dashboard')}
-              onSaveCard={(term, def) => {
-                  handleAddCard(term, def); // Reuse the Add Card logic but direct
-              }}
-          />
       )}
     </div>
   );
