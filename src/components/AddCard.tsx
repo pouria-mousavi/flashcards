@@ -52,7 +52,7 @@ export default function AddCard({ onAdd, onCancel }: Props) {
         messages: [{ role: "user", content: prompt }]
       });
 
-      const content = msg.content[0].text;
+      const content = (msg.content[0] as any).text;
       const json = JSON.parse(content.replace(/```json/g, '').replace(/```/g, '').trim());
 
       setGeneratedCard({
@@ -60,7 +60,7 @@ export default function AddCard({ onAdd, onCancel }: Props) {
         back: json.back,
         pronunciation: json.pronunciation,
         tone: json.tone,
-        synonyms: json.synonyms,
+        synonyms: Array.isArray(json.synonyms) ? json.synonyms.join(', ') : json.synonyms,
         word_forms: json.word_forms,
         examples: json.examples
       });
@@ -81,7 +81,7 @@ export default function AddCard({ onAdd, onCancel }: Props) {
 
   return (
     <div className="flex-center full-screen" style={{ flexDirection: 'column', background: 'var(--bg-color)', zIndex: 10 }}>
-      {/* Header */}
+    {/* ... (Header omission if possible, but keep simple) */}
       <div style={{ width: '100%', padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '600px' }}>
           <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>Add New Word</h2>
           <button onClick={onCancel} style={{ background: 'transparent', color: 'var(--text-secondary)', fontSize: '1.5rem', border: 'none', cursor: 'pointer' }}>✕</button>
@@ -164,7 +164,7 @@ export default function AddCard({ onAdd, onCancel }: Props) {
                           <PreviewField label="Tone" value={generatedCard.tone} />
                       </div>
 
-                      <PreviewField label="Synonyms" value={generatedCard.synonyms?.join(', ')} />
+                      <PreviewField label="Synonyms" value={generatedCard.synonyms} /> {/* Removed .join */}
                       
                       <div style={{ marginTop: '16px' }}>
                            <label style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginBottom: '4px', display: 'block' }}>Examples</label>
