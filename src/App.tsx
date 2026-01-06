@@ -161,7 +161,7 @@ function App() {
           examples: partialCard.examples || []
       };
       saveCard(newCard);
-      setView('dashboard');
+      // setView('dashboard'); // Removed to prevent closing AddCard
   };
 
   return (

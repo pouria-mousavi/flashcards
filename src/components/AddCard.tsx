@@ -99,10 +99,17 @@ export default function AddCard({ onAdd, onCancel }: Props) {
     }
   };
 
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
+
+  // ... (handleGenerate remains same)
+
   const handleSaveAll = () => {
+    const count = generatedCards.length;
     generatedCards.forEach(card => onAdd(card));
     setGeneratedCards([]);
     setInputText('');
+    setSuccessMsg(`Successfully saved ${count} cards!`);
+    setTimeout(() => setSuccessMsg(null), 3000);
   };
 
   const handleDiscard = () => {
@@ -177,6 +184,12 @@ export default function AddCard({ onAdd, onCancel }: Props) {
           {error && (
               <div style={{ padding: '16px', background: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5', borderRadius: '16px', fontSize: '0.95rem' }}>
                   {error}
+              </div>
+          )}
+
+          {successMsg && (
+              <div style={{ padding: '16px', background: 'rgba(16, 185, 129, 0.15)', color: '#6ee7b7', borderRadius: '16px', fontSize: '1rem', textAlign: 'center', fontWeight: 'bold' }}>
+                  {successMsg}
               </div>
           )}
 
