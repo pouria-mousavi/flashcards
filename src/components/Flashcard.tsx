@@ -7,10 +7,11 @@ interface Props {
   isFlipped: boolean;
   onFlip: () => void;
   onSaveNote: (cardId: string, note: string) => Promise<void>;
-  onPlayAudio: () => void; // Pass this down from StudySession to keep logic there
+  onPlayAudio: () => void;
+  onDelete: () => void;
 }
 
-export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayAudio }: Props) {
+export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayAudio, onDelete }: Props) {
   const [isNoteOpen, setIsNoteOpen] = useState(false);
   const [noteText, setNoteText] = useState(card.user_notes || '');
   const [isRecording, setIsRecording] = useState(false);
@@ -25,7 +26,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         const recog = new SpeechRecognition();
         recog.continuous = true;
-        recog.interimResults = false; // Fix: Only accept final results to avoid weird partials
+        recog.interimResults = false;
         recog.lang = 'en-US'; 
         
         recog.onresult = (event: any) => {
@@ -80,6 +81,13 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
       setIsNoteOpen(false);
   };
   
+  // Clean example helper
+  const cleanExample = (ex: string) => {
+      const match = ex.match(/\(([^)]+)\)$/);
+      if (match) return match[1];
+      return ex;
+  };
+
   if (!card) return null;
 
   return (
@@ -92,15 +100,13 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
         style={{
           width: '90vw',
           maxWidth: '400px', 
-          // height: '70vh', // REMOVED fixed height
-          // maxHeight: '650px', // REMOVED max height
-          minHeight: '400px', // Ensure it has some substance
+          minHeight: '400px',
           position: 'relative',
           transformStyle: 'preserve-3d',
           paddingBottom: '0px'
         }}
       >
-        {/* FRONT (Persian) - Absolute so it overlays (or lies behind) the Back which dictates height */}
+        {/* FRONT (Persian) */}
         <div
           style={{
             position: 'absolute',
@@ -123,8 +129,6 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             zIndex: 2
           }}
         >
-          {/* Removed Front Note Button as requested */}
-          
           <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>
             PERSIAN
           </span>
@@ -145,12 +149,12 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
           </p>
         </div>
 
-        {/* BACK (English) - Relative so it drives the height of the card-inner container */}
+        {/* BACK (English) */}
         <div
           style={{
-            position: 'relative', // Changed to relative so it pushes the parent height
+            position: 'relative', 
             width: '100%',
-            minHeight: '400px', // Match parent min
+            minHeight: '400px', 
             backfaceVisibility: 'hidden',
             backgroundColor: '#18181b', 
             color: '#fff',
@@ -163,14 +167,30 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             paddingBottom: '32px',
             boxSizing: 'border-box',
             border: '1px solid rgba(255,255,255,0.08)',
-            // overflowY: 'auto' // REMOVED scroll
            }}
-          // onClick={(e) => e.stopPropagation()} // Removed so user can flip back
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', marginBottom: '10px' }}>
              <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)' }}>
                 ENGLISH
              </span>
+             {/* Delete Button */}
+             <button 
+                onClick={(e) => { e.stopPropagation(); onDelete(); }}
+                style={{
+                    background: 'rgba(239, 68, 68, 0.1)',
+                    border: '1px solid rgba(239, 68, 68, 0.2)',
+                    borderRadius: '8px',
+                    color: '#fca5a5',
+                    padding: '4px 8px',
+                    fontSize: '0.75rem',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                }}
+             >
+                 🗑️ Delete
+             </button>
           </div>
 
           {!isNoteOpen ? (
@@ -206,7 +226,6 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
                     )}
                 </div>
 
-                {/* Word Forms Section (V17) */}
                 {card.word_forms && Object.values(card.word_forms).some(v => !!v) && (
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
                         {Object.entries(card.word_forms).map(([pos, val]) => (
@@ -244,7 +263,9 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
                     <div style={{ textAlign: 'left', marginTop: '16px' }}>
                     <ul style={{ paddingLeft: '16px', margin: 0, listStyle: 'circle' }}>
                         {card.examples.map((ex, i) => (
-                        <li key={i} style={{ marginBottom: '12px', fontSize: '0.9rem', lineHeight: '1.5', color: '#d1d5db' }}>{ex}</li>
+                        <li key={i} style={{ marginBottom: '12px', fontSize: '0.9rem', lineHeight: '1.5', color: '#d1d5db' }}>
+                            {cleanExample(ex)}
+                        </li>
                         ))}
                     </ul>
                     </div>
@@ -259,7 +280,6 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
 
                  <div style={{ height: '140px', flexShrink: 0, width: '100%' }} />
 
-                 {/* FOOTER BUTTONS (Speaker + Note) */}
                  <div style={{ 
                      position: 'absolute', 
                      bottom: '20px', 
@@ -312,7 +332,6 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
 
               </>
           ) : (
-              // NOTE EDITOR MODE
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }} onClick={e => e.stopPropagation()}>
                   <h4 style={{ margin: '0 0 10px 0', color: '#f472b6' }}>Add Voice Note</h4>
                   <textarea

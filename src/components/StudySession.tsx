@@ -10,11 +10,12 @@ interface Props {
   cards: Flashcard[];
   startIndex?: number;
   onUpdateCard: (card: Flashcard) => void;
+  onDeleteCard: (cardId: string) => void;
   onSessionComplete: () => void;
   onExit: () => void;
 }
 
-export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSessionComplete, onExit }: Props) {
+export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDeleteCard, onSessionComplete, onExit }: Props) {
   const [queue, setQueue] = useState<Flashcard[]>([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(startIndex);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -120,6 +121,15 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
       ));
   };
 
+  const handleDelete = (cardId: string) => {
+      if (confirm("Are you sure you want to PERMANENTLY delete this card?")) {
+          onDeleteCard(cardId);
+          // Remove locally immediately to avoid UI glitch
+          setQueue(prev => prev.filter(c => c.id !== cardId));
+          // Check if empty or need to advance handled by effect/render logic
+      }
+  };
+
   if (queue.length === 0) return <div className="flex-center full-screen">All caught up! 🎉</div>;
   
   if (currentCardIndex >= queue.length) {
@@ -179,6 +189,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onSe
                     isFlipped={isFlipped} 
                     onFlip={() => setIsFlipped(!isFlipped)} 
                     onSaveNote={handleSaveNote}
+                    onDelete={() => handleDelete(currentCard.id)}
                     onPlayAudio={() => handlePlayAudio(currentCard.back)}
                 />
             </motion.div>

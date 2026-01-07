@@ -48,6 +48,19 @@ function App() {
 
     if (error) console.error('Error updating:', error);
   };
+
+  const deleteCard = async (cardId: string) => {
+      // Optimistic update
+      setCards(prev => prev.filter(c => c.id !== cardId));
+      setRestoredSession(prev => prev ? { ...prev, queue: prev.queue.filter(c => c.id !== cardId) } : null);
+
+      const { error } = await supabase.from('cards').delete().eq('id', cardId);
+      if (error) {
+          console.error("Error deleting:", error);
+          alert("Failed to delete card from DB!");
+          // Revert if needed, but for now simple alert is enough
+      }
+  };
   
 
   const getDueCards = () => {
@@ -178,6 +191,7 @@ function App() {
           cards={restoredSession.queue}
           startIndex={restoredSession.index}
           onUpdateCard={updateCardStats} 
+          onDeleteCard={deleteCard}
           onExit={handleSessionEnd} 
           onSessionComplete={handleSessionEnd}
         />
