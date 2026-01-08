@@ -132,18 +132,53 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
           <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>
             PERSIAN
           </span>
-          <h2 style={{ 
-              fontSize: (card.front?.length || 0) > 50 ? '1.5rem' : ((card.front?.length || 0) > 20 ? '2rem' : '2.5rem'), 
-              textAlign: 'center', 
-              margin: 0, 
-              lineHeight: '1.4',
-              fontFamily: 'Vazirmatn, sans-serif', 
-              padding: '0 20px',
-              wordWrap: 'break-word',
-              width: '100%'
-          }}>
-            {card.front || 'Invalid Card'}
-          </h2>
+          {(() => {
+              const [persianText, englishHint] = (card.front || '').split('===HINT===');
+              return (
+                  <>
+                    <h2 style={{ 
+                        fontSize: (persianText?.length || 0) > 50 ? '1.5rem' : ((persianText?.length || 0) > 20 ? '2rem' : '2.5rem'), 
+                        textAlign: 'center', 
+                        margin: 0, 
+                        lineHeight: '1.4',
+                        fontFamily: 'Vazirmatn, sans-serif', 
+                        padding: '0 20px',
+                        wordWrap: 'break-word',
+                        width: '100%'
+                    }}>
+                        {persianText?.trim() || 'Invalid Card'}
+                    </h2>
+
+                    {englishHint && (
+                        <div style={{
+                            marginTop: '24px',
+                            borderTop: '1px solid rgba(255,255,255,0.1)',
+                            paddingTop: '16px',
+                            width: '80%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: '4px'
+                        }}>
+                            <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(255,255,255,0.3)' }}>
+                                Definition
+                            </span>
+                            <p style={{
+                                fontSize: '0.95rem',
+                                color: 'rgba(255,255,255,0.7)',
+                                margin: 0,
+                                textAlign: 'center',
+                                fontFamily: '"Outfit", sans-serif',
+                                fontStyle: 'italic',
+                                lineHeight: '1.4'
+                            }}>
+                                {englishHint.trim()}
+                            </p>
+                        </div>
+                    )}
+                  </>
+              );
+          })()}
           
 
           <p style={{ marginTop: 'auto', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem' }}>
