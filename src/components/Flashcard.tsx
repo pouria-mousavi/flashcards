@@ -145,16 +145,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             {card.front || 'Invalid Card'}
           </h2>
           
-          {/* English Hint (User Request) */}
-          <h3 style={{
-              fontSize: '1rem',
-              color: 'rgba(255,255,255,0.5)',
-              marginTop: '16px',
-              fontWeight: 'normal',
-              fontFamily: 'monospace'
-          }}>
-            {card.back}
-          </h3>
+
           <p style={{ marginTop: 'auto', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem' }}>
             Tap to flip
           </p>
