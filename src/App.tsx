@@ -67,8 +67,19 @@ function App() {
     const now = Date.now();
     const due = cards.filter(c => c.nextReviewDate <= now);
     
-    // Always Shuffle (User Request V14)
-    return [...due].sort(() => Math.random() - 0.5);
+    // Partition: Reviews vs New
+    const reviews = due.filter(c => c.state !== 'NEW');
+    const newCards = due.filter(c => c.state === 'NEW');
+
+    // 1. Reviews: Random Shuffle (Prioritize waiting reviews)
+    const shuffledReviews = [...reviews].sort(() => Math.random() - 0.5);
+
+    // 2. New Cards: Sort by Most Recent First (LIFO)
+    // "ALWAYS the most recent cards to be shown at first"
+    const sortedNew = [...newCards].sort((a, b) => b.createdAt - a.createdAt);
+
+    // Return: Reviews -> New
+    return [...shuffledReviews, ...sortedNew];
   };
 
   // Session Persistence
@@ -167,6 +178,7 @@ function App() {
           nextReviewDate: Date.now(),
           interval: 0,
           easeFactor: 2.5,
+          createdAt: Date.now(),
           pronunciation: partialCard.pronunciation || '',
           tone: partialCard.tone || '',
           word_forms: partialCard.word_forms,

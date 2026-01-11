@@ -24,6 +24,7 @@ export interface Flashcard {
   nextReviewDate: number; // Timestamp
   interval: number;
   easeFactor: number;
+  createdAt: number; // Timestamp
   
   // V9: User Feedback
   user_notes?: string;
@@ -174,6 +175,7 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         nextReviewDate: new Date(row.next_review).getTime(),
         interval: row.interval,
         easeFactor: row.ease_factor,
+        createdAt: new Date(row.created_at).getTime(),
         // @ts-ignore - Supabase types might not be regenerated yet
         user_notes: row.user_notes || undefined,
         // @ts-ignore
