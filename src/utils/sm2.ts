@@ -129,21 +129,27 @@ export function calculateSM2(
           next.interval = Math.max(1, Math.floor(next.interval * SETTINGS.hardInterval));
           next.easeFactor = Math.max(1.3, next.easeFactor - 0.15);
           next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
-      } else if (rating === 4) {
-          // Good
-                if (next.state === CardState.RELEARNING) {
-                     // Graduated back
-                     next.state = CardState.REVIEW;
-                     next.interval = 1; // Reset to 1 day or calculate based on lapse? Anki defaults to 1.
-                } else {
-                     next.interval = Math.round(next.interval * next.easeFactor);
-                }
-          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
-      } else if (rating === 5) {
-          // Easy
-          if (next.state === CardState.RELEARNING) next.state = CardState.REVIEW;
-          next.easeFactor += 0.15;
-          next.interval = Math.round(next.interval * next.easeFactor * SETTINGS.easyBonus);
+      } else {
+          // Good (4) or Easy (5)
+          
+          if (next.state === CardState.RELEARNING) {
+               // Graduated back from Lapse
+               next.state = CardState.REVIEW;
+               next.interval = 1; // Reset to 1 day
+          } else {
+               // Standard Review
+               next.interval = Math.round(next.interval * next.easeFactor);
+               if (rating === 5) {
+                   next.interval = Math.round(next.interval * SETTINGS.easyBonus);
+               }
+          }
+          
+          // SM-2 Ease Factor Formula: EF' = EF + (0.1 - (5-q) * (0.08 + (5-q) * 0.02))
+          // q = rating (0-5)
+          const q = rating;
+          const newEF = next.easeFactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02));
+          next.easeFactor = Math.max(1.3, newEF); // Minimum EF is 1.3
+
           next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
       }
   }

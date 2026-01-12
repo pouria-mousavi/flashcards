@@ -126,7 +126,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
           onDeleteCard(cardId);
           // Remove locally immediately to avoid UI glitch
           setQueue(prev => prev.filter(c => c.id !== cardId));
-          // Check if empty or need to advance handled by effect/render logic
+          setIsFlipped(false); // Reset flip state for the next card
       }
   };
 

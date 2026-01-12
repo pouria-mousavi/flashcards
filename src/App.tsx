@@ -71,15 +71,15 @@ function App() {
     const reviews = due.filter(c => c.state !== 'NEW');
     const newCards = due.filter(c => c.state === 'NEW');
 
-    // 1. Reviews: Random Shuffle (Prioritize waiting reviews)
-    const shuffledReviews = [...reviews].sort(() => Math.random() - 0.5);
+    // 1. Reviews: Sort by Urgency (Oldest Due Date First) - Standard Anki-like behavior
+    const sortedReviews = [...reviews].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
 
     // 2. New Cards: Sort by Most Recent First (LIFO)
     // "ALWAYS the most recent cards to be shown at first"
     const sortedNew = [...newCards].sort((a, b) => b.createdAt - a.createdAt);
 
     // Return: Reviews -> New
-    return [...shuffledReviews, ...sortedNew];
+    return [...sortedReviews, ...sortedNew];
   };
 
   // Session Persistence
