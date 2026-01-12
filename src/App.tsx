@@ -125,7 +125,16 @@ function App() {
     init();
   }, []);
 
-  const handleStartStudy = () => {
+  const handleStartStudy = (freshStart = false) => {
+    // 1. Check for existing session first
+    if (!freshStart) {
+        const saved = localStorage.getItem(SESSION_KEY);
+        if (saved && restoredSession) {
+            setView('study');
+            return;
+        }
+    }
+
     const due = getDueCards().slice(0, 50); // Limit batch size
     if (due.length === 0) {
         alert("No cards due!");
@@ -144,7 +153,13 @@ function App() {
     setView('study');
   };
 
-  const handleSessionEnd = () => {
+  const handleSessionPause = () => {
+      // Just exit view, keep session
+      setView('dashboard');
+  };
+
+  const handleSessionComplete = () => {
+      // Clear session
       localStorage.removeItem(SESSION_KEY);
       setRestoredSession(null);
       setView('dashboard');
@@ -194,8 +209,9 @@ function App() {
       {view === 'dashboard' && (
         <Dashboard 
           cards={cards} 
-          onStartStudy={handleStartStudy} 
+          onStartStudy={() => handleStartStudy(false)} 
           onAddCard={() => setView('add')}
+          hasActiveSession={!!restoredSession}
         />
       )}
       {view === 'study' && restoredSession && (
@@ -204,8 +220,8 @@ function App() {
           startIndex={restoredSession.index}
           onUpdateCard={updateCardStats} 
           onDeleteCard={deleteCard}
-          onExit={handleSessionEnd} 
-          onSessionComplete={handleSessionEnd}
+          onPause={handleSessionPause} 
+          onSessionComplete={handleSessionComplete}
         />
       )}
       {view === 'add' && (

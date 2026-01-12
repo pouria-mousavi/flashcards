@@ -5,9 +5,10 @@ interface Props {
   cards: Flashcard[];
   onStartStudy: () => void;
   onAddCard: () => void;
+  hasActiveSession?: boolean;
 }
 
-export default function Dashboard({ cards, onStartStudy, onAddCard }: Props) {
+export default function Dashboard({ cards, onStartStudy, onAddCard, hasActiveSession }: Props) {
   // Compute Stats
   // const totalCards = cards.length;
   let newCards = 0;
@@ -79,9 +80,11 @@ export default function Dashboard({ cards, onStartStudy, onAddCard }: Props) {
                 border: toReview === 0 ? '1px solid rgba(255,255,255,0.1)' : 'none'
             }}
           >
-              {toReview > 0 
-                  ? `Study ${Math.min(toReview, 50)} / ${toReview} Cards` 
-                  : (newCards > 0 ? "Learn New Cards" : "All Done!")}
+              {hasActiveSession 
+                  ? "Resume Session" 
+                  : (toReview > 0 
+                      ? `Study ${Math.min(toReview, 50)} / ${toReview} Cards` 
+                      : (newCards > 0 ? "Learn New Cards" : "All Done!"))}
           </button>
 
           {/* Settings Row */}

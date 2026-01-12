@@ -12,10 +12,10 @@ interface Props {
   onUpdateCard: (card: Flashcard) => void;
   onDeleteCard: (cardId: string) => void;
   onSessionComplete: () => void;
-  onExit: () => void;
+  onPause: () => void;
 }
 
-export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDeleteCard, onSessionComplete, onExit }: Props) {
+export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDeleteCard, onSessionComplete, onPause }: Props) {
   const [queue, setQueue] = useState<Flashcard[]>([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(startIndex);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -146,7 +146,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
       {/* Header Controls */}
       <div style={{ position: 'absolute', top: '20px', left: '20px', right: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
         <button 
-            onClick={onExit}
+            onClick={onPause}
             style={{ 
                 background: 'rgba(255,255,255,0.1)', 
                 color: 'var(--text-secondary)', 
@@ -157,7 +157,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
                 cursor: 'pointer'
             }}
         >
-            ← Quit
+            ← Pause
         </button>
         <div style={{ color: 'var(--text-secondary)' }}>
             {cardsLeft} cards
