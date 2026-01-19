@@ -28,11 +28,23 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
    useEffect(() => {
       const loadVoices = () => {
           const vs = window.speechSynthesis.getVoices();
-          // Prefer "Google US English", then any "en-US", then fallback
-          let preferred = vs.find(v => v.name === 'Google US English');
-          if (!preferred) preferred = vs.find(v => v.lang === 'en-US');
+          // Filter strictly for en-US
+          const usVoices = vs.filter(v => v.lang === 'en-US');
+          
+          // Priority list: Google US English, Samantha, etc.
+          let preferred = usVoices.find(v => v.name === 'Google US English');
+          if (!preferred) preferred = usVoices.find(v => v.name === 'Samantha');
+          if (!preferred) preferred = usVoices.find(v => v.name.includes('US English'));
+          if (!preferred) preferred = usVoices[0]; // Fallback to any US voice
 
-          if (preferred) setVoice(preferred);
+          if (preferred) {
+              console.log("Selected Voice:", preferred.name);
+              setVoice(preferred);
+          } else {
+              // Extreme fallback if no strictly 'en-US' is found (rare)
+              const fallback = vs.find(v => v.lang.startsWith('en'));
+              if (fallback) setVoice(fallback);
+          }
       };
       
       loadVoices();

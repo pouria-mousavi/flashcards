@@ -37,7 +37,12 @@ export interface Flashcard {
       adv?: string;
       past?: string;
       pp?: string;
+      other_meanings?: any[]; // Hack for Cerebras fallback without schema migration
   };
+
+  // V18: Standardized Fields (If supported)
+  front_definition?: string;
+  other_meanings?: any[]; // Array of { definition, part_of_speech, translation } or strings
 }
 
 // Configuration similar to Anki defaults
@@ -185,6 +190,10 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         // @ts-ignore - Supabase types might not be regenerated yet
         user_notes: row.user_notes || undefined,
         // @ts-ignore
-        word_forms: row.word_forms || undefined
+        word_forms: row.word_forms || undefined,
+        // @ts-ignore
+        front_definition: row.front_definition || undefined,
+        // @ts-ignore
+        other_meanings: row.other_meanings || undefined
     }
 }
