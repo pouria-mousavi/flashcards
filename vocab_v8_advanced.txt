@@ -1,0 +1,302 @@
+نقش وکیل مدافع شیطان را بازی کردن (مخالفت برای بحث) | Play devil's advocate
+-- Tone: Professional/Debate
+-- Example: 1. I agree with you, but let me play devil's advocate for a moment to test your argument.
+
+با مخالفت موافقت کردن (پایان بحث بدون توافق) | Agree to disagree
+-- Tone: Formal/Polite
+-- Example: 1. We're never going to see eye to eye on politics, so let's just agree to disagree.
+
+زیاده‌روی نمیکردم (موافق نیستم کاملاً) | I wouldn't go that far
+-- Tone: Spoken/Nuanced
+-- Example: 1. "He's a genius!" "He's smart, sure, but I wouldn't go that far."
+
+لبه پرتگاه (مسیر خطرناک) | A slippery slope
+-- Tone: Metaphorical
+-- Example: 1. Censoring slight criticism is a slippery slope to total dictatorship.
+
+درک کردن (هضم کردن موضوع پیچیده) | Wrap my head around it
+-- Tone: Spoken
+-- Example: 1. Quantum physics is so weird; I just can't wrap my head around it.
+
+در اوج عصبانیت (داغی لحظه) | In the heat of the moment
+-- Tone: Spoken
+-- Example: 1. I didn't mean what I said; it was just in the heat of the moment.
+
+کوتاه اومدن (سخت نگرفتن به کسی) | Cut someone some slack
+-- Tone: Informal
+-- Example: 1. He's new to the job, so cut him some slack if he makes mistakes.
+
+خود را جمع و جور کردن (مسلط شدن) | Get your act together
+-- Tone: Stern
+-- Example: 1. You're failing all your classes. You need to get your act together or you'll be expelled.
+
+بی‌مقدمه (یهویی) | Out of the blue
+-- Tone: Spoken
+-- Example: 1. We hadn't spoken in years, and then she called me out of the blue.
+
+تکلیف را روشن کردن (در نطفه خفه کردن) | Nip it in the bud
+-- Tone: Idiom
+-- Example: 1. It's a small leak now, but we should nip it in the bud before it floods the house.
+
+به دلت صابون نزن | Don't hold your breath
+-- Tone: Sarcastic/Realistic
+-- Example: 1. They promised a raise, but don't hold your breath.
+
+چوب لای چرخ گذاشتن (خراب کردن برنامه) | Throw a wrench in the works
+-- Tone: Idiom
+-- Example: 1. The storm threw a wrench in the works for our picnic plans.
+
+دست و پا زدن (بداهه گویی کردن) | Wing it
+-- Tone: Informal
+-- Example: 1. I didn't study for the presentation, so I'm just going to wing it.
+
+روی ابرها بودن (خیلی خوشحال) | On cloud nine
+-- Tone: Idiom
+-- Example: 1. Ever since he got the promotion, he's been on cloud nine.
+
+سنگ تمام گذاشتن | Pull out all the stops
+-- Tone: Idiom
+-- Example: 1. It's her 50th birthday, so we're going to pull out all the stops for the party.
+
+زیر آب زنی (خیانت) | Stab in the back
+-- Tone: Metaphorical
+-- Example: 1. I trusted him, but he stabbed me in the back to get my job.
+
+آب پاکی ریختن (ناامید کردن) | Burst your bubble
+-- Tone: Spoken
+-- Example: 1. I hate to burst your bubble, but that "diamond" is actually glass.
+
+تکلیف نامعلوم (معلق) | Up in the air
+-- Tone: Spoken
+-- Example: 1. Our vacation plans are still up in the air until I get my schedule.
+
+به سیم آخر زدن | Throw caution to the wind
+-- Tone: Idiom
+-- Example: 1. She quit her safe job and threw caution to the wind to become an artist.
+
+دندان روی جگر گذاشتن | Bite the bullet
+-- Tone: Idiom
+-- Example: 1. The car is wrecked; I'll just have to bite the bullet and buy a new one.
+
+از کاه کوه ساختن | Make a mountain out of a molehill
+-- Tone: Idiom
+-- Example: 1. You only lost a pen; don't make a mountain out of a molehill.
+
+آتیش بیار معرکه شدن | Add fuel to the fire
+-- Tone: Idiom
+-- Example: 1. He's already angry. Don't add fuel to the fire by arguing back.
+
+نمک به زخم پاشیدن | Add insult to injury
+-- Tone: Idiom
+-- Example: 1. I crashed my car, and to add insult to injury, I got a speeding ticket.
+
+مرغ یک پا دارد (لجوج) | Stick to your guns
+-- Tone: Idiom
+-- Example: 1. Everyone told him to sell, but he stuck to his guns and now he's rich.
+
+حواس پرت شدن (رشته کلام) | Lose my train of thought
+-- Tone: Spoken
+-- Example: 1. Sorry, that noise made me lose my train of thought. Where was I?
+
+توجه کامل داشتن | Be all ears
+-- Tone: Spoken
+-- Example: 1. "I have a secret." "Tell me, I'm all ears."
+
+چشم پوشی کردن | Turn a blind eye
+-- Tone: Metaphorical
+-- Example: 1. The manager knows about the theft but turns a blind eye to it.
+
+قسر در رفتن | Get off scot-free
+-- Tone: Idiom
+-- Example: 1. He robbed the bank but got off scot-free due to a technicality.
+
+دست پیش گرفتن (مسئولیت پذیرفتن) | Face the music
+-- Tone: Idiom
+-- Example: 1. You broke the window; now go tell Dad and face the music.
+
+رک بودن (تعارف نداشتن) | Call a spade a spade
+-- Tone: Idiom
+-- Example: 1. Let's call a spade a spade; the project failed because of laziness.
+
+دل را به دریا زدن | Take the plunge
+-- Tone: Idiom
+-- Example: 1. After years of renting, they finally took the plunge and bought a house.
+
+پا پس کشیدن | Back out
+-- Tone: Phrasal Verb
+-- Example: 1. You promised to help; you can't back out now.
+
+تحمل کردن (کنار آمدن) | Put up with
+-- Tone: Phrasal Verb
+-- Example: 1. I don't know how you put up with his constant complaining.
+
+تحقیر کردن (کوچک شمردن) | Look down on
+-- Tone: Phrasal Verb
+-- Example: 1. She looks down on anyone who doesn't have a fancy car.
+
+به کسی احترام گذاشتن (الگو قرار دادن) | Look up to
+-- Tone: Phrasal Verb
+-- Example: 1. He's always looked up to his older brother.
+
+از کوره در رفتن (عصبانیت ناگهانی) | Blow a fuse / Blow a gasket
+-- Tone: Slang
+-- Example: 1. Dad is going to blow a fuse when he sees the bill.
+
+دست و پا چلفتی | All thumbs
+-- Tone: Idiom
+-- Example: 1. Can you fix this necklace? I'm all thumbs today.
+
+موش آزمایشگاهی | Guinea pig
+-- Tone: Metaphorical
+-- Example: 1. I'm not eating that! I won't be your guinea pig for new recipes.
+
+عذر بدتر از گناه | A blessing in disguise (NOT EXACT mapping, checking) -> Actually 'Blessing in disguise' is "Good outcome from bad event".
+-- Mapping Correction: 'Good outcome' -> عدو شود سبب خیر
+توفیق اجباری (عدو شود سبب خیر) | A blessing in disguise
+-- Tone: Idiom
+-- Example: 1. Getting fired was a blessing in disguise; I found a much better job.
+
+نخود هر آش (همه کاره) | Have a finger in every pie
+-- Tone: Idiom
+-- Example: 1. He owns a restaurant, a hotel, and a shop; he has a finger in every pie.
+
+خبرچین (دهن لق) | Stool pigeon / Snitch
+-- Tone: Slang/Criminal
+-- Example: 1. Nobody likes a snitch.
+
+همرنگ جماعت شدن | Jump on the bandwagon
+-- Tone: Idiom
+-- Example: 1. Once the team started winning, everyone jumped on the bandwagon.
+
+ریسک کردن (گردن کلفتی کردن) | Stick your neck out
+-- Tone: Idiom
+-- Example: 1. I stuck my neck out for you to get this job; don't mess it up.
+
+دستم نمک نداره (بی چشم و رو) | Bite the hand that feeds you
+-- Tone: Idiom
+-- Example: 1. Don't insult your boss; that's biting the hand that feeds you.
+
+آب در هاون کوبیدن (تلاش بیهوده) | Beat a dead horse
+-- Tone: Idiom
+-- Example: 1. Stop asking; the answer is no. You're just beating a dead horse.
+
+قلق کاری را یاد گرفتن | Learn the ropes
+-- Tone: Idiom
+-- Example: 1. It takes a few weeks to learn the ropes of this new software.
+
+روی غلطک افتادن | Get into the swing of things
+-- Tone: Idiom
+-- Example: 1. After a week at the new office, I'm finally getting into the swing of things.
+
+عقل کل (همه چیز دان) | Know-it-all
+-- Tone: Negative
+-- Example: 1. Nobody likes him because he acts like a know-it-all.
+
+سربه سر گذاشتن | Pull someone's leg
+-- Tone: Idiom
+-- Example: 1. I didn't really win the lottery; I was just pulling your leg.
+
+موش آب کشیده (ترسو/بدبخت) -> Actually 'Drowned rat' is for wetness. For fear: 'Scaredy cat'.
+مثل موش آب کشیده | Like a drowned rat
+-- Tone: Simile
+-- Example: 1. You came in from the rain looking like a drowned rat.
+
+خواب سنگین | Sleeping log / Sleep like a log
+-- Tone: Idiom
+-- Example: 1. I slept like a log last night; didn't hear the alarm.
+
+آسه برو آسه بیا (سه نشی) | Keep a low profile
+-- Tone: Idiom
+-- Example: 1. The police are looking for you, so keep a low profile.
+
+لو دادن (راز) | Let the cat out of the bag
+-- Tone: Idiom
+-- Example: 1. It was a surprise party, but John let the cat out of the bag.
+
+هلو بپر تو گلو (خیلی راحت) | Handed to on a silver platter
+-- Tone: Idiom
+-- Example: 1. He didn't work for his success; it was handed to him on a silver platter.
+
+پا تو کفش کسی کردن | Step on someone's toes
+-- Tone: Idiom
+-- Example: 1. I want to help, but I don't want to step on your toes.
+
+کاسه کوزه‌ها را سر کسی شکستن | Throw someone under the bus
+-- Tone: Metaphorical
+-- Example: 1. When the project failed, he threw his assistant under the bus to save himself.
+
+دل تو دلم نیست (بیقرارم) | On pins and needles
+-- Tone: Idiom
+-- Example: 1. I've been on pins and needles waiting for the test results.
+
+سنگ رو یخ شدن (ضایع شدن) | Egg on your face
+-- Tone: Idiom
+-- Example: 1. If you confirm the wrong date, you'll have egg on your face.
+
+یه دستی زدن (تست کردن) | Test the waters
+-- Tone: Idiom
+-- Example: 1. Before launching the product, let's test the waters with a survey.
+
+ریش و قیچی دست خودت | The ball is in your court
+-- Tone: Idiom
+-- Example: 1. I've made my offer. Now the ball is in your court.
+
+پل‌های پشت سر را خراب کردن | Burn bridges
+-- Tone: Metaphorical
+-- Example: 1. Don't insult your boss when you quit; never burn bridges.
+
+آب از سر گذشتن | Past the point of no return
+-- Tone: Idiom
+-- Example: 1. We've signed the contract; we are past the point of no return.
+
+دنیای وارونه | Topsy-turvy
+-- Tone: Idiom
+-- Example: 1. Since the baby arrived, our house has been topsy-turvy.
+
+دلشوره داشتن | Butterflies in my stomach
+-- Tone: Idiom
+-- Example: 1. I always get butterflies in my stomach before speaking in public.
+
+گوش بزنگ بودن | Keep your ear to the ground
+-- Tone: Idiom
+-- Example: 1. Keep your ear to the ground for any new job openings.
+
+چشم برداشتن (غفلت کردن) | Take your eye off the ball
+-- Tone: Idiom
+-- Example: 1. We lost because we took our eye off the ball in the final minutes.
+
+وقت گل نی | When pigs fly
+-- Tone: Idiom
+-- Example: 1. "When will he clean his room?" "When pigs fly."
+
+هر طور شده (به هر قیمتی) | By hook or by crook
+-- Tone: Idiom
+-- Example: 1. I will finish this book by hook or by crook.
+
+بحث را عوض کردن | Change the subject
+-- Tone: Spoken
+-- Example: 1. Don't try to change the subject; answer the question.
+
+حرف توی حرف آوردن | Interrupt
+-- Tone: Spoken
+-- Example: 1. Please don't interrupt me while I'm speaking.
+
+توی ذوق کسی زدن | Rain on someone's parade
+-- Tone: Idiom
+-- Example: 1. I hate to rain on your parade, but the beach is closed today.
+
+قسر در رفتن (شانسی) | Dodge a bullet
+-- Tone: Metaphorical
+-- Example: 1. I broke up with him right before he got arrested. I really dodged a bullet.
+
+دستم به دهنم میرسه | Make ends meet
+-- Tone: Idiom (Usually negative: barely make ends meet)
+-- Example: 1. With inflation, it's hard to make ends meet these days.
+
+نان کسی را آجر کردن | Take the bread out of someone's mouth
+-- Tone: Metaphorical
+-- Example: 1. By opening a shop next door, you're taking the bread out of my mouth.
+
+کله شق (لجباز) | Pig-headed
+-- Tone: Slang
+-- Example: 1. He's so pig-headed he refuses to ask for directions.

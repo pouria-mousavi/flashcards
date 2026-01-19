@@ -1,0 +1,938 @@
+[
+  {
+    "word": "still (motionless)",
+    "definition": "motionless; without movement.",
+    "example": "Come over here and stand still.",
+    "persian": "بی‌حرکت، ثابت"
+  },
+  {
+    "word": "still (even/yet)",
+    "definition": "even; yet (used to emphasize a comparison).",
+    "example": "These apples are very nice, but the others are better still.",
+    "persian": "هنوز، کماکان، حتی"
+  },
+  {
+    "word": "Still (nevertheless)",
+    "definition": "nevertheless; even so (used to introduce a contrasting idea).",
+    "example": "My arm's very sore after the accident. Still, it feels better than it did yesterday.",
+    "persian": "با این حال، با وجود این"
+  },
+  {
+    "word": "leaked",
+    "definition": "secretly revealed information before the official time.",
+    "example": "The contents of the report have already been leaked to the press.",
+    "persian": "لو رفتن، درز کردن (اطلاعات)"
+  },
+  {
+    "word": "flooding",
+    "definition": "arriving in large numbers (figurative).",
+    "example": "Thousands of refugees are now flooding across the border.",
+    "persian": "سیل‌آسا وارد شدن، هجوم آوردن"
+  },
+  {
+    "word": "under the microscope",
+    "definition": "subject to intense scrutiny or investigation (figurative).",
+    "example": "The Trade Secretary could find herself under the microscope.",
+    "persian": "زیر ذره‌بین، تحت بررسی دقیق"
+  },
+  {
+    "word": "old friend",
+    "definition": "a friend I have known for a long time.",
+    "example": "She's an old friend.",
+    "persian": "دوست قدیمی"
+  },
+  {
+    "word": "missed the bus",
+    "definition": "wasn't able to catch the bus.",
+    "example": "I missed the bus.",
+    "persian": "جا ماندن از اتوبوس"
+  },
+  {
+    "word": "highly unlikely",
+    "definition": "it's very unlikely he'll come.",
+    "example": "It's highly unlikely he'll come.",
+    "persian": "بسیار بعید"
+  },
+  {
+    "word": "torrential rainfall",
+    "definition": "very heavy rain.",
+    "example": "Last night we had torrential rainfall.",
+    "persian": "بارش سیل‌آسا"
+  },
+  {
+    "word": "constant care",
+    "definition": "continuous attention/looking after.",
+    "example": "His mother is very elderly and needs constant care.",
+    "persian": "مراقبت مداوم"
+  },
+  {
+    "word": "pool our resources",
+    "definition": "combine our assets/effort.",
+    "example": "If we work together on this, we'll be able to pool our resources.",
+    "persian": "منابع خود را روی هم ریختن"
+  },
+  {
+    "word": "break the deadlock",
+    "definition": "end an inability to agree or move forward.",
+    "example": "Do you think they'll be able to break the deadlock?",
+    "persian": "شکستن بن‌بست"
+  },
+  {
+    "word": "a drop in the ocean",
+    "definition": "a tiny amount compared to what is needed.",
+    "example": "It may seem a lot of money, but really it's just a drop in the ocean.",
+    "persian": "قطره‌ای در اقیانوس، مقدار ناچیز"
+  },
+  {
+    "word": "nothing to lose",
+    "definition": "no negative consequence if you fail.",
+    "example": "She might as well apply for the job; she's got nothing to lose.",
+    "persian": "چیزی برای از دست دادن نداشتن"
+  },
+  {
+    "word": "a foregone conclusion",
+    "definition": "a result that is obvious before it happens.",
+    "example": "They're bound to win; it's a foregone conclusion.",
+    "persian": "نتیجه از پیش معلوم"
+  },
+  {
+    "word": "First and foremost",
+    "definition": "most importantly.",
+    "example": "First and foremost, we must decide what to do.",
+    "persian": "اول و مهمتر از همه"
+  },
+  {
+    "word": "deteriorate",
+    "definition": "become worse. deterioration N.",
+    "example": "(No sentence provided in glossary entry)",
+    "persian": "بدتر شدن، وخیم‌تر شدن"
+  },
+  {
+    "word": "interrogation",
+    "definition": "the process of asking sb a lot of questions, especially in an aggressive way. interrogate sb v.",
+    "example": "(No sentence provided in glossary entry)",
+    "persian": "بازجویی، استنطاق"
+  },
+  {
+    "word": "catch sb out",
+    "definition": "make sb make a mistake which shows they have been lying.",
+    "example": "(No sentence provided in glossary entry)",
+    "persian": "مچ کسی را گرفتن، به دام انداختن"
+  },
+  {
+    "word": "humiliated",
+    "definition": "feeling ashamed because you have lost the respect of other people. humiliate sb v. humiliation N.",
+    "example": "(No sentence provided in glossary entry)",
+    "persian": "تحقیرشده، خجالت‌زده"
+  },
+  {
+    "word": "needless to say",
+    "definition": "obviously.",
+    "example": "(No sentence provided in glossary entry)",
+    "persian": "ناگفته پیداست، معلوم است که"
+  },
+  {
+    "word": "therapeutic",
+    "definition": "relating to the treatment of illness (adjective form of THERAPY).",
+    "example": "Most people find the treatment very therapeutic.",
+    "persian": "درمانی، شفابخش"
+  },
+  {
+    "word": "scrutinize",
+    "definition": "examine carefully (verb form of SCRUTINY).",
+    "example": "They are sure to scrutinize the results carefully.",
+    "persian": "به دقت بررسی کردن"
+  },
+  {
+    "word": "provocative",
+    "definition": "intended to cause argument or reaction (adjective form of PROVOKE).",
+    "example": "His behaviour was very provocative.",
+    "persian": "تحریک‌آمیز"
+  },
+  {
+    "word": "anonymity",
+    "definition": "the state of being unknown to most people (noun form of ANONYMOUS).",
+    "example": "Some people prefer to maintain their anonymity.",
+    "persian": "گمنامی، بی‌نامی"
+  },
+  {
+    "word": "synonymous",
+    "definition": "having the same, or nearly the same, meaning. synonym N.",
+    "example": "A Are the words phase and stage synonymous?",
+    "persian": "هم‌معنی، مترادف"
+  },
+  {
+    "word": "sense (N)",
+    "definition": "the meaning of a word or phrase.",
+    "example": "B In one sense, they're interchangeable.",
+    "persian": "معنی، مفهوم"
+  },
+  {
+    "word": "interchangeable",
+    "definition": "if two things are interchangeable you can use one instead of the other and the effect will be the same.",
+    "example": "B In one sense, they're interchangeable.",
+    "persian": "قابل تعویض، جایگزین‌پذیر"
+  },
+  {
+    "word": "ambiguous",
+    "definition": "not clear: able to be explained in different ways. ambiguity N.",
+    "example": "A It's a bit ambiguous to say 'She's a good student', isn't it?",
+    "persian": "مبهم، دوپهلو"
+  },
+  {
+    "word": "interpret sth",
+    "definition": "decide that sth has a particular meaning. interpretation N.",
+    "example": "B Yes, you can interpret it in different ways.",
+    "persian": "تفسیر کردن، تعبیر کردن"
+  },
+  {
+    "word": "transparent",
+    "definition": "(of language) easy to understand. OPP opaque.",
+    "example": "A The meaning of wrapping paper is transparent, isn't it?",
+    "persian": "شفاف، واضح"
+  },
+  {
+    "word": "self-explanatory",
+    "definition": "easy to understand and not needing more explanation.",
+    "example": "B Yes, it's self-explanatory - just paper for wrapping presents and stuff.",
+    "persian": "خودتوضیح، واضح"
+  },
+  {
+    "word": "precise",
+    "definition": "clear and accurate. SYN exact. precision N.",
+    "example": "A Can you give me a more precise definition of soul?",
+    "persian": "دقیق، مشخص"
+  },
+  {
+    "word": "virtually",
+    "definition": "almost; very nearly (virtually the same/impossible/certain).",
+    "example": "B Well, it's virtually the same as spirit - the part of you that is believed to exist after you die.",
+    "persian": "تقریباً، عملاً"
+  },
+  {
+    "word": "irony (N)",
+    "definition": "the use of words to say the opposite of what you mean, often humorously (a trace/hint of irony = a little irony).",
+    "example": "'Thank you, Sam,' she said, with heavy irony.",
+    "persian": "کنایه، وارونه‌گویی"
+  },
+  {
+    "word": "ironic (ADJ)",
+    "definition": "adjective form of irony.",
+    "example": "In fact, Sam had hardly helped at all.",
+    "persian": "کنایه‌آمیز"
+  },
+  {
+    "word": "sarcasm (N)",
+    "definition": "the use of words to say the opposite of what you mean in order to be unpleasant to sb or make fun of sb.",
+    "example": "'Oh, that's just great,' was her sarcastic reply.",
+    "persian": "طعنه، ریشخند"
+  },
+  {
+    "word": "sarcastic (ADJ)",
+    "definition": "adjective form of sarcasm.",
+    "example": "'Oh, that's just great,' was her sarcastic reply.",
+    "persian": "طعنه‌آمیز"
+  },
+  {
+    "word": "figurative",
+    "definition": "(of words) not used with their literal (= usual) meaning.",
+    "example": "Slim is used figuratively in the sentence Many firms are slimmer than they were.",
+    "persian": "مجازی، استعاری"
+  },
+  {
+    "word": "literary",
+    "definition": "used of the kind of language you find in stories and poems.",
+    "example": "Heart can be used in a literary way, e.g. She put her hand on her heart.",
+    "persian": "ادبی"
+  },
+  {
+    "word": "disapproving",
+    "definition": "(often used in dictionaries) showing that sth is bad or wrong.",
+    "example": "The dictionary marks stupid as 'disapproving'.",
+    "persian": "ناپسند، حاکی از عدم تأیید"
+  },
+  {
+    "word": "old-fashioned",
+    "definition": "no longer modern or fashionable. SYN dated. OPP in current use.",
+    "example": "Spiffing means 'great', but it's very old-fashioned.",
+    "persian": "قدیمی، از مد افتاده"
+  },
+  {
+    "word": "slang",
+    "definition": "very informal words which are not suitable in formal situations.",
+    "example": "In slang, wicked means 'very good'.",
+    "persian": "زبان عامیانه، کلام محاوره‌ای"
+  },
+  {
+    "word": "pejorative",
+    "definition": "FML expressing disapproval or criticism. SYN derogatory.",
+    "example": "His pejorative comments about my essay upset me.",
+    "persian": "توهین‌آمیز، تحقیرکننده"
+  },
+  {
+    "word": "insulting",
+    "definition": "rude or offensive (deliberately/highly insulting). insult sb v",
+    "example": "He called Mark an 'old woman': how insulting!",
+    "persian": "اهانت‌آمیز"
+  },
+  {
+    "word": "make fun of someone",
+    "definition": "make jokes about them in an unkind way.",
+    "example": "Stop making fun of her!",
+    "persian": "مسخره کردن کسی"
+  },
+  {
+    "word": "poke fun at",
+    "definition": "make jokes about them in an unkind way.",
+    "example": "(Definition entry only)",
+    "persian": "شوخی کردن با، دست انداختن"
+  },
+  {
+    "word": "mock",
+    "definition": "make fun of them, often by copying what they say or do.",
+    "example": "He's always mocking her country accent.",
+    "persian": "تمسخر کردن، تقلید کردن برای ریشخند"
+  },
+  {
+    "word": "crawl",
+    "definition": "(of a vehicle) move very slowly.",
+    "example": "As I crawled along the motorway...",
+    "persian": "خزیدن، بسیار آهسته حرکت کردن"
+  },
+  {
+    "word": "have second thoughts",
+    "definition": "start having doubts about a decision you have made.",
+    "example": "I was having second thoughts about staying with Marcus.",
+    "persian": "دچار تردید شدن، منصرف شدن"
+  },
+  {
+    "word": "be in two minds about sth",
+    "definition": "be unable to decide what to do about sth.",
+    "example": "I'd been in two minds about going in the first place...",
+    "persian": "دودل بودن، مردد بودن"
+  },
+  {
+    "word": "sweet (of sb)",
+    "definition": "kind (of sb).",
+    "example": "but it was sweet of him to invite me...",
+    "persian": "مهربانانه، از روی لطف"
+  },
+  {
+    "word": "be tied up",
+    "definition": "be busy and unable to do other things.",
+    "example": "I wasn't tied up, so I said, 'Yes.'",
+    "persian": "گرفتار بودن، سرش شلوغ بودن"
+  },
+  {
+    "word": "dawn on sb",
+    "definition": "If sth dawns on you, you begin to realize it for the first time.",
+    "example": "But now it dawned on me that he may have had an ulterior motive:",
+    "persian": "متوجه شدن، دریافتن"
+  },
+  {
+    "word": "ulterior motive",
+    "definition": "a reason for doing sth that you keep hidden.",
+    "example": "he may have had an ulterior motive:",
+    "persian": "انگیزه پنهان"
+  },
+  {
+    "word": "thick (ADJ)",
+    "definition": "INF stupid.",
+    "example": "How could I be so thick?",
+    "persian": "احمق، کودن"
+  },
+  {
+    "word": "be the last thing on sb's mind",
+    "definition": "be the thing that sb is least likely to be thinking about.",
+    "example": "a romantic relationship was the last thing on my mind.",
+    "persian": "اصلاً به فکرش نبودن"
+  },
+  {
+    "word": "get out of sth",
+    "definition": "avoid doing sth.",
+    "example": "How can I get out of this, I wondered?",
+    "persian": "قسر در رفتن، از زیر کاری در رفتن"
+  },
+  {
+    "word": "send sth/sb flying",
+    "definition": "make sth/sb move quickly and without control.",
+    "example": "something went into the back of me and sent the car flying off the road.",
+    "persian": "به هوا پرتاب کردن، پرت کردن"
+  },
+  {
+    "word": "you're not gonna believe this",
+    "definition": "used to introduce surprising and often unwelcome news (gonna INF = going to).",
+    "example": "Listen, you're not gonna believe this, but...",
+    "persian": "باور نخواهی کرد"
+  },
+  {
+    "word": "get sth/sb to do sth",
+    "definition": "make or persuade sb/sth to do sth.",
+    "example": "I finally got the car to start. / I couldn't get him to leave the party.",
+    "persian": "متقاعد کردن، وادار کردن"
+  },
+  {
+    "word": "keep (remain fresh)",
+    "definition": "remain fresh.",
+    "example": "We must eat the grapes - they won't keep.",
+    "persian": "تازه ماندن، خراب نشدن"
+  },
+  {
+    "word": "keep sb going",
+    "definition": "be enough for sb until a later time.",
+    "example": "That will keep me going until lunchtime.",
+    "persian": "کافی بودن برای ادامه دادن"
+  },
+  {
+    "word": "put sth (into words)",
+    "definition": "say or write sth in a particular way.",
+    "example": "It's hard to put your feelings into words.",
+    "persian": "بیان کردن، به زبان آوردن"
+  },
+  {
+    "word": "push sb/oneself",
+    "definition": "make sb work harder.",
+    "example": "Some parents push their kids really hard. / I need to push myself more at work.",
+    "persian": "فشار آوردن، تشویق به تلاش بیشتر کردن"
+  },
+  {
+    "word": "leave sth to/with sb",
+    "definition": "allow sb to take care of sth.",
+    "example": "I'll leave that to you. / Leave it to/with me - I'll do it.",
+    "persian": "سپردن کاری به کسی، واگذار کردن"
+  },
+  {
+    "word": "make sth sth",
+    "definition": "think or calculate sth to be a particular time or number.",
+    "example": "What time do you make it? / I make that 25 now.",
+    "persian": "محاسبه کردن، تخمین زدن (زمان یا عدد)"
+  },
+  {
+    "word": "bring sb somewhere",
+    "definition": "cause sb to reach a particular condition or place.",
+    "example": "It was the war that brought him to power. / What brings you here?",
+    "persian": "باعث شدن، کشاندن"
+  },
+  {
+    "word": "come with",
+    "definition": "be sold or produced with a particular feature.",
+    "example": "I'm sure the radio comes with batteries.",
+    "persian": "به همراه داشتن، شامل بودن"
+  },
+  {
+    "word": "come in (colours/sizes)",
+    "definition": "be sold or produced in different variations (colours, sizes, etc).",
+    "example": "The chairs come in four different colours.",
+    "persian": "در دسترس بودن در (رنگ یا اندازه)"
+  },
+  {
+    "word": "do (for sb/sth)",
+    "definition": "be enough or be acceptable in a particular situation.",
+    "example": "Will that do? / Will these shoes do for the wedding?",
+    "persian": "کافی بودن، مناسب بودن"
+  },
+  {
+    "word": "driving licence",
+    "definition": "an official document that shows you are qualified to drive.",
+    "example": "(Table entry)",
+    "persian": "گواهینامه رانندگی"
+  },
+  {
+    "word": "birth certificate",
+    "definition": "an official document showing when and where you were born.",
+    "example": "(Table entry)",
+    "persian": "شناسنامه، گواهی تولد"
+  },
+  {
+    "word": "spare part",
+    "definition": "a part for a car or machine to replace an old or broken part.",
+    "example": "(Table entry)",
+    "persian": "قطعه یدکی"
+  },
+  {
+    "word": "passer-by",
+    "definition": "a person walking past a place by chance.",
+    "example": "(Table entry)",
+    "persian": "رهگذر"
+  },
+  {
+    "word": "long weekend",
+    "definition": "a short holiday from Friday to Sunday, or Saturday to Monday.",
+    "example": "(Table entry)",
+    "persian": "آخر هفته طولانی (تعطیلی چند روزه)"
+  },
+  {
+    "word": "life expectancy",
+    "definition": "the number of years that a person is likely to live.",
+    "example": "(Table entry)",
+    "persian": "امید به زندگی"
+  },
+  {
+    "word": "short cut / shortcut",
+    "definition": "a path or route that is quicker than the normal way.",
+    "example": "(Table entry)",
+    "persian": "میان‌بُر"
+  },
+  {
+    "word": "fancy dress",
+    "definition": "clothes that you wear to a party to make you appear a different character.",
+    "example": "(Table entry)",
+    "persian": "لباس مبدل، لباس فانتزی"
+  },
+  {
+    "word": "nursery rhyme",
+    "definition": "a short and usually very old song or poem for young children.",
+    "example": "(Table entry)",
+    "persian": "شعر کودکانه، لالایی"
+  },
+  {
+    "word": "fruit/slot machine",
+    "definition": "a machine into which you put money in the hope of winning more back.",
+    "example": "(Table entry)",
+    "persian": "ماشین قمار، دستگاه اسلات"
+  },
+  {
+    "word": "next of kin",
+    "definition": "your closest living relative (often used on official documents).",
+    "example": "(Table entry)",
+    "persian": "نزدیکترین خویشاوند"
+  },
+  {
+    "word": "last-minute",
+    "definition": "happening at the last possible moment.",
+    "example": "It was a last-minute decision, but we managed to get a cheap holiday in Spain.",
+    "persian": "لحظه آخری"
+  },
+  {
+    "word": "built-up",
+    "definition": "A built-up area has a lot of houses and not many open spaces.",
+    "example": "The area's quite built-up, but the beach is lovely.",
+    "persian": "پرساختمان، توسعه‌یافته"
+  },
+  {
+    "word": "panic-stricken",
+    "definition": "extremely anxious about sth.",
+    "example": "My cousin is very absent-minded. He leaves things lying around and then gets panic-stricken when he can't find them.",
+    "persian": "وحشت‌زده، دستپاچه"
+  },
+  {
+    "word": "thick-skinned",
+    "definition": "not easily upset by unkind or critical comments.",
+    "example": "My brother's pretty thick-skinned, whereas I'm more sensitive.",
+    "persian": "پوست‌کلفت، بی‌تفاوت (به انتقاد)"
+  },
+  {
+    "word": "off-putting",
+    "definition": "(of behaviour) irritating or unattractive.",
+    "example": "I find this very off-putting and it makes me a bit tongue-tied.",
+    "persian": "آزاردهنده، دافع"
+  },
+  {
+    "word": "tongue-tied",
+    "definition": "unable to speak easily because of nerves or shyness.",
+    "example": "it makes me a bit tongue-tied.",
+    "persian": "زبانم بند آمده، قادر به سخن گفتن نبودن"
+  },
+  {
+    "word": "worn out (thing)",
+    "definition": "(of a thing) no longer useful because it has been used so much.",
+    "example": "These boots are worn out now, but they've been incredibly hard-wearing.",
+    "persian": "فرسوده، مستعمل"
+  },
+  {
+    "word": "worn out (person)",
+    "definition": "(of a person) exhausted from work or exercise.",
+    "example": "(Definition entry only)",
+    "persian": "خسته و کوفته"
+  },
+  {
+    "word": "hard-wearing",
+    "definition": "(of a product) remaining in good condition for a long time.",
+    "example": "but they've been incredibly hard-wearing.",
+    "persian": "بادوام، مقاوم"
+  },
+  {
+    "word": "never-ending",
+    "definition": "(especially of sth unpleasant) seeming to last for ever.",
+    "example": "the rows seem to be never-ending.",
+    "persian": "بی‌پایان"
+  },
+  {
+    "word": "bad-tempered",
+    "definition": "often angry and easily annoyed.",
+    "example": "It makes me very bad-tempered.",
+    "persian": "بدخلق، کج‌خلق"
+  },
+  {
+    "word": "narrow-minded",
+    "definition": "not willing to listen to the ideas and opinions of others, SYN bigoted. OPPS broad-minded, open-minded.",
+    "example": "My uncle's very narrow-minded:",
+    "persian": "کوته‌فکر، متحجر"
+  },
+  {
+    "word": "absent-minded",
+    "definition": "forgetful.",
+    "example": "My cousin is very absent-minded.",
+    "persian": "حواس‌پرت، فراموشکار"
+  },
+  {
+    "word": "single-minded",
+    "definition": "thinking in a concentrated way about sth and determined to achieve it.",
+    "example": "(Definition entry only)",
+    "persian": "هدفمند، مصمم"
+  },
+  {
+    "word": "let-down (N)",
+    "definition": "a disappointment. let sb down v.",
+    "example": "The course has been a real let-down.",
+    "persian": "ناامیدی، سرخوردگی"
+  },
+  {
+    "word": "drop out (of sth)",
+    "definition": "leave school, college, a course, etc. without finishing your studies. dropout N.",
+    "example": "Some people have dropped out already.",
+    "persian": "ترک تحصیل کردن، انصراف دادن"
+  },
+  {
+    "word": "turnout (N)",
+    "definition": "the number of people who attend an event. turn out v.",
+    "example": "last night the turnout was awful.",
+    "persian": "تعداد شرکت‌کنندگان، حضور"
+  },
+  {
+    "word": "shake-up (N)",
+    "definition": "large changes made in an organization to improve it. shake sth up v.",
+    "example": "There could be quite a shake-up at the end of the year.",
+    "persian": "تحول بزرگ، دگرگونی"
+  },
+  {
+    "word": "break down (V)",
+    "definition": "(of a vehicle or machine) stop working. breakdown N.",
+    "example": "A car broke down on the side of the road and a lorry crashed into it;",
+    "persian": "خراب شدن (ماشین)"
+  },
+  {
+    "word": "hold sth/sb up (V)",
+    "definition": "delay sth/sb. hold-up N.",
+    "example": "we were held up in the ensuing tailback.",
+    "persian": "معطل کردن، به تأخیر انداختن"
+  },
+  {
+    "word": "tailback (N)",
+    "definition": "a long line of traffic, moving very slowly. tail back v.",
+    "example": "we were held up in the ensuing tailback.",
+    "persian": "ترافیک سنگین، صف طولانی ماشین"
+  },
+  {
+    "word": "write-off (N)",
+    "definition": "a vehicle that is so badly damaged that it is not worth repairing. write sth off v.",
+    "example": "but the car was a write-off.",
+    "persian": "اسقاطی، چیزی که ارزش تعمیر ندارد"
+  },
+  {
+    "word": "break-up (N)",
+    "definition": "the ending of a relationship or association. break up v.",
+    "example": "The break-up of their marriage was a real setback for Paula...",
+    "persian": "جدایی، قطع رابطه"
+  },
+  {
+    "word": "setback (N)",
+    "definition": "a problem that delays or prevents progress, or makes a situation worse for sb. set sth/sb back v.",
+    "example": "The break-up of their marriage was a real setback for Paula...",
+    "persian": "مشکل، مانع، شکست"
+  },
+  {
+    "word": "outbreak (N)",
+    "definition": "the start of something bad (e.g. war, disease).",
+    "example": "The outbreak of war followed.",
+    "persian": "شیوع، آغاز ناگهانی"
+  },
+  {
+    "word": "outlay (N)",
+    "definition": "the amount of money spent.",
+    "example": "What was the initial outlay?",
+    "persian": "هزینه، مخارج اولیه"
+  },
+  {
+    "word": "lay out (V)",
+    "definition": "INF spend (money).",
+    "example": "Did he lay out much money?",
+    "persian": "خرج کردن، هزینه کردن"
+  },
+  {
+    "word": "set fire to",
+    "definition": "made it start burning.",
+    "example": "Two boys set fire to the school.",
+    "persian": "آتش زدن"
+  },
+  {
+    "word": "catch fire",
+    "definition": "start to burn.",
+    "example": "These buildings catch fire easily.",
+    "persian": "آتش گرفتن"
+  },
+  {
+    "word": "fire broke out",
+    "definition": "the fire started.",
+    "example": "The fire broke out in the kitchen.",
+    "persian": "آتش‌سوزی شروع شد"
+  },
+  {
+    "word": "be on fire",
+    "definition": "burning.",
+    "example": "The building is on fire.",
+    "persian": "در حال سوختن بودن"
+  },
+  {
+    "word": "fire spread",
+    "definition": "the fire moved and covered a larger area.",
+    "example": "The fire spread to the first floor.",
+    "persian": "آتش گسترش یافت"
+  },
+  {
+    "word": "burst into flames",
+    "definition": "suddenly began burning strongly.",
+    "example": "The plane burst into flames.",
+    "persian": "شعله‌ور شدن ناگهانی"
+  },
+  {
+    "word": "go up in flames",
+    "definition": "was destroyed by fire.",
+    "example": "The cottage went up in flames.",
+    "persian": "سوختن و نابود شدن در آتش"
+  },
+  {
+    "word": "die down",
+    "definition": "the fire/flames became weak.",
+    "example": "The fire/flames soon died down.",
+    "persian": "فروکش کردن، آرام شدن (آتش)"
+  },
+  {
+    "word": "put out the fire",
+    "definition": "stop the fire burning. SYN extinguish the fire FML.",
+    "example": "They managed to put out the fire.",
+    "persian": "خاموش کردن آتش"
+  },
+  {
+    "word": "forest fires",
+    "definition": "fires that occur in forests during hot summer months.",
+    "example": "We get a lot of forest fires here.",
+    "persian": "آتش‌سوزی جنگل"
+  },
+  {
+    "word": "lit a fire",
+    "definition": "started a fire for a purpose (e.g. in a fireplace or garden).",
+    "example": "I lit a fire this morning.",
+    "persian": "آتش روشن کردن"
+  },
+  {
+    "word": "went out (fire)",
+    "definition": "the fire stopped burning.",
+    "example": "The fire went out last night.",
+    "persian": "خاموش شدن (آتش)"
+  },
+  {
+    "word": "lights went out",
+    "definition": "suddenly the lights stopped working.",
+    "example": "Suddenly the lights went out.",
+    "persian": "برق رفت"
+  },
+  {
+    "word": "put out (a cigarette)",
+    "definition": "stop something from burning.",
+    "example": "Put that cigarette out, please.",
+    "persian": "خاموش کردن (سیگار)"
+  },
+  {
+    "word": "fight broke out",
+    "definition": "an argument/conflict started.",
+    "example": "A fight broke out between the gangs.",
+    "persian": "دعوا شروع شد"
+  },
+  {
+    "word": "burst into tears",
+    "definition": "suddenly started crying.",
+    "example": "The little girl burst into tears.",
+    "persian": "بنای گریه گذاشتن، ناگهان گریه کردن"
+  },
+  {
+    "word": "noise died down",
+    "definition": "the noise became weaker.",
+    "example": "The noise soon died down.",
+    "persian": "سر و صدا کم شد"
+  },
+  {
+    "word": "torrential rain",
+    "definition": "very heavy rain.",
+    "example": "We had torrential rain last night.",
+    "persian": "باران شدید/سیل‌آسا"
+  },
+  {
+    "word": "gale-force winds",
+    "definition": "very strong winds.",
+    "example": "They are predicting gale-force winds tonight.",
+    "persian": "بادهای بسیار شدید/طوفانی"
+  },
+  {
+    "word": "considerable difficulty",
+    "definition": "a lot of difficulty. SYN great difficulty.",
+    "example": "I had considerable difficulty getting here.",
+    "persian": "مشکل قابل توجه"
+  },
+  {
+    "word": "extensive damage",
+    "definition": "a lot of damage. SYN widespread damage.",
+    "example": "The storms caused extensive damage.",
+    "persian": "آسیب گسترده"
+  },
+  {
+    "word": "strong accent",
+    "definition": "a very noticeable accent. OPP slight accent.",
+    "example": "He speaks with a strong accent.",
+    "persian": "لهجه قوی/غلیظ"
+  },
+  {
+    "word": "great honour",
+    "definition": "an action or occasion that creates a feeling of pride.",
+    "example": "It was a great honour to meet the president.",
+    "persian": "افتخار بزرگ"
+  },
+  {
+    "word": "real effort",
+    "definition": "a big effort. SYNS special/concerted effort.",
+    "example": "We made a real effort to finish it on time.",
+    "persian": "تلاش واقعی/زیاد"
+  },
+  {
+    "word": "main concern",
+    "definition": "biggest worry. SYN principal concern (also growing concern = an increasing concern).",
+    "example": "My main concern is the effect of the drugs.",
+    "persian": "نگرانی اصلی"
+  },
+  {
+    "word": "familiar face",
+    "definition": "a person who you recognize and know.",
+    "example": "It's nice to see a familiar face.",
+    "persian": "چهره آشنا"
+  },
+  {
+    "word": "brief summary",
+    "definition": "a short statement giving the main points of sth.",
+    "example": "Could you give us a brief summary?",
+    "persian": "خلاصه کوتاه"
+  },
+  {
+    "word": "classic example",
+    "definition": "a very typical example of sth. SYN perfect example.",
+    "example": "It was a classic example of his stupidity.",
+    "persian": "مثال کلاسیک/نمونه بارز"
+  },
+  {
+    "word": "strong criticism",
+    "definition": "a lot of disapproval from others. SYN fierce criticism (also widespread criticism).",
+    "example": "I had to face strong criticism over this issue.",
+    "persian": "انتقاد شدید"
+  },
+  {
+    "word": "utter chaos",
+    "definition": "a state of complete confusion. SYN total chaos.",
+    "example": "The place was in utter chaos when I arrived.",
+    "persian": "هرج و مرج مطلق"
+  },
+  {
+    "word": "narrow escape",
+    "definition": "they were lucky to get away safely.",
+    "example": "The children had a narrow escape.",
+    "persian": "نجات یافتن به سختی، قسر در رفتن"
+  },
+  {
+    "word": "a real eyesore",
+    "definition": "a building or object that is very unpleasant to look at.",
+    "example": "neighbour Adam Clark thought it was a real eyesore,",
+    "persian": "بسیار زشت، منظره نازیبا"
+  },
+  {
+    "word": "take offence (at sth)",
+    "definition": "show you are angry or upset about sth, or feeling insulted by it.",
+    "example": "Mr Hunt took offence and made it clear that he would do no such thing.",
+    "persian": "رنجیدن، به خود گرفتن"
+  },
+  {
+    "word": "make it clear (that)",
+    "definition": "say sth to make sb understand a situation.",
+    "example": "and made it clear that he would do no such thing.",
+    "persian": "واضح ساختن"
+  },
+  {
+    "word": "do no such thing",
+    "definition": "refuse to do the thing you have been asked to do.",
+    "example": "made it clear that he would do no such thing.",
+    "persian": "چنین کاری را انجام ندادن"
+  },
+  {
+    "word": "reach (an) agreement",
+    "definition": "successfully arrive at an agreement (reach a conclusion/compromise/verdict).",
+    "example": "One year on, the two men still haven't reached agreement.",
+    "persian": "به توافق رسیدن"
+  },
+  {
+    "word": "face the prospect (of/that...)",
+    "definition": "recognize the possibility that sth may happen.",
+    "example": "and now face the prospect of having to settle their dispute in court.",
+    "persian": "مواجه شدن با چشم‌انداز/احتمال"
+  },
+  {
+    "word": "settle a dispute",
+    "definition": "end an argument between people (settle an argument).",
+    "example": "having to settle their dispute in court.",
+    "persian": "حل اختلاف"
+  },
+  {
+    "word": "hold sb responsible (for sth)",
+    "definition": "think that sb should be blamed for sth.",
+    "example": "He holds me entirely responsible and refuses to take any of the blame.",
+    "persian": "مسئول دانستن کسی"
+  },
+  {
+    "word": "take the blame (for sth)",
+    "definition": "accept responsibility for sth.",
+    "example": "and refuses to take any of the blame.",
+    "persian": "تقصیر را به گردن گرفتن"
+  },
+  {
+    "word": "reach the point (where/when)",
+    "definition": "arrive at a time or stage at which sth happens.",
+    "example": "we've reached the point where neither of us will back down.",
+    "persian": "به نقطه‌ای رسیدن که"
+  },
+  {
+    "word": "back down",
+    "definition": "stop asking for sth, or stop saying you will do sth.",
+    "example": "we've reached the point where neither of us will back down.",
+    "persian": "عقب‌نشینی کردن، کوتاه آمدن"
+  },
+  {
+    "word": "entirely",
+    "definition": "completely.",
+    "example": "He holds me entirely responsible.",
+    "persian": "کاملاً، به طور کامل"
+  },
+  {
+    "word": "entirely different",
+    "definition": "completely different.",
+    "example": "entirely different",
+    "persian": "کاملاً متفاوت"
+  },
+  {
+    "word": "agree entirely",
+    "definition": "agree completely.",
+    "example": "agree entirely",
+    "persian": "کاملاً موافق بودن"
+  },
+  {
+    "word": "not entirely",
+    "definition": "not completely (used to soften speech).",
+    "example": "I'm not entirely sure/happy/satisfied.",
+    "persian": "نه کاملاً، تا حدی"
+  }
+]

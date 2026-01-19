@@ -1,0 +1,5763 @@
+[
+  {
+    "id": "275b1b4f-8f22-483e-82d0-617ebe56eedb",
+    "word": "Conjugate [kənˈdʒuːɡeɪt]",
+    "existing": {
+      "pp": "conjugated",
+      "adj": "conjugated",
+      "noun": "conjugation",
+      "past": "conjugated",
+      "verb": "conjugate"
+    }
+  },
+  {
+    "id": "667997b8-33e8-42bb-8aaf-ccafc822ecd4",
+    "word": "arousal, /əˈraʊ.zəl/",
+    "existing": {
+      "pp": "aroused",
+      "adj": "aroused",
+      "adv": null,
+      "noun": "arousal",
+      "past": "aroused",
+      "verb": "arouse"
+    }
+  },
+  {
+    "id": "1819ed4b-95bd-4323-a82c-133cbf91d844",
+    "word": "chair (a meeting) V",
+    "existing": {
+      "pp": "chaired",
+      "adj": "chaired",
+      "adv": null,
+      "noun": "chair",
+      "past": "chaired",
+      "verb": "chair"
+    }
+  },
+  {
+    "id": "ed7b9d85-01bc-4c1a-9a9e-2856702e64ea",
+    "word": "Restroom",
+    "existing": {
+      "pp": null,
+      "adj": null,
+      "adv": null,
+      "noun": "restroom",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "07a6c095-ac59-4eec-8ae5-d22070604cb0",
+    "word": "Change the subject",
+    "existing": {
+      "pp": "changed",
+      "adj": "changeable",
+      "adv": null,
+      "noun": "change",
+      "past": "changed",
+      "verb": "change"
+    }
+  },
+  {
+    "id": "9725c9c2-9f4b-4dd3-9ba2-935ec82fc95f",
+    "word": "repel/fight",
+    "existing": {
+      "pp": "repelled",
+      "adj": "repulsive",
+      "adv": null,
+      "noun": "repulsion",
+      "past": "repelled",
+      "verb": "repel"
+    }
+  },
+  {
+    "id": "31cb22bb-b9f7-4c78-889d-7c7808273be9",
+    "word": "Night owl",
+    "existing": {
+      "pp": null,
+      "adj": null,
+      "adv": null,
+      "noun": "night owl",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "d14deffd-4f5e-4bb6-852f-7cb216c2e68e",
+    "word": "Insomnia",
+    "existing": {
+      "adj": "insomniac",
+      "noun": "insomnia"
+    }
+  },
+  {
+    "id": "98e40059-ee92-446d-ade4-fb47a744b5b0",
+    "word": "imbecile [ˈɪm.bə.sɪl]",
+    "existing": {
+      "pp": null,
+      "adj": "imbecilic",
+      "adv": null,
+      "noun": "imbecility",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "ba7aa671-0674-476b-9659-cb0b15ab3e39",
+    "word": "parlance [ˈpɑː.ləns]",
+    "existing": {
+      "pp": null,
+      "adj": null,
+      "adv": null,
+      "noun": "parlance",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "d7cc2680-68b1-4810-a869-f5fb1739126d",
+    "word": "depleted [dɪˈpliː.tɪd]",
+    "existing": {
+      "pp": "depleted",
+      "adj": "depleted",
+      "adv": null,
+      "noun": "depletion",
+      "past": "depleted",
+      "verb": "deplete"
+    }
+  },
+  {
+    "id": "7e5bebc7-0a36-4d20-94b0-07d3b9740e29",
+    "word": "advent [ˈæd.vɛnt]",
+    "existing": {
+      "pp": null,
+      "adj": "adventitious",
+      "adv": null,
+      "noun": "advent",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "bd0604e9-bc3a-4fac-8695-3b1b01956e72",
+    "word": "recalcitrant [rɪˈkæl.sɪ.trənt]",
+    "existing": {
+      "pp": null,
+      "adj": "recalcitrant",
+      "adv": "recalcitrantly",
+      "noun": "recalcitrance",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "ee67888b-3a84-4aa4-b61e-5e0c15501b25",
+    "word": "thus/hence",
+    "existing": {
+      "pp": null,
+      "adj": null,
+      "adv": "thus",
+      "noun": null,
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "8aaa696b-4d42-40ae-b149-8b79645599cb",
+    "word": "With regard to/Regarding/Concerning",
+    "existing": {
+      "pp": "regarded",
+      "adj": "regardless",
+      "adv": null,
+      "noun": "regard",
+      "past": "regarded",
+      "verb": "regard"
+    }
+  },
+  {
+    "id": "4cc7d255-260c-40c0-810c-aff6de7c16e5",
+    "word": "Catch red-handed",
+    "existing": {
+      "pp": "caught",
+      "adj": "catchy",
+      "adv": null,
+      "noun": "catch",
+      "past": "caught",
+      "verb": "catch"
+    }
+  },
+  {
+    "id": "078e2ca4-2302-4e36-ae1a-40729a98c6eb",
+    "word": "Comprise [kəmˈpraɪz]",
+    "existing": {
+      "pp": "comprised",
+      "adj": "comprised",
+      "adv": null,
+      "noun": null,
+      "past": "comprised",
+      "verb": "comprise"
+    }
+  },
+  {
+    "id": "d8d93927-f44d-488f-ba57-9ad6fff7bf34",
+    "word": "Make ends meet",
+    "existing": {
+      "pp": "met",
+      "adj": null,
+      "adv": null,
+      "noun": "meeting",
+      "past": "met",
+      "verb": "meet"
+    }
+  },
+  {
+    "id": "e445efa9-588b-424f-aba7-9fc0b24a0fc3",
+    "word": "Dodge a bullet",
+    "existing": {
+      "pp": "dodged",
+      "adj": null,
+      "adv": null,
+      "noun": "dodge",
+      "past": "dodged",
+      "verb": "dodge"
+    }
+  },
+  {
+    "id": "7336721b-71dc-42ac-be9d-663596a7fafb",
+    "word": "sacrosanct [ˈsæk.rə.sæŋkt]",
+    "existing": {
+      "pp": null,
+      "adj": "sacrosanct",
+      "adv": "sacrosanctly",
+      "noun": "sacrosanctity",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "8cc56c2e-a7a0-4dc3-bcb5-d6e62366d433",
+    "word": "Make an appointment",
+    "existing": {
+      "pp": "appointed",
+      "adj": "appointed",
+      "adv": null,
+      "noun": "appointment",
+      "past": "appointed",
+      "verb": "appoint"
+    }
+  },
+  {
+    "id": "0e1e087b-01f3-4e54-8fb1-cefc64834742",
+    "word": "conceal sth (V)",
+    "existing": {
+      "pp": "concealed",
+      "adj": "concealed",
+      "adv": null,
+      "noun": "concealment",
+      "past": "concealed",
+      "verb": "conceal"
+    }
+  },
+  {
+    "id": "e043b666-f8db-404e-9bb9-3c08aca92ee9",
+    "word": "guideline (N)",
+    "existing": {
+      "pp": "guided",
+      "adj": "guiding",
+      "adv": null,
+      "noun": "guideline",
+      "past": "guided",
+      "verb": "guide"
+    }
+  },
+  {
+    "id": "021af7b0-b5e8-44a6-b69b-2a2e9cde80d1",
+    "word": "solicitor",
+    "existing": {
+      "pp": "solicited",
+      "adj": "solicited",
+      "adv": null,
+      "noun": "solicitor",
+      "past": "solicited",
+      "verb": "solicit"
+    }
+  },
+  {
+    "id": "a50ca1f5-cc14-4867-8a84-7efe354a0794",
+    "word": "Contagious",
+    "existing": {
+      "pp": null,
+      "adj": "contagious",
+      "adv": "contagiously",
+      "noun": "contagion",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "1fd925fa-06f7-4250-8c01-a91b7cc4e64f",
+    "word": "Pig-headed",
+    "existing": {
+      "pp": null,
+      "adj": "pig-headed",
+      "adv": "pig-headedly",
+      "noun": "pig-headedness",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "9b4bcd87-4af0-4f3b-8ee7-c1f4e6c058ae",
+    "word": "Scalp [skælp]",
+    "existing": {
+      "pp": "scalped",
+      "adj": "scalped",
+      "adv": null,
+      "noun": "scalp",
+      "past": "scalped",
+      "verb": "scalp"
+    }
+  },
+  {
+    "id": "291041b2-ec8a-4223-bb93-1b08056603f7",
+    "word": "Bluff",
+    "existing": {
+      "pp": "bluffed",
+      "adj": "bluffing",
+      "adv": null,
+      "noun": "bluff",
+      "past": "bluffed",
+      "verb": "bluff"
+    }
+  },
+  {
+    "id": "d0c72665-5ca0-49ed-86a3-d6c190adc885",
+    "word": "Mutter /ˈmʌt.ər/ MUH-TER",
+    "existing": {
+      "pp": "muttered",
+      "adj": "muttering",
+      "adv": null,
+      "noun": "mutter",
+      "past": "muttered",
+      "verb": "mutter"
+    }
+  },
+  {
+    "id": "ee7a3d5c-da55-46b0-b2c4-a4a45eac9dd2",
+    "word": "cater [ˈkeɪ.tər]",
+    "existing": {
+      "pp": "catered",
+      "adj": "catered",
+      "adv": null,
+      "noun": "catering",
+      "past": "catered",
+      "verb": "cater"
+    }
+  },
+  {
+    "id": "e3be44eb-6ccf-4061-a6ba-ad8f4fc1716e",
+    "word": "lure [lʊə(r)]",
+    "existing": {
+      "pp": "lured",
+      "adj": "luring",
+      "adv": null,
+      "noun": "lure",
+      "past": "lured",
+      "verb": "lure"
+    }
+  },
+  {
+    "id": "9d7ea8c3-83da-4aeb-8b0e-9031ea93c5ad",
+    "word": "Side effects",
+    "existing": {
+      "pp": null,
+      "adj": null,
+      "adv": null,
+      "noun": "side effect",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "0c38efb1-6118-4ac6-8490-a5341e5f7d02",
+    "word": "Wages [ˈweɪ.dʒɪz]",
+    "existing": {
+      "pp": "waged",
+      "adj": "waged",
+      "adv": null,
+      "noun": "wage",
+      "past": "waged",
+      "verb": "wage"
+    }
+  },
+  {
+    "id": "17f07831-e7e5-45a3-b21e-3f35d101c491",
+    "word": "Fend for oneself",
+    "existing": {
+      "pp": "fended",
+      "adj": null,
+      "adv": null,
+      "noun": null,
+      "past": "fended",
+      "verb": "fend"
+    }
+  },
+  {
+    "id": "0e3ea4ca-425d-4de2-8430-559385d12759",
+    "word": "dampening [ˈdæm.pən.ɪŋ]",
+    "existing": {
+      "pp": "dampened",
+      "adj": "dampened",
+      "adv": null,
+      "noun": "dampening",
+      "past": "dampened",
+      "verb": "dampen"
+    }
+  },
+  {
+    "id": "ef2137e7-bfd4-4515-9be2-3a5d35904af3",
+    "word": "remand sb",
+    "existing": {
+      "pp": "remanded",
+      "adj": "remanded",
+      "adv": null,
+      "noun": "remand",
+      "past": "remanded",
+      "verb": "remand"
+    }
+  },
+  {
+    "id": "348fc718-2dab-45f7-96d5-558eea5a287a",
+    "word": "Sagacious [suh-GAY-shuhs]",
+    "existing": {
+      "pp": null,
+      "adj": "sagacious",
+      "adv": "sagaciously",
+      "noun": "sagacity",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "fa00fb8c-741d-4714-86eb-8c4477be0550",
+    "word": "criterion",
+    "existing": {
+      "pp": null,
+      "adj": "criterial",
+      "adv": null,
+      "noun": "criterion",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "6d8d96c0-53f5-429d-a3eb-cc4129f63b2b",
+    "word": "Leverage",
+    "existing": {
+      "pp": "leveraged",
+      "adj": "leveraged",
+      "adv": null,
+      "noun": "leverage",
+      "past": "leveraged",
+      "verb": "leverage"
+    }
+  },
+  {
+    "id": "b5397414-e109-4d0c-8805-c1a8256ee2f0",
+    "word": "Apathetic",
+    "existing": {
+      "pp": null,
+      "adj": "apathetic",
+      "adv": "apathetically",
+      "noun": "apathy",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "de8274f6-900b-41eb-b69a-5d82b39c1298",
+    "word": "Repercussion",
+    "existing": {
+      "pp": null,
+      "adj": "repercussive",
+      "adv": null,
+      "noun": "repercussion",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "21b53fad-bc19-458b-b683-f9560fd0b5c7",
+    "word": "Odour [ˈəʊdə]",
+    "existing": {
+      "pp": null,
+      "adj": "odorous",
+      "adv": null,
+      "noun": "odour",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "dac84b70-c83d-42f3-8d9a-67fe0bad81ea",
+    "word": "Indispensable [ˌɪn.dɪˈspen.sə.bəl]",
+    "existing": {
+      "pp": null,
+      "adj": "indispensable",
+      "adv": "indispensably",
+      "noun": "indispensability",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "e1254b80-87cc-4e14-a352-0ad4c9bf425d",
+    "word": "Grapple with",
+    "existing": {
+      "pp": "grappled",
+      "adj": "grappling",
+      "adv": null,
+      "noun": "grapple",
+      "past": "grappled",
+      "verb": "grapple"
+    }
+  },
+  {
+    "id": "6ed47d06-f654-4d3f-a57d-c82cb0d7c343",
+    "word": "Precarious [prɪˈkeə.ri.əs]",
+    "existing": {
+      "pp": null,
+      "adj": "precarious",
+      "adv": "precariously",
+      "noun": "precariousness",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "a42ecf60-afe5-459d-8d2d-b06b8ce68a6b",
+    "word": "Unless ...",
+    "existing": {
+      "pp": null,
+      "adj": null,
+      "adv": null,
+      "noun": null,
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "6e09e69d-bbf3-4013-b549-61bc85d45337",
+    "word": "Evaporates [ɪˈvæpəreɪts]",
+    "existing": {
+      "pp": "evaporated",
+      "adj": "evaporated",
+      "adv": null,
+      "noun": "evaporation",
+      "past": "evaporated",
+      "verb": "evaporate"
+    }
+  },
+  {
+    "id": "f32df88c-1b47-419b-a7b6-8fc379978eb0",
+    "word": "Timid",
+    "existing": {
+      "pp": null,
+      "adj": "timid",
+      "adv": "timidly",
+      "noun": "timidity",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "73271777-4c02-41fa-b280-f2b4fdae66d5",
+    "word": "Cynical",
+    "existing": {
+      "pp": null,
+      "adj": "cynical",
+      "adv": "cynically",
+      "noun": "cynicism",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "fe270e3a-7bc4-404a-9447-f570bba14983",
+    "word": "gesture (N)",
+    "existing": {
+      "pp": "gestured",
+      "adj": "gestural",
+      "adv": null,
+      "noun": "gesture",
+      "past": "gestured",
+      "verb": "gesture"
+    }
+  },
+  {
+    "id": "0415becf-be83-4807-b3e4-b060e100b1d8",
+    "word": "Opaque",
+    "existing": {
+      "pp": null,
+      "adj": "opaque",
+      "adv": "opaquely",
+      "noun": "opaqueness",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "bd4f7b0a-5400-4274-b817-6af707ea6eb4",
+    "word": "Sabotage ",
+    "existing": {
+      "pp": "sabotaged",
+      "adj": null,
+      "adv": null,
+      "noun": "sabotage",
+      "past": "sabotaged",
+      "verb": "sabotage"
+    }
+  },
+  {
+    "id": "5d68d6bf-ae9b-4375-81f8-729d08eb2205",
+    "word": "self-contained",
+    "existing": {
+      "pp": null,
+      "adj": "self-contained",
+      "adv": null,
+      "noun": "self-containment",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "1ed043de-c0a7-48f6-b032-65846f79d4c0",
+    "word": "readily [ˈrɛdɪli]",
+    "existing": {
+      "pp": null,
+      "adj": "ready",
+      "adv": "readily",
+      "noun": "readiness",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "75496ce7-909b-4d38-9b3d-ba92e1dd7577",
+    "word": "Integrity",
+    "existing": {
+      "pp": null,
+      "adj": "integral",
+      "adv": "integrally",
+      "noun": "integrity",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "ab3aa05c-e1f2-45b4-b861-1012d5ad2e9e",
+    "word": "Pungent",
+    "existing": {
+      "pp": null,
+      "adj": "pungent",
+      "adv": "pungently",
+      "noun": "pungency",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "a9e37bb3-71cc-40a9-8652-d988563f1d5d",
+    "word": "Cursory",
+    "existing": {
+      "pp": null,
+      "adj": "cursory",
+      "adv": "cursorily",
+      "noun": "cursoriness",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "a941156c-7323-4310-b72a-bc81c4a01c87",
+    "word": "Bullish",
+    "existing": {
+      "pp": null,
+      "adj": "bullish",
+      "adv": "bullishly",
+      "noun": "bullishness",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "331f61a5-25f3-47ef-b1f7-228dc3db09b7",
+    "word": "Outperform [aʊt.pərˈfɔːrm]",
+    "existing": {
+      "pp": "outperformed",
+      "adj": null,
+      "adv": null,
+      "noun": "outperformance",
+      "past": "outperformed",
+      "verb": "outperform"
+    }
+  },
+  {
+    "id": "207e8859-94f6-441a-818c-175968125faa",
+    "word": "the draft",
+    "existing": {
+      "pp": "drafted",
+      "adj": "draft",
+      "adv": null,
+      "noun": "draft",
+      "past": "drafted",
+      "verb": "draft"
+    }
+  },
+  {
+    "id": "701ce627-740e-4a88-b5cf-82ebc2f49400",
+    "word": "Reimburse ",
+    "existing": {
+      "pp": "reimbursed",
+      "adj": "reimbursable",
+      "adv": null,
+      "noun": "reimbursement",
+      "past": "reimbursed",
+      "verb": "reimburse"
+    }
+  },
+  {
+    "id": "b9ab1579-fc4e-44f9-994e-66d515c036ff",
+    "word": "Longevity [lɒnˈdʒɛvəti]",
+    "existing": {
+      "pp": null,
+      "adj": null,
+      "adv": null,
+      "noun": "longevity",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "5b648181-702a-45d0-84be-e3c81970eaed",
+    "word": "rampant [ˈræm.pənt]",
+    "existing": {
+      "pp": null,
+      "adj": "rampant",
+      "adv": "rampantly",
+      "noun": "rampancy",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "58ca8832-9645-422f-9124-7271995fb08d",
+    "word": "eye contact (N)",
+    "existing": {
+      "pp": null,
+      "adj": null,
+      "adv": null,
+      "noun": "eye contact",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "0eadf7fd-e61c-44ae-96b0-942b09ad3a98",
+    "word": "Granted that ...",
+    "existing": {
+      "pp": "granted",
+      "adj": "granted",
+      "adv": null,
+      "noun": "grant",
+      "past": "granted",
+      "verb": "grant"
+    }
+  },
+  {
+    "id": "324be75b-b666-4658-bd2d-57d1987fef12",
+    "word": "But for ...",
+    "existing": {
+      "pp": null,
+      "adj": null,
+      "adv": null,
+      "noun": null,
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "48f64eab-86fe-4c34-81a6-4460108ee313",
+    "word": "Fabricate",
+    "existing": {
+      "pp": "fabricated",
+      "adj": "fabricated",
+      "adv": null,
+      "noun": "fabrication",
+      "past": "fabricated",
+      "verb": "fabricate"
+    }
+  },
+  {
+    "id": "4cb46c4c-b1cd-4a06-85d2-9ce20b4f9dbd",
+    "word": "Exacerbate",
+    "existing": {
+      "pp": "exacerbated",
+      "adj": "exacerbating",
+      "adv": null,
+      "noun": "exacerbation",
+      "past": "exacerbated",
+      "verb": "exacerbate"
+    }
+  },
+  {
+    "id": "9157f188-9526-412c-970b-84941df096b6",
+    "word": "Scrutinize",
+    "existing": {
+      "pp": "scrutinized",
+      "adj": "scrutinizing",
+      "adv": null,
+      "noun": "scrutiny",
+      "past": "scrutinized",
+      "verb": "scrutinize"
+    }
+  },
+  {
+    "id": "0f1e1b7a-94b9-4e13-9f9b-4a4237d28a0d",
+    "word": "Stuck in traffic",
+    "existing": {
+      "pp": "stuck",
+      "adj": "stuck",
+      "adv": null,
+      "noun": null,
+      "past": "stuck",
+      "verb": "stick"
+    }
+  },
+  {
+    "id": "35689392-5efc-430b-af0e-9a164b36af99",
+    "word": "combination (N)",
+    "existing": {
+      "pp": "combined",
+      "adj": "combined",
+      "adv": null,
+      "noun": "combination",
+      "past": "combined",
+      "verb": "combine"
+    }
+  },
+  {
+    "id": "712d902a-8815-423e-b17c-c84f2c91be77",
+    "word": "Arms deal probe",
+    "existing": {
+      "pp": "probed",
+      "adj": null,
+      "adv": null,
+      "noun": "probe",
+      "past": "probed",
+      "verb": "probe"
+    }
+  },
+  {
+    "id": "4d01c4c6-1e28-4b02-b65e-0818ef692cc4",
+    "word": "As it happens",
+    "existing": {
+      "pp": "happened",
+      "adj": null,
+      "adv": null,
+      "noun": "happening",
+      "past": "happened",
+      "verb": "happen"
+    }
+  },
+  {
+    "id": "6f0dec1d-a0f0-4ca5-929d-2a9c222c763c",
+    "word": "Nodded [ˈnɑːdɪd]",
+    "existing": {
+      "pp": "nodded",
+      "adj": null,
+      "adv": null,
+      "noun": "nod",
+      "past": "nodded",
+      "verb": "nod"
+    }
+  },
+  {
+    "id": "c1cc75d7-6959-4a7a-b095-52f25b9309b5",
+    "word": "Notorious",
+    "existing": {
+      "pp": null,
+      "adj": "notorious",
+      "adv": "notoriously",
+      "noun": "notoriety",
+      "past": null,
+      "verb": null
+    }
+  },
+  {
+    "id": "8a5c3377-b51e-4545-a9b7-f71ac23d08cb",
+    "word": "display sth (V)",
+    "existing": {
+      "pp": "displayed",
+      "adj": "displayed",
+      "adv": null,
+      "noun": "display",
+      "past": "displayed",
+      "verb": "display"
+    }
+  },
+  {
+    "id": "dbef85f4-d588-4380-82ca-70288113fb05",
+    "word": "Nonchalant",
+    "existing": {
+      "adj": "nonchalant",
+      "adv": "nonchalantly",
+      "noun": "nonchalance"
+    }
+  },
+  {
+    "id": "d183a267-894c-40e3-96ae-4187c1b7b1ee",
+    "word": "Intricate",
+    "existing": {
+      "adj": "intricate",
+      "adv": "intricately",
+      "noun": "intricacy"
+    }
+  },
+  {
+    "id": "c6bc749e-da90-4d4d-8b3b-ebd8e43782a8",
+    "word": "Inevitable",
+    "existing": {
+      "adj": "inevitable",
+      "adv": "inevitably",
+      "noun": "inevitability"
+    }
+  },
+  {
+    "id": "617f6e4e-46b0-471a-879e-93423c35a92e",
+    "word": "Seemingly",
+    "existing": {
+      "adj": "seeming",
+      "adv": "seemingly",
+      "verb": "seem"
+    }
+  },
+  {
+    "id": "7eb661e9-609f-4db5-a35a-6a767f717f93",
+    "word": "Embark [ɛmˈbɑːrk]",
+    "existing": {
+      "pp": "embarked",
+      "noun": "embarkation",
+      "past": "embarked",
+      "verb": "embark"
+    }
+  },
+  {
+    "id": "bbebdd98-0009-483b-82a6-8ba8f68b30fa",
+    "word": "Dustpan",
+    "existing": {
+      "noun": "dustpan"
+    }
+  },
+  {
+    "id": "d12616a5-1e35-46ec-b141-5289004c553f",
+    "word": "Undermine",
+    "existing": {
+      "pp": "undermined",
+      "past": "undermined",
+      "verb": "undermine"
+    }
+  },
+  {
+    "id": "4bc76f40-16ed-42e7-87eb-c4bf7f40c510",
+    "word": "Tangible",
+    "existing": {
+      "adj": "tangible",
+      "adv": "tangibly",
+      "noun": "tangibility"
+    }
+  },
+  {
+    "id": "db6af7de-d7b7-43a9-b452-35c3dae1a581",
+    "word": "Clothespin",
+    "existing": {
+      "noun": "clothespin"
+    }
+  },
+  {
+    "id": "8f5cdca2-9c81-4eb4-99c2-784e7f839d46",
+    "word": "To my surprise",
+    "existing": {}
+  },
+  {
+    "id": "2c453ead-97fe-4d64-a1d4-c046193aa079",
+    "word": "Mundane",
+    "existing": {
+      "adj": "mundane",
+      "adv": "mundanely",
+      "noun": "mundaneness"
+    }
+  },
+  {
+    "id": "d4f25a25-85e0-408b-96f7-82da0f3bd7ff",
+    "word": "Band-Aid / Plaster",
+    "existing": {
+      "noun": "Band-Aid"
+    }
+  },
+  {
+    "id": "2628f0cd-b37e-46c9-84a7-0b58e75842fb",
+    "word": "Down-to-earth",
+    "existing": {
+      "adj": "down-to-earth"
+    }
+  },
+  {
+    "id": "dd8612b6-fe76-4a93-9535-86afe0b3e3bf",
+    "word": "Can Opener",
+    "existing": {
+      "noun": "can opener"
+    }
+  },
+  {
+    "id": "ca9b1f67-dfdd-4f14-bb61-dde8a0d92e6a",
+    "word": "go red (PHR)",
+    "existing": {
+      "pp": "gone",
+      "past": "went",
+      "verb": "go"
+    }
+  },
+  {
+    "id": "781dff63-d82e-46cd-8057-54c6f4d8e7e7",
+    "word": "sweat (V)",
+    "existing": {
+      "pp": "sweated",
+      "adj": "sweaty",
+      "noun": "sweat",
+      "past": "sweated",
+      "verb": "sweat"
+    }
+  },
+  {
+    "id": "38d22f92-d815-4f6d-9afa-63cb37916403",
+    "word": "Conducive ",
+    "existing": {
+      "adj": "conducive"
+    }
+  },
+  {
+    "id": "4a573545-f0e7-4aaf-a407-f6491facc69b",
+    "word": "Put on hold",
+    "existing": {
+      "pp": "put",
+      "past": "put",
+      "verb": "put"
+    }
+  },
+  {
+    "id": "484998a4-7849-4fc8-b92a-1fc024719674",
+    "word": "Blow off",
+    "existing": {
+      "pp": "blown off",
+      "past": "blew off",
+      "verb": "blow off"
+    }
+  },
+  {
+    "id": "68a230f4-8f00-4c76-bfbd-10e72340ac2a",
+    "word": "Loathe",
+    "existing": {
+      "pp": "loathed",
+      "adj": "loathsome",
+      "noun": "loathing",
+      "past": "loathed",
+      "verb": "loathe"
+    }
+  },
+  {
+    "id": "629e4e07-f9c5-4b3c-9a7f-a5ac64a37374",
+    "word": "Breaking up",
+    "existing": {
+      "pp": "broken up",
+      "noun": "breakup",
+      "past": "broke up",
+      "verb": "break up"
+    }
+  },
+  {
+    "id": "fc8e6cef-bb90-4b44-8ce9-bf51c8d6204a",
+    "word": "Whisk",
+    "existing": {
+      "pp": "whisked",
+      "noun": "whisk",
+      "past": "whisked",
+      "verb": "whisk"
+    }
+  },
+  {
+    "id": "fa529dd0-e8bb-434c-b3e9-acbd50148780",
+    "word": "Contraption",
+    "existing": {
+      "noun": "contraption"
+    }
+  },
+  {
+    "id": "81e997e0-c966-4a5f-9188-353a928e40e9",
+    "word": "Comprehensive",
+    "existing": {
+      "adj": "comprehensive",
+      "adv": "comprehensively",
+      "noun": "comprehensiveness"
+    }
+  },
+  {
+    "id": "9dd2e20b-28c7-4a00-aedf-b744e1e9080a",
+    "word": "Grater",
+    "existing": {
+      "pp": "grated",
+      "noun": "grater",
+      "past": "grated",
+      "verb": "grate"
+    }
+  },
+  {
+    "id": "5b7920bf-723e-4a50-84d0-5e93928c4c2d",
+    "word": "Gibberish",
+    "existing": {
+      "noun": "gibberish"
+    }
+  },
+  {
+    "id": "6593c02f-e064-4b20-bc5f-e1a13b6e2363",
+    "word": "Appease",
+    "existing": {
+      "pp": "appeased",
+      "noun": "appeasement",
+      "past": "appeased",
+      "verb": "appease"
+    }
+  },
+  {
+    "id": "f5a8e56f-f62d-49ea-8345-e2b1b62c81b4",
+    "word": "Nail File",
+    "existing": {
+      "noun": "nail file"
+    }
+  },
+  {
+    "id": "f0a18d89-fa62-4a1b-a428-4394a2b16876",
+    "word": "Tweezers",
+    "existing": {
+      "noun": "tweezers"
+    }
+  },
+  {
+    "id": "8748d39a-297b-404a-8ab7-eb110765287c",
+    "word": "Flake / Bail",
+    "existing": {
+      "pp": "flaked",
+      "adj": "flaky",
+      "noun": "flake",
+      "past": "flaked",
+      "verb": "flake"
+    }
+  },
+  {
+    "id": "7c838868-2874-4e3c-ad6d-e1db64f38dee",
+    "word": "Stepladder",
+    "existing": {
+      "noun": "stepladder"
+    }
+  },
+  {
+    "id": "c2aa70f8-c27f-47a3-9132-3e92299e2e76",
+    "word": "Fryer",
+    "existing": {
+      "noun": "fryer",
+      "verb": "fry"
+    }
+  },
+  {
+    "id": "2d1523a4-5611-4e85-b8eb-b826a317dad8",
+    "word": "You're splitting hairs",
+    "existing": {}
+  },
+  {
+    "id": "899ea962-98f7-42b2-ac41-9e237e2392cc",
+    "word": "Cost-effective",
+    "existing": {
+      "adj": "cost-effective",
+      "noun": "cost-effectiveness"
+    }
+  },
+  {
+    "id": "3452d60d-0121-4698-814a-e9d6122860cb",
+    "word": "excessive (ADJ)",
+    "existing": {
+      "adj": "excessive",
+      "adv": "excessively",
+      "noun": "excess"
+    }
+  },
+  {
+    "id": "391575e6-2c51-4244-b581-86d8b17278c3",
+    "word": "Grudge",
+    "existing": {
+      "adj": "grudging",
+      "adv": "grudgingly",
+      "noun": "grudge",
+      "verb": "grudge"
+    }
+  },
+  {
+    "id": "a71be133-e425-4634-8cba-dc90253dc418",
+    "word": "a real eyesore",
+    "existing": {
+      "noun": "eyesore"
+    }
+  },
+  {
+    "id": "a6b11d5c-ec37-40bc-9459-57581542ffcd",
+    "word": "Vague",
+    "existing": {
+      "adj": "vague",
+      "adv": "vaguely",
+      "noun": "vagueness"
+    }
+  },
+  {
+    "id": "dadba331-fb6f-469e-9be4-ae696c5e7f60",
+    "word": "Bland /blænd/ BLAND",
+    "existing": {
+      "adj": "bland",
+      "adv": "blandly",
+      "noun": "blandness"
+    }
+  },
+  {
+    "id": "854343c4-d113-41da-94df-9fe40ac55d1a",
+    "word": "count (2) (FIND TOTAL)",
+    "existing": {
+      "adj": "countable",
+      "noun": "count",
+      "verb": "count"
+    }
+  },
+  {
+    "id": "09fba4ba-7558-4a77-8a5c-3c6ca0495a08",
+    "word": "Bottom line",
+    "existing": {
+      "noun": "bottom line"
+    }
+  },
+  {
+    "id": "ccde2aef-0f86-4fea-a13a-f3f0d2455836",
+    "word": "Impromptu",
+    "existing": {
+      "adj": "impromptu",
+      "adv": "impromptu"
+    }
+  },
+  {
+    "id": "e3307e3d-8c7e-491e-b786-07119be342ba",
+    "word": "Inasmuch as ...",
+    "existing": {}
+  },
+  {
+    "id": "b90046e9-8f21-462a-85bf-9091c01ecea9",
+    "word": "Concise",
+    "existing": {
+      "adj": "concise",
+      "adv": "concisely",
+      "noun": "conciseness"
+    }
+  },
+  {
+    "id": "5f61378b-5359-48f4-bf56-f84db64e9480",
+    "word": "Cauldron /ˈkɔːl.drən/ KAWL-DRUHN",
+    "existing": {
+      "noun": "cauldron"
+    }
+  },
+  {
+    "id": "26459dda-8b4a-4ab6-85f0-28fd57527cab",
+    "word": "Breakthrough",
+    "existing": {
+      "noun": "breakthrough"
+    }
+  },
+  {
+    "id": "8051e820-77a0-43c3-85cd-cb77011c7860",
+    "word": "Grueling",
+    "existing": {
+      "adj": "grueling"
+    }
+  },
+  {
+    "id": "ef413ba2-3d12-4f9b-b3cd-30b3e2e6c282",
+    "word": "Stakeholders",
+    "existing": {
+      "noun": "stakeholder"
+    }
+  },
+  {
+    "id": "565473b0-fc2c-46bf-95a5-baa94d0b4f00",
+    "word": "Procrastinate",
+    "existing": {
+      "adj": "procrastinating",
+      "noun": "procrastination",
+      "verb": "procrastinate"
+    }
+  },
+  {
+    "id": "23710e33-60d9-4b19-815f-506ab846fbe7",
+    "word": "moving the goalposts",
+    "existing": {}
+  },
+  {
+    "id": "123f1860-d333-437e-9077-07fd9da70822",
+    "word": "Yearn [jɝn]",
+    "existing": {
+      "noun": "yearning",
+      "verb": "yearn"
+    }
+  },
+  {
+    "id": "ca064a8b-27e2-4640-a881-2944ef63c954",
+    "word": "Parallel park",
+    "existing": {
+      "noun": "parking",
+      "verb": "park"
+    }
+  },
+  {
+    "id": "651c695d-265e-4cff-a35d-1782302bdc01",
+    "word": "imply sth (V)",
+    "existing": {
+      "adj": "implied",
+      "noun": "implication",
+      "verb": "imply"
+    }
+  },
+  {
+    "id": "4f244358-96bb-417c-8614-62440692999c",
+    "word": "stubbornness (N)",
+    "existing": {
+      "adj": "stubborn",
+      "adv": "stubbornly",
+      "noun": "stubbornness"
+    }
+  },
+  {
+    "id": "34ad10df-df20-4b9a-b949-b2a0167a461e",
+    "word": "fancy sb (V)",
+    "existing": {
+      "adj": "fancy",
+      "noun": "fancy",
+      "verb": "fancy"
+    }
+  },
+  {
+    "id": "456b9d20-542c-4835-99ab-7467423e70f8",
+    "word": "lodge (in sth)",
+    "existing": {
+      "noun": "lodge",
+      "verb": "lodge"
+    }
+  },
+  {
+    "id": "4003ac0e-9b5f-4191-942a-fc2b6dded4cc",
+    "word": "Latitude ",
+    "existing": {
+      "noun": "latitude"
+    }
+  },
+  {
+    "id": "f955dffa-3a9a-4cb5-86cf-f0cfb75e4e5a",
+    "word": "Subservient [səbˈsɜː.vi.ənt]",
+    "existing": {
+      "adj": "subservient",
+      "adv": "subserviently",
+      "noun": "subservience"
+    }
+  },
+  {
+    "id": "1a24078c-bb2c-4cd5-818c-12172659c40f",
+    "word": "Rush hour",
+    "existing": {
+      "noun": "rush hour"
+    }
+  },
+  {
+    "id": "480dc2c7-247e-405f-8462-13126c922c46",
+    "word": "Scarce",
+    "existing": {
+      "adj": "scarce",
+      "adv": "scarcely",
+      "noun": "scarcity"
+    }
+  },
+  {
+    "id": "0ffde16a-8496-4ae2-8553-d1fff91932d0",
+    "word": "Lose appetite",
+    "existing": {
+      "noun": "appetite"
+    }
+  },
+  {
+    "id": "5a717cd3-a112-405b-923d-fa3db8477ee7",
+    "word": "harbor /ˈhɑː.bər/ HAR-bər",
+    "existing": {
+      "noun": "harbor",
+      "verb": "harbor"
+    }
+  },
+  {
+    "id": "ad8de8b8-5895-4085-a242-461e0cbeb5e5",
+    "word": "Abundant",
+    "existing": {
+      "adj": "abundant",
+      "adv": "abundantly",
+      "noun": "abundance"
+    }
+  },
+  {
+    "id": "7ef1c2c0-838d-410d-a5be-8dda47533fb5",
+    "word": "Swindle [ˈswɪn.dəl]",
+    "existing": {
+      "noun": "swindle",
+      "verb": "swindle"
+    }
+  },
+  {
+    "id": "0cf345aa-ef10-4c14-b162-fc659cfa9918",
+    "word": "Alert",
+    "existing": {
+      "adj": "alert",
+      "adv": "alertly",
+      "noun": "alert",
+      "verb": "alert"
+    }
+  },
+  {
+    "id": "b46a9d0d-a261-4b8e-b342-00a225c81947",
+    "word": "Respectful",
+    "existing": {
+      "adj": "respectful",
+      "adv": "respectfully",
+      "noun": "respect",
+      "verb": "respect"
+    }
+  },
+  {
+    "id": "fa7bb9cf-3930-48f1-beb7-ef4aac19721f",
+    "word": "Vital",
+    "existing": {
+      "adj": "vital",
+      "adv": "vitally",
+      "noun": "vitality"
+    }
+  },
+  {
+    "id": "90fccac1-78b8-46f6-a2de-9ecbe4b06e6b",
+    "word": "Oversleep",
+    "existing": {
+      "pp": "overslept",
+      "past": "overslept",
+      "verb": "oversleep"
+    }
+  },
+  {
+    "id": "12b8582b-89fc-481e-bd75-12d5fc4b7d69",
+    "word": "Gridlock",
+    "existing": {
+      "noun": "gridlock"
+    }
+  },
+  {
+    "id": "ebb8432d-9663-4757-a55a-464f6c17b9af",
+    "word": "outspend (prefix out-)",
+    "existing": {}
+  },
+  {
+    "id": "eda644ce-a0d2-43e4-9c62-f9da27c129de",
+    "word": "Shone [ʃoʊn]",
+    "existing": {
+      "pp": "shone",
+      "past": "shone",
+      "verb": "shine"
+    }
+  },
+  {
+    "id": "566a740e-76f3-42bf-868a-84a431225636",
+    "word": "stroke sth (V)",
+    "existing": {
+      "noun": "stroke",
+      "verb": "stroke"
+    }
+  },
+  {
+    "id": "bc2f6a94-21fb-4c89-8406-800a27188f1c",
+    "word": "Mitigate",
+    "existing": {
+      "adj": "mitigating",
+      "noun": "mitigation",
+      "verb": "mitigate"
+    }
+  },
+  {
+    "id": "e2fc97de-54cf-47dd-97fb-eefc1255bc3e",
+    "word": "Greasy",
+    "existing": {
+      "adj": "greasy",
+      "noun": "grease"
+    }
+  },
+  {
+    "id": "ff0b4d9e-6fca-4e81-a9f1-d1f73d18acfa",
+    "word": "Apprised\nKeep the apprised",
+    "existing": {
+      "adj": "apprised",
+      "verb": "apprise"
+    }
+  },
+  {
+    "id": "c11180ef-e42c-458f-bec8-ea85b4e723b0",
+    "word": "Moldy",
+    "existing": {
+      "adj": "moldy",
+      "noun": "mold"
+    }
+  },
+  {
+    "id": "18a70bab-ab55-4565-9760-07189d8401fa",
+    "word": "fiddle with sth (V)",
+    "existing": {
+      "verb": "fiddle"
+    }
+  },
+  {
+    "id": "e52eb3ea-e667-4f80-a201-bacda710d29d",
+    "word": "Coherent",
+    "existing": {
+      "adj": "coherent",
+      "adv": "coherently",
+      "noun": "coherence"
+    }
+  },
+  {
+    "id": "5bd1a4c8-6f0d-4e0a-a979-8246ba0da510",
+    "word": "Bitter",
+    "existing": {
+      "adj": "bitter",
+      "adv": "bitterly",
+      "noun": "bitterness"
+    }
+  },
+  {
+    "id": "f73d63d7-be77-424f-9845-b4f134277abb",
+    "word": "Furious",
+    "existing": {
+      "adj": "furious",
+      "adv": "furiously",
+      "noun": "fury"
+    }
+  },
+  {
+    "id": "e646c931-9e14-4f19-a814-576517154b6c",
+    "word": "Sour",
+    "existing": {
+      "adj": "sour",
+      "noun": "sourness",
+      "verb": "sour"
+    }
+  },
+  {
+    "id": "544c468e-7e78-4e2b-b42e-06df3fa7ef60",
+    "word": "Nauseous",
+    "existing": {
+      "adj": "nauseous",
+      "noun": "nausea"
+    }
+  },
+  {
+    "id": "2dc8f245-282b-4b0c-a819-6a0411bcfb9d",
+    "word": "Paled [peɪld]",
+    "existing": {
+      "adj": "pale",
+      "verb": "pale"
+    }
+  },
+  {
+    "id": "e443fc65-0b4c-4d6a-b263-cb0cc9b16461",
+    "word": "Flared [fleəd]",
+    "existing": {
+      "noun": "flare",
+      "verb": "flare"
+    }
+  },
+  {
+    "id": "bc3d07a5-f3ef-432c-b52b-84ef20c6583f",
+    "word": "Dizzy",
+    "existing": {
+      "adj": "dizzy",
+      "noun": "dizziness",
+      "verb": "dizzy"
+    }
+  },
+  {
+    "id": "baec3ac8-17ba-4d87-aafc-a1e9bcbf0d5b",
+    "word": "Compromise",
+    "existing": {
+      "noun": "compromise",
+      "verb": "compromise"
+    }
+  },
+  {
+    "id": "b9605899-4f30-48f2-9616-507a510211ae",
+    "word": "Terrified",
+    "existing": {
+      "adj": "terrified",
+      "noun": "terror",
+      "verb": "terrify"
+    }
+  },
+  {
+    "id": "00836b31-8646-4d88-937d-d0e76c892121",
+    "word": "Adapt",
+    "existing": {
+      "adj": "adaptable",
+      "noun": "adaptation",
+      "verb": "adapt"
+    }
+  },
+  {
+    "id": "6bdd6888-14d5-4dfd-a923-63138ef0dc73",
+    "word": "Bland",
+    "existing": {
+      "adj": "bland",
+      "noun": "blandness"
+    }
+  },
+  {
+    "id": "04a3de63-49b2-4a8d-81d3-c9f79d8ade5f",
+    "word": "creep (V)",
+    "existing": {
+      "adj": "creepy",
+      "noun": "creep",
+      "verb": "creep"
+    }
+  },
+  {
+    "id": "62de8545-8663-4625-b51b-f97c9a05ece4",
+    "word": "Obligator [ˈɒblɪɡeɪtər]",
+    "existing": {
+      "noun": "obligator"
+    }
+  },
+  {
+    "id": "66cf7f4c-ccc1-45f1-87dd-c5058273700a",
+    "word": "Capsize ",
+    "existing": {
+      "verb": "capsize"
+    }
+  },
+  {
+    "id": "ccb518e4-4b58-4cdb-a874-ef10b185810d",
+    "word": "Mild",
+    "existing": {
+      "adj": "mild",
+      "adv": "mildly",
+      "noun": "mildness"
+    }
+  },
+  {
+    "id": "10aaafbb-3048-440c-8ba9-789b85fb8776",
+    "word": "pry into sth",
+    "existing": {
+      "adj": "prying",
+      "verb": "pry"
+    }
+  },
+  {
+    "id": "5e82972e-f307-4b07-90f5-b87a5e6db5a2",
+    "word": "Simultaneously",
+    "existing": {
+      "adj": "simultaneous",
+      "adv": "simultaneously",
+      "noun": "simultaneity"
+    }
+  },
+  {
+    "id": "e23edae4-0068-4f0e-aacc-cb9a2bfeaaa8",
+    "word": "You rocked it",
+    "existing": {}
+  },
+  {
+    "id": "fd3467eb-c77c-4847-b369-3a184e26ee59",
+    "word": "Conjugate [kənˈdʒuːɡeɪt]",
+    "existing": {
+      "noun": "conjugation",
+      "verb": "conjugate"
+    }
+  },
+  {
+    "id": "e6d5f345-39b8-46b7-bc36-47e90f5c8fe9",
+    "word": "Grumpy",
+    "existing": {
+      "adj": "grumpy",
+      "noun": "grumpiness"
+    }
+  },
+  {
+    "id": "c286ce35-1b7a-4a58-ad56-b97c6bde74b7",
+    "word": "Parasol [ˈpærəsɒl]",
+    "existing": {
+      "noun": "parasol"
+    }
+  },
+  {
+    "id": "6d779718-e75c-40fc-9bf5-0a9e67764650",
+    "word": "backlash [ /ˈbæk.læʃ/]",
+    "existing": {
+      "noun": "backlash"
+    }
+  },
+  {
+    "id": "85d17561-a433-40ae-8059-20c516621857",
+    "word": "Fussy",
+    "existing": {
+      "adj": "fussy",
+      "noun": "fussiness",
+      "verb": "fuss"
+    }
+  },
+  {
+    "id": "6accd548-c30e-4212-adbf-978ad09cd58c",
+    "word": "Praise [preɪz]",
+    "existing": {
+      "adj": "praiseworthy",
+      "noun": "praise",
+      "verb": "praise"
+    }
+  },
+  {
+    "id": "d8870aae-9349-46b2-a324-53181ea69c67",
+    "word": "Severe / Acute",
+    "existing": {
+      "adj": "severe",
+      "adv": "severely",
+      "noun": "severity"
+    }
+  },
+  {
+    "id": "53cb6bd0-8e1f-4d1e-bc8f-617f277f2f0d",
+    "word": "Pantry [ˈpæn.tri]",
+    "existing": {
+      "noun": "pantry"
+    }
+  },
+  {
+    "id": "cb48b0cb-5dcc-4ee4-94b1-ed1f47a452e3",
+    "word": "Wistful",
+    "existing": {
+      "adj": "wistful",
+      "adv": "wistfully",
+      "noun": "wistfulness"
+    }
+  },
+  {
+    "id": "d46140cf-7cc8-4f4d-b90d-aa8d402981dc",
+    "word": "Enigmatic",
+    "existing": {
+      "adj": "enigmatic",
+      "adv": "enigmatically",
+      "noun": "enigma"
+    }
+  },
+  {
+    "id": "6ee9b125-5aa4-434c-b12f-4d0d0af449e6",
+    "word": "Blatant",
+    "existing": {
+      "adj": "blatant",
+      "adv": "blatantly",
+      "noun": "blatancy"
+    }
+  },
+  {
+    "id": "f1c9447a-584a-4788-be9b-7094d184204b",
+    "word": "Keen [kiːn]",
+    "existing": {
+      "adj": "keen",
+      "adv": "keenly",
+      "noun": "keenness"
+    }
+  },
+  {
+    "id": "deafd570-5402-4673-be56-0e1fdf06c8fa",
+    "word": "Slippery",
+    "existing": {
+      "adj": "slippery",
+      "noun": "slipperiness",
+      "verb": "slip"
+    }
+  },
+  {
+    "id": "7f28775b-7e7a-4acb-ae11-881b70e2bb56",
+    "word": "stroll (V)",
+    "existing": {
+      "noun": "stroll",
+      "verb": "stroll"
+    }
+  },
+  {
+    "id": "010590f1-8c69-41e9-b6e9-faf44b520ca0",
+    "word": "limp (V)",
+    "existing": {
+      "adj": "limp",
+      "noun": "limp",
+      "verb": "limp"
+    }
+  },
+  {
+    "id": "6f6fb772-a0f2-448b-8316-b2cb150b6d21",
+    "word": "circumstance (1) (usually pl.)",
+    "existing": {
+      "adj": "circumstantial",
+      "noun": "circumstance"
+    }
+  },
+  {
+    "id": "fe846cef-92a2-4c23-8c0f-61850161a339",
+    "word": "Zealous [ZEL-uhs]",
+    "existing": {
+      "adj": "zealous",
+      "adv": "zealously",
+      "noun": "zeal"
+    }
+  },
+  {
+    "id": "7f09e845-bd24-449a-b5a1-8b89d4691e08",
+    "word": "allegedly",
+    "existing": {
+      "adj": "alleged",
+      "adv": "allegedly",
+      "verb": "allege"
+    }
+  },
+  {
+    "id": "7bd5019f-62b8-4059-915f-b2c72f1ac82c",
+    "word": "Stingy",
+    "existing": {
+      "adj": "stingy",
+      "noun": "stinginess"
+    }
+  },
+  {
+    "id": "98735591-325c-41ab-8435-4d6f9e567db5",
+    "word": "Vacillate",
+    "existing": {
+      "noun": "vacillation",
+      "verb": "vacillate"
+    }
+  },
+  {
+    "id": "3fb77456-2fc3-475f-9b23-affa24727a71",
+    "word": "Numb",
+    "existing": {
+      "adj": "numb",
+      "noun": "numbness",
+      "verb": "numb"
+    }
+  },
+  {
+    "id": "938957c0-fa62-4187-9803-901fc4a0f235",
+    "word": "Viscosity [vɪsˈkɒsɪti]",
+    "existing": {
+      "adj": "viscous",
+      "noun": "viscosity"
+    }
+  },
+  {
+    "id": "1dced483-c317-467f-b637-f7cd9cca0951",
+    "word": "Smidgen /ˈsmɪdʒ.ən/ SMIJ-uhn",
+    "existing": {
+      "noun": "smidgen"
+    }
+  },
+  {
+    "id": "47bc908c-e872-428a-ae90-eaaddc6b9d40",
+    "word": "Hollow",
+    "existing": {
+      "adj": "hollow",
+      "adv": "hollowly",
+      "noun": "hollow",
+      "verb": "hollow"
+    }
+  },
+  {
+    "id": "f35a7c03-aeb3-45ed-a2c5-18a5f6e22772",
+    "word": "Tidy",
+    "existing": {
+      "adj": "tidy",
+      "noun": "tidiness",
+      "verb": "tidy"
+    }
+  },
+  {
+    "id": "939de1d9-bb1a-4920-9ede-16454806d24d",
+    "word": "Conferred [kənˈfɜːrd]",
+    "existing": {
+      "noun": "conference",
+      "verb": "confer"
+    }
+  },
+  {
+    "id": "33c6a0f0-f7b0-45e3-887b-acb5ab181fd1",
+    "word": "Restless",
+    "existing": {
+      "adj": "restless",
+      "adv": "restlessly",
+      "noun": "restlessness"
+    }
+  },
+  {
+    "id": "70721e9d-d48c-4e3b-b94c-fc48a10392ad",
+    "word": "Cramped",
+    "existing": {
+      "adj": "cramped",
+      "verb": "cramp"
+    }
+  },
+  {
+    "id": "4c6c0890-1d33-4214-a20b-4e4b0fa92934",
+    "word": "Itchy",
+    "existing": {
+      "adj": "itchy",
+      "noun": "itch",
+      "verb": "itch"
+    }
+  },
+  {
+    "id": "ede6a589-166a-4834-9fce-8559300a6702",
+    "word": "Solitude [ˈsɒl.ɪ.tʃuːd]",
+    "existing": {
+      "noun": "solitude"
+    }
+  },
+  {
+    "id": "a6c98170-cb57-402d-878e-4d907148fa00",
+    "word": "Get cold feet",
+    "existing": {}
+  },
+  {
+    "id": "ba615440-63f7-4341-82c3-d97e8e4e42ed",
+    "word": "Swollen",
+    "existing": {
+      "adj": "swollen",
+      "verb": "swell"
+    }
+  },
+  {
+    "id": "d37b13af-3ba7-4b72-9f42-dc5d868bda8e",
+    "word": "Bruised",
+    "existing": {
+      "adj": "bruised",
+      "noun": "bruise",
+      "verb": "bruise"
+    }
+  },
+  {
+    "id": "d2c46c4f-d2a3-43aa-8b34-c9a983ea846f",
+    "word": "chase sb/sth (V)",
+    "existing": {
+      "noun": "chase",
+      "verb": "chase"
+    }
+  },
+  {
+    "id": "9a0be74b-e8ca-4c40-ad9e-917e44a390e1",
+    "word": "c/o (care of)",
+    "existing": {}
+  },
+  {
+    "id": "de5ae042-54a6-415b-bd8e-85dc7161f28e",
+    "word": "On me",
+    "existing": {}
+  },
+  {
+    "id": "f1f0190c-7b43-41b4-bfc8-64bbf89cef51",
+    "word": "Crispy",
+    "existing": {
+      "adj": "crispy",
+      "noun": "crispiness"
+    }
+  },
+  {
+    "id": "3af5ece5-f3b0-4093-b359-4aef894173bc",
+    "word": "dash (V)",
+    "existing": {
+      "noun": "dash",
+      "verb": "dash"
+    }
+  },
+  {
+    "id": "646e5d7d-da17-46e9-a93e-a0cf5f817a39",
+    "word": "Riffling [ˈrɪf.lɪŋ]",
+    "existing": {
+      "verb": "riffle"
+    }
+  },
+  {
+    "id": "4f9be05a-6795-470f-bb98-25afee4efc60",
+    "word": "conducive (ADJ) (to)",
+    "existing": {
+      "adj": "conducive"
+    }
+  },
+  {
+    "id": "55f44f82-1716-4b7d-b184-d4c0210726e5",
+    "word": "finalize (V)",
+    "existing": {
+      "adj": "final",
+      "noun": "finalization",
+      "verb": "finalize"
+    }
+  },
+  {
+    "id": "b285fe07-d52c-4414-b2fa-74d054836a5b",
+    "word": "Spicy",
+    "existing": {
+      "adj": "spicy",
+      "adv": "spicily",
+      "noun": "spice"
+    }
+  },
+  {
+    "id": "8186746d-0487-4bb7-9ebc-90fa2e123ef7",
+    "word": "Messy",
+    "existing": {
+      "adj": "messy",
+      "adv": "messily",
+      "noun": "mess"
+    }
+  },
+  {
+    "id": "7cdb8c53-d4f7-4ca8-9d9d-d9b47a3be9fb",
+    "word": "Cozy",
+    "existing": {
+      "adj": "cozy",
+      "adv": "cozily",
+      "noun": "coziness"
+    }
+  },
+  {
+    "id": "05f862c5-a95b-43e6-b98e-b43fed422d18",
+    "word": "Waterproof",
+    "existing": {
+      "adj": "waterproof",
+      "verb": "waterproof"
+    }
+  },
+  {
+    "id": "c9f3e12a-e0c2-4e4e-a0fe-fe0c599ad350",
+    "word": "Tight",
+    "existing": {
+      "adj": "tight",
+      "adv": "tightly",
+      "noun": "tightness",
+      "verb": "tighten"
+    }
+  },
+  {
+    "id": "f1ac302e-ff61-43f2-9fca-b3bf9623ac81",
+    "word": "Rotten",
+    "existing": {
+      "adj": "rotten",
+      "noun": "rot",
+      "verb": "rot"
+    }
+  },
+  {
+    "id": "5baf4080-2192-45c6-a427-5e0b3a540656",
+    "word": "march (V)",
+    "existing": {
+      "noun": "march",
+      "verb": "march"
+    }
+  },
+  {
+    "id": "d62128c2-1488-460f-a71a-dce9ec4c4416",
+    "word": "Adjustable",
+    "existing": {
+      "adj": "adjustable",
+      "noun": "adjustment",
+      "verb": "adjust"
+    }
+  },
+  {
+    "id": "45f4e373-ee8d-4b0a-8a2a-33946c044db6",
+    "word": "Portable",
+    "existing": {
+      "adj": "portable",
+      "noun": "portability"
+    }
+  },
+  {
+    "id": "1baa93fd-0d25-4aa2-9bb3-cc4ccd5ea9d9",
+    "word": "Apathy [əˈpæθi]",
+    "existing": {
+      "adj": "apathetic",
+      "adv": "apathetically",
+      "noun": "apathy"
+    }
+  },
+  {
+    "id": "81ecbcdf-ffca-47e7-8c34-416ab8b1954a",
+    "word": "handling (N)",
+    "existing": {
+      "noun": "handling",
+      "verb": "handle"
+    }
+  },
+  {
+    "id": "4c9fece7-b00e-410c-81cf-fbae1f3ee573",
+    "word": "gallop (V)",
+    "existing": {
+      "noun": "gallop",
+      "verb": "gallop"
+    }
+  },
+  {
+    "id": "bb8c04f5-e7e4-498b-90a0-996f21b34492",
+    "word": "Keep one's cool",
+    "existing": {}
+  },
+  {
+    "id": "97015f2f-3c27-40e5-a8b4-95ebbad5354e",
+    "word": "Upside down",
+    "existing": {
+      "adj": "upside-down",
+      "adv": "upside down"
+    }
+  },
+  {
+    "id": "2012d70a-ee56-4c1e-9f1a-201de07ab690",
+    "word": "charge (V)",
+    "existing": {
+      "noun": "charge",
+      "verb": "charge"
+    }
+  },
+  {
+    "id": "e5d51ad9-5d19-4b9a-91cf-2c86312c637a",
+    "word": "Apprentice [əˈprɛn.tɪs]",
+    "existing": {
+      "noun": "apprenticeship",
+      "verb": "apprentice"
+    }
+  },
+  {
+    "id": "b1289478-bc7a-49dd-aef6-c992461fcc5a",
+    "word": "Inside out",
+    "existing": {
+      "adj": "inside-out",
+      "adv": "inside out"
+    }
+  },
+  {
+    "id": "8818b0a5-d821-43c1-99ae-910a153996db",
+    "word": "excel (V)",
+    "existing": {
+      "adj": "excellent",
+      "noun": "excellence",
+      "verb": "excel"
+    }
+  },
+  {
+    "id": "c2fff742-7cfd-4d24-845d-bdd1079017ad",
+    "word": "Breed [briːd]",
+    "existing": {
+      "noun": "breed",
+      "verb": "breed"
+    }
+  },
+  {
+    "id": "2ab6ed92-40a4-4f47-8bf0-9003b1030444",
+    "word": "Ruddy [ˈrʌd.i]",
+    "existing": {
+      "adj": "ruddy"
+    }
+  },
+  {
+    "id": "2c07253b-a996-4c04-95c3-86616b2413cd",
+    "word": "Sticky",
+    "existing": {
+      "adj": "sticky",
+      "noun": "stickiness",
+      "verb": "stick"
+    }
+  },
+  {
+    "id": "1a59be12-dca3-460f-a461-bc5ae863d8dd",
+    "word": "Loose",
+    "existing": {
+      "adj": "loose",
+      "adv": "loosely",
+      "noun": "looseness",
+      "verb": "loosen"
+    }
+  },
+  {
+    "id": "83a427b1-0362-48ef-94da-3aa2ba3d9c72",
+    "word": "Mandatory",
+    "existing": {
+      "adj": "mandatory",
+      "noun": "mandate"
+    }
+  },
+  {
+    "id": "930d2488-d88b-43ce-848e-44455134e326",
+    "word": "Intricate [ˈɪn.trɪ.kət]",
+    "existing": {
+      "adj": "intricate",
+      "adv": "intricately",
+      "noun": "intricacy"
+    }
+  },
+  {
+    "id": "bb75a76f-5eeb-4f63-8983-bb80edc84aab",
+    "word": "indicate sth",
+    "existing": {
+      "adj": "indicative",
+      "noun": "indication",
+      "verb": "indicate"
+    }
+  },
+  {
+    "id": "69fa2bce-80fc-439d-8d5e-57e2885af3ba",
+    "word": "gaze at sth (V)",
+    "existing": {
+      "noun": "gaze",
+      "verb": "gaze"
+    }
+  },
+  {
+    "id": "500dec4a-f617-48f6-9eb2-a3ac9854253a",
+    "word": "Toxic",
+    "existing": {
+      "adj": "toxic",
+      "noun": "toxicity"
+    }
+  },
+  {
+    "id": "d4506e84-ba87-4056-8fe4-a511033bb1a4",
+    "word": "Flammable",
+    "existing": {
+      "adj": "flammable",
+      "noun": "flammability"
+    }
+  },
+  {
+    "id": "7f39c7f8-34cd-4464-8b69-0375221b8bbe",
+    "word": "workout (N)",
+    "existing": {
+      "noun": "workout",
+      "verb": "work out"
+    }
+  },
+  {
+    "id": "06fda1c8-a43d-422f-aa54-a703f6d022f1",
+    "word": "Optional",
+    "existing": {
+      "adj": "optional",
+      "adv": "optionally",
+      "noun": "option"
+    }
+  },
+  {
+    "id": "55d0f824-bbd5-4296-aeb8-a30f04088537",
+    "word": "stout [staʊt]",
+    "existing": {
+      "adj": "stout",
+      "adv": "stoutly",
+      "noun": "stoutness"
+    }
+  },
+  {
+    "id": "3c2a7f6f-6ada-4653-b7c6-f491a40a79fb",
+    "word": "Foolhardy [ˈfuːlˌhɑːr.di]",
+    "existing": {
+      "adj": "foolhardy",
+      "noun": "foolhardiness"
+    }
+  },
+  {
+    "id": "6fcd8d34-9d47-4dcd-840b-0ecaff627d23",
+    "word": "Lethal",
+    "existing": {
+      "adj": "lethal",
+      "adv": "lethally",
+      "noun": "lethality"
+    }
+  },
+  {
+    "id": "30380380-cdf3-455b-be71-2239eefe2982",
+    "word": "deep end (thrown in at the deep end)",
+    "existing": {
+      "noun": "deep end"
+    }
+  },
+  {
+    "id": "14a10095-d5dc-43ac-a637-efab90d6f953",
+    "word": "Offensive",
+    "existing": {
+      "adj": "offensive",
+      "adv": "offensively",
+      "noun": "offense"
+    }
+  },
+  {
+    "id": "752a4626-ff73-4ca8-919f-d4cbff787dfe",
+    "word": "Casual",
+    "existing": {
+      "adj": "casual",
+      "adv": "casually",
+      "noun": "casualness"
+    }
+  },
+  {
+    "id": "45e6536c-2748-41af-bae6-260019f75055",
+    "word": "Permanent",
+    "existing": {
+      "adj": "permanent",
+      "adv": "permanently",
+      "noun": "permanence"
+    }
+  },
+  {
+    "id": "e9340974-e262-4906-b866-b257d380f7f3",
+    "word": "Instant",
+    "existing": {
+      "adj": "instant",
+      "adv": "instantly",
+      "noun": "instant"
+    }
+  },
+  {
+    "id": "168e3417-1a8c-4a9d-bc24-8c0355db0cb3",
+    "word": "Scapegoat",
+    "existing": {
+      "noun": "scapegoat",
+      "verb": "scapegoat"
+    }
+  },
+  {
+    "id": "b98ec7b3-f84f-43a6-afd7-2a96f044896b",
+    "word": "Beneficial",
+    "existing": {
+      "adj": "beneficial",
+      "adv": "beneficially",
+      "noun": "benefit"
+    }
+  },
+  {
+    "id": "e87efc10-d06b-4ed5-bddf-5bb0a66b48d8",
+    "word": "Weirdo / Creep",
+    "existing": {
+      "noun": "creep"
+    }
+  },
+  {
+    "id": "1ed7c94a-1f56-4ca9-8d4d-c7765e7e1bc0",
+    "word": "disorder",
+    "existing": {
+      "adj": "disorderly",
+      "noun": "disorder"
+    }
+  },
+  {
+    "id": "59bcb0ee-255e-4cf5-9400-d11161d980e3",
+    "word": "agile (ADJ)",
+    "existing": {
+      "adj": "agile",
+      "adv": "agilely",
+      "noun": "agility"
+    }
+  },
+  {
+    "id": "9aceb02d-6843-4d60-b8f2-351d5a4351a6",
+    "word": "mouth water (PHR)",
+    "existing": {
+      "adj": "mouth-watering"
+    }
+  },
+  {
+    "id": "2a86b598-e555-4093-8173-21efab244d88",
+    "word": "Gradual",
+    "existing": {
+      "adj": "gradual",
+      "adv": "gradually"
+    }
+  },
+  {
+    "id": "928bd593-2861-451f-8e08-3cfd12d3799f",
+    "word": "Conservative [kənˈsɜː.və.tɪv]",
+    "existing": {
+      "adj": "conservative",
+      "adv": "conservatively",
+      "noun": "conservation"
+    }
+  },
+  {
+    "id": "f01d7149-3be7-4ffa-9fbe-05f669d36321",
+    "word": "supple (ADJ)",
+    "existing": {
+      "adj": "supple",
+      "adv": "supply",
+      "noun": "suppleness"
+    }
+  },
+  {
+    "id": "6b6d008b-553f-4f35-abbd-269ce718cac1",
+    "word": "Cut someone off",
+    "existing": {
+      "verb": "cut off"
+    }
+  },
+  {
+    "id": "4cdc55ab-ef43-4f23-a922-5283ba072625",
+    "word": "Formal",
+    "existing": {
+      "adj": "formal",
+      "adv": "formally",
+      "noun": "formality"
+    }
+  },
+  {
+    "id": "582d9499-af69-4dec-9eed-e09a69f06a6f",
+    "word": "Nepotism",
+    "existing": {
+      "adj": "nepotistic",
+      "noun": "nepotism"
+    }
+  },
+  {
+    "id": "af4e7f89-43e5-47cf-9815-4a7b7b55ec97",
+    "word": "Unconventional",
+    "existing": {
+      "adj": "unconventional",
+      "adv": "unconventionally"
+    }
+  },
+  {
+    "id": "db5473eb-8b19-4b13-bbae-27ea8250bdab",
+    "word": "Get flustered",
+    "existing": {
+      "adj": "flustered",
+      "verb": "fluster"
+    }
+  },
+  {
+    "id": "efd10ec6-8427-4299-9be2-95d0e797016e",
+    "word": "Splurge",
+    "existing": {
+      "noun": "splurge",
+      "verb": "splurge"
+    }
+  },
+  {
+    "id": "5b17d2c2-fd5f-4624-ad3d-742bcc19e645",
+    "word": "Sudden",
+    "existing": {
+      "adj": "sudden",
+      "adv": "suddenly",
+      "noun": "suddenness"
+    }
+  },
+  {
+    "id": "2780cbbd-c367-4c6f-a3da-3d8eda69a6ff",
+    "word": "Lose the argument",
+    "existing": {}
+  },
+  {
+    "id": "1f630f47-63fa-4024-a3c0-7fd5b0f85029",
+    "word": "Accidental",
+    "existing": {
+      "adj": "accidental",
+      "adv": "accidentally",
+      "noun": "accident"
+    }
+  },
+  {
+    "id": "ef1a8fca-af55-4379-a2ea-8f175fad8787",
+    "word": "charisma",
+    "existing": {
+      "adj": "charismatic",
+      "adv": "charismatically",
+      "noun": "charisma"
+    }
+  },
+  {
+    "id": "965d4c9d-cda0-491f-9a0e-a252d7b8c9b9",
+    "word": "Deliberate",
+    "existing": {
+      "adj": "deliberate",
+      "adv": "deliberately",
+      "noun": "deliberation",
+      "verb": "deliberate"
+    }
+  },
+  {
+    "id": "d3ebb973-eccb-404c-bbb1-50c9ff243d4a",
+    "word": "sluggish (ADJ)",
+    "existing": {
+      "adj": "sluggish",
+      "adv": "sluggishly",
+      "noun": "sluggishness"
+    }
+  },
+  {
+    "id": "bef24a5b-5aa9-4d69-b69f-6a8b81eb6309",
+    "word": "Abstract",
+    "existing": {
+      "adj": "abstract",
+      "adv": "abstractly",
+      "noun": "abstraction",
+      "verb": "abstract"
+    }
+  },
+  {
+    "id": "27439e78-fbce-4ba7-b93d-bbb853dd64b2",
+    "word": "Venture /ˈven.tʃər/ VEN-CHUR",
+    "existing": {
+      "noun": "venture",
+      "verb": "venture"
+    }
+  },
+  {
+    "id": "7c3fea71-f16b-4f7c-afbd-6ab28073355a",
+    "word": "confide in sb",
+    "existing": {
+      "noun": "confidence",
+      "verb": "confide"
+    }
+  },
+  {
+    "id": "9e03efd4-20b8-4120-85fe-2e049cc88140",
+    "word": "Vial [ˈvaɪ.əl]",
+    "existing": {
+      "noun": "vial"
+    }
+  },
+  {
+    "id": "a6d58083-921f-42fd-8ded-e0bdf8359b38",
+    "word": "Conventional",
+    "existing": {
+      "adj": "conventional",
+      "adv": "conventionally",
+      "noun": "convention"
+    }
+  },
+  {
+    "id": "f6c98dad-297b-4c43-bc5c-8ce7e9abbb2a",
+    "word": "Ire [aɪər]",
+    "existing": {
+      "noun": "ire"
+    }
+  },
+  {
+    "id": "18c83666-4954-4979-a232-4d6450f61f7e",
+    "word": "stiff (ADJ)",
+    "existing": {
+      "adj": "stiff",
+      "adv": "stiffly",
+      "noun": "stiffness",
+      "verb": "stiffen"
+    }
+  },
+  {
+    "id": "2915a702-806c-41b1-b74b-b5d7efec947b",
+    "word": "Authentic",
+    "existing": {
+      "adj": "authentic",
+      "adv": "authentically",
+      "noun": "authenticity"
+    }
+  },
+  {
+    "id": "9524dd19-5dd4-4d29-a0f3-783b43461109",
+    "word": "Artificial",
+    "existing": {
+      "adj": "artificial",
+      "adv": "artificially",
+      "noun": "artificiality"
+    }
+  },
+  {
+    "id": "2905b839-97bd-47e6-86f2-424c15a8f231",
+    "word": "Natural",
+    "existing": {
+      "adj": "natural",
+      "adv": "naturally",
+      "noun": "nature"
+    }
+  },
+  {
+    "id": "3c22cfd9-df6a-466c-8db9-28da70e0fade",
+    "word": "raked /reɪkt/ RAYKT",
+    "existing": {
+      "noun": "rake",
+      "verb": "rake"
+    }
+  },
+  {
+    "id": "8c0e1f1f-9a0f-4580-91d1-1d3bfb5ca220",
+    "word": "Concrete",
+    "existing": {
+      "adj": "concrete",
+      "adv": "concretely",
+      "noun": "concrete"
+    }
+  },
+  {
+    "id": "d11fceba-d7f1-4cd9-9145-43ae96c734fc",
+    "word": "Primitive",
+    "existing": {
+      "adj": "primitive",
+      "adv": "primitively",
+      "noun": "primitiveness"
+    }
+  },
+  {
+    "id": "ddfc58d2-5c40-4889-ae9c-d776142e921b",
+    "word": "One-upmanship",
+    "existing": {
+      "noun": "one-upmanship"
+    }
+  },
+  {
+    "id": "ac6fc36e-1828-45f0-9d5a-5e137e6e622d",
+    "word": "devise sth (V)",
+    "existing": {
+      "noun": "device",
+      "verb": "devise"
+    }
+  },
+  {
+    "id": "df888d4f-7d82-4850-a203-45142f565d4a",
+    "word": "bend (V)",
+    "existing": {
+      "adj": "bent",
+      "noun": "bend",
+      "verb": "bend"
+    }
+  },
+  {
+    "id": "f232bb54-31f5-47c6-b338-93ff68201e43",
+    "word": "disclose sth (to sb) (SYN reveal sth)",
+    "existing": {
+      "noun": "disclosure",
+      "verb": "disclose"
+    }
+  },
+  {
+    "id": "743ccaae-07ae-4eba-bbdc-fb27764d0dbe",
+    "word": "strenuous (ADJ)",
+    "existing": {
+      "adj": "strenuous",
+      "adv": "strenuously",
+      "noun": "strenuousness"
+    }
+  },
+  {
+    "id": "dc3231d0-53a0-4c38-a768-10554a78dab6",
+    "word": "Sophisticated",
+    "existing": {
+      "adj": "sophisticated",
+      "adv": "sophisticatedly",
+      "noun": "sophistication"
+    }
+  },
+  {
+    "id": "7a4fb4e0-cec3-4124-aecd-8b2bdfa70e79",
+    "word": "Weasel out",
+    "existing": {
+      "verb": "weasel"
+    }
+  },
+  {
+    "id": "c64f69ad-b315-477f-9970-f719e3646028",
+    "word": "burglar /ˈbɜːr.ɡlər/",
+    "existing": {
+      "noun": "burglary",
+      "verb": "burgle"
+    }
+  },
+  {
+    "id": "a79e1373-9e91-4097-8fdf-3a11962274d3",
+    "word": "loosen up (PHR V)",
+    "existing": {
+      "verb": "loosen"
+    }
+  },
+  {
+    "id": "8073d6db-d67c-485d-ae61-ec6a2b0de503",
+    "word": "Gossip",
+    "existing": {
+      "noun": "gossip",
+      "verb": "gossip"
+    }
+  },
+  {
+    "id": "15252b7e-58f3-4035-a7d4-fd619d2c91f0",
+    "word": "stumpy /ˈstʌm.pi/",
+    "existing": {
+      "adj": "stumpy"
+    }
+  },
+  {
+    "id": "35e433e4-7847-4ab7-a714-d56e0325c6dc",
+    "word": "endowed /ɪnˈdaʊd/",
+    "existing": {
+      "adj": "endowed",
+      "noun": "endowment",
+      "verb": "endow"
+    }
+  },
+  {
+    "id": "e22df8cd-5fe1-4187-9434-3cb4eaaf897e",
+    "word": "handkerchief /ˈhæŋ.kə.tʃiːf/",
+    "existing": {
+      "noun": "handkerchief"
+    }
+  },
+  {
+    "id": "eb58f796-af2d-481b-b224-d6343e3c00e9",
+    "word": "brimmed /brɪmd/",
+    "existing": {
+      "noun": "brim",
+      "verb": "brim"
+    }
+  },
+  {
+    "id": "1e602709-6709-4ce3-9af5-cae3b544395e",
+    "word": "Greedy",
+    "existing": {
+      "adj": "greedy",
+      "adv": "greedily",
+      "noun": "greed"
+    }
+  },
+  {
+    "id": "37e3a43e-1b96-465e-9639-1c54065a62b7",
+    "word": "Blunt / Straightforward",
+    "existing": {
+      "adj": "blunt",
+      "adv": "bluntly",
+      "noun": "bluntness"
+    }
+  },
+  {
+    "id": "58e0b5af-988e-4a57-be2c-f9f1e4b864ca",
+    "word": "Take lightly",
+    "existing": {}
+  },
+  {
+    "id": "8d56b93c-378c-477c-9798-94027ee4bf1b",
+    "word": "Get off scot-free",
+    "existing": {}
+  },
+  {
+    "id": "b1edff39-15b0-42a8-9de8-13ba891e9704",
+    "word": "Turn the tables",
+    "existing": {}
+  },
+  {
+    "id": "15f6b397-4fc6-46fe-9f53-02f37aff831e",
+    "word": "dedication (N)",
+    "existing": {
+      "adj": "dedicated",
+      "noun": "dedication",
+      "verb": "dedicate"
+    }
+  },
+  {
+    "id": "5d548ec5-5a60-44dd-8daf-8bad052de5eb",
+    "word": "relentless (ADJ)",
+    "existing": {
+      "adj": "relentless",
+      "adv": "relentlessly",
+      "noun": "relentlessness"
+    }
+  },
+  {
+    "id": "0e8eaa40-2f21-4cdd-a233-b534b98193f0",
+    "word": "Notwithstanding",
+    "existing": {
+      "adv": "notwithstanding"
+    }
+  },
+  {
+    "id": "8f4dbb34-3345-4b5f-a3d4-1312500d9781",
+    "word": "Word: Hostile [ˈhɒs.taɪl]",
+    "existing": {
+      "adj": "hostile",
+      "adv": "hostilely",
+      "noun": "hostility"
+    }
+  },
+  {
+    "id": "00425c1c-0414-4c33-891c-d66a39f815fe",
+    "word": "constant (ADJ)",
+    "existing": {
+      "adj": "constant",
+      "adv": "constantly",
+      "noun": "constancy"
+    }
+  },
+  {
+    "id": "775d51a5-a07d-4b03-a02d-2a12788bc041",
+    "word": "eavesdrop /ˈiːvz.drɒp/",
+    "existing": {
+      "noun": "eavesdropper",
+      "verb": "eavesdrop"
+    }
+  },
+  {
+    "id": "eda71cb6-8da4-4871-b41b-c625991aa096",
+    "word": "Sentiment ",
+    "existing": {
+      "adj": "sentimental",
+      "adv": "sentimentally",
+      "noun": "sentiment"
+    }
+  },
+  {
+    "id": "1a9cc6cb-ffd1-4383-8590-1e8d69cc9cf2",
+    "word": "recurrent (ADJ)",
+    "existing": {
+      "adj": "recurrent",
+      "adv": "recurrently",
+      "noun": "recurrence",
+      "verb": "recur"
+    }
+  },
+  {
+    "id": "8aca4e66-f21b-4615-b074-1dea3cf7ad26",
+    "word": "Stubborn / Headstrong",
+    "existing": {
+      "adj": "stubborn",
+      "adv": "stubbornly",
+      "noun": "stubbornness"
+    }
+  },
+  {
+    "id": "a077fd6a-2b22-4ff1-995f-cb57954f2a43",
+    "word": "Hubris [HYOO-briss]",
+    "existing": {
+      "adj": "hubristic",
+      "noun": "hubris"
+    }
+  },
+  {
+    "id": "81eaa1e5-ef5a-43b7-a771-d3503300cf97",
+    "word": "Word: Scowling [ˈskaʊ.lɪŋ]",
+    "existing": {
+      "noun": "scowl",
+      "verb": "scowl"
+    }
+  },
+  {
+    "id": "b959384b-fb73-41d0-a352-322319f4d71a",
+    "word": "Word: Heralds [ˈher.əldz]",
+    "existing": {
+      "noun": "herald",
+      "verb": "herald"
+    }
+  },
+  {
+    "id": "352e3f53-553a-45b0-9dfd-ec8f84c4b48c",
+    "word": "sprint (V)",
+    "existing": {
+      "noun": "sprint",
+      "verb": "sprint"
+    }
+  },
+  {
+    "id": "e275249b-ccd2-4753-a72d-ca682fdb99ee",
+    "word": "pulls her weight",
+    "existing": {}
+  },
+  {
+    "id": "eed681c4-b804-4450-a68a-18de73d2cf4e",
+    "word": "Word: flushed [flʌʃt]",
+    "existing": {
+      "adj": "flushed",
+      "noun": "flush",
+      "verb": "flush"
+    }
+  },
+  {
+    "id": "df498917-7971-4f20-8929-c3935b07b303",
+    "word": "subdued; /səbˈduːd/",
+    "existing": {
+      "adj": "subdued",
+      "verb": "subdue"
+    }
+  },
+  {
+    "id": "cc85b5fe-e7af-44f1-9585-efea68056c9d",
+    "word": "Clean slate",
+    "existing": {
+      "noun": "slate"
+    }
+  },
+  {
+    "id": "a985249c-adc7-4817-9e57-37e203eddf20",
+    "word": "view (v, FML)",
+    "existing": {
+      "noun": "view",
+      "verb": "view"
+    }
+  },
+  {
+    "id": "22322435-7af0-472d-bc7d-f70728374f22",
+    "word": "lead sb astray",
+    "existing": {}
+  },
+  {
+    "id": "015d7041-8e09-45e6-a65c-a5f7bc031843",
+    "word": "narrator",
+    "existing": {
+      "noun": "narration",
+      "verb": "narrate"
+    }
+  },
+  {
+    "id": "a7983650-483a-419e-b322-9a47802cda2a",
+    "word": "Word: Courtesy [ˈkɜː.tə.si]",
+    "existing": {
+      "adj": "courteous",
+      "adv": "courteously",
+      "noun": "courtesy"
+    }
+  },
+  {
+    "id": "bf928ac5-c531-4d4a-9f03-a580080a511a",
+    "word": "rattle (V)",
+    "existing": {
+      "adj": "rattled",
+      "noun": "rattle",
+      "verb": "rattle"
+    }
+  },
+  {
+    "id": "06f7bc57-6860-414f-956d-9eca70880fae",
+    "word": "rumble (N)",
+    "existing": {
+      "noun": "rumble",
+      "verb": "rumble"
+    }
+  },
+  {
+    "id": "ef18f91d-35a5-4ba4-912a-5effc2c6d2d3",
+    "word": "rustle (V)",
+    "existing": {
+      "adj": "rustling",
+      "noun": "rustle",
+      "verb": "rustle"
+    }
+  },
+  {
+    "id": "dcb6d3ac-087c-4072-bd70-09cd8070b04c",
+    "word": "presentation",
+    "existing": {
+      "adj": "representational",
+      "noun": "presentation",
+      "verb": "present"
+    }
+  },
+  {
+    "id": "4ac7f231-2b11-49ff-90f2-b371b053c180",
+    "word": "splash on/onto sth (V)",
+    "existing": {
+      "adj": "splashy",
+      "noun": "splash",
+      "verb": "splash"
+    }
+  },
+  {
+    "id": "d6cabff6-9f0a-4b96-884b-688a9ef744fb",
+    "word": "impact (on sth)",
+    "existing": {
+      "noun": "impact",
+      "verb": "impact"
+    }
+  },
+  {
+    "id": "6f2d2403-64c7-4a42-a165-dfd3be31e43d",
+    "word": "Conservative ",
+    "existing": {
+      "adj": "conservative",
+      "adv": "conservatively",
+      "noun": "conservatism"
+    }
+  },
+  {
+    "id": "2fc00d34-b248-475d-b836-69b7dfff2f97",
+    "word": "Word: Ruefully [ˈruː.fəl.i]",
+    "existing": {
+      "adj": "rueful",
+      "adv": "ruefully",
+      "noun": "ruefulness",
+      "verb": "rue"
+    }
+  },
+  {
+    "id": "b759313d-823d-4e1d-ad7e-60db916d1b65",
+    "word": "Jump the gun",
+    "existing": {}
+  },
+  {
+    "id": "feddb988-ac3a-49ba-a8e4-8118bd4395bb",
+    "word": "play a part (in sth)",
+    "existing": {}
+  },
+  {
+    "id": "22e1d901-1850-409c-9076-7f95a2a74868",
+    "word": "stir-fry",
+    "existing": {
+      "noun": "stir-fry",
+      "verb": "stir-fry"
+    }
+  },
+  {
+    "id": "a67edfb0-3d25-4229-b7af-aa752eba28c7",
+    "word": "incoherent",
+    "existing": {
+      "adj": "incoherent",
+      "adv": "incoherently",
+      "noun": "incoherence"
+    }
+  },
+  {
+    "id": "4bc7d92b-a9c2-4204-bf42-65d03690a5fc",
+    "word": "Stocky [ˈstɒk.i]",
+    "existing": {
+      "adj": "stocky",
+      "noun": "stockiness"
+    }
+  },
+  {
+    "id": "9f564ce1-71de-490a-beac-097d42b01c83",
+    "word": "Nefarious \nNefariously",
+    "existing": {
+      "adj": "nefarious",
+      "adv": "nefariously",
+      "noun": "nefariousness"
+    }
+  },
+  {
+    "id": "43ee0dfb-21a9-4a12-943b-4a56955aaa4d",
+    "word": "Implications, /ˌɪmplɪˈkeɪʃənz/",
+    "existing": {
+      "adj": "implicit",
+      "noun": "implication",
+      "verb": "imply"
+    }
+  },
+  {
+    "id": "47c00140-57d8-4412-9f74-bef73f8155bf",
+    "word": "Beat the rap",
+    "existing": {}
+  },
+  {
+    "id": "6ec7d70f-53f4-42d2-86f1-44de987c348f",
+    "word": "discursive",
+    "existing": {
+      "adj": "discursive",
+      "adv": "discursively",
+      "noun": "discursiveness"
+    }
+  },
+  {
+    "id": "1cf0e89c-2557-472a-bfc2-53d036a4027f",
+    "word": "beep (V)",
+    "existing": {
+      "noun": "beep",
+      "verb": "beep"
+    }
+  },
+  {
+    "id": "b71fb0ef-1b75-48ef-8208-08bd25f9ecd5",
+    "word": "screech (N)",
+    "existing": {
+      "adj": "screeching",
+      "noun": "screech",
+      "verb": "screech"
+    }
+  },
+  {
+    "id": "eb22f2de-7fb7-455f-ae8a-98dffa9fdd39",
+    "word": "slam sth (shut) (V)",
+    "existing": {
+      "noun": "slam",
+      "verb": "slam"
+    }
+  },
+  {
+    "id": "bde68238-34c1-4083-b68e-fdfac31f9017",
+    "word": "squelch (V)",
+    "existing": {
+      "noun": "squelch",
+      "verb": "squelch"
+    }
+  },
+  {
+    "id": "6fb4182d-dfac-4b99-b09e-e35989818d51",
+    "word": "Unavoidable",
+    "existing": {
+      "adj": "unavoidable",
+      "adv": "unavoidably",
+      "noun": "unavoidability"
+    }
+  },
+  {
+    "id": "880474f7-e13c-454a-a538-74cca5aa2f44",
+    "word": "gait /ɡeɪt/",
+    "existing": {
+      "noun": "gait"
+    }
+  },
+  {
+    "id": "c6f8ab32-095e-4a9b-b56f-68fb22c149c2",
+    "word": "be into sth (INF)",
+    "existing": {}
+  },
+  {
+    "id": "fcc4e92c-3226-41a8-a4ff-1ccb29964da5",
+    "word": "sour grapes (idiom)",
+    "existing": {}
+  },
+  {
+    "id": "8ad15974-14f8-453e-8a7f-4bb819dd6ee1",
+    "word": "Sputtered, /ˈspʌtərd/",
+    "existing": {
+      "noun": "sputter",
+      "verb": "sputter"
+    }
+  },
+  {
+    "id": "456e76f5-a93e-4dd4-9f52-ebb51b78c714",
+    "word": "Murky [ˈmɜːr.ki]",
+    "existing": {
+      "adj": "murky",
+      "noun": "murkiness"
+    }
+  },
+  {
+    "id": "c6c09b6e-b065-4549-b525-276bf1676dec",
+    "word": "skimpy, /ˈskɪm.pi/",
+    "existing": {
+      "adj": "skimpy",
+      "noun": "skimpiness"
+    }
+  },
+  {
+    "id": "2494aae6-2390-4d4d-bf58-ce0efc28ca7e",
+    "word": "naivete, /ˌnaɪˈiːv.teɪ/",
+    "existing": {
+      "adj": "naive",
+      "noun": "naivete"
+    }
+  },
+  {
+    "id": "2eb04285-80d1-48a5-9b43-8d74ff901e2d",
+    "word": "Crested [ˈkrɛs.tɪd]",
+    "existing": {
+      "noun": "crest",
+      "verb": "crest"
+    }
+  },
+  {
+    "id": "9f839aa5-f1f7-43a8-8b24-e9f4996393c3",
+    "word": "creak (V)",
+    "existing": {
+      "adj": "creaky",
+      "noun": "creak",
+      "verb": "creak"
+    }
+  },
+  {
+    "id": "a9f8abbd-6d9d-4171-8f39-e7a9a38cf801",
+    "word": "high-pitched (ADJ)",
+    "existing": {
+      "adj": "high-pitched"
+    }
+  },
+  {
+    "id": "3ff93036-1e67-4662-938c-6b984e6901bb",
+    "word": "bark (N/V)",
+    "existing": {
+      "noun": "bark",
+      "verb": "bark"
+    }
+  },
+  {
+    "id": "42a574d8-b6c1-43df-bec0-c3127144ccfe",
+    "word": "distinct [dɪˈstɪŋkt]",
+    "existing": {
+      "adj": "distinct",
+      "adv": "distinctly",
+      "noun": "distinction"
+    }
+  },
+  {
+    "id": "77ad4f28-c958-49b3-9bda-ddf62d83dab0",
+    "word": "Welding",
+    "existing": {
+      "noun": "welder",
+      "verb": "weld"
+    }
+  },
+  {
+    "id": "08757d81-7b6c-4f6f-954c-0b818eba581a",
+    "word": "Julienne",
+    "existing": {
+      "adj": "julienne",
+      "verb": "julienne"
+    }
+  },
+  {
+    "id": "bc27f1e3-4485-4ce9-8da1-951bc5cc92b4",
+    "word": "restrained, /rɪˈstreɪnd/",
+    "existing": {
+      "adj": "restrained",
+      "noun": "restraint",
+      "verb": "restrain"
+    }
+  },
+  {
+    "id": "4b6d3ceb-e292-445f-855b-fa951e7ae087",
+    "word": "prospect [ˈprɒs.pekt]",
+    "existing": {
+      "adj": "prospective",
+      "noun": "prospect",
+      "verb": "prospect"
+    }
+  },
+  {
+    "id": "3b5dd35a-94dc-458f-9c0b-a3b85131a2a9",
+    "word": "take it easy (INF)",
+    "existing": {}
+  },
+  {
+    "id": "75d6d8c2-93a7-4e47-82db-dddadc9fb76a",
+    "word": "reluctant [rɪˈlʌk.tənt]",
+    "existing": {
+      "adj": "reluctant",
+      "adv": "reluctantly",
+      "noun": "reluctance"
+    }
+  },
+  {
+    "id": "64b71898-41e9-4be9-8aa7-cd5b29fe56a7",
+    "word": "Hurtling [ˈhɜː.təl.ɪŋ]",
+    "existing": {
+      "verb": "hurtle"
+    }
+  },
+  {
+    "id": "df75a92b-ab03-4e3e-8c92-90be1be4b8f9",
+    "word": "astray, /əˈstreɪ/",
+    "existing": {
+      "adj": "astray",
+      "adv": "astray"
+    }
+  },
+  {
+    "id": "defbdfe8-5a61-465a-ab52-c2334fdfa709",
+    "word": "Going bust",
+    "existing": {
+      "verb": "go bust"
+    }
+  },
+  {
+    "id": "2ac52e37-1eb4-4eaa-ac09-eb4fe1e38767",
+    "word": "nibble, /ˈnɪb.əl/",
+    "existing": {
+      "noun": "nibble",
+      "verb": "nibble"
+    }
+  },
+  {
+    "id": "5658a251-bfd9-4e08-9a52-7e8d2be9d05f",
+    "word": "sheer /ʃɪər/",
+    "existing": {
+      "adj": "sheer",
+      "adv": "sheerly",
+      "noun": "sheerness"
+    }
+  },
+  {
+    "id": "947dc114-ab33-4365-aa9f-73129cdde415",
+    "word": "Stiff [stɪf]",
+    "existing": {
+      "adj": "stiff",
+      "adv": "stiffly",
+      "noun": "stiffness"
+    }
+  },
+  {
+    "id": "cc61c2a0-d32a-4518-a043-18c328690ad7",
+    "word": "growl (V)",
+    "existing": {
+      "noun": "growl",
+      "verb": "growl"
+    }
+  },
+  {
+    "id": "ebaab407-c339-43ca-be4e-b2ccb2a2ac8a",
+    "word": "firms [fɜːmz]",
+    "existing": {
+      "v": "firm",
+      "adj": "firm",
+      "noun": "firm"
+    }
+  },
+  {
+    "id": "0ec7ee60-0b70-440b-a3cb-d2b46c0a0d7c",
+    "word": "Sloppy [ˈslɒp.i]",
+    "existing": {
+      "adj": "sloppy",
+      "adv": "sloppily",
+      "noun": "sloppiness"
+    }
+  },
+  {
+    "id": "c9c5d8ef-c1bc-4b71-86dc-8410b22aec03",
+    "word": "appeal [əˈpiːl]",
+    "existing": {
+      "adj": "appealing",
+      "noun": "appeal",
+      "verb": "appeal"
+    }
+  },
+  {
+    "id": "d7b6b11e-c5a6-4f53-8a3d-c64239430c6b",
+    "word": "Steering [ˈstɪərɪŋ]",
+    "existing": {
+      "noun": "steering",
+      "verb": "steer"
+    }
+  },
+  {
+    "id": "71776a02-8d17-4047-be01-e421e9d5c73b",
+    "word": "buzz (V)",
+    "existing": {
+      "adj": "buzzing",
+      "noun": "buzz",
+      "verb": "buzz"
+    }
+  },
+  {
+    "id": "3bcb435f-2686-4630-bfa4-009ad9b7896c",
+    "word": "curable ADJ.",
+    "existing": {
+      "adj": "curable",
+      "noun": "cure",
+      "verb": "cure"
+    }
+  },
+  {
+    "id": "17e0c92f-dce6-4b92-b493-be24efc52d28",
+    "word": "howl (N/V)",
+    "existing": {
+      "adj": "howling",
+      "noun": "howl",
+      "verb": "howl"
+    }
+  },
+  {
+    "id": "754f9c66-271c-4b45-8e87-219b860b9da5",
+    "word": "bring sth about",
+    "existing": {
+      "verb": "bring about"
+    }
+  },
+  {
+    "id": "17f655be-1538-4f22-9e79-c0c623d9ed1d",
+    "word": "whatsoever [ˌwʌtsoʊˈɛvər]",
+    "existing": {
+      "adv": "whatsoever"
+    }
+  },
+  {
+    "id": "55297a7d-5e5b-4ded-8fcb-07d22f8bc0b9",
+    "word": "altruistic, /ˌæltruˈɪstɪk/",
+    "existing": {
+      "adj": "altruistic",
+      "adv": "altruistically",
+      "noun": "altruism"
+    }
+  },
+  {
+    "id": "6679e34f-31c6-44b4-8c93-f6dde8775746",
+    "word": "Perpendicular [/ˌpɜːrpənˈdɪkjələr/]",
+    "existing": {
+      "adj": "perpendicular",
+      "adv": "perpendicularly",
+      "noun": "perpendicularity"
+    }
+  },
+  {
+    "id": "dc82a570-c245-4d73-ab16-4a47a3a0be2d",
+    "word": "go to pieces (idiom, INF)",
+    "existing": {}
+  },
+  {
+    "id": "06ebe114-9129-4dcf-96e4-75369a9afaf2",
+    "word": "predicament [/prɪˈdɪk.ə.mənt/]",
+    "existing": {
+      "noun": "predicament"
+    }
+  },
+  {
+    "id": "51484d75-23d6-4c8c-bbaa-c66c8a299ca6",
+    "word": "Juxtaposition [juhk-stuh-puh-ZISH-uhn]",
+    "existing": {
+      "noun": "juxtaposition",
+      "verb": "juxtapose"
+    }
+  },
+  {
+    "id": "68f63483-0e03-4469-b942-00102e36f51c",
+    "word": "Indecisiveness [ˌɪndɪˈsaɪsɪvnəs]",
+    "existing": {
+      "adj": "indecisive",
+      "adv": "indecisively",
+      "noun": "indecisiveness"
+    }
+  },
+  {
+    "id": "e28614b7-2c3c-4a86-9758-c8046f4481e9",
+    "word": "roar (N/V)",
+    "existing": {
+      "adj": "roaring",
+      "noun": "roar",
+      "verb": "roar"
+    }
+  },
+  {
+    "id": "214b62d6-054a-4c5b-b9d2-4bc01a75444c",
+    "word": "squeak (V)",
+    "existing": {
+      "adj": "squeaky",
+      "noun": "squeak",
+      "verb": "squeak"
+    }
+  },
+  {
+    "id": "63abbd28-95ed-4eb2-994a-d833b77ec894",
+    "word": "miscast",
+    "existing": {
+      "adj": "miscast",
+      "verb": "miscast"
+    }
+  },
+  {
+    "id": "956c372b-33dc-405d-889d-34286da1539b",
+    "word": "atrocity [/əˈtrɑː.sə.t̬i/]",
+    "existing": {
+      "adj": "atrocious",
+      "noun": "atrocity"
+    }
+  },
+  {
+    "id": "66347c78-1867-4624-a60d-3619e398e7f5",
+    "word": "charade /ʃəˈreɪd/",
+    "existing": {
+      "noun": "charade"
+    }
+  },
+  {
+    "id": "9ecffae7-dcaa-49e6-bbdb-29fe3e09db4e",
+    "word": "Profit Margin",
+    "existing": {}
+  },
+  {
+    "id": "c86f60ca-49fa-4d12-b26c-7b570646db93",
+    "word": "Liquidity",
+    "existing": {
+      "adj": "liquid",
+      "noun": "liquidity"
+    }
+  },
+  {
+    "id": "d449399d-e1f6-4d07-ac88-03973ca55343",
+    "word": "hedge",
+    "existing": {
+      "noun": "hedge",
+      "verb": "hedge"
+    }
+  },
+  {
+    "id": "03998000-29ab-4d24-ac15-2d87ef2249f0",
+    "word": "incentive [/ɪnˈsen.tɪv/]",
+    "existing": {
+      "adj": "incentivized",
+      "noun": "incentive",
+      "verb": "incentivize"
+    }
+  },
+  {
+    "id": "c01143d0-3a44-4d96-9dd2-cb0f9a3ef8ad",
+    "word": "crow (V)",
+    "existing": {
+      "noun": "crow",
+      "verb": "crow"
+    }
+  },
+  {
+    "id": "55843edc-da78-4f76-809f-721e9a3fe6ee",
+    "word": "crouch [kraʊtʃ]",
+    "existing": {
+      "noun": "crouch",
+      "verb": "crouch"
+    }
+  },
+  {
+    "id": "d644859b-fac2-4f9d-8591-c2d09c362222",
+    "word": "Cumbersome",
+    "existing": {
+      "adj": "cumbersome",
+      "noun": "cumbersomeness"
+    }
+  },
+  {
+    "id": "964bec77-ba56-4a2c-ac86-3cd5c876065c",
+    "word": "eyesight (N)",
+    "existing": {
+      "noun": "eyesight"
+    }
+  },
+  {
+    "id": "10e831c7-26d0-4b5d-88c6-aa47c20460d9",
+    "word": "eye strain (N)",
+    "existing": {
+      "noun": "strain"
+    }
+  },
+  {
+    "id": "66a3497d-ddee-4865-be5b-fe869a6c6a8c",
+    "word": "Scalable",
+    "existing": {
+      "adj": "scalable",
+      "noun": "scalability",
+      "verb": "scale"
+    }
+  },
+  {
+    "id": "85796349-e6ec-45bd-be9c-d55ed1889205",
+    "word": "temptation, /tɛmpˈteɪ.ʃən/",
+    "existing": {
+      "adj": "tempting",
+      "noun": "temptation",
+      "verb": "tempt"
+    }
+  },
+  {
+    "id": "e6b74d55-3f11-4227-9ec9-e403511a6a04",
+    "word": "Insidious",
+    "existing": {
+      "adj": "insidious",
+      "adv": "insidiously",
+      "noun": "insidiousness"
+    }
+  },
+  {
+    "id": "a6afa935-7de0-45ad-bf30-b3af259aca08",
+    "word": "Impeccable",
+    "existing": {
+      "adj": "impeccable",
+      "adv": "impeccably",
+      "noun": "impeccability"
+    }
+  },
+  {
+    "id": "fdc5c308-04f2-4a75-b342-98af735c7eb9",
+    "word": "Outsourcing",
+    "existing": {
+      "noun": "outsourcing",
+      "verb": "outsource"
+    }
+  },
+  {
+    "id": "70a00c25-652a-42ad-bd50-b1dc76f99edb",
+    "word": "Articulate",
+    "existing": {
+      "adj": "articulate",
+      "noun": "articulation",
+      "verb": "articulate"
+    }
+  },
+  {
+    "id": "8e87f3e1-4dc0-499b-bb75-7fd6ad357256",
+    "word": "apprehension [/ˌæp.rɪˈhen.ʃən/]",
+    "existing": {
+      "adj": "apprehensive",
+      "noun": "apprehension",
+      "verb": "apprehend"
+    }
+  },
+  {
+    "id": "f44fe249-07f8-4677-a513-d219eb185099",
+    "word": "Prodigal [ˈprɒdɪɡəl]",
+    "existing": {
+      "adj": "prodigal",
+      "noun": "prodigality"
+    }
+  },
+  {
+    "id": "0934d551-9a66-45d6-a9b0-a6149e6077da",
+    "word": "Break-even point",
+    "existing": {}
+  },
+  {
+    "id": "b40ed67b-b965-432a-a9ac-c27123ebcd01",
+    "word": "hoot (V)",
+    "existing": {
+      "noun": "hoot",
+      "verb": "hoot"
+    }
+  },
+  {
+    "id": "801e3805-d4c7-4977-9274-1fd8e4c13b0b",
+    "word": "Shrill",
+    "existing": {
+      "adj": "shrill",
+      "adv": "shrilly",
+      "noun": "shrillness",
+      "verb": "shrill"
+    }
+  },
+  {
+    "id": "98fa00a5-c0e7-4376-bbf3-11f1b24f9f93",
+    "word": "Coarse",
+    "existing": {
+      "adj": "coarse",
+      "adv": "coarsely",
+      "noun": "coarseness"
+    }
+  },
+  {
+    "id": "dc0cb545-a226-45eb-b8bd-5755f501a8e3",
+    "word": "incurable ADJ.",
+    "existing": {
+      "adj": "incurable",
+      "adv": "incurably",
+      "noun": "incurability"
+    }
+  },
+  {
+    "id": "27f67876-af32-4f5d-a2a0-becb0bbefe96",
+    "word": "Cautious",
+    "existing": {
+      "adj": "cautious",
+      "adv": "cautiously",
+      "noun": "caution"
+    }
+  },
+  {
+    "id": "c6631526-f07f-4cb9-831f-48eea9ee4e2f",
+    "word": "Bold",
+    "existing": {
+      "adj": "bold",
+      "adv": "boldly",
+      "noun": "boldness"
+    }
+  },
+  {
+    "id": "ecf3a4f4-d07f-40bd-ae1b-6889631cc6dc",
+    "word": "Regret",
+    "existing": {
+      "adj": "regretful",
+      "noun": "regret",
+      "verb": "regret"
+    }
+  },
+  {
+    "id": "dc262bfb-43ff-4fcb-908c-443bc9cbbfcd",
+    "word": "Meticulous",
+    "existing": {
+      "adj": "meticulous",
+      "adv": "meticulously",
+      "noun": "meticulousness"
+    }
+  },
+  {
+    "id": "e74f1d73-96bf-4cae-a235-ecaf2263f168",
+    "word": "Ephemeral",
+    "existing": {
+      "adj": "ephemeral",
+      "adv": "ephemerally",
+      "noun": "ephemera"
+    }
+  },
+  {
+    "id": "2fee88dc-d267-43eb-b83e-27c7248feba1",
+    "word": "Delicate",
+    "existing": {
+      "adj": "delicate",
+      "adv": "delicately",
+      "noun": "delicacy"
+    }
+  },
+  {
+    "id": "4b7a10d1-f12f-4da4-b442-8a5cef5185ca",
+    "word": "Superfluous",
+    "existing": {
+      "adj": "superfluous",
+      "adv": "superfluously",
+      "noun": "superfluity"
+    }
+  },
+  {
+    "id": "8077cc6b-0659-4b5e-8555-e610ac7f5957",
+    "word": "Paradox",
+    "existing": {
+      "adj": "paradoxical",
+      "adv": "paradoxically",
+      "noun": "paradox"
+    }
+  },
+  {
+    "id": "03e6c383-cff1-4c8c-bb8c-9ba116175227",
+    "word": "Altruism",
+    "existing": {
+      "adj": "altruistic",
+      "adv": "altruistically",
+      "noun": "altruism"
+    }
+  },
+  {
+    "id": "cdfad4e8-7129-4f44-aab4-eeec75f2da17",
+    "word": "Perseverance",
+    "existing": {
+      "adj": "persevering",
+      "noun": "perseverance",
+      "verb": "persevere"
+    }
+  },
+  {
+    "id": "935b7b1d-a3ac-4989-9a34-a9669eba036b",
+    "word": "impulse (to do sth)",
+    "existing": {
+      "adj": "impulsive",
+      "noun": "impulse"
+    }
+  },
+  {
+    "id": "ceb8f6eb-fd0d-44ff-b8ab-4f59cb6b9e2c",
+    "word": "Mundane",
+    "existing": {
+      "adj": "mundane",
+      "adv": "mundanely",
+      "noun": "mundaneness"
+    }
+  },
+  {
+    "id": "458a62aa-06b7-4b94-9dfa-e38f5a3b5e55",
+    "word": "Pessimistic",
+    "existing": {
+      "adj": "pessimistic",
+      "adv": "pessimistically",
+      "noun": "pessimism"
+    }
+  },
+  {
+    "id": "55bf24e4-6d46-4704-a033-f9a5ec77134e",
+    "word": "Fragile",
+    "existing": {
+      "adj": "fragile",
+      "adv": "fragilely",
+      "noun": "fragility"
+    }
+  },
+  {
+    "id": "2f5f7ad9-375e-4e34-bee5-27f8863941c1",
+    "word": "Pivotal",
+    "existing": {
+      "adj": "pivotal",
+      "noun": "pivot",
+      "verb": "pivot"
+    }
+  },
+  {
+    "id": "cbd545da-f522-43e2-87d9-ef43afc8d53a",
+    "word": "Transparent",
+    "existing": {
+      "adj": "transparent",
+      "adv": "transparently",
+      "noun": "transparency"
+    }
+  },
+  {
+    "id": "6a10ed95-a0c2-466f-a3ba-bafbef6249d6",
+    "word": "Deafening",
+    "existing": {
+      "adj": "deafening",
+      "adv": "deafeningly",
+      "verb": "deafen"
+    }
+  },
+  {
+    "id": "d5c68619-9225-4a15-9e35-b073b648436c",
+    "word": "Inquisitive",
+    "existing": {
+      "adj": "inquisitive",
+      "adv": "inquisitively",
+      "noun": "inquisitiveness"
+    }
+  },
+  {
+    "id": "3a695088-327c-4eba-9733-57ade8ef813a",
+    "word": "Ubiquitous",
+    "existing": {
+      "adj": "ubiquitous",
+      "adv": "ubiquitously",
+      "noun": "ubiquity"
+    }
+  },
+  {
+    "id": "5591a348-3402-4e29-bc30-41846378e4f0",
+    "word": "Dazzling",
+    "existing": {
+      "adj": "dazzling",
+      "adv": "dazzlingly",
+      "verb": "dazzle"
+    }
+  },
+  {
+    "id": "3c86168e-b4cc-40b6-adba-2e851337375d",
+    "word": "Versatility",
+    "existing": {
+      "adj": "versatile",
+      "adv": "versatilely",
+      "noun": "versatility"
+    }
+  },
+  {
+    "id": "d6c241a1-96f7-4fbc-80b4-afbfc8e44bc0",
+    "word": "Remorse",
+    "existing": {
+      "adj": "remorseful",
+      "adv": "remorsefully",
+      "noun": "remorse"
+    }
+  },
+  {
+    "id": "24c57fc1-44a4-4ade-b98f-14a0b920a9be",
+    "word": "Pull my leg",
+    "existing": {}
+  },
+  {
+    "id": "f0561fbb-42ef-4ffe-b18b-96ec168ce355",
+    "word": "Constituents [kənˈstɪtʃuənts]",
+    "existing": {
+      "adj": "constituent",
+      "noun": "constituent"
+    }
+  },
+  {
+    "id": "6ab49ce0-19c2-4f4d-969a-07ca3e386f0d",
+    "word": "Haughtily [ˈhɔː.tɪ.li]",
+    "existing": {
+      "adj": "haughty",
+      "adv": "haughtily",
+      "noun": "haughtiness"
+    }
+  },
+  {
+    "id": "e507d6f6-a9f9-470f-bb63-60d28ace9450",
+    "word": "Anonymity [ˌæn.əˈnɪm.ə.ti]",
+    "existing": {
+      "adj": "anonymous",
+      "adv": "anonymously",
+      "noun": "anonymity"
+    }
+  },
+  {
+    "id": "6ab5f5e2-063e-446c-a6cf-4266913ac84d",
+    "word": "Indigenous",
+    "existing": {
+      "adj": "indigenous",
+      "adv": "indigenously",
+      "noun": "indigeneity"
+    }
+  },
+  {
+    "id": "37574f2f-49ac-4abd-a975-83eb8d0e4e69",
+    "word": "Still (nevertheless)",
+    "existing": {}
+  },
+  {
+    "id": "0f6286cd-0c8e-484f-ab6b-b605d610c18f",
+    "word": "Ambivalent",
+    "existing": {
+      "adj": "ambivalent",
+      "adv": "ambivalently",
+      "noun": "ambivalence"
+    }
+  },
+  {
+    "id": "807453bd-744d-4a03-8bbf-7f3e83a13b1b",
+    "word": "still (even/yet)",
+    "existing": {}
+  },
+  {
+    "id": "e62a9c6a-498a-4be5-8ec3-7bbed0140046",
+    "word": "cliquey (adj, INF, DISAPPROVING)",
+    "existing": {
+      "adj": "cliquey",
+      "noun": "clique"
+    }
+  },
+  {
+    "id": "35daf9c0-02ed-4c97-8ab5-245b134b7fee",
+    "word": "Huff [hʌf]",
+    "existing": {
+      "adj": "huffy",
+      "noun": "huff",
+      "verb": "huff"
+    }
+  },
+  {
+    "id": "1aaf324c-4f3a-4811-a11b-fa38c649a6d9",
+    "word": "captivating [ˈkæp.tɪ.veɪ.tɪŋ]",
+    "existing": {
+      "adj": "captivating",
+      "noun": "captivation",
+      "verb": "captivate"
+    }
+  },
+  {
+    "id": "4ec98abd-3f68-4c05-8279-e470927e6158",
+    "word": "indolent [ˈɪn.dəl.ənt]",
+    "existing": {
+      "adj": "indolent",
+      "adv": "indolently",
+      "noun": "indolence"
+    }
+  },
+  {
+    "id": "61a82d49-2c8e-4b98-9e45-1b5a3f5f148c",
+    "word": "Behest [bɪˈhest]",
+    "existing": {
+      "noun": "behest"
+    }
+  },
+  {
+    "id": "f316feca-8a6d-4577-8c94-fb1d01d40dba",
+    "word": "Enticing /ɪnˈtaɪ.sɪŋ/ EN-TY-SING",
+    "existing": {
+      "adj": "enticing",
+      "adv": "enticingly",
+      "verb": "entice"
+    }
+  },
+  {
+    "id": "2f02ea1c-4d2b-415b-9c89-4079c28e3fa5",
+    "word": "Waddling [ˈwɒd.lɪŋ]",
+    "existing": {
+      "noun": "waddle",
+      "verb": "waddle"
+    }
+  },
+  {
+    "id": "81bb653c-35e7-48f4-a5f1-1748562012db",
+    "word": "still (motionless)",
+    "existing": {
+      "adj": "still",
+      "adv": "still",
+      "noun": "stillness"
+    }
+  },
+  {
+    "id": "407adc3a-ca8e-408a-84c4-d478f1cf5a61",
+    "word": "implement sth",
+    "existing": {
+      "adj": "implementable",
+      "noun": "implementation",
+      "verb": "implement"
+    }
+  },
+  {
+    "id": "df9cc182-98e1-4647-aabb-7097e6cb749c",
+    "word": "leaked",
+    "existing": {
+      "adj": "leaky",
+      "noun": "leak",
+      "verb": "leak"
+    }
+  },
+  {
+    "id": "9cafaeff-d71a-4951-b650-b8c02fc05790",
+    "word": "Inquisition [ˌɪn.kwɪˈzɪʃ.ən]",
+    "existing": {
+      "adj": "inquisitive",
+      "noun": "inquisition"
+    }
+  },
+  {
+    "id": "7e41bab6-49ff-43ef-88e4-2b97b16ef800",
+    "word": "Muttered [ˈmʌt.ərd]",
+    "existing": {
+      "noun": "mutter",
+      "verb": "mutter"
+    }
+  },
+  {
+    "id": "77c3473b-48a3-46c5-a46a-11a9d6e21718",
+    "word": "Pavilion",
+    "existing": {
+      "noun": "pavilion"
+    }
+  },
+  {
+    "id": "12fef8aa-52f2-4527-b8c0-266622363c9d",
+    "word": "Torrential",
+    "existing": {
+      "adj": "torrential",
+      "noun": "torrent"
+    }
+  },
+  {
+    "id": "02cd1c21-d8c2-47f8-b265-164bc571b074",
+    "word": "Substantially [səbˈstænʃəli]",
+    "existing": {
+      "adj": "substantial",
+      "adv": "substantially",
+      "noun": "substance"
+    }
+  },
+  {
+    "id": "708f6827-42bd-4486-90b5-043cd1e565ae",
+    "word": "Frowned [fraʊnd]",
+    "existing": {
+      "noun": "frown",
+      "verb": "frown"
+    }
+  },
+  {
+    "id": "555383c4-d6a3-4733-a5aa-c0f20f508f8f",
+    "word": "flooding",
+    "existing": {
+      "noun": "flooding",
+      "verb": "flood"
+    }
+  },
+  {
+    "id": "97bd39d8-ed99-4624-a28c-e3b3ffd4e7ff",
+    "word": "Conservation",
+    "existing": {
+      "noun": "conservation",
+      "verb": "conserve"
+    }
+  },
+  {
+    "id": "a1129913-9470-486d-af64-8ab89faa8ef6",
+    "word": "under the microscope",
+    "existing": {}
+  },
+  {
+    "id": "cae59ecf-70f9-45c5-8468-34d93d4b7e2c",
+    "word": "Banditry [ˈbæn.dɪ.tri]",
+    "existing": {
+      "noun": "bandit"
+    }
+  },
+  {
+    "id": "36c51975-72be-4c90-9272-8cf54b9d3572",
+    "word": "Waning /ˈweɪ.nɪŋ/ WAY-NING",
+    "existing": {
+      "adj": "waning",
+      "verb": "wane"
+    }
+  },
+  {
+    "id": "5e6d091e-858a-4301-8b48-f9f8403fae74",
+    "word": "Bomb",
+    "existing": {
+      "noun": "bomb",
+      "verb": "bomb"
+    }
+  },
+  {
+    "id": "5c2c5bee-def3-4aa3-87b4-d2767bc5d74a",
+    "word": "salience [ˈseɪ.li.əns]",
+    "existing": {
+      "adj": "salient",
+      "noun": "salience"
+    }
+  },
+  {
+    "id": "74fe2620-86c7-438f-aba7-8c98973cb7fe",
+    "word": "Flee [fliː]",
+    "existing": {
+      "noun": "flight",
+      "verb": "flee"
+    }
+  },
+  {
+    "id": "185296a9-aaa3-458b-a419-1f56a75b9117",
+    "word": "Slung [slʌŋ]",
+    "existing": {
+      "past": "slung",
+      "verb": "sling"
+    }
+  },
+  {
+    "id": "bd878fe5-5033-4f3c-b7b9-11de3b125d7d",
+    "word": "highly unlikely",
+    "existing": {}
+  },
+  {
+    "id": "0a97ae11-b0e0-4dbd-ad47-819fa4cb93cb",
+    "word": "What's the story?",
+    "existing": {}
+  },
+  {
+    "id": "e678ed77-3efb-441d-9ee8-fcdf6a37887c",
+    "word": "assertion",
+    "existing": {
+      "noun": "assertion",
+      "verb": "assert"
+    }
+  },
+  {
+    "id": "37068f6b-a5b8-40a0-a1b3-0a50b5e2c40d",
+    "word": "recede [rɪˈsiːd]",
+    "existing": {
+      "noun": "recession",
+      "verb": "recede"
+    }
+  },
+  {
+    "id": "3c69fbfb-3e40-4cce-835a-cc5e246b6fd8",
+    "word": "old friend",
+    "existing": {}
+  },
+  {
+    "id": "871ebb8e-9b1d-4636-8c26-a767074f5163",
+    "word": "condemnation",
+    "existing": {
+      "noun": "condemnation",
+      "verb": "condemn"
+    }
+  },
+  {
+    "id": "64dc7585-8105-4a06-bea1-bc6c6749b7aa",
+    "word": "monolithic [ˌmɒn.əˈlɪθ.ɪk]",
+    "existing": {
+      "adj": "monolithic",
+      "noun": "monolith"
+    }
+  },
+  {
+    "id": "64894ce6-5130-4b19-aad6-37c1b5f6ee67",
+    "word": "missed the bus",
+    "existing": {}
+  },
+  {
+    "id": "6e8dc356-4d63-4c55-b412-85ab942db3b5",
+    "word": "torrential rainfall",
+    "existing": {}
+  },
+  {
+    "id": "2aec769a-1bdf-4a3f-962b-0202fe1bdfd5",
+    "word": "Gutters /ˈɡʌt.ərz/ GUT-ERZ",
+    "existing": {
+      "noun": "gutter"
+    }
+  },
+  {
+    "id": "241d0372-a020-44ff-b966-523c18eb7cf2",
+    "word": "break the deadlock",
+    "existing": {}
+  },
+  {
+    "id": "a54ff740-9bc4-4fa8-a0f4-f2257891597e",
+    "word": "Lavish /ˈlæv.ɪʃ/ LAV-ISH",
+    "existing": {
+      "adj": "lavish",
+      "adv": "lavishly"
+    }
+  },
+  {
+    "id": "7eef7e2c-e7a2-4c4c-a5f3-ea83b99676cf",
+    "word": "Frowned [fraʊnd]",
+    "existing": {
+      "noun": "frown",
+      "verb": "frown"
+    }
+  },
+  {
+    "id": "cd41cf5d-a020-4658-b52d-78b3d189da4e",
+    "word": "spam",
+    "existing": {
+      "noun": "spam"
+    }
+  },
+  {
+    "id": "191386a3-95ab-45b4-8a13-0eadfc788aa7",
+    "word": "outlined",
+    "existing": {
+      "noun": "outline",
+      "verb": "outline"
+    }
+  },
+  {
+    "id": "4747acc1-0bc4-4a67-9f57-a90432e3c9bc",
+    "word": "Enticing [ɪnˈtaɪ.sɪŋ]",
+    "existing": {
+      "adj": "enticing",
+      "adv": "enticingly",
+      "verb": "entice"
+    }
+  },
+  {
+    "id": "b922958d-f9e4-4f4a-911d-5ed26367d353",
+    "word": "pool our resources",
+    "existing": {
+      "verb": "pool"
+    }
+  },
+  {
+    "id": "e5431ced-6800-407f-a3f6-00a4a19d0165",
+    "word": "condone",
+    "existing": {
+      "verb": "condone"
+    }
+  },
+  {
+    "id": "5e1ed4cb-78da-4908-b414-4a11baa99a6c",
+    "word": "Tyrant [ˈtaɪ.rənt]",
+    "existing": {
+      "adj": "tyrannical",
+      "noun": "tyrant"
+    }
+  },
+  {
+    "id": "55df23ed-8827-42d3-846a-05dd7cdca84d",
+    "word": "Unyielding /ʌnˈjiːl.dɪŋ/ UN-YEEL-DING",
+    "existing": {
+      "adj": "unyielding",
+      "verb": "yield"
+    }
+  },
+  {
+    "id": "22dff34a-d84b-49e0-8f42-3150a62eb72c",
+    "word": "Lair [leər]",
+    "existing": {
+      "noun": "lair"
+    }
+  },
+  {
+    "id": "467657aa-5ea2-4462-80ab-c31e76a521b0",
+    "word": "eradicate sth",
+    "existing": {
+      "noun": "eradication",
+      "verb": "eradicate"
+    }
+  },
+  {
+    "id": "51a9a1f5-42dd-44a4-943f-a9c21eac997e",
+    "word": "Crass [kræs]",
+    "existing": {
+      "adj": "crass",
+      "noun": "crassness"
+    }
+  },
+  {
+    "id": "0f5b1726-69ab-44c0-9e8d-2d1a0c94a999",
+    "word": "hack into sth",
+    "existing": {
+      "verb": "hack"
+    }
+  },
+  {
+    "id": "4962520e-5ab8-459e-bb81-182c38fc66bb",
+    "word": "be uprooted",
+    "existing": {
+      "verb": "uproot"
+    }
+  },
+  {
+    "id": "be5c2454-58ad-4774-8b29-bfcd1362fc83",
+    "word": "Reputation [ˌrep.jəˈteɪ.ʃən]",
+    "existing": {
+      "adj": "reputable",
+      "noun": "reputation"
+    }
+  },
+  {
+    "id": "ff6639a7-7f8f-43d2-a082-32a125a4457f",
+    "word": "deteriorate",
+    "existing": {
+      "noun": "deterioration",
+      "verb": "deteriorate"
+    }
+  },
+  {
+    "id": "45d4ee42-6ef9-44eb-a1a3-17a3e3e8f8d7",
+    "word": "interrogation",
+    "existing": {
+      "noun": "interrogation",
+      "verb": "interrogate"
+    }
+  },
+  {
+    "id": "08a74700-4108-4829-af77-dde6f4ffb443",
+    "word": "stir [stɜːr]",
+    "existing": {
+      "noun": "stir",
+      "verb": "stir"
+    }
+  },
+  {
+    "id": "12f82455-194f-4fda-9db5-4b25a6c96cd5",
+    "word": "restrict sth (to sth)",
+    "existing": {
+      "adj": "restrictive",
+      "noun": "restriction",
+      "verb": "restrict"
+    }
+  },
+  {
+    "id": "555f11b2-eca4-4ec6-8ba0-5afc979d678f",
+    "word": "First and foremost",
+    "existing": {}
+  },
+  {
+    "id": "53f1fc8e-84fe-4a1a-a312-09769a113a0f",
+    "word": "a foregone conclusion",
+    "existing": {}
+  },
+  {
+    "id": "e5ef57fc-6cb6-40ce-8e80-4f340311fcc7",
+    "word": "vaccine",
+    "existing": {
+      "noun": "vaccination",
+      "verb": "vaccinate"
+    }
+  },
+  {
+    "id": "0aac5f73-c405-4bab-941e-e4068d4d827d",
+    "word": "Forges /fɔː.dʒɪz/ FOR-jiz",
+    "existing": {
+      "noun": "forge",
+      "verb": "forge"
+    }
+  },
+  {
+    "id": "5c527863-d2e2-499a-9f62-05d26ae7c29e",
+    "word": "Mansion [ˈmæn.ʃən]",
+    "existing": {
+      "noun": "mansion"
+    }
+  },
+  {
+    "id": "4821e6c5-de8b-405d-b778-2951bd48989e",
+    "word": "Incline [ɪnˈklaɪn]",
+    "existing": {
+      "noun": "incline",
+      "verb": "incline"
+    }
+  },
+  {
+    "id": "319e7bb8-ca5e-4a6d-8ecc-4d8245a8e523",
+    "word": "Intricate /ˈɪn.trɪ.kət/, IN-TRI-KUT",
+    "existing": {
+      "adj": "intricate",
+      "adv": "intricately",
+      "noun": "intricacy"
+    }
+  },
+  {
+    "id": "fa54f1d8-9e57-4e1b-abaa-56affb5bb798",
+    "word": "pewter [ˈpjuː.tər]",
+    "existing": {
+      "noun": "pewter"
+    }
+  },
+  {
+    "id": "3b087686-5f4a-4571-9525-6c45e294e31d",
+    "word": "on the cards",
+    "existing": {}
+  },
+  {
+    "id": "f409d87b-b6ce-4ac5-b182-d4fc9f18aa6b",
+    "word": "portrayal",
+    "existing": {
+      "noun": "portrayal",
+      "verb": "portray"
+    }
+  },
+  {
+    "id": "0992e4a0-0407-4235-a7d7-9ce6cb20af5d",
+    "word": "Cramped [kræmpt]",
+    "existing": {
+      "adj": "cramped"
+    }
+  },
+  {
+    "id": "56d72a29-d3f0-4c3e-a495-a59b3d666dd5",
+    "word": "Brass [brɑːs]",
+    "existing": {
+      "noun": "brass"
+    }
+  },
+  {
+    "id": "5286fa6b-73a2-46ee-9e32-2627fbdf0231",
+    "word": "Stride [straɪd]",
+    "existing": {
+      "noun": "stride",
+      "verb": "stride"
+    }
+  },
+  {
+    "id": "39d0e725-7b36-4849-b8e3-8b22967cc65d",
+    "word": "Haul [hɔːl]",
+    "existing": {
+      "noun": "haul",
+      "verb": "haul"
+    }
+  },
+  {
+    "id": "b99cb505-bd36-4b3c-a1d8-86752604619e",
+    "word": "Pounded [ˈpaʊn.dɪd]",
+    "existing": {
+      "noun": "pound",
+      "verb": "pound"
+    }
+  },
+  {
+    "id": "b78dc0e0-a5f0-41ec-8c21-856fecfd5a2f",
+    "word": "proactive",
+    "existing": {
+      "adj": "proactive",
+      "adv": "proactively",
+      "noun": "proactivity"
+    }
+  },
+  {
+    "id": "26144646-f330-483b-876d-60e54db00da6",
+    "word": "Munched [mʌntʃt]",
+    "existing": {
+      "verb": "munch"
+    }
+  },
+  {
+    "id": "f0c8d95f-765a-43a7-a73f-52eb1b753729",
+    "word": "catch sb out",
+    "existing": {
+      "verb": "catch out"
+    }
+  },
+  {
+    "id": "c3566ff4-473e-4e9a-8410-ab19b07a9b52",
+    "word": "tighten your belt",
+    "existing": {}
+  },
+  {
+    "id": "07f38894-2546-4246-bc46-e382740b4123",
+    "word": "needless to say",
+    "existing": {}
+  },
+  {
+    "id": "7422f807-84ef-4f81-b220-b0784ea36ac7",
+    "word": "Gullible /ˈɡʌl.ə.bəl/ GUL-uh-buhl",
+    "existing": {
+      "adj": "gullible",
+      "adv": "gullibly",
+      "noun": "gullibility"
+    }
+  },
+  {
+    "id": "83f725f6-5391-4838-ae13-2849ee34901f",
+    "word": "rummaging /ˈrʌm.ɪ.dʒɪŋ/",
+    "existing": {
+      "verb": "rummage"
+    }
+  },
+  {
+    "id": "52ea8ac7-e195-4d0e-ae9a-dc9ef00d7374",
+    "word": "Word: Musingly [ˈmjuː.zɪŋ.li]",
+    "existing": {
+      "adv": "musingly",
+      "verb": "muse"
+    }
+  },
+  {
+    "id": "a276aaef-8128-4449-b07a-c19049c9432b",
+    "word": "Rivals",
+    "existing": {
+      "noun": "rivalry"
+    }
+  },
+  {
+    "id": "76abcebf-d45f-4261-907f-e96ab3fb6dde",
+    "word": "scrutinize",
+    "existing": {
+      "noun": "scrutiny",
+      "verb": "scrutinize"
+    }
+  },
+  {
+    "id": "fcf81480-7a04-4749-a752-0d06ff3fed5f",
+    "word": "provocative",
+    "existing": {
+      "adj": "provocative",
+      "adv": "provocatively",
+      "noun": "provocation"
+    }
+  },
+  {
+    "id": "798c07fe-cc67-478f-962e-72957eb61328",
+    "word": "embodiment",
+    "existing": {
+      "noun": "embodiment",
+      "verb": "embody"
+    }
+  },
+  {
+    "id": "b8130d06-7df9-41f3-ac23-19bfea7023e4",
+    "word": "Pondering /ˈpɒn.dər.ɪŋ/",
+    "existing": {
+      "verb": "ponder"
+    }
+  },
+  {
+    "id": "85e2e739-9e2c-4192-b848-a066b69bbb09",
+    "word": "defiance",
+    "existing": {
+      "adj": "defiant",
+      "adv": "defiantly",
+      "noun": "defiance"
+    }
+  },
+  {
+    "id": "778a6349-b2b5-4b76-b21c-03dd5accbf02",
+    "word": "with hindsight",
+    "existing": {
+      "noun": "hindsight"
+    }
+  },
+  {
+    "id": "1f8ee303-b675-4522-b1ea-a3d5cd3d5f76",
+    "word": "Nonetheless /ˌnʌn.ðəˈles/ NUN-THUH-LESS",
+    "existing": {
+      "adv": "nonetheless"
+    }
+  },
+  {
+    "id": "60750c4f-06d5-45ef-abcf-c25dec8ef92f",
+    "word": "Grumbling, /ˈɡrʌmblɪŋ/",
+    "existing": {
+      "noun": "grumble",
+      "verb": "grumble"
+    }
+  },
+  {
+    "id": "12116f8f-44d0-40ca-b637-0ee3761a1d28",
+    "word": "Punctuated /ˈpʌŋk.tʃu.eɪ.tɪd/ PUNK-CHOO-AY-TID",
+    "existing": {
+      "noun": "punctuation",
+      "verb": "punctuate"
+    }
+  },
+  {
+    "id": "e43c8df5-5d07-42c6-a386-7b81f1f1c185",
+    "word": "therapeutic",
+    "existing": {
+      "adj": "therapeutic",
+      "adv": "therapeutically",
+      "noun": "therapy"
+    }
+  },
+  {
+    "id": "7fcdbca3-d052-4e88-84eb-c54e2383aa82",
+    "word": "Count me in",
+    "existing": {}
+  },
+  {
+    "id": "c5f9e1cf-0986-4be9-95f6-988e2757b580",
+    "word": "Count me out",
+    "existing": {}
+  },
+  {
+    "id": "20fff2c6-1687-4343-89e1-5632f8c07f02",
+    "word": "illumination [ɪˌluː.mɪˈneɪ.ʃən]",
+    "existing": {
+      "adj": "illuminated",
+      "noun": "illumination",
+      "verb": "illuminate"
+    }
+  },
+  {
+    "id": "fd3001d0-fa59-47bd-9ee8-c03029fea0e5",
+    "word": "toppling [ˈtɒp.lɪŋ]",
+    "existing": {
+      "verb": "topple"
+    }
+  },
+  {
+    "id": "869b9136-6cea-40a2-b8e7-b054a4496fa9",
+    "word": "anonymity",
+    "existing": {
+      "adj": "anonymous",
+      "noun": "anonymity"
+    }
+  },
+  {
+    "id": "2f2478d0-6038-4d2f-934e-3d35a0d2e4ae",
+    "word": "synonymous",
+    "existing": {
+      "adj": "synonymous",
+      "noun": "synonym"
+    }
+  },
+  {
+    "id": "a618ab2e-0226-4c0d-bd0c-b790bb1c8d7c",
+    "word": "sense (N)",
+    "existing": {
+      "noun": "sense"
+    }
+  },
+  {
+    "id": "1590e105-84af-4413-b915-3ff68377bb59",
+    "word": "ambiguous",
+    "existing": {
+      "adj": "ambiguous",
+      "noun": "ambiguity"
+    }
+  },
+  {
+    "id": "234459d4-1b48-475f-8a33-9785846027ba",
+    "word": "good as gold",
+    "existing": {}
+  },
+  {
+    "id": "b7a14d9a-c48b-4d27-9f20-9d64d4a5971d",
+    "word": "Hold your horses",
+    "existing": {}
+  },
+  {
+    "id": "c7849676-8399-495c-8370-c75647db1673",
+    "word": "scorched [skɔːrtʃt]",
+    "existing": {
+      "adj": "scorched",
+      "verb": "scorch"
+    }
+  },
+  {
+    "id": "3397b049-fc30-4ec9-82b1-030c0147ae6f",
+    "word": "Rosary [ˈroʊzəri]",
+    "existing": {
+      "noun": "rosary"
+    }
+  },
+  {
+    "id": "e55bdec0-99c9-4c60-99c4-49beb9291a95",
+    "word": "huddled [ˈhʌd.əld]",
+    "existing": {
+      "verb": "huddle"
+    }
+  },
+  {
+    "id": "c226df1e-196b-46eb-974e-eb31bb0cbd23",
+    "word": "Wandering [ˈwɒn.dər.ɪŋ]",
+    "existing": {
+      "adj": "wandering",
+      "noun": "wanderer",
+      "verb": "wander"
+    }
+  },
+  {
+    "id": "59fbc936-7779-448f-9ce5-91e98b05823d",
+    "word": "Implication [ˌɪm.plɪˈkeɪ.ʃən]",
+    "existing": {
+      "adj": "implicit",
+      "noun": "implication",
+      "verb": "imply"
+    }
+  },
+  {
+    "id": "f8b75852-9e2d-4e00-9f93-ef8f259edb8c",
+    "word": "distort sth",
+    "existing": {
+      "adj": "distorted",
+      "noun": "distortion",
+      "verb": "distort"
+    }
+  },
+  {
+    "id": "b80e68fe-b5ee-4ee7-9cf0-ee6abe86c2ee",
+    "word": "resilient",
+    "existing": {
+      "adj": "resilient",
+      "adv": "resiliently",
+      "noun": "resilience"
+    }
+  },
+  {
+    "id": "21a7a408-cc8b-4d5b-874b-1a15b572f507",
+    "word": "Never mind",
+    "existing": {}
+  },
+  {
+    "id": "9dc45fd3-987d-4b2f-a8f9-b1817b69fe89",
+    "word": "gamble [ /ˈɡæm.bəl/]",
+    "existing": {
+      "noun": "gamble",
+      "verb": "gamble"
+    }
+  },
+  {
+    "id": "a821d90f-53fb-4d0f-b693-db476f2ac472",
+    "word": "Chill out",
+    "existing": {
+      "verb": "chill"
+    }
+  },
+  {
+    "id": "32518fef-413d-4031-8fcb-a52df4b7b76b",
+    "word": "a (real) pain (INF)",
+    "existing": {}
+  },
+  {
+    "id": "874feea2-f035-4bca-8fe8-e66502e845cf",
+    "word": "interpret sth",
+    "existing": {
+      "noun": "interpretation",
+      "verb": "interpret"
+    }
+  },
+  {
+    "id": "21f417ac-0ae8-4ef9-b694-dc1c0aca698a",
+    "word": "self-explanatory",
+    "existing": {
+      "adv": "self-explanatorily"
+    }
+  },
+  {
+    "id": "798dd82a-5f58-462f-881e-fdb03f606154",
+    "word": "precise",
+    "existing": {
+      "adv": "precisely",
+      "noun": "precision"
+    }
+  },
+  {
+    "id": "50c511d9-26be-45b8-a2bd-255be7c19456",
+    "word": "virtually",
+    "existing": {
+      "adj": "virtual"
+    }
+  },
+  {
+    "id": "656c33eb-8fa0-478b-a793-e0d886d6cc03",
+    "word": "Brace [breɪs]",
+    "existing": {
+      "noun": "brace",
+      "verb": "brace"
+    }
+  },
+  {
+    "id": "73947944-a814-49a1-a8db-850c2697e234",
+    "word": "Take it easy",
+    "existing": {}
+  },
+  {
+    "id": "54260106-ce27-40b3-8698-6b86d8a9ade7",
+    "word": "spontaneous [/spɑːnˈteɪ.ni.əs/]",
+    "existing": {
+      "adv": "spontaneously",
+      "noun": "spontaneity"
+    }
+  },
+  {
+    "id": "18a1e871-bd6b-4964-a5c4-3bd657b85b15",
+    "word": "transparent",
+    "existing": {
+      "adv": "transparently",
+      "noun": "transparency"
+    }
+  },
+  {
+    "id": "b110732a-afcf-4fb5-b4b9-b51a3a096b44",
+    "word": "ironic (ADJ)",
+    "existing": {
+      "adv": "ironically",
+      "noun": "irony"
+    }
+  },
+  {
+    "id": "f6ffd594-03c6-4be9-9326-1223f6f3b2a9",
+    "word": "sarcasm (N)",
+    "existing": {
+      "adj": "sarcastic",
+      "adv": "sarcastically"
+    }
+  },
+  {
+    "id": "6ea73df1-2264-4292-8764-6e58769ce148",
+    "word": "sarcastic (ADJ)",
+    "existing": {
+      "adv": "sarcastically",
+      "noun": "sarcasm"
+    }
+  },
+  {
+    "id": "4dd58d8f-5ece-4372-83c0-a16b5763c548",
+    "word": "figurative",
+    "existing": {
+      "adv": "figuratively"
+    }
+  },
+  {
+    "id": "5faf2075-5a86-4d19-854d-c95e3cbc48d1",
+    "word": "Arbitrary",
+    "existing": {
+      "adv": "arbitrarily",
+      "noun": "arbitrariness"
+    }
+  },
+  {
+    "id": "e4421875-c3ef-4e0c-8976-b5d0da76de9e",
+    "word": "Align (on something)",
+    "existing": {
+      "noun": "alignment",
+      "verb": "align"
+    }
+  },
+  {
+    "id": "2cc498d5-0705-4676-8483-c927cd7e6a2f",
+    "word": "Spatula",
+    "existing": {
+      "noun": "spatula"
+    }
+  },
+  {
+    "id": "82f9e6ca-8ded-4695-9ee7-a001e564cece",
+    "word": "Hinge",
+    "existing": {
+      "noun": "hinge",
+      "verb": "hinge"
+    }
+  },
+  {
+    "id": "937efe5a-beb9-4cdd-81cc-1ec826219c26",
+    "word": "Intuitively",
+    "existing": {
+      "adj": "intuitive",
+      "noun": "intuition"
+    }
+  },
+  {
+    "id": "8ec6bb87-5e53-4037-8616-a08da64e90ae",
+    "word": "Counter-intuitive",
+    "existing": {
+      "adj": "counter-intuitive"
+    }
+  },
+  {
+    "id": "161d7b1b-a625-4833-96cf-7675626dfbda",
+    "word": "Power Strip",
+    "existing": {}
+  },
+  {
+    "id": "6cde093e-e67e-4327-a77f-77e7cc5b5301",
+    "word": "Ajar",
+    "existing": {}
+  },
+  {
+    "id": "b8d6a800-37ca-43b9-9221-637bc1df7c0d",
+    "word": "Extension Cord",
+    "existing": {
+      "noun": "extension cord"
+    }
+  },
+  {
+    "id": "4f44b247-eacd-4c9c-a020-0b0e26c0ad7f",
+    "word": "Learning Curve",
+    "existing": {}
+  },
+  {
+    "id": "eccac478-e9c0-469e-bac7-775b2c9b9de6",
+    "word": "Bottle Cap",
+    "existing": {}
+  },
+  {
+    "id": "b83434bf-b002-4f61-8e8d-bcee4991af33",
+    "word": "Prerequisite",
+    "existing": {
+      "noun": "prerequisite"
+    }
+  },
+  {
+    "id": "f7a04326-eb89-4634-9840-98b7e45ed942",
+    "word": "Coaster",
+    "existing": {
+      "noun": "coaster"
+    }
+  },
+  {
+    "id": "174b74ec-36bc-4094-a3d2-14cd8b14624c",
+    "word": "Ladle",
+    "existing": {
+      "noun": "ladle"
+    }
+  },
+  {
+    "id": "0038768e-c3c0-48ac-ae86-049ff1850a27",
+    "word": "Deprecated",
+    "existing": {
+      "adj": "deprecating",
+      "noun": "deprecation",
+      "verb": "deprecate"
+    }
+  },
+  {
+    "id": "934de6f4-5b48-4ab4-90ac-96091b4f60e9",
+    "word": "Coherent ",
+    "existing": {
+      "adj": "coherent",
+      "adv": "coherently",
+      "noun": "coherence"
+    }
+  },
+  {
+    "id": "2d17be45-5540-40f0-8f84-05a99651f947",
+    "word": "Ushered [ˈʌʃ.ərd]",
+    "existing": {
+      "verb": "usher"
+    }
+  },
+  {
+    "id": "6e02147d-5479-46cc-83e1-8972980331f2",
+    "word": "Spike [spaɪk]",
+    "existing": {
+      "noun": "spike",
+      "verb": "spike"
+    }
+  },
+  {
+    "id": "fb970b8c-530e-47e2-aa2f-3e85e1b9d4a9",
+    "word": "Lingered [ˈlɪŋ.ɡɚd]",
+    "existing": {
+      "verb": "linger"
+    }
+  },
+  {
+    "id": "3731b95a-7205-4804-aa53-5bc79e018baf",
+    "word": "Way to go",
+    "existing": {}
+  },
+  {
+    "id": "317febed-0834-4c09-ab8e-346055578ab1",
+    "word": "You're kidding",
+    "existing": {}
+  },
+  {
+    "id": "355d1b3b-fc6a-424e-a210-e3a917482cea",
+    "word": "you never know",
+    "existing": {}
+  },
+  {
+    "id": "f0066d95-4b96-4425-9fb4-81ebdb17956e",
+    "word": "Toiled [tɔɪld]",
+    "existing": {
+      "noun": "toil",
+      "verb": "toil"
+    }
+  },
+  {
+    "id": "8242df24-6fc1-482c-85cd-b2ca74f87ae2",
+    "word": "Forestall [fɔːrˈstɔːl]",
+    "existing": {
+      "noun": "forestallment",
+      "verb": "forestall"
+    }
+  },
+  {
+    "id": "1ebb14b8-0f9e-4e01-801c-0e22e0d80e50",
+    "word": "merciful/merciless",
+    "existing": {
+      "noun": "mercy"
+    }
+  },
+  {
+    "id": "80fb85b6-e4d7-4a31-9b4d-d8349cf96d84",
+    "word": "literary",
+    "existing": {
+      "noun": "literature"
+    }
+  },
+  {
+    "id": "78852559-96aa-4fb9-946b-4dc6c1f2a32b",
+    "word": "disapproving",
+    "existing": {
+      "adv": "disapprovingly",
+      "noun": "disapproval",
+      "verb": "disapprove"
+    }
+  },
+  {
+    "id": "eccccdcc-a59f-4456-b786-077be98606d7",
+    "word": "old-fashioned",
+    "existing": {}
+  },
+  {
+    "id": "54595e52-ef06-49b9-ae51-eb9da6b9bcc3",
+    "word": "Unadorned [ˌʌn.əˈdɔːrnd]",
+    "existing": {
+      "noun": "adornment",
+      "verb": "adorn"
+    }
+  },
+  {
+    "id": "af281fe1-7609-4168-897f-429aad1ec9fd",
+    "word": "Scrawny [ˈskrɔː.ni]",
+    "existing": {
+      "noun": "scrawniness"
+    }
+  },
+  {
+    "id": "fda79643-10ad-4c3e-81fe-daafa40d0645",
+    "word": "portly /ˈpɔːt.li/",
+    "existing": {
+      "noun": "portliness"
+    }
+  },
+  {
+    "id": "a767331a-1409-4f91-9ca7-2c02645f14dc",
+    "word": "senior OPP",
+    "existing": {
+      "noun": "seniority"
+    }
+  },
+  {
+    "id": "832ae589-33ad-4a62-93fb-21b1933c8442",
+    "word": "admitted to hospital",
+    "existing": {}
+  },
+  {
+    "id": "cd21331f-1290-48e6-abe8-15343c5fb26f",
+    "word": "discharged",
+    "existing": {
+      "noun": "discharge",
+      "verb": "discharge"
+    }
+  },
+  {
+    "id": "39e2c9b1-b66b-42cc-bd33-8928c9bb63a0",
+    "word": "Word: Loathe [loʊð]",
+    "existing": {
+      "adj": "loathsome",
+      "noun": "loathing"
+    }
+  },
+  {
+    "id": "d31a5c88-91cd-424d-873c-06dd480ff46f",
+    "word": "convalesce V",
+    "existing": {
+      "adj": "convalescent",
+      "noun": "convalescence"
+    }
+  },
+  {
+    "id": "4ff055b1-f5f3-4091-8be6-ecf97560fbb0",
+    "word": "convalescence N",
+    "existing": {
+      "verb": "convalesce"
+    }
+  },
+  {
+    "id": "7ceb1976-81fd-4b21-8938-8245a18e94ad",
+    "word": "recuperate V SYN",
+    "existing": {
+      "adj": "recuperative",
+      "noun": "recuperation"
+    }
+  },
+  {
+    "id": "cb13826d-7c02-47e9-81ed-b6acde3ffae8",
+    "word": "Word: Endowed [ɪnˈdaʊd]",
+    "existing": {
+      "noun": "endowment",
+      "verb": "endow"
+    }
+  },
+  {
+    "id": "ba86c95d-f666-4e38-a703-2ec61a246885",
+    "word": "tainted [ˈteɪn.tɪd]",
+    "existing": {
+      "noun": "taint",
+      "verb": "taint"
+    }
+  },
+  {
+    "id": "e94e8aea-206e-4080-9294-de63e2086ddb",
+    "word": "Word: Con [kɒn/kɑːn]",
+    "existing": {
+      "noun": "con",
+      "verb": "con"
+    }
+  },
+  {
+    "id": "93ffed31-547d-4294-831d-7b8f52c6b6c5",
+    "word": "Intrigued, /ɪnˈtriːɡd/",
+    "existing": {
+      "adj": "intriguing",
+      "noun": "intrigue",
+      "verb": "intrigue"
+    }
+  },
+  {
+    "id": "63433a68-25bf-4896-824b-b614fbc51acd",
+    "word": "You nailed it",
+    "existing": {}
+  },
+  {
+    "id": "0201017d-f0ad-4e17-ba58-50d623c4c606",
+    "word": "Resilient",
+    "existing": {
+      "adv": "resiliently",
+      "noun": "resilience"
+    }
+  },
+  {
+    "id": "9b3773b9-5b05-4300-b3cb-5746b0fd5ab6",
+    "word": "Knock on wood",
+    "existing": {}
+  },
+  {
+    "id": "48716fef-9486-4fc6-b1d8-25bd16d85b22",
+    "word": "Evocative",
+    "existing": {
+      "adj": "evocative",
+      "noun": "evocation",
+      "verb": "evoke"
+    }
+  },
+  {
+    "id": "76ff569d-e5f5-40e9-be4a-9378b0d9d087",
+    "word": "Contemplate",
+    "existing": {
+      "adj": "contemplative",
+      "noun": "contemplation"
+    }
+  },
+  {
+    "id": "8941f4a9-3269-4039-91b7-af15af8f138a",
+    "word": "pejorative",
+    "existing": {
+      "noun": "pejorative"
+    }
+  },
+  {
+    "id": "2d2ea017-d1f5-4abb-8bc5-5112b6c2abe3",
+    "word": "Venture",
+    "existing": {
+      "noun": "venture",
+      "verb": "venture"
+    }
+  },
+  {
+    "id": "a33759e2-aaef-4e3a-a202-7e73bb8d9903",
+    "word": "Darn it!",
+    "existing": {}
+  },
+  {
+    "id": "3fd64c4a-e627-4652-876e-9922d8605d83",
+    "word": "insulting",
+    "existing": {
+      "noun": "insult",
+      "verb": "insult"
+    }
+  },
+  {
+    "id": "0597a9d4-79b5-4e8f-bb60-f3a01429f444",
+    "word": "depicted",
+    "existing": {
+      "noun": "depiction",
+      "verb": "depict"
+    }
+  },
+  {
+    "id": "1bfd685e-b8f4-4501-be8b-a87a1cb23aab",
+    "word": "endows (with)",
+    "existing": {
+      "noun": "endowment",
+      "verb": "endow"
+    }
+  },
+  {
+    "id": "f3be292d-ba2c-4580-854b-65661a4bb16b",
+    "word": "Vanishing Point",
+    "existing": {}
+  },
+  {
+    "id": "a2933d11-b361-4f9c-95ee-d2f3c1d2dadc",
+    "word": "slang",
+    "existing": {
+      "noun": "slang"
+    }
+  },
+  {
+    "id": "74b9f509-09b9-4301-9a1e-fe57a7d535c2",
+    "word": "You got lucky",
+    "existing": {}
+  },
+  {
+    "id": "7a27f517-82b8-4b85-8840-6ec8abab436a",
+    "word": "Tedious",
+    "existing": {
+      "adv": "tediously",
+      "noun": "tedium"
+    }
+  },
+  {
+    "id": "ac7f9d49-5cf8-4338-a01e-c9ae81b710bf",
+    "word": "straightforward",
+    "existing": {
+      "noun": "straightforwardness"
+    }
+  },
+  {
+    "id": "e8cfda1e-fc56-4f13-9491-d7338c7dd8b6",
+    "word": "Watch your back",
+    "existing": {}
+  },
+  {
+    "id": "8fb61062-5840-40d0-a0a0-b45a822cce51",
+    "word": "Settle down",
+    "existing": {}
+  },
+  {
+    "id": "0d90b80a-9d1b-4f3e-a004-b11bde26843f",
+    "word": "poke fun at",
+    "existing": {}
+  },
+  {
+    "id": "50aa84ce-700d-45c7-bf9b-0a5430b04581",
+    "word": "crawl",
+    "existing": {
+      "noun": "crawl",
+      "verb": "crawl"
+    }
+  },
+  {
+    "id": "dc4ba2b6-4b16-45b4-b467-1e4c8937d25b",
+    "word": "I'm all ears",
+    "existing": {}
+  },
+  {
+    "id": "4d8e46ad-cae7-4f5f-977c-355a72cb2a20",
+    "word": "objective, objectivity",
+    "existing": {
+      "adj": "objective",
+      "noun": "objectivity"
+    }
+  },
+  {
+    "id": "0a981511-d807-4594-818b-10477bdd169e",
+    "word": "Don't hold back",
+    "existing": {}
+  },
+  {
+    "id": "f5b9d401-05ae-4bc1-b908-314380f7ca9d",
+    "word": "Grow up",
+    "existing": {}
+  },
+  {
+    "id": "0bdfa617-dc92-4907-893b-5ca15d3dcdd0",
+    "word": "Behave yourself",
+    "existing": {}
+  },
+  {
+    "id": "5ad59d6e-125d-44bc-955d-7045b38284de",
+    "word": "Don't be ridiculous",
+    "existing": {}
+  },
+  {
+    "id": "5d12ed8f-798b-4499-99a2-9ecda75c97a1",
+    "word": "biased, bias",
+    "existing": {
+      "adj": "biased",
+      "noun": "bias"
+    }
+  },
+  {
+    "id": "581c7d2c-827c-4f78-ac3f-9778278dcb9e",
+    "word": "Have my back",
+    "existing": {}
+  },
+  {
+    "id": "3861a1c4-3b94-4a4d-99bc-4c9d2081d1e9",
+    "word": "I'm in",
+    "existing": {}
+  },
+  {
+    "id": "72cce5e2-cdaf-4307-8c31-7141a58ba65a",
+    "word": "Forget I asked",
+    "existing": {}
+  },
+  {
+    "id": "c95a8ea3-6bfe-4dec-a33e-c8a808ba4945",
+    "word": "Beat it",
+    "existing": {}
+  },
+  {
+    "id": "169b5bfa-6aa0-442a-8416-560d11b63606",
+    "word": "I'm over it",
+    "existing": {}
+  },
+  {
+    "id": "c822935d-25f6-4ac4-899e-f97e351b8e7a",
+    "word": "I'm craving ...",
+    "existing": {}
+  },
+  {
+    "id": "7e50cb1e-c035-48b8-b3e1-3da66eabdfb4",
+    "word": "I give up",
+    "existing": {}
+  },
+  {
+    "id": "0f90531c-e1b2-43ee-8033-e78760e558c1",
+    "word": "You're a lifesaver",
+    "existing": {}
+  },
+  {
+    "id": "bfc09b6f-25eb-401e-8947-7dd2ec68457e",
+    "word": "It's on me",
+    "existing": {}
+  },
+  {
+    "id": "d86a7036-4df8-4baa-95dc-ad8ad720a11f",
+    "word": "Keep in touch",
+    "existing": {}
+  },
+  {
+    "id": "4f777cd3-565c-45dd-8e14-457ec6a3ccde",
+    "word": "Have a blast",
+    "existing": {}
+  },
+  {
+    "id": "24291652-e5fc-4f08-a830-82461cd9363f",
+    "word": "Take care",
+    "existing": {}
+  },
+  {
+    "id": "9e2d687f-5f2a-430a-a9c3-41d8e3d89bc8",
+    "word": "At your service",
+    "existing": {}
+  },
+  {
+    "id": "0f99269e-796b-45d8-b8c1-a7bfe4ea136c",
+    "word": "Be my guest",
+    "existing": {}
+  },
+  {
+    "id": "4cca6fed-fd06-47b6-984f-c4c6fb7144c5",
+    "word": "After you",
+    "existing": {}
+  },
+  {
+    "id": "d87c7414-0815-4953-9d2e-f825ff2ac44a",
+    "word": "You're too kind",
+    "existing": {}
+  },
+  {
+    "id": "911b9843-f873-4177-b87e-cd2b786b3b5f",
+    "word": "Stick around",
+    "existing": {}
+  },
+  {
+    "id": "47dfd690-6ff6-4dde-a2c6-4a686512c64a",
+    "word": "I'm starving",
+    "existing": {}
+  },
+  {
+    "id": "640ddf63-c5fa-48f7-8b48-f660e5b7078b",
+    "word": "I'm stuffed",
+    "existing": {}
+  },
+  {
+    "id": "d236825b-88f6-493f-9160-fdf8384970ec",
+    "word": "I'm fed up",
+    "existing": {}
+  },
+  {
+    "id": "51239955-c619-4b76-9bcf-3849ec1a867b",
+    "word": "I'm pissed off",
+    "existing": {}
+  },
+  {
+    "id": "0d53228c-d743-4821-9a01-08f75dd3f099",
+    "word": "I lost it",
+    "existing": {}
+  },
+  {
+    "id": "ebc28578-1de0-4a83-bcd7-84122f8a9613",
+    "word": "sweet (of sb)",
+    "existing": {}
+  },
+  {
+    "id": "f8b7350c-ac0b-438b-aaf7-6730d6be8e6a",
+    "word": "be tied up",
+    "existing": {}
+  },
+  {
+    "id": "22e9c1a2-33ef-41ee-bf23-39c7123c25a4",
+    "word": "My jaw dropped",
+    "existing": {}
+  },
+  {
+    "id": "98a0c55c-f0a0-4ba0-ac6a-94f49baa0427",
+    "word": "It beats me",
+    "existing": {}
+  },
+  {
+    "id": "e555be6d-2089-495a-b051-dbf22c93fedc",
+    "word": "My bad",
+    "existing": {}
+  },
+  {
+    "id": "e9b46b7a-ee0a-4177-b182-692447cca70b",
+    "word": "ulterior motive",
+    "existing": {}
+  },
+  {
+    "id": "ba5f7e3d-684d-44ae-a7bc-5ff76aca7142",
+    "word": "The penny dropped",
+    "existing": {}
+  },
+  {
+    "id": "73f71bd7-2e5f-46dd-81ec-edaa05ecc469",
+    "word": "Nuts / Bonkers",
+    "existing": {
+      "adj": "nuts"
+    }
+  },
+  {
+    "id": "669b9cd6-4f1f-4990-ad78-133aaaed0d84",
+    "word": "What a mess",
+    "existing": {}
+  },
+  {
+    "id": "f275a918-070a-4eec-9ee7-7c29c80836db",
+    "word": "We're screwed",
+    "existing": {}
+  },
+  {
+    "id": "5eb3208d-323e-4706-a39e-f86b561b83fc",
+    "word": "We're done for",
+    "existing": {}
+  },
+  {
+    "id": "0a317b8c-342b-404e-b738-8ca998bbd473",
+    "word": "I'm doomed",
+    "existing": {}
+  },
+  {
+    "id": "763ccc6d-cac1-4ae6-bc3d-dfd5952f3fec",
+    "word": "My apologies",
+    "existing": {}
+  },
+  {
+    "id": "14e2e33d-19be-4615-988a-c2b6ac102aa0",
+    "word": "No offense meant",
+    "existing": {}
+  },
+  {
+    "id": "18a4e7ab-c88a-4e94-899d-7f27700e031a",
+    "word": "You deserve it",
+    "existing": {
+      "verb": "deserve"
+    }
+  },
+  {
+    "id": "ef558917-7540-4785-9655-c461f0f960ff",
+    "word": "It suits you",
+    "existing": {}
+  },
+  {
+    "id": "40055b04-aea0-468e-b124-6000a5c0d753",
+    "word": "I was floored",
+    "existing": {}
+  },
+  {
+    "id": "76e477c3-8a2c-4235-a3bb-aeaf56ad9408",
+    "word": "thick (ADJ)",
+    "existing": {
+      "adj": "thick",
+      "adv": "thickly",
+      "noun": "thickness"
+    }
+  },
+  {
+    "id": "5a98d1d6-25e4-456d-bfee-b629919c66f2",
+    "word": "Whatever you say",
+    "existing": {}
+  },
+  {
+    "id": "12498236-2408-4165-b8ca-7bb1ebde8a61",
+    "word": "Don't touch me",
+    "existing": {}
+  },
+  {
+    "id": "42b12fb2-0ba0-4d87-8e78-93530b0df89e",
+    "word": "Lean on me",
+    "existing": {}
+  },
+  {
+    "id": "33d0aeac-b76b-4bf8-97a0-87766556b233",
+    "word": "Rest assured",
+    "existing": {}
+  },
+  {
+    "id": "f209ce3f-12e9-47fd-be2f-17b8cc8df4b0",
+    "word": "Get out",
+    "existing": {}
+  },
+  {
+    "id": "eaa33531-afd6-4741-b83e-911546ea7d26",
+    "word": "Let me go",
+    "existing": {}
+  },
+  {
+    "id": "1f6ab1ec-ffd8-4af9-b87c-b895db264f1a",
+    "word": "Time is money",
+    "existing": {}
+  },
+  {
+    "id": "d5e75ca1-45db-4774-9377-986568e1bdbc",
+    "word": "Opportunity knocks",
+    "existing": {}
+  },
+  {
+    "id": "76449c3a-cd42-4321-ad3b-26511b6dec7e",
+    "word": "Nothing is impossible",
+    "existing": {}
+  },
+  {
+    "id": "dbc35d76-6af4-4f66-aa59-4c80a46e1577",
+    "word": "When in Rome",
+    "existing": {}
+  },
+  {
+    "id": "b02693ad-e91a-4db5-910d-d02fa12a1bf0",
+    "word": "Institutionalised ",
+    "existing": {
+      "noun": "institutionalisation",
+      "verb": "institutionalise"
+    }
+  },
+  {
+    "id": "3ad02fb3-8fc8-442c-926d-91341702364a",
+    "word": "Practice makes perfect",
+    "existing": {}
+  },
+  {
+    "id": "f79e6037-193a-4cb4-8b64-8dae5f5a4ef3",
+    "word": "Haste makes waste",
+    "existing": {}
+  },
+  {
+    "id": "9f274ebc-9c89-44ae-8ed0-383198488747",
+    "word": "You look sharp",
+    "existing": {}
+  },
+  {
+    "id": "490e8fe2-16fb-438c-a0d4-47218b439140",
+    "word": "You're the boss",
+    "existing": {}
+  },
+  {
+    "id": "1aed3780-ac46-4f3e-99a0-e4ee2e5c760c",
+    "word": "keep sb going",
+    "existing": {}
+  },
+  {
+    "id": "8c457157-ef07-40ec-a667-ba5931b9e1ca",
+    "word": "put sth (into words)",
+    "existing": {}
+  },
+  {
+    "id": "f80a4f3a-eaa4-4e53-ad97-7c4098a30511",
+    "word": "push sb/oneself",
+    "existing": {}
+  },
+  {
+    "id": "e53f6d7d-5b4f-461e-81c1-82b146a08e1f",
+    "word": "make sth sth",
+    "existing": {}
+  },
+  {
+    "id": "a9245df5-b9d3-4c5f-a41b-7d7c8aa33e59",
+    "word": "bring sb somewhere",
+    "existing": {}
+  },
+  {
+    "id": "3ae74a6c-9091-4721-834c-37d160253314",
+    "word": "come with",
+    "existing": {}
+  },
+  {
+    "id": "4aba9429-7199-4f9a-87be-74ba45d5cd76",
+    "word": "come in (colours/sizes)",
+    "existing": {}
+  },
+  {
+    "id": "889258eb-c788-4a4b-a500-f14643fb9347",
+    "word": "do (for sb/sth)",
+    "existing": {}
+  },
+  {
+    "id": "e31b4a9b-b900-4dfe-843c-a197340a4266",
+    "word": "driving licence",
+    "existing": {
+      "noun": "driving licence"
+    }
+  },
+  {
+    "id": "18f4db3e-f594-4823-9c79-439fddb63a5f",
+    "word": "birth certificate",
+    "existing": {
+      "noun": "birth certificate"
+    }
+  },
+  {
+    "id": "43b2b321-7900-4940-80ce-cd1007a19cec",
+    "word": "spare part",
+    "existing": {
+      "noun": "spare part"
+    }
+  },
+  {
+    "id": "2457991f-cfcc-4f98-a2fe-23aa47035fb8",
+    "word": "passer-by",
+    "existing": {
+      "noun": "passer-by"
+    }
+  },
+  {
+    "id": "e9556cc3-c9dc-414a-8c74-e70a49a4b6d1",
+    "word": "long weekend",
+    "existing": {
+      "noun": "long weekend"
+    }
+  },
+  {
+    "id": "bc85408b-5624-4ece-9caf-3a931f87c80e",
+    "word": "life expectancy",
+    "existing": {
+      "noun": "life expectancy"
+    }
+  },
+  {
+    "id": "5b222a7f-75c0-4050-8a48-750fc87cd6ec",
+    "word": "nursery rhyme",
+    "existing": {
+      "noun": "nursery rhyme"
+    }
+  },
+  {
+    "id": "841cf609-1526-49b2-b876-5c36033c7ab9",
+    "word": "recuperation N",
+    "existing": {
+      "noun": "recuperation",
+      "verb": "recuperate"
+    }
+  },
+  {
+    "id": "5b503175-7e75-4ed6-9ad2-89b13713fda0",
+    "word": "keep (remain fresh)",
+    "existing": {}
+  },
+  {
+    "id": "6b20cc74-9f73-47c5-9ddb-1c03777dad54",
+    "word": "Knowledge is power",
+    "existing": {}
+  },
+  {
+    "id": "741574ab-c600-4096-a95c-4f51d1d3f12a",
+    "word": "What's the plan?",
+    "existing": {}
+  },
+  {
+    "id": "4c75a54d-a8e6-4ee6-831f-1ed47e9ccc93",
+    "word": "God bless you",
+    "existing": {}
+  },
+  {
+    "id": "2bb58c2e-dc1d-42e8-8838-69c51f85d95b",
+    "word": "Silence is golden",
+    "existing": {}
+  },
+  {
+    "id": "05133aa7-2da6-4442-b673-64a955571a66",
+    "word": "last-minute",
+    "existing": {
+      "adj": "last-minute"
+    }
+  },
+  {
+    "id": "c7eec3dd-6d64-4d1f-82e0-ef71e0ed5a9b",
+    "word": "built-up",
+    "existing": {
+      "adj": "built-up"
+    }
+  },
+  {
+    "id": "4ebbcdf6-4119-419a-b98c-8e2ea01c83d1",
+    "word": "thick-skinned",
+    "existing": {
+      "adj": "thick-skinned"
+    }
+  },
+  {
+    "id": "b3834b32-552b-48e3-98fc-101ee18bc54c",
+    "word": "off-putting",
+    "existing": {
+      "adj": "off-putting"
+    }
+  },
+  {
+    "id": "6dc9e9c5-0cab-4fb6-b130-cbeedaac4a79",
+    "word": "tongue-tied",
+    "existing": {
+      "adj": "tongue-tied"
+    }
+  },
+  {
+    "id": "6c8b14b1-24bc-41f3-9954-6bc47d8d6bbb",
+    "word": "worn out (thing)",
+    "existing": {
+      "adj": "worn out"
+    }
+  },
+  {
+    "id": "31d6c13b-8433-49b5-af7e-06701af47a37",
+    "word": "defy sth/sb",
+    "existing": {
+      "noun": "defiance",
+      "verb": "defy"
+    }
+  }
+]

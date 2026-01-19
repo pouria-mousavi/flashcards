@@ -1,0 +1,399 @@
+گیر دادی ها (ول نمیکنی) | You're splitting hairs
+-- Tone: Spoken / Idiom
+-- Example: 1. It was 12:01, not midnight. You're splitting hairs.
+
+موش و گربه بازی | Cat and mouse
+-- Tone: Spoken / Idiom
+-- Example: 1. Stop playing cat and mouse with me.
+
+به سیم آخر زدن | Go bananas
+-- Tone: Spoken / Slang
+-- Example: 1. The crowd went bananas when the band came out.
+
+قاطی کردن (عصبانی شدن) | Go ballistic
+-- Tone: Spoken / Slang
+-- Example: 1. My dad went ballistic when he saw the dent in the car.
+
+دیوونه شدن (از کوره در رفتن) | Go nuts
+-- Tone: Spoken / Slang
+-- Example: 1. If I hear that song again, I'm going to go nuts.
+
+عصبی شدن (وحشی شدن) | Freak out
+-- Tone: Spoken / Slang
+-- Example: 1. Don't freak out, it's just a spider.
+
+ترسیدن (جا زدن) | Chicken out
+-- Tone: Spoken / Slang
+-- Example: 1. I was going to jump, but I chickened out.
+
+خرخون | Bookworm
+-- Tone: Spoken
+-- Example: 1. She's such a bookworm; always in the library.
+
+خنگ | Airhead
+-- Tone: Spoken / Slang
+-- Example: 1. Don't be such an airhead.
+
+باهوش (زرنگ) | Sharp cookie
+-- Tone: Spoken / Idiom
+-- Example: 1. He's a sharp cookie; he'll figure it out.
+
+آدم زرنگ (سخت‌کوش) | Go-getter
+-- Tone: Spoken
+-- Example: 1. She's a real go-getter; she'll be CEO one day.
+
+آدم تنبل | Couch potato
+-- Tone: Spoken / Slang
+-- Example: 1. Stop being a couch potato and go outside.
+
+آدم فضول | Busybody
+-- Tone: Spoken
+-- Example: 1. That neighbor is such a busybody.
+
+دهن‌لق | Chatterbox
+-- Tone: Spoken
+-- Example: 1. She's a chatterbox; never stops talking.
+
+آدم نچسب (ضدحال) | Wet blanket / Party pooper
+-- Tone: Spoken / Slang
+-- Example: 1. Don't be a wet blanket; come dance!
+
+آدم دو رو | Two-faced
+-- Tone: Spoken
+-- Example: 1. Watch out for him; he's two-faced.
+
+آدم خسیس | Cheapskate
+-- Tone: Spoken / Slang
+-- Example: 1. He didn't even tip. What a cheapskate.
+
+پولدار (مایه دار) | Loaded
+-- Tone: Spoken / Slang
+-- Example: 1. Look at his car. He must be loaded.
+
+بی‌پول (آس و پاس) | Broke
+-- Tone: Spoken
+-- Example: 1. I can't go out tonight; I'm completely broke.
+
+گرون (قیمت خون باباش) | Rip-off
+-- Tone: Spoken / Slang
+-- Example: 1. $50 for a t-shirt? That's a rip-off.
+
+مفت (خیلی ارزون) | A steal
+-- Tone: Spoken / Idiom
+-- Example: 1. I got this bike for $10. It was a steal.
+
+پول زور | Highway robbery
+-- Tone: Spoken / Idiom
+-- Example: 1. The price of popcorn at the cinema is highway robbery.
+
+پول خرد (ناچیز) | Peanuts
+-- Tone: Spoken / Idiom
+-- Example: 1. He works hard but gets paid peanuts.
+
+پول نقد | Cold hard cash
+-- Tone: Spoken
+-- Example: 1. I want payment in cold hard cash.
+
+رشوه دادن (سبیل چرب کردن) | Grease someone's palm
+-- Tone: Spoken / Idiom
+-- Example: 1. You might have to grease someone's palm to get that permit.
+
+کلک زدن | Pull a fast one
+-- Tone: Spoken / Idiom
+-- Example: 1. Don't try to pull a fast one on me.
+
+سرم کلاه گذاشتن | Rip me off
+-- Tone: Spoken / Slang
+-- Example: 1. That mechanic ripped me off.
+
+دستم انداختن (سر کار گذاشتن) | Pull my leg
+-- Tone: Spoken / Idiom
+-- Example: 1. Are you pulling my leg?
+
+دست به سر کردن | Blow someone off
+-- Tone: Spoken / Slang
+-- Example: 1. I texted him but he blew me off.
+
+پیچوندن | Ditch / Bail
+-- Tone: Spoken / Slang
+-- Example: 1. Let's ditch this class. 2. He bailed on us at the last minute.
+
+قال گذاشتن | Stand someone up
+-- Tone: Spoken / Idiom
+-- Example: 1. He waited for an hour, but she stood him up.
+
+مخ زنی | Hit on someone
+-- Tone: Spoken / Slang
+-- Example: 1. Was that guy hitting on you?
+
+پا دادن (لاس زدن) | Flirt
+-- Tone: Spoken
+-- Example: 1. She was definitely flirting with you.
+
+خاطرخواه شدن | Have a crush on
+-- Tone: Spoken
+-- Example: 1. I think he has a crush on the teacher.
+
+عاشق شدن (یه دل نه صد دل) | Head over heels
+-- Tone: Spoken / Idiom
+-- Example: 1. They are head over heels in love.
+
+نامزد کردن (شیرینی خوردن) | Tie the knot
+-- Tone: Spoken / Idiom (Usually means get married)
+-- Example: 1. So, when are you two going to tie the knot?
+
+زن ذلیل | Whipped
+-- Tone: Spoken / Slang
+-- Example: 1. He won't come out; he's totally whipped.
+
+رفیق فابریک (صمیمی) | Bestie / BFF
+-- Tone: Spoken / Slang
+-- Example: 1. She's my bestie; we tell each other everything.
+
+اکیپ (گروه دوستان) | Squad / Crew
+-- Tone: Spoken / Slang
+-- Example: 1. Heading to the mall with the squad.
+
+پایه (اهل دل) | Down to earth
+-- Tone: Spoken
+-- Example: 1. She's famous but very down to earth.
+
+خوش مشرب | Butterfly (Social butterfly)
+-- Tone: Spoken / Idiom
+-- Example: 1. She's a social butterfly; knows everyone.
+
+تنها (منزوی) | Loner
+-- Tone: Spoken
+-- Example: 1. He's a bit of a loner.
+
+عجیب غریب | Weirdo / Creep
+-- Tone: Spoken / Slang
+-- Example: 1. Stay away from that weirdo.
+
+خفن (باحال) | Dope / Sick / Cool
+-- Tone: Spoken / Slang
+-- Example: 1. Those shoes are dope! 2. That jump was sick!
+
+مزخرف (چرت) | Lame / Garbage
+-- Tone: Spoken / Slang
+-- Example: 1. That movie was so lame.
+
+بی‌نمک (لوس) | Cheesy
+-- Tone: Spoken / Slang
+-- Example: 1. That pickup line was so cheesy.
+
+ضایع (افتضاح) | Cringe
+-- Tone: Spoken / Slang (Gen Z)
+-- Example: 1. His dancing is so cringe.
+
+سه کردن (سوتی دادن) | Screw up / Mess up
+-- Tone: Spoken / Slang
+-- Example: 1. Don't screw this up.
+
+گند زدن | Bomb
+-- Tone: Spoken / Slang
+-- Example: 1. The comedian bombed on stage; nobody laughed.
+
+ترکوندن (عالی بودن) | Kill it / Slay
+-- Tone: Spoken / Slang
+-- Example: 1. Go out there and kill it! 2. She slewed that performance.
+
+پشیمون شدن (سرد شدن) | Get cold feet
+-- Tone: Spoken / Idiom
+-- Example: 1. He got cold feet before the wedding.
+
+دل و جرات داشتن | Have guts
+-- Tone: Spoken
+-- Example: 1. It takes guts to say that.
+
+بزدل (ترسو) | Chicken / Coward
+-- Tone: Spoken / Slang
+-- Example: 1. Don't be a chicken; jump!
+
+رو اعصابه (گیر میده) | Pain in the neck / ass
+-- Tone: Spoken / Idiom
+-- Example: 1. Filling out these forms is a pain in the neck.
+
+راحت (مثل آب خوردن) | Piece of cake
+-- Tone: Spoken / Idiom
+-- Example: 1. The exam was a piece of cake.
+
+سخت (مثل سنگ) | Rock hard / Tough
+-- Tone: Spoken
+-- Example: 1. That question was rock hard.
+
+سر در گم | In a fog
+-- Tone: Spoken / Idiom
+-- Example: 1. I haven't had coffee; I'm in a fog.
+
+هشیار (سر حال) | Sharp
+-- Tone: Spoken
+-- Example: 1. Stay sharp; they might trick you.
+
+مست | Hammered / Wasted
+-- Tone: Spoken / Slang
+-- Example: 1. He got hammered at the party.
+
+خمار (بعد از مستی) | Hungover
+-- Tone: Spoken
+-- Example: 1. I have a terrible headache; I'm hungover.
+
+سیگاری | Chain smoker
+-- Tone: Spoken / Idiom
+-- Example: 1. He's a chain smoker; goes through two packs a day.
+
+ترک کردن (یکدفعه) | Cold turkey
+-- Tone: Spoken / Idiom
+-- Example: 1. I quit smoking cold turkey.
+
+معتاد به کار | Workaholic
+-- Tone: Spoken
+-- Example: 1. Put down the phone; you're a workaholic.
+
+معتاد به خرید | Shopaholic
+-- Tone: Spoken
+-- Example: 1. She's a total shopaholic.
+
+عشق شکلات | Chocoholic
+-- Tone: Spoken
+-- Example: 1. I must have dessert; I'm a chocoholic.
+
+خوره کامپیوتر | Geek / Nerd
+-- Tone: Spoken / Slang
+-- Example: 1. He's a computer geek.
+
+خوره فیلم | Movie buff
+-- Tone: Spoken
+-- Example: 1. Ask him about the actor; he's a movie buff.
+
+خوره غذا (شکمو) | Foodie
+-- Tone: Spoken
+-- Example: 1. I'm a foodie; I love trying new restaurants.
+
+بد غذا | Picky eater
+-- Tone: Spoken
+-- Example: 1. Cooking for him is hard; he's a picky eater.
+
+سحرخیز | Early bird
+-- Tone: Spoken
+-- Example: 1. I'm an early bird; I wake up at 5 am.
+
+شب زنده دار | Night owl
+-- Tone: Spoken
+-- Example: 1. I do my best work at night; I'm a night owl.
+
+خوش بیان (چرب زبان) | Smooth talker
+-- Tone: Spoken
+-- Example: 1. Don't believe him; he's a smooth talker.
+
+دهن گشاد (راز نگه ندار) | Big mouth
+-- Tone: Spoken
+-- Example: 1. You told him? You have such a big mouth!
+
+سنگ صبور | Shoulder to cry on
+-- Tone: Spoken / Idiom
+-- Example: 1. If you need a shoulder to cry on, I'm here.
+
+گوش شنوا | Sympathetic ear
+-- Tone: Spoken
+-- Example: 1. She always lends a sympathetic ear.
+
+حلال مشکلات (همه فن حریف) | Jack of all trades
+-- Tone: Spoken / Idiom
+-- Example: 1. He can fix anything; a real jack of all trades.
+
+استاد هیچ کاری نبودن | Master of none
+-- Tone: Spoken / Idiom
+-- Example: 1. Jack of all trades, master of none.
+
+کپی کار | Copycat
+-- Tone: Spoken
+-- Example: 1. Stop repeating me, you copycat!
+
+نچسب (مزاحم) | Third wheel
+-- Tone: Spoken / Idiom
+-- Example: 1. I don't want to go on your date; I'll feel like a third wheel.
+
+تو دل برو (جذاب) | Catch
+-- Tone: Spoken / Slang
+-- Example: 1. Marry him! He's a real catch.
+
+چشم چرون | Peeping Tom
+-- Tone: Spoken / Old Slang
+-- Example: 1. Close the curtains; there might be a Peeping Tom.
+
+شیرین عسل (نور چشمی) | Teacher's pet
+-- Tone: Spoken
+-- Example: 1. Everyone hates the teacher's pet.
+
+خوش شانس | Lucky duck / Lucky dog
+-- Tone: Spoken / Slang
+-- Example: 1. You won? You lucky dog!
+
+بد شانس | Jinxed
+-- Tone: Spoken
+-- Example: 1. I think this car is jinxed; it always breaks.
+
+بزن به تخته (چشم نخوری) | Touch wood / Knock on wood
+-- Tone: Spoken / Idiom
+-- Example: 1. I haven't been sick all year, touch wood.
+
+چشم خوردم | I put the hex on myself / Jinxed it
+-- Tone: Spoken
+-- Example: 1. I said I'd never fall, and then I fell. I jinxed it.
+
+چشمت زدن | Someone cast a spell on you
+-- Tone: Spoken (Figurative)
+-- Example: 1. You have such bad luck. Someone must have cast a spell on you.
+
+برو بابا (باور نمیکنم) | My foot
+-- Tone: Spoken / Idiom
+-- Example: 1. You're a doctor? Doctor my foot!
+
+همین مونده بود (کم داشتیم) | That's all I needed
+-- Tone: Spoken (Sarcastic)
+-- Example: 1. Great, now it's raining. That's all I needed.
+
+خدا بخیر بگذرونه | Heaven help us
+-- Tone: Spoken
+-- Example: 1. If he is driving, heaven help us.
+
+خدا نکنه | God forbid
+-- Tone: Spoken
+-- Example: 1. If anything happens to you, God forbid...
+
+خدا رو شکر | Thank God / Thank goodness
+-- Tone: Spoken
+-- Example: 1. You're safe! Thank God.
+
+به جهنم | To hell with it
+-- Tone: Spoken
+-- Example: 1. I can't fix it. To hell with it.
+
+به درک | Who cares?
+-- Tone: Spoken
+-- Example: 1. "He's mad at you." "Who cares?"
+
+خاک تو سرت | Dropped on your head
+-- Tone: Spoken / Insult (Were you dropped on your head as a baby?)
+-- Example: 1. Why did you do that? Were you dropped on your head?
+
+مخت تاب داره (دیوانه) | Screw loose
+-- Tone: Spoken / Idiom
+-- Example: 1. He talks to himself. He's got a screw loose.
+
+مخ کسی را زدن (متقاعد کردن) | Talk someone into something
+-- Tone: Spoken
+-- Example: 1. He talked me into buying this car.
+
+مخ کسی را خوردن | Talk someone's ear off
+-- Tone: Spoken / Idiom
+-- Example: 1. She talked my ear off for hours.
+
+سر کسی کلاه گذاشتن | Take someone for a ride
+-- Tone: Spoken / Idiom
+-- Example: 1. I paid too much. They took me for a ride.
+
+گول زدن | Pull the wool over someone's eyes
+-- Tone: Spoken / Idiom
+-- Example: 1. Don't try to pull the wool over my eyes.

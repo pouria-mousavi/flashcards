@@ -1,0 +1,1634 @@
+[
+  {
+    "word": "make a mess",
+    "definition": "create untidiness or a disordered situation.",
+    "example": "The children often make a mess.",
+    "persian": "خرابکاری کردن، ریخت و پاش کردن"
+  },
+  {
+    "word": "make a fuss",
+    "definition": "show excessive concern, excitement, or agitation about something.",
+    "example": "The children often make a fuss.",
+    "persian": "سروصدا راه انداختن، هیاهو کردن"
+  },
+  {
+    "word": "detrimental",
+    "definition": "harmful; damaging.",
+    "example": "Does money have a detrimental effect on people?",
+    "persian": "مضر، زیان‌آور"
+  },
+  {
+    "word": "deprived",
+    "definition": "lacking basic necessities or advantages.",
+    "example": "He was from a broken, deprived home.",
+    "persian": "محروم، بی‌بهره"
+  },
+  {
+    "word": "beneficial",
+    "definition": "resulting in good; favourable or advantageous.",
+    "example": "Does money have a beneficial effect on people?",
+    "persian": "مفید، سودمند"
+  },
+  {
+    "word": "pulls her weight",
+    "definition": "does her fair share of the work or effort (implies she is competent).",
+    "example": "She's great, and she always pulls her weight.",
+    "persian": "وظیفه‌اش را به طور کامل انجام می‌دهد، سهم خود را ادا می‌کند"
+  },
+  {
+    "word": "sets a good example",
+    "definition": "behaves in a way that others should copy.",
+    "example": "She sets a good example.",
+    "persian": "الگوی خوبی است"
+  },
+  {
+    "word": "does her fair share",
+    "definition": "contributes an equal or expected amount to a task or effort.",
+    "example": "She does her fair share.",
+    "persian": "سهم عادلانه خود را انجام می‌دهد"
+  },
+  {
+    "word": "unappealing",
+    "definition": "not attractive or interesting.",
+    "example": "Nagging is an unappealing habit.",
+    "persian": "نامطلوب، ناخوشایند"
+  },
+  {
+    "word": "life-threatening",
+    "definition": "likely to cause death.",
+    "example": "A life-threatening habit.",
+    "persian": "تهدید کننده حیات، خطرناک"
+  },
+  {
+    "word": "gives in to",
+    "definition": "yields or surrenders to (often after resisting).",
+    "example": "He goes on and on at the children until he gives in to them.",
+    "persian": "تسلیم شدن، کوتاه آمدن (در برابر کسی/چیزی)"
+  },
+  {
+    "word": "nags",
+    "definition": "repeatedly asks or urges someone to do something.",
+    "example": "He nags the children about doing their homework.",
+    "persian": "نق زدن، سرزنش کردن مداوم"
+  },
+  {
+    "word": "anti-social behaviour",
+    "definition": "behaviour that causes problems or annoyance to other people.",
+    "example": "The council decided to address anti-social behaviour in the park.",
+    "persian": "رفتار ضد اجتماعی"
+  },
+  {
+    "word": "truancy",
+    "definition": "the action of staying away from school without permission.",
+    "example": "Truancy is a serious problem in some urban schools.",
+    "persian": "غیبت غیرموجه (از مدرسه)"
+  },
+  {
+    "word": "reckless (behaviour)",
+    "definition": "doing something dangerous and not worrying about the risks.",
+    "example": "His reckless behaviour almost caused an accident.",
+    "persian": "بی‌پروا، بی‌ملاحظه (رفتار)"
+  },
+  {
+    "word": "reprimand sb",
+    "definition": "tell someone officially that you disapprove of them.",
+    "example": "The teacher had to reprimand the noisy students.",
+    "persian": "توبیخ کردن، سرزنش کردن"
+  },
+  {
+    "word": "ringleader",
+    "definition": "the person who leads others in mischievous or criminal activities.",
+    "example": "The ringleader was punished more severely than the others.",
+    "persian": "سردسته، بانی"
+  },
+  {
+    "word": "lead sb astray",
+    "definition": "encourage someone to behave badly.",
+    "example": "His older friends led him astray.",
+    "persian": "به بیراهه کشاندن، منحرف کردن"
+  },
+  {
+    "word": "exemplary",
+    "definition": "outstanding; serving as a perfect model (Positive remark, P).",
+    "example": "His manners were exemplary.",
+    "persian": "نمونه، مثال‌زدنی"
+  },
+  {
+    "word": "took exception to (idiom)",
+    "definition": "objected strongly to (Negative remark, N).",
+    "example": "I took exception to his comments.",
+    "persian": "اعتراض کردن، ناخوشایند شمردن"
+  },
+  {
+    "word": "insolent",
+    "definition": "rude and disrespectful (Negative remark, N).",
+    "example": "She was very insolent.",
+    "persian": "گستاخ، وقیح"
+  },
+  {
+    "word": "impeccable",
+    "definition": "perfect; faultless (Positive remark, P).",
+    "example": "The service was impeccable.",
+    "persian": "بی‌عیب و نقص، عالی"
+  },
+  {
+    "word": "is frowned upon (phrasal verb)",
+    "definition": "is disapproved of (Negative remark, N).",
+    "example": "Taking photos is frowned upon.",
+    "persian": "مورد نقد و انتقاد قرار گرفتن، با اخم تلقی شدن"
+  },
+  {
+    "word": "What a cheek! (idiom)",
+    "definition": "used to say someone has been rude or disrespectful (Negative remark, N).",
+    "example": "What a cheek!",
+    "persian": "چه رویی!، چه پررویی!"
+  },
+  {
+    "word": "put her foot in it (idiom)",
+    "definition": "said something embarrassing or inappropriate (Negative remark, N).",
+    "example": "She put her foot in it.",
+    "persian": "گاف دادن، خراب کردن (با حرف نابجا)"
+  },
+  {
+    "word": "courteous",
+    "definition": "polite and respectful (Positive remark, P).",
+    "example": "They're always courteous.",
+    "persian": "با ادب، مؤدبانه"
+  },
+  {
+    "word": "personal space",
+    "definition": "the physical area immediately surrounding someone (often related to invasion).",
+    "example": "He invaded my personal space by standing too close.",
+    "persian": "حریم خصوصی فیزیکی"
+  },
+  {
+    "word": "uncivil behaviour",
+    "definition": "rude or impolite conduct.",
+    "example": "The passengers complained about his uncivil behaviour.",
+    "persian": "رفتار ناشایست، بی‌ادبی"
+  },
+  {
+    "word": "churlish",
+    "definition": "rude, unfriendly, and uncooperative.",
+    "example": "It would be churlish to refuse their invitation.",
+    "persian": "بدخلق، خشن، غیردوستانه"
+  },
+  {
+    "word": "protocol",
+    "definition": "the system of rules and acceptable behaviour in a formal situation.",
+    "example": "He failed to follow diplomatic protocol.",
+    "persian": "تشریفات، آیین‌نامه، دستورالعمل"
+  },
+  {
+    "word": "have the decency to do sth (idiom)",
+    "definition": "behave in a reasonable and acceptable way.",
+    "example": "He didn't even have the decency to apologize.",
+    "persian": "شرم و حیا/نزاکت داشتن برای انجام کاری"
+  },
+  {
+    "word": "indiscretion",
+    "definition": "an action or remark that is careless or inappropriate.",
+    "example": "She regretted the indiscretion of telling him her secret.",
+    "persian": "بی‌احتیاطی، عمل نسنجیده"
+  },
+  {
+    "word": "pomegranate",
+    "definition": "a round fruit with thick skin and many seeds.",
+    "example": "I bought a pomegranate from the market.",
+    "persian": "انار"
+  },
+  {
+    "word": "passion fruit",
+    "definition": "a small round fruit with a purple or yellow skin, tropical.",
+    "example": "Passion fruit is great in cocktails.",
+    "persian": "پشن فروت"
+  },
+  {
+    "word": "papaya",
+    "definition": "a large oval tropical fruit.",
+    "example": "Papaya and pineapple are tropical fruits.",
+    "persian": "پاپایا (خربزه درختی)"
+  },
+  {
+    "word": "radishes",
+    "definition": "small, red, round vegetables, eaten raw in salads.",
+    "example": "We grow radishes in our garden.",
+    "persian": "تربچه"
+  },
+  {
+    "word": "beetroot",
+    "definition": "a round root vegetable with deep red skin and flesh.",
+    "example": "I like boiled beetroot in salads.",
+    "persian": "چغندر قرمز"
+  },
+  {
+    "word": "bean sprouts",
+    "definition": "young, newly-grown beans, often used in Asian cooking.",
+    "example": "Bean sprouts add crunch to stir-fries.",
+    "persian": "جوانه ماش/لوبیا"
+  },
+  {
+    "word": "squash",
+    "definition": "a type of vegetable with hard skin (like pumpkin or courgette).",
+    "example": "We baked the winter squash for dinner.",
+    "persian": "کدو حلوایی، کدو مسمایی"
+  },
+  {
+    "word": "fennel",
+    "definition": "a plant with a crisp bulb and feathery leaves, eaten as a vegetable.",
+    "example": "Artichoke and fennel are vegetables.",
+    "persian": "رازیانه، بادیان"
+  },
+  {
+    "word": "artichoke",
+    "definition": "a round vegetable with thick, edible leaves.",
+    "example": "I steamed the artichokes.",
+    "persian": "کنگر فرنگی"
+  },
+  {
+    "word": "almonds",
+    "definition": "an oval edible nut.",
+    "example": "Almonds and cashews are types of nut.",
+    "persian": "بادام"
+  },
+  {
+    "word": "cashews",
+    "definition": "kidney-shaped edible nuts.",
+    "example": "Cashews are often used in Indian cuisine.",
+    "persian": "بادام هندی"
+  },
+  {
+    "word": "lentils",
+    "definition": "small dried seeds (a type of pulse) used in stews and soups.",
+    "example": "Lentils are a great source of protein.",
+    "persian": "عدس"
+  },
+  {
+    "word": "ginger",
+    "definition": "a spicy root used in cooking and baking.",
+    "example": "Ginger and cinnamon are spices.",
+    "persian": "زنجبیل"
+  },
+  {
+    "word": "cinnamon",
+    "definition": "a sweet-smelling spice, bark of a tree.",
+    "example": "I put cinnamon on my oatmeal.",
+    "persian": "دارچین"
+  },
+  {
+    "word": "sage",
+    "definition": "an herb with grey-green leaves, used to flavour food.",
+    "example": "Sage and coriander are herbs.",
+    "persian": "مرزنجوش، مریم گلی"
+  },
+  {
+    "word": "coriander",
+    "definition": "an herb used to flavour food, also known as cilantro.",
+    "example": "I added fresh coriander to the soup.",
+    "persian": "گشنیز"
+  },
+  {
+    "word": "sultanas",
+    "definition": "small, pale-coloured dried grapes (a type of dried fruit).",
+    "example": "Sultanas and raisins are types of dried fruit.",
+    "persian": "کشمش زرد، مویز روشن"
+  },
+  {
+    "word": "raisins",
+    "definition": "dried grapes (a type of dried fruit).",
+    "example": "Raisins and sultanas are dried fruits.",
+    "persian": "کشمش، مویز"
+  },
+  {
+    "word": "wok",
+    "definition": "a bowl-shaped pan, used to stir-fry vegetables, meat, fish.",
+    "example": "We used a wok to stir-fry the chicken and vegetables.",
+    "persian": "وک (تابه عمیق چینی)"
+  },
+  {
+    "word": "stir-fry",
+    "definition": "cook quickly by stirring in a small amount of hot oil.",
+    "example": "I like to stir-fry vegetables.",
+    "persian": "تفت دادن (با حرارت بالا و روغن کم)"
+  },
+  {
+    "word": "steamer",
+    "definition": "an appliance used to steam fish, rice, vegetables.",
+    "example": "Use a steamer to cook the rice perfectly.",
+    "persian": "بخارپز"
+  },
+  {
+    "word": "steam",
+    "definition": "cook over boiling water.",
+    "example": "It's healthier to steam the vegetables.",
+    "persian": "بخارپز کردن"
+  },
+  {
+    "word": "deep fat fryer",
+    "definition": "a kitchen appliance used to deep-fry fish and potatoes.",
+    "example": "She bought a deep fat fryer for making chips.",
+    "persian": "سرخ‌کن عمیق"
+  },
+  {
+    "word": "deep-fry",
+    "definition": "fry food in a large amount of hot fat or oil.",
+    "example": "Don't deep-fry the fish for too long.",
+    "persian": "سرخ کردن عمیق"
+  },
+  {
+    "word": "casserole",
+    "definition": "a large, deep dish used for cooking meat and vegetables slowly in liquid (also the name of the dish itself).",
+    "example": "We prepared a meat casserole in the evening.",
+    "persian": "قابلمه چدنی (برای آرام‌پز کردن)، خوراک آرام‌پز"
+  },
+  {
+    "word": "braise/stew",
+    "definition": "cook meat slowly in liquid in a closed container.",
+    "example": "Braising the meat makes it very tender.",
+    "persian": "آرام‌پز کردن، تفت دادن (و سپس آرام پختن)"
+  },
+  {
+    "word": "food processor",
+    "definition": "an appliance used to chop, slice, and mix meat, vegetables, etc.",
+    "example": "I used the food processor to chop the onions quickly.",
+    "persian": "غذا ساز"
+  },
+  {
+    "word": "chop",
+    "definition": "cut food into small pieces.",
+    "example": "Chop the herbs finely.",
+    "persian": "خرد کردن"
+  },
+  {
+    "word": "whisk",
+    "definition": "a utensil used to beat eggs, cream, or other liquids rapidly.",
+    "example": "Use a whisk to beat the eggs.",
+    "persian": "همزن دستی"
+  },
+  {
+    "word": "beat",
+    "definition": "mix rapidly to incorporate air.",
+    "example": "Beat the eggs until they are frothy.",
+    "persian": "زدن، هم زدن (تخم مرغ، خامه)"
+  },
+  {
+    "word": "colander",
+    "definition": "a bowl-shaped container with holes, used to drain vegetables that have been washed or cooked.",
+    "example": "Place the cooked pasta in a colander.",
+    "persian": "آبکش"
+  },
+  {
+    "word": "drain",
+    "definition": "remove the liquid from food or containers.",
+    "example": "Drain vegetables cooked in water.",
+    "persian": "آبکش کردن، آب اضافی را خارج کردن"
+  },
+  {
+    "word": "grater",
+    "definition": "a tool used to grate cheese (e.g., parmesan).",
+    "example": "I need a grater for the cheese.",
+    "persian": "رنده"
+  },
+  {
+    "word": "grate",
+    "definition": "shred food into small pieces using a grater.",
+    "example": "Grate the cheese over the pasta.",
+    "persian": "رنده کردن"
+  },
+  {
+    "word": "garlic crusher",
+    "definition": "a tool used to crush garlic.",
+    "example": "The recipe calls for a crushed clove of garlic.",
+    "persian": "سیر له کن"
+  },
+  {
+    "word": "crush",
+    "definition": "press or squeeze forcefully so as to break or distort.",
+    "example": "Crush the fresh garlic.",
+    "persian": "له کردن، کوبیدن"
+  },
+  {
+    "word": "sieve (tool)",
+    "definition": "a utensil used to separate solids from liquid or larger solids from smaller ones (e.g., flour).",
+    "example": "Use a sieve to remove lumps in flour.",
+    "persian": "الک، صافی"
+  },
+  {
+    "word": "sieve (action)",
+    "definition": "pass food through a sieve.",
+    "example": "You need to sieve the flour before mixing.",
+    "persian": "الک کردن، صاف کردن"
+  },
+  {
+    "word": "peeler",
+    "definition": "a tool used to peel vegetables (e.g., potatoes).",
+    "example": "Where is the potato peeler?",
+    "persian": "پوست‌کن"
+  },
+  {
+    "word": "peel",
+    "definition": "remove the outer skin or rind of a fruit or vegetable.",
+    "example": "Peel the potatoes before boiling them.",
+    "persian": "پوست کندن"
+  },
+  {
+    "word": "lemon squeezer",
+    "definition": "a small tool used to squeeze lemons or limes.",
+    "example": "She bought a lemon squeezer for the cocktail.",
+    "persian": "آب‌لیمو/آب‌مرکبات‌گیر"
+  },
+  {
+    "word": "squeeze",
+    "definition": "press firmly, typically with one's fingers.",
+    "example": "Squeeze the lemons to get the juice.",
+    "persian": "فشردن، آب گرفتن"
+  },
+  {
+    "word": "corkscrew",
+    "definition": "a tool used to open wine bottles by pulling out the cork.",
+    "example": "I need a corkscrew to open a bottle of wine.",
+    "persian": "چوب‌پنبه‌بازکن"
+  },
+  {
+    "word": "ladle",
+    "definition": "a large long-handled spoon with a cup-shaped bowl, used to serve soup.",
+    "example": "Use the ladle to serve soup.",
+    "persian": "ملاقه"
+  },
+  {
+    "word": "serve",
+    "definition": "present food or drink to someone.",
+    "example": "Serve the dinner immediately.",
+    "persian": "سرو کردن"
+  },
+  {
+    "word": "kitchen scales",
+    "definition": "an instrument used to weigh all types of food.",
+    "example": "I weighed the flour on the kitchen scales.",
+    "persian": "ترازوی آشپزخانه"
+  },
+  {
+    "word": "weigh",
+    "definition": "find out how heavy something is.",
+    "example": "Weigh the ingredients accurately.",
+    "persian": "وزن کردن"
+  },
+  {
+    "word": "go pear-shaped (idiom, INF)",
+    "definition": "go badly wrong and be very unsuccessful.",
+    "example": "I said the plan would work, but it all went pear-shaped.",
+    "persian": "به مشکل خوردن، خراب شدن (نقشه، برنامه)"
+  },
+  {
+    "word": "eat your words (idiom)",
+    "definition": "admit that something you said was wrong.",
+    "example": "I was wrong and in the end I had to eat my words.",
+    "persian": "حرف خود را پس گرفتن، اعتراف به اشتباه کردن"
+  },
+  {
+    "word": "sour grapes (idiom)",
+    "definition": "a negative response to something because you're angry you can't have it.",
+    "example": "He was only rude about the party because he wasn't invited. It was just sour grapes.",
+    "persian": "حسادت، انگور ترش (انتقاد از چیزی که نمی‌توانید داشته باشید)"
+  },
+  {
+    "word": "a fish out of water (idiom)",
+    "definition": "a person who feels uneasy and out of place in their surroundings.",
+    "example": "Frankly, I felt like a fish out of water.",
+    "persian": "ماهی بیرون از آب (احساس ناراحتی و بی‌جایی)"
+  },
+  {
+    "word": "have your cake and eat it (idiom)",
+    "definition": "have the advantages of something without the disadvantages (implying selfishness).",
+    "example": "The trouble with Tanya is she always wants to have her cake and eat it.",
+    "persian": "هم خدا را خواستن هم خرما را، بهره‌مندی از همه مزایا بدون پذیرش معایب"
+  },
+  {
+    "word": "make a meal of sth (idiom, INF)",
+    "definition": "spend more time doing something than is necessary.",
+    "example": "It took two men three days to build that little wall. They really made a meal of it.",
+    "persian": "اغراق کردن، بیش از حد لازم وقت صرف کردن"
+  },
+  {
+    "word": "fishy (adj, INF)",
+    "definition": "suspicious, and probably involving dishonesty.",
+    "example": "A man knocked on the door and said that if I gave him £100, it sounded fishy.",
+    "persian": "مشکوک، بودار"
+  },
+  {
+    "word": "breadwinner",
+    "definition": "a person who supports their family with money they earn.",
+    "example": "Since Jamie lost his job, Marcia has been the main breadwinner.",
+    "persian": "نان‌آور خانواده"
+  },
+  {
+    "word": "don't count your chickens (idiom, SAYING)",
+    "definition": "don't be too confident that something will be successful, because it may go wrong.",
+    "example": "You might get the money but don't count your chickens.",
+    "persian": "جوجه را آخر پاییز می‌شمارند (زود مطمئن نباش)"
+  },
+  {
+    "word": "nutcase (n, INF)",
+    "definition": " a crazy person.",
+    "example": "Ali's brother's a complete nutcase.",
+    "persian": "آدم دیوانه، خل و چل"
+  },
+  {
+    "word": "like chalk and cheese (idiom)",
+    "definition": "used for saying that two people are very different.",
+    "example": "Maggie and her sister are like chalk and cheese.",
+    "persian": "مثل آسمان و ریسمان بودن، مثل زمین تا آسمان فرق داشتن"
+  },
+  {
+    "word": "stunning",
+    "definition": "extremely attractive or impressive. SYN beautiful.",
+    "example": "Prague is a stunning city.",
+    "persian": "حیرت‌انگیز، فوق‌العاده زیبا"
+  },
+  {
+    "word": "thriving",
+    "definition": "growing and developing, and very successful. SYN flourishing.",
+    "example": "This thriving capital of the Czech Republic.",
+    "persian": "پررونق، شکوفا، موفق"
+  },
+  {
+    "word": "vibrant",
+    "definition": "full of life and energy.",
+    "example": "A romantic and vibrant city-break destination.",
+    "persian": "سرزنده، پرجنب و جوش"
+  },
+  {
+    "word": "cobbled streets",
+    "definition": "streets with a surface of old round stones.",
+    "example": "A stroll through Prague's cobbled streets is wonderfully exciting.",
+    "persian": "خیابان‌های سنگفرش"
+  },
+  {
+    "word": "remarkably",
+    "definition": "in an unusual or surprising way. remarkable ADJ.",
+    "example": "Its architecture is remarkably diverse.",
+    "persian": "به طرز چشمگیری، قابل ملاحظه"
+  },
+  {
+    "word": "diverse",
+    "definition": "of many different kinds.",
+    "example": "The architecture is remarkably diverse.",
+    "persian": "متنوع"
+  },
+  {
+    "word": "undergo sth",
+    "definition": "experience a process of change.",
+    "example": "The Clock has recently been undergoing restoration.",
+    "persian": "متحمل شدن، از سر گذراندن"
+  },
+  {
+    "word": "restoration",
+    "definition": "the work of repairing old buildings, paintings, etc.",
+    "example": "The buildings need to be repaired (restoration).",
+    "persian": "مرمت، بازسازی"
+  },
+  {
+    "word": "laze around",
+    "definition": "relax and do very little.",
+    "example": "Laze around on the golden, sandy beaches.",
+    "persian": "اوقات را به بطالت گذراندن، استراحت مطلق کردن"
+  },
+  {
+    "word": "soak sth up",
+    "definition": "absorb or take something into your senses, body, or mind.",
+    "example": "Soak up the atmosphere of traditional fishing villages.",
+    "persian": "جذب کردن، لذت بردن کامل (از چیزی)"
+  },
+  {
+    "word": "go for a wander (around/in)",
+    "definition": "walk slowly without a real purpose or direction.",
+    "example": "Just go for a wander around Albufeira's old town.",
+    "persian": "گشت و گذار کردن، پرسه زدن"
+  },
+  {
+    "word": "retain sth (FML)",
+    "definition": "keep something. retention N.",
+    "example": "The old town still retains its wonderful charm.",
+    "persian": "حفظ کردن، نگه داشتن"
+  },
+  {
+    "word": "charm",
+    "definition": "a pleasant or attractive quality or feature.",
+    "example": "Absorb the charms of the old town.",
+    "persian": "جذابیت، دلربایی"
+  },
+  {
+    "word": "off the beaten track",
+    "definition": "far away from other people and houses.",
+    "example": "Our China trek offers an experience off the beaten track.",
+    "persian": "دورافتاده، خارج از مسیر معمول گردشگری"
+  },
+  {
+    "word": "trek",
+    "definition": "a long hard walk, often in the mountains.",
+    "example": "Our China trek.",
+    "persian": "پیاده‌روی طولانی و دشوار"
+  },
+  {
+    "word": "unique",
+    "definition": "being the only one of its kind.",
+    "example": "Our trek offers a unique experience.",
+    "persian": "منحصر به فرد، بی‌نظیر"
+  },
+  {
+    "word": "get away from it all",
+    "definition": "go somewhere different to have a rest or holiday.",
+    "example": "The adventurous traveller wants to get away from it all.",
+    "persian": "از همه چیز دور شدن و استراحت کردن"
+  },
+  {
+    "word": "remote",
+    "definition": "far from places where other people live. SYN isolated.",
+    "example": "Camp in a remote part of rural China.",
+    "persian": "دور، پرت افتاده"
+  },
+  {
+    "word": "unspoilt",
+    "definition": "(of a place) beautiful because it has not been changed or built on.",
+    "example": "Experience local life in its most unspoilt state.",
+    "persian": "دست نخورده، بکر"
+  },
+  {
+    "word": "unwind",
+    "definition": "relax (SYN take it easy, chill out).",
+    "example": "If you need to unwind, try the Algarve.",
+    "persian": "ریلکس کردن، آرام شدن"
+  },
+  {
+    "word": "take it easy (INF)",
+    "definition": "relax.",
+    "example": "We just want to take it easy and do very little.",
+    "persian": "راحت بودن، سخت نگرفتن"
+  },
+  {
+    "word": "chill out (INF)",
+    "definition": "relax.",
+    "example": "I'm going to chill out all weekend.",
+    "persian": "آرامش گرفتن، حال کردن (عامیانه)"
+  },
+  {
+    "word": "recharge your batteries (idiom)",
+    "definition": "take a break or holiday to get your energy back.",
+    "example": "You recharge your batteries.",
+    "persian": "شارژ شدن (انرژی گرفتن)"
+  },
+  {
+    "word": "heritage",
+    "definition": "valued traditions, historical buildings, etc.",
+    "example": "The city protects its cultural heritage.",
+    "persian": "میراث فرهنگی"
+  },
+  {
+    "word": "exotic",
+    "definition": "exciting and unusual, often from a distant place.",
+    "example": "They serve exotic food at the resort.",
+    "persian": "عجیب و غریب، غیربومی"
+  },
+  {
+    "word": "renowned",
+    "definition": "famous for something.",
+    "example": "The island is renowned for its seafood.",
+    "persian": "مشهور، نامدار"
+  },
+  {
+    "word": "long-haul",
+    "definition": "travelling a long distance (flight/destination).",
+    "example": "This is a very long-haul flight.",
+    "persian": "مسافت طولانی"
+  },
+  {
+    "word": "tranquil",
+    "definition": "calm and peaceful.",
+    "example": "We looked for a tranquil spot by the river.",
+    "persian": "آرام، ساکت و آرامش‌بخش"
+  },
+  {
+    "word": "spine-tingling",
+    "definition": "very frightening or exciting in a way that you enjoy.",
+    "example": "A spine-tingling ghost story.",
+    "persian": "هیجان‌انگیز، مو بر تن سیخ کن"
+  },
+  {
+    "word": "ghost story",
+    "definition": "a story about the spirit of a dead person that sb hears or sees.",
+    "example": "I love reading ghost stories before bed.",
+    "persian": "داستان ارواح، داستان شبح"
+  },
+  {
+    "word": "on the edge of your seat (idiom)",
+    "definition": "very excited and interested in something (often a story or performance).",
+    "example": "The play will have you on the edge of your seat.",
+    "persian": "لب مرز نشستن (بسیار هیجان‌زده و مشتاق بودن)"
+  },
+  {
+    "word": "set",
+    "definition": "the scenery and furniture used in a play, film, etc.",
+    "example": "The production used a minimal set.",
+    "persian": "صحنه آرایی، دکور"
+  },
+  {
+    "word": "sound effects",
+    "definition": "sounds that are made artificially in a play, film, etc., to make it more realistic.",
+    "example": "The film used incredible sound effects.",
+    "persian": "جلوه‌های صوتی"
+  },
+  {
+    "word": "scare sb out of their wits (idiom)",
+    "definition": "frighten someone very much.",
+    "example": "This drama will scare you out of your wits!",
+    "persian": "تا سر حد مرگ ترساندن"
+  },
+  {
+    "word": "nail-biting",
+    "definition": "making you very excited or worried. SYN gripping.",
+    "example": "The plot was a nail-biting finish.",
+    "persian": "پرتنش، هیجان‌آور (به حدی که ناخن بجوی)"
+  },
+  {
+    "word": "adaptation",
+    "definition": "a book or play that has been made into a film, TV programme, etc.",
+    "example": "A nail-biting adaptation of Susan Hill's novel.",
+    "persian": "اقتباس"
+  },
+  {
+    "word": "twist",
+    "definition": "an unexpected change or development in a story or situation.",
+    "example": "The plot twists are brilliant.",
+    "persian": "پیچش داستانی، تحول غیرمنتظره"
+  },
+  {
+    "word": "cast",
+    "definition": "(singular or plural verb) all the people who act in a play or film.",
+    "example": "The cast of two are sensational.",
+    "persian": "بازیگران، تیم بازیگری"
+  },
+  {
+    "word": "sensational (INF)",
+    "definition": "extremely good; wonderful. SYNS fabulous, brilliant.",
+    "example": "The cast are sensational!",
+    "persian": "فوق‌العاده، محشر، عالی"
+  },
+  {
+    "word": "applause",
+    "definition": "the sound of an audience showing approval by hitting their hands together. applaud V.",
+    "example": "The applause went on and on.",
+    "persian": "کف زدن، تشویق"
+  },
+  {
+    "word": "phenomenally",
+    "definition": "in a very great or impressive way. SYN extraordinarily.",
+    "example": "Phenomenally successful.",
+    "persian": "به طور فوق‌العاده‌ای، به نحو چشمگیری"
+  },
+  {
+    "word": "unanimously",
+    "definition": "in a way that is agreed by everyone. unanimous ADJ.",
+    "example": "Unanimously acclaimed by the critics.",
+    "persian": "به اتفاق آراء، یک‌صدا"
+  },
+  {
+    "word": "acclaimed",
+    "definition": "publicly talked or written about in an admiring way. acclaim N.",
+    "example": "Unanimously acclaimed by the critics.",
+    "persian": "تحسین شده، مورد ستایش قرار گرفته"
+  },
+  {
+    "word": "atrocious",
+    "definition": "very bad and unpleasant. SYN dire INF.",
+    "example": "I had to sit through some atrocious, sentimental movie.",
+    "persian": "افتضاح، فجیع، خیلی بد"
+  },
+  {
+    "word": "sentimental (DISAPPROVING)",
+    "definition": "making people experience feelings of sadness, sympathy, etc. in a deliberate and obvious way.",
+    "example": "It's a very sentimental film.",
+    "persian": "احساساتی (با بار منفی)، آبکی"
+  },
+  {
+    "word": "tedious",
+    "definition": "boring, long, and slow.",
+    "example": "Yes, it was tedious, wasn't it?",
+    "persian": "خسته کننده، ملال‌آور"
+  },
+  {
+    "word": "cliché",
+    "definition": "a phrase or idea that has been used so often it no longer has much meaning and is not interesting. clichéd ADJ.",
+    "example": "The film was full of clichés.",
+    "persian": "کلیشه"
+  },
+  {
+    "word": "shallow",
+    "definition": "not showing serious thought, feelings, etc. SYN superficial.",
+    "example": "The female characters were shallow.",
+    "persian": "سطحی، کم عمق"
+  },
+  {
+    "word": "feeble",
+    "definition": "very weak.",
+    "example": "It was all terrible - feeble jokes.",
+    "persian": "ضعیف، سست"
+  },
+  {
+    "word": "wooden",
+    "definition": "not showing enough natural expression, emotion, or movement (especially acting/dialogue).",
+    "example": "The acting was quite wooden.",
+    "persian": "بی‌روح، خشک، غیرطبیعی"
+  },
+  {
+    "word": "mediocre",
+    "definition": "of only average quality.",
+    "example": "The acting was very mediocre.",
+    "persian": "متوسط، نه چندان خوب"
+  },
+  {
+    "word": "miscast",
+    "definition": "(of an actor) not suitable for the role they have been given.",
+    "example": "Jack Burns was totally miscast as the romantic lead.",
+    "persian": "انتخاب نامناسب بازیگر (برای نقش)"
+  },
+  {
+    "word": "unconvincing",
+    "definition": "not seeming true or real. OPP convincing.",
+    "example": "Maggie Lovett was pretty unconvincing too.",
+    "persian": "غیرقابل باور، نامطمئن"
+  },
+  {
+    "word": "utter",
+    "definition": "complete (used to emphasize something bad).",
+    "example": "It was utter rubbish.",
+    "persian": "تمام، مطلق (معمولاً برای تأکید بر بدی)"
+  },
+  {
+    "word": "rubbish (n, INF)",
+    "definition": "poor quality; nonsense.",
+    "example": "The film was utter rubbish.",
+    "persian": "مزخرف، آشغال"
+  },
+  {
+    "word": "deadly dull (idiom)",
+    "definition": "very boring.",
+    "example": "The musical was absolutely deadly dull.",
+    "persian": "به طرز کشنده‌ای کسل‌کننده"
+  },
+  {
+    "word": "bored to tears/death/stiff/out of your mind (idioms)",
+    "definition": "extremely bored.",
+    "example": "I was bored to tears after twenty minutes.",
+    "persian": "از شدت بی‌حوصلگی (به ستوه آمدن)"
+  },
+  {
+    "word": "witty",
+    "definition": "clever and funny.",
+    "example": "The script was very witty.",
+    "persian": "بذله‌گو، شوخ طبع"
+  },
+  {
+    "word": "rave about sth",
+    "definition": "talk enthusiastically about something.",
+    "example": "The critics raved about the performance.",
+    "persian": "با اشتیاق ستایش کردن"
+  },
+  {
+    "word": "bitter-sweet",
+    "definition": "containing a mixture of sadness and happiness.",
+    "example": "The ending was bitter-sweet.",
+    "persian": "تلخ و شیرین"
+  },
+  {
+    "word": "tear jerker",
+    "definition": "a film or story intended to make the audience cry.",
+    "example": "It was a real tear jerker.",
+    "persian": "فیلم/داستان اشک‌آور"
+  },
+  {
+    "word": "grim",
+    "definition": "unpleasant and depressing.",
+    "example": "The future looks grim.",
+    "persian": "سخت، گرفته، تیره و تار"
+  },
+  {
+    "word": "harrowing",
+    "definition": "extremely distressing or painful.",
+    "example": "It was a harrowing account of the war.",
+    "persian": "دلخراش، اندوه‌آور"
+  },
+  {
+    "word": "at home",
+    "definition": "playing in their own stadium. OPP away.",
+    "example": "Each team plays the others in their group at home and away.",
+    "persian": "در خانه، در زمین خودی"
+  },
+  {
+    "word": "qualify for sth",
+    "definition": "be good enough to enter a competition or reach a stage.",
+    "example": "The group winners qualify for the knockout stage.",
+    "persian": "واجد شرایط شدن، صلاحیت پیدا کردن"
+  },
+  {
+    "word": "knockout",
+    "definition": "a competition where the winner continues and the loser is eliminated.",
+    "example": "They qualified for the knockout stage.",
+    "persian": "حذفی (مسابقات)"
+  },
+  {
+    "word": "runner(s)-up",
+    "definition": "a person or team that comes second in a competition.",
+    "example": "The two best runners-up also qualify.",
+    "persian": "نایب قهرمان(ها)، تیم دوم"
+  },
+  {
+    "word": "the rest (of sth)",
+    "definition": "the remaining people or things; the others.",
+    "example": "The rest are eliminated.",
+    "persian": "بقیه، مابقی"
+  },
+  {
+    "word": "eliminate sb from sth",
+    "definition": "be beaten and can no longer take part. SYN knock sb out of sth (usually passive).",
+    "example": "If you are eliminated, that is the end of your competition.",
+    "persian": "حذف شدن (از مسابقات)"
+  },
+  {
+    "word": "draw (n)",
+    "definition": "an act of deciding which teams play against each other by pulling names out of a bag. be drawn (against sb) v.",
+    "example": "The draw for the quarter-final round.",
+    "persian": "قرعه‌کشی"
+  },
+  {
+    "word": "round",
+    "definition": "a stage in a sports competition.",
+    "example": "We managed to win in the first round.",
+    "persian": "دور (مسابقات)"
+  },
+  {
+    "word": "get through (to sth)",
+    "definition": "reach the next stage in a competition.",
+    "example": "The two teams that get through their semi-final.",
+    "persian": "صعود کردن، راه یافتن (به مرحله بعد)"
+  },
+  {
+    "word": "neutral",
+    "definition": "not belonging to either of the teams who are playing.",
+    "example": "They play the final at a neutral venue.",
+    "persian": "بی‌طرف"
+  },
+  {
+    "word": "venue",
+    "definition": "a place where an organized event happens.",
+    "example": "They play the final at a neutral venue.",
+    "persian": "محل برگزاری"
+  },
+  {
+    "word": "victory",
+    "definition": "success in a game, war, etc. victorious ADJ.",
+    "example": "Victory for the winners.",
+    "persian": "پیروزی، فتح"
+  },
+  {
+    "word": "form (performance)",
+    "definition": "the way in which someone is performing (in or on good/great form; off form).",
+    "example": "Our form in the league was poor.",
+    "persian": "فرم، عملکرد، وضعیت آمادگی"
+  },
+  {
+    "word": "league",
+    "definition": "a set of teams who play each other over a season to find the best team.",
+    "example": "The league title is still undecided.",
+    "persian": "لیگ"
+  },
+  {
+    "word": "a (good/bad) run",
+    "definition": "a period of performing well or badly.",
+    "example": "We've had a good run lately.",
+    "persian": "دوره (خوب/بد) عملکرد"
+  },
+  {
+    "word": "unbeaten",
+    "definition": "not having lost.",
+    "example": "We're unbeaten now in six matches.",
+    "persian": "شکست‌ناپذیر، بدون باخت"
+  },
+  {
+    "word": "promotion",
+    "definition": "the action of moving a team up to a higher league. OPP relegation N.",
+    "example": "We had an outside chance of promotion.",
+    "persian": "صعود (به لیگ بالاتر)"
+  },
+  {
+    "word": "let sb down",
+    "definition": "fail to give someone the help and support they need.",
+    "example": "Recently he's let us down.",
+    "persian": "ناامید کردن، تنها گذاشتن"
+  },
+  {
+    "word": "under pressure",
+    "definition": "in a stressful situation.",
+    "example": "When the opposition put us under pressure.",
+    "persian": "تحت فشار"
+  },
+  {
+    "word": "go to pieces (idiom, INF)",
+    "definition": "become very nervous or upset and unable to perform.",
+    "example": "When the opposition put us under pressure, we just went to pieces.",
+    "persian": "از هم پاشیدن، دستپاچه شدن"
+  },
+  {
+    "word": "dominate",
+    "definition": "(in sport) play better than and be in control of the game. SYN be on top.",
+    "example": "We dominated the game.",
+    "persian": "مسلط بودن، برتری داشتن"
+  },
+  {
+    "word": "on the verge of sth",
+    "definition": "near to the moment of doing or achieving something.",
+    "example": "We were on the verge of winning.",
+    "persian": "در آستانه چیزی بودن"
+  },
+  {
+    "word": "give sth away",
+    "definition": "lose a game, point, or competition through a bad mistake.",
+    "example": "We gave away a silly penalty.",
+    "persian": "از دست دادن (فرصت/ امتیاز) به دلیل اشتباه"
+  },
+  {
+    "word": "outside chance",
+    "definition": "a small chance (of success).",
+    "example": "We had an outside chance of promotion.",
+    "persian": "شانس ضعیف"
+  },
+  {
+    "word": "great chance",
+    "definition": "a high possibility; good opportunity.",
+    "example": "This season could be my great chance.",
+    "persian": "شانس بزرگ"
+  },
+  {
+    "word": "fixture",
+    "definition": "a sports match that is arranged to be played on a particular date.",
+    "example": "Check the list of upcoming fixtures.",
+    "persian": "برنامه مسابقات، بازی تعیین شده"
+  },
+  {
+    "word": "sign a player",
+    "definition": "hire a player to play for a team.",
+    "example": "The club signed a new striker.",
+    "persian": "بازیکن جدید جذب کردن"
+  },
+  {
+    "word": "thrash sb",
+    "definition": "defeat someone heavily.",
+    "example": "We thrashed them 5-0.",
+    "persian": "شکست سخت دادن، درهم کوبیدن"
+  },
+  {
+    "word": "transfer sb",
+    "definition": "move a player from one team to another.",
+    "example": "He was transferred to a Spanish club.",
+    "persian": "انتقال دادن (بازیکن)"
+  },
+  {
+    "word": "seed (n)",
+    "definition": "a ranked player or team in a competition.",
+    "example": "He was the top seed in the tournament.",
+    "persian": "سید (بازیکن/تیم رده‌بندی شده)"
+  },
+  {
+    "word": "make your debut",
+    "definition": "play your first game for a team.",
+    "example": "The young player made his debut yesterday.",
+    "persian": "اولین بازی خود را انجام دادن"
+  },
+  {
+    "word": "imitate sth/sb",
+    "definition": "SYN copy sth/sb.",
+    "example": "A garden which imitates the best of nature.",
+    "persian": "تقلید کردن"
+  },
+  {
+    "word": "acquire sth",
+    "definition": "obtain something by buying it or being given it.",
+    "example": "Having acquired a cottage in the country.",
+    "persian": "به دست آوردن، کسب کردن"
+  },
+  {
+    "word": "cottage",
+    "definition": "a small house, especially in the country.",
+    "example": "We stayed in a charming cottage by the sea.",
+    "persian": "کلبه، خانه ییلاقی"
+  },
+  {
+    "word": "in the process of doing sth",
+    "definition": "doing things that are necessary to achieve something.",
+    "example": "I'm now in the process of creating my own wildlife garden.",
+    "persian": "در حال انجام کاری بودن، در فرآیند"
+  },
+  {
+    "word": "wildlife",
+    "definition": "animals, birds, and insects that live in a natural state.",
+    "example": "Plants to attract wildlife such as bees and butterflies.",
+    "persian": "حیات وحش"
+  },
+  {
+    "word": "site",
+    "definition": "an area of land that is used for something (camping site/building site).",
+    "example": "The site is ideal for a garden.",
+    "persian": "محل، سایت، قطعه زمین"
+  },
+  {
+    "word": "slope",
+    "definition": "an area of land that is higher at one end than the other.",
+    "example": "A gentle slope going down to a pond.",
+    "persian": "شیب، سراشیبی"
+  },
+  {
+    "word": "shed",
+    "definition": "a small simple building, made of wood, and often found in gardens.",
+    "example": "There's a shed in the garden for tools.",
+    "persian": "آلونک، انبار کوچک"
+  },
+  {
+    "word": "attract sth/sb",
+    "definition": "make something/someone come towards you.",
+    "example": "Plants to attract wildlife.",
+    "persian": "جذب کردن، جلب کردن"
+  },
+  {
+    "word": "scatter sth",
+    "definition": "throw or drop things in different directions over a wide area.",
+    "example": "I've scattered seeds to create a meadow.",
+    "persian": "پراکنده کردن، افشاندن"
+  },
+  {
+    "word": "seed",
+    "definition": "the small hard part of a plant from which new plants grow.",
+    "example": "I've bought lots of packets of seed.",
+    "persian": "دانه، تخم"
+  },
+  {
+    "word": "meadow",
+    "definition": "a field covered in grass, and often wild flowers.",
+    "example": "A wild-flower meadow.",
+    "persian": "چمنزار، مرغزار"
+  },
+  {
+    "word": "nest",
+    "definition": "a place where birds lay their eggs and live with their young. nest v.",
+    "example": "I hope birds will soon build nests.",
+    "persian": "لانه، آشیانه"
+  },
+  {
+    "word": "nature (concept)",
+    "definition": "the physical world and everything that lives in it.",
+    "example": "We can say someone is interested in nature.",
+    "persian": "طبیعت"
+  },
+  {
+    "word": "chore",
+    "definition": "a small job that you have to do regularly, often around the home.",
+    "example": "I've got lots of chores to do today.",
+    "persian": "کار روزمره، وظیفه"
+  },
+  {
+    "word": "compost",
+    "definition": "a mixture of decaying plants and food that is added to soil to help things grow.",
+    "example": "Add compost to enrich the soil.",
+    "persian": "کود گیاهی، کمپوست"
+  },
+  {
+    "word": "enrich sth",
+    "definition": "improve the quality of something by adding something to it.",
+    "example": "We need to enrich the soil.",
+    "persian": "غنی‌سازی کردن"
+  },
+  {
+    "word": "soil",
+    "definition": "the top part of the earth in which trees and plants grow.",
+    "example": "Compost makes the soil more fertile.",
+    "persian": "خاک"
+  },
+  {
+    "word": "prune sth",
+    "definition": "remove some of a plant's stems or branches to improve future growth. SYN cut sth back.",
+    "example": "Prune certain bushes and plants.",
+    "persian": "هرس کردن، شاخه‌زنی کردن"
+  },
+  {
+    "word": "muddy",
+    "definition": "(of the earth) wet from too much rain. mud N.",
+    "example": "The ground is muddy.",
+    "persian": "گِل‌آلود"
+  },
+  {
+    "word": "do the weeding",
+    "definition": "remove the weeds (= wild plants growing where they are not wanted).",
+    "example": "Do regular weeding.",
+    "persian": "علف هرز کندن"
+  },
+  {
+    "word": "put your feet up (idiom)",
+    "definition": "sit down and relax.",
+    "example": "Put your feet up and enjoy the garden.",
+    "persian": "لم دادن و استراحت کردن"
+  },
+  {
+    "word": "hedge",
+    "definition": "a line of bushes growing close together around a garden or field.",
+    "example": "Tidy hedges and fallen leaves.",
+    "persian": "پرچین، شمشاد"
+  },
+  {
+    "word": "plant sth (v)",
+    "definition": "put flowers and other plants into the soil.",
+    "example": "Plant bulbs for the following spring.",
+    "persian": "کاشتن"
+  },
+  {
+    "word": "mow the lawn",
+    "definition": "cut the grass on the lawn.",
+    "example": "Mow the lawn once a week.",
+    "persian": "چمن‌زنی کردن"
+  },
+  {
+    "word": "spade",
+    "definition": "a tool used for digging (a shovel).",
+    "example": "Have you got something I can use for digging? Have you got a spade?",
+    "persian": "بیلچه، بیل"
+  },
+  {
+    "word": "lawnmower",
+    "definition": "a machine for cutting grass.",
+    "example": "The grass needs cutting - you'll find the lawnmower in the garden.",
+    "persian": "ماشین چمن‌زنی"
+  },
+  {
+    "word": "rake",
+    "definition": "a garden tool with a long handle and prongs, used for gathering leaves.",
+    "example": "I used a rake to clear the leaves.",
+    "persian": "چنگک، شن‌کش"
+  },
+  {
+    "word": "sow (v)",
+    "definition": "plant seeds in the ground.",
+    "example": "I need to sow the vegetable seeds.",
+    "persian": "بذر کاشتن، تخم پاشیدن"
+  },
+  {
+    "word": "pests",
+    "definition": "small animals or insects that damage plants or food.",
+    "example": "The plant is covered in garden pests.",
+    "persian": "آفت‌ها"
+  },
+  {
+    "word": "impulse (to do sth)",
+    "definition": "a sudden desire to do something without thinking about the results (buy sth on impulse).",
+    "example": "I always buy things on impulse.",
+    "persian": "انگیزه ناگهانی، تصمیم آنی"
+  },
+  {
+    "word": "in search of sth",
+    "definition": "looking for something.",
+    "example": "I went into town in search of some shoes.",
+    "persian": "در جستجوی چیزی"
+  },
+  {
+    "word": "price tag",
+    "definition": "a label on something which shows how much you must pay.",
+    "example": "The price tag was still on the clothes.",
+    "persian": "برچسب قیمت"
+  },
+  {
+    "word": "shop till you drop (idiom, MODERN INF)",
+    "definition": "spend a long time shopping because you don't want to stop (till = until).",
+    "example": "I'm not the kind of person who shops till they drop.",
+    "persian": "آنقدر خرید کردن که از حال بروی"
+  },
+  {
+    "word": "browse (v)",
+    "definition": "casually look at things in a shop, or look through the pages of a book.",
+    "example": "I stopped to browse through this magazine.",
+    "persian": "سرسری نگاه کردن، گشت زدن (در مغازه)"
+  },
+  {
+    "word": "after sth",
+    "definition": "looking for and trying to obtain something.",
+    "example": "You're after a particular buy.",
+    "persian": "در پی چیزی بودن"
+  },
+  {
+    "word": "the minute (phrase)",
+    "definition": "as soon as. SYN the moment.",
+    "example": "The minute you've got it, you're off.",
+    "persian": "همین که، به محض اینکه"
+  },
+  {
+    "word": "be off (phrasal verb)",
+    "definition": "go; leave.",
+    "example": "I told Patsy that I had to be off.",
+    "persian": "رفتن، ترک کردن (مکان)"
+  },
+  {
+    "word": "have an eye for sth (idiom)",
+    "definition": "have a natural ability to see or find something (often used for bargains or detail).",
+    "example": "You have an eye for a bargain.",
+    "persian": "ذوق و سلیقه داشتن، چشم تیزبین داشتن (برای چیزی)"
+  },
+  {
+    "word": "shop around (v)",
+    "definition": "go to different shops until you find what you want.",
+    "example": "I'm happy to shop around.",
+    "persian": "مغازه به مغازه گشتن (برای یافتن بهترین قیمت/محصول)"
+  },
+  {
+    "word": "focused",
+    "definition": "having a very clear aim; knowing what you want to do.",
+    "example": "You're incredibly focused.",
+    "persian": "متمرکز"
+  },
+  {
+    "word": "be distracted by sth",
+    "definition": "be looking at or thinking about something so that you are unable to pay attention to other things.",
+    "example": "I won't be distracted by cheap offers.",
+    "persian": "حواس‌پرتی پیدا کردن، پرت شدن حواس توسط چیزی"
+  },
+  {
+    "word": "pursuit (leisure)",
+    "definition": "hobby, pastime (leisure/outdoor pursuits).",
+    "example": "Shopping is the UK's fourth favourite leisure pursuit.",
+    "persian": "سرگرمی، مشغله"
+  },
+  {
+    "word": "spree",
+    "definition": "a short period of time doing one activity in an uncontrolled way (spending/shopping spree).",
+    "example": "How often do you go on a spending spree?",
+    "persian": "ولخرجی، افراط (در یک دوره کوتاه)"
+  },
+  {
+    "word": "bargain hunting",
+    "definition": "looking for something at a good price and cheaper than usual.",
+    "example": "She tends to indulge in a bit of bargain hunting.",
+    "persian": "شکار تخفیف، جستجوی ارزان‌قیمت"
+  },
+  {
+    "word": "head for/towards",
+    "definition": "go in the direction of.",
+    "example": "Millions of us head for the shops every weekend.",
+    "persian": "به سمت جایی رفتن، رهسپار شدن"
+  },
+  {
+    "word": "indulge in sth",
+    "definition": "do something you like, especially something that is bad for you.",
+    "example": "They indulge in this popular pastime.",
+    "persian": "افراط کردن، زیاده‌روی کردن"
+  },
+  {
+    "word": "gadget",
+    "definition": "a small tool or piece of equipment that does something useful.",
+    "example": "Men over 50 now outspend women because of their love of gadgets.",
+    "persian": "ابزارک، وسیله کاربردی کوچک"
+  },
+  {
+    "word": "shopaholic (INF)",
+    "definition": "someone who enjoys shopping and spends a lot of time doing it.",
+    "example": "A small number may become compulsive shoppers.",
+    "persian": "خرید بیمارگونه، معتاد به خرید"
+  },
+  {
+    "word": "compulsive",
+    "definition": "finding it difficult to control their actions (a compulsive shopper/gambler/liar).",
+    "example": "Compulsive shoppers.",
+    "persian": "اجباری، غیرقابل کنترل"
+  },
+  {
+    "word": "addicted to sth",
+    "definition": "unable to stop doing something which is usually harmful. addict N.",
+    "example": "It's easy to get addicted to things such as drugs or alcohol.",
+    "persian": "معتاد به چیزی"
+  },
+  {
+    "word": "crippling",
+    "definition": "very serious (crippling debts/disease).",
+    "example": "They end up with crippling financial debts.",
+    "persian": "فلج‌کننده، بسیار سنگین"
+  },
+  {
+    "word": "outspend (prefix out-)",
+    "definition": "spend more than someone else.",
+    "example": "Men over 50 outspend women.",
+    "persian": "بیشتر خرج کردن"
+  },
+  {
+    "word": "outweigh (prefix out-)",
+    "definition": "be greater or more important than something else.",
+    "example": "The advantages outweigh the disadvantages.",
+    "persian": "سنگین‌تر بودن، ارجح بودن"
+  },
+  {
+    "word": "retail therapy",
+    "definition": "shopping to cheer yourself up.",
+    "example": "She needed some retail therapy after a difficult week.",
+    "persian": "تسکین روحی با خرید"
+  },
+  {
+    "word": "charity shop",
+    "definition": "a shop that sells donated goods for charity.",
+    "example": "I bought this jacket from a charity shop.",
+    "persian": "مغازه خیریه"
+  },
+  {
+    "word": "haggle",
+    "definition": "argue about the price until a lower price is agreed.",
+    "example": "She tried to haggle for a better price.",
+    "persian": "چانه زدن"
+  },
+  {
+    "word": "get a buzz/rush from sth (idiom)",
+    "definition": "feel excitement from an activity.",
+    "example": "He gets a rush from extreme sports.",
+    "persian": "لذت/هیجان شدید بردن از چیزی"
+  },
+  {
+    "word": "socialize (v)",
+    "definition": "spend time with other people in a friendly way. sociable ADJ.",
+    "example": "Do you want to make new friends and socialize more effectively?",
+    "persian": "اجتماعی شدن، معاشرت کردن"
+  },
+  {
+    "word": "host (n)",
+    "definition": "a person who is giving a meal or a party. hostess N.",
+    "example": "Paula and Simon are the hosts.",
+    "persian": "میزبان"
+  },
+  {
+    "word": "lay sth on (phrasal verb, INF)",
+    "definition": "provide something for someone, especially food, drink, or transport.",
+    "example": "The host is expected to lay on food and drink.",
+    "persian": "تدارک دیدن، فراهم کردن"
+  },
+  {
+    "word": "time-consuming",
+    "definition": "needing a lot of time (a time-consuming process).",
+    "example": "Organizing a party can be expensive and time-consuming.",
+    "persian": "زمان‌بر"
+  },
+  {
+    "word": "contribution",
+    "definition": "a thing that you give or do to help something be successful. contribute v.",
+    "example": "Everyone made a contribution.",
+    "persian": "مشارکت، سهم، کمک"
+  },
+  {
+    "word": "clear (sth) up",
+    "definition": "leave everything clean and tidy (after a party/mess).",
+    "example": "A lot of food means a lot of clearing up.",
+    "persian": "مرتب کردن، جمع و جور کردن"
+  },
+  {
+    "word": "disposable",
+    "definition": "intended to be used once or twice then thrown away.",
+    "example": "Think about disposable plates and cutlery.",
+    "persian": "یکبار مصرف"
+  },
+  {
+    "word": "beforehand (adv)",
+    "definition": "before something else happens or is done.",
+    "example": "Don't advertise it on the internet beforehand.",
+    "persian": "از قبل، پیشاپیش"
+  },
+  {
+    "word": "gatecrasher",
+    "definition": "a person who tries to get into a party without an invitation.",
+    "example": "You don't want gatecrashers.",
+    "persian": "مهمان ناخوانده (که خود را تحمیل می‌کند)"
+  },
+  {
+    "word": "warm up (phrasal verb)",
+    "definition": "(of a party or event) start to become interesting and enjoyable.",
+    "example": "Parties take a while to warm up.",
+    "persian": "گرم شدن (مهمانی)، هیجان‌انگیز شدن"
+  },
+  {
+    "word": "deafening",
+    "definition": "very loud.",
+    "example": "Music that is not so deafening.",
+    "persian": "کر کننده، بسیار بلند"
+  },
+  {
+    "word": "drown sth out (phrasal verb)",
+    "definition": "be louder than other sounds, so they can't be heard.",
+    "example": "Don't have the music so loud that it drowns out the conversation.",
+    "persian": "صدای چیزی را تحت الشعاع قرار دادن (به دلیل بلند بودن)"
+  },
+  {
+    "word": "liven sth up (phrasal verb)",
+    "definition": "make something more exciting.",
+    "example": "Party games can liven things up.",
+    "persian": "هیجان دادن، پرشور کردن"
+  },
+  {
+    "word": "get/be carried away (idiom)",
+    "definition": "become very excited or lose control of your feelings.",
+    "example": "Don't get carried away!",
+    "persian": "از خود بیخود شدن، هیجان‌زده شدن بیش از حد"
+  },
+  {
+    "word": "pop round/over/in (phrasal verb, INF)",
+    "definition": "go somewhere quickly or for a fairly short time.",
+    "example": "Shall we pop round and see Glynnis?",
+    "persian": "سر زدن، سریع رفتن (برای دیدار کوتاه)"
+  },
+  {
+    "word": "fancy sth (v, INF)",
+    "definition": "want something or want to do something.",
+    "example": "She may fancy a bit of company.",
+    "persian": "هوس چیزی کردن، چیزی را خواستن"
+  },
+  {
+    "word": "no doubt (phrase)",
+    "definition": "used to say you expect something will happen.",
+    "example": "They'll have fun tonight, no doubt.",
+    "persian": "بدون شک، قطعاً"
+  },
+  {
+    "word": "drunk (adj)",
+    "definition": "having drunk too much alcohol. get/be drunk.",
+    "example": "I'm sure they won't get drunk.",
+    "persian": "مست، سکران"
+  },
+  {
+    "word": "awkward",
+    "definition": "not relaxed or comfortable with other people.",
+    "example": "Jim's quite awkward when he's in company.",
+    "persian": "معذب، دست و پا چلفتی، ناجور"
+  },
+  {
+    "word": "loner",
+    "definition": "a person who is often alone and usually prefers to be alone.",
+    "example": "He's a bit of a loner.",
+    "persian": "منزوی، گوشه‌گیر"
+  },
+  {
+    "word": "get-together (n)",
+    "definition": "a friendly informal meeting or party.",
+    "example": "We're having a get-together tonight.",
+    "persian": "دورهمی، جلسه دوستانه"
+  },
+  {
+    "word": "join in (phrasal verb)",
+    "definition": "take part in an activity with other people.",
+    "example": "Can I join in?",
+    "persian": "ملحق شدن، شرکت کردن"
+  },
+  {
+    "word": "warm welcome",
+    "definition": "a friendly reception that makes you feel relaxed.",
+    "example": "You never get a warm welcome at Laura's.",
+    "persian": "استقبال گرم"
+  },
+  {
+    "word": "cliquey (adj, INF, DISAPPROVING)",
+    "definition": "forming a small group and not letting others join in. clique N.",
+    "example": "Her friends are all a bit cliquey as well.",
+    "persian": "باندباز، گروه گرا"
+  },
+  {
+    "word": "company (being with people)",
+    "definition": "being with other people, or an enjoyable person (good company).",
+    "example": "I like company (being with other people).",
+    "persian": "معاشرت، هم‌صحبتی"
+  },
+  {
+    "word": "accompany (FML)",
+    "definition": "go with someone.",
+    "example": "I'll accompany you.",
+    "persian": "همراهی کردن"
+  },
+  {
+    "word": "break the ice (idiom)",
+    "definition": "do something to make people feel more relaxed when meeting for the first time.",
+    "example": "We played a game to break the ice.",
+    "persian": "سر صحبت را باز کردن"
+  },
+  {
+    "word": "throw a party",
+    "definition": "organize a party.",
+    "example": "They decided to throw a party for her birthday.",
+    "persian": "مهمانی برگزار کردن"
+  },
+  {
+    "word": "housewarming party",
+    "definition": "a party to celebrate moving into a new home.",
+    "example": "We were invited to their housewarming party.",
+    "persian": "مهمانی خانه‌تکانی"
+  },
+  {
+    "word": "cater/catering",
+    "definition": "provide food and drink for a social event.",
+    "example": "They hired a company to cater the event.",
+    "persian": "غذا و پذیرایی فراهم کردن/ خدمات پذیرایی"
+  }
+]
