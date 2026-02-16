@@ -27,8 +27,8 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
         const recog = new SpeechRecognition();
         recog.continuous = true;
         recog.interimResults = false;
-        recog.lang = 'en-US'; 
-        
+        recog.lang = 'en-US';
+
         recog.onresult = (event: any) => {
             let finalTranscript = '';
             for (let i = event.resultIndex; i < event.results.length; ++i) {
@@ -45,7 +45,7 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             console.error("Speech recognition error", event.error);
             setIsRecording(false);
         };
-        
+
         recog.onend = () => {
              setIsRecording(false);
         };
@@ -74,36 +74,34 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
           }
       }
   };
-  
+
   const handleSave = async (e: React.MouseEvent) => {
       e.stopPropagation();
       await onSaveNote(card.id, noteText);
       setIsNoteOpen(false);
   };
-  
-  // Clean example helper
-  const cleanExample = (ex: string) => {
-      const match = ex.match(/\(([^)]+)\)$/);
-      if (match) return match[1];
-      return ex;
-  };
 
   if (!card) return null;
 
+  const toneColor = (() => {
+      const t = (card.tone || '').toLowerCase();
+      if (t === 'formal') return { bg: 'rgba(99, 102, 241, 0.12)', text: '#a5b4fc' };
+      if (t === 'informal') return { bg: 'rgba(245, 158, 11, 0.12)', text: '#fbbf24' };
+      if (t === 'slang') return { bg: 'rgba(239, 68, 68, 0.12)', text: '#fca5a5' };
+      return { bg: 'rgba(255,255,255,0.06)', text: 'var(--text-muted)' };
+  })();
+
   return (
-    <div className="card-container" style={{ perspective: 1000 }} onClick={onFlip}>
+    <div style={{ perspective: 1000, width: '92vw', maxWidth: '400px' }} onClick={onFlip}>
       <motion.div
-        className="card-inner"
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
+        transition={{ duration: 0.5, type: "spring", stiffness: 300, damping: 25 }}
         style={{
-          width: '90vw',
-          maxWidth: '400px', 
-          minHeight: '400px',
+          width: '100%',
+          minHeight: '380px',
           position: 'relative',
           transformStyle: 'preserve-3d',
-          paddingBottom: '0px'
         }}
       >
         {/* FRONT (Persian) */}
@@ -115,62 +113,62 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
             width: '100%',
             height: '100%',
             backfaceVisibility: 'hidden',
-            backgroundColor: '#1E1E1E', 
-            color: '#ffffff',
-            borderRadius: '32px',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+            backgroundColor: 'var(--card-bg)',
+            color: 'var(--text-primary)',
+            borderRadius: 'var(--radius-lg)',
+            boxShadow: 'var(--card-shadow)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '32px',
-            boxSizing: 'border-box',
-            border: '1px solid rgba(255,255,255,0.08)',
+            padding: '32px 24px',
+            border: '1px solid var(--border)',
             zIndex: 2
           }}
         >
-          <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>
-            PERSIAN
-          </span>
           {(() => {
               const [persianText, englishHint] = (card.front || '').split('===HINT===');
+              const textLen = persianText?.trim().length || 0;
               return (
                   <>
-                    <h2 style={{ 
-                        fontSize: (persianText?.length || 0) > 50 ? '1.5rem' : ((persianText?.length || 0) > 20 ? '2rem' : '2.5rem'), 
-                        textAlign: 'center', 
-                        margin: 0, 
-                        lineHeight: '1.4',
-                        fontFamily: 'Vazirmatn, sans-serif', 
-                        padding: '0 20px',
+                    <h2 style={{
+                        fontSize: textLen > 50 ? '1.3rem' : (textLen > 20 ? '1.7rem' : '2.2rem'),
+                        textAlign: 'center',
+                        margin: 0,
+                        lineHeight: '1.5',
+                        fontFamily: 'Vazirmatn, sans-serif',
+                        fontWeight: '700',
+                        padding: '0 8px',
                         wordWrap: 'break-word',
-                        width: '100%'
+                        width: '100%',
+                        direction: 'rtl'
                     }}>
                         {persianText?.trim() || 'Invalid Card'}
                     </h2>
 
                     {englishHint && (
                         <div style={{
-                            marginTop: '24px',
-                            borderTop: '1px solid rgba(255,255,255,0.1)',
-                            paddingTop: '16px',
-                            width: '80%',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            gap: '4px'
+                            marginTop: '20px',
+                            borderTop: '1px solid var(--border)',
+                            paddingTop: '14px',
+                            width: '85%',
+                            textAlign: 'center'
                         }}>
-                            <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(255,255,255,0.3)' }}>
-                                Definition
+                            <span style={{
+                                fontSize: '0.7rem',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.1em',
+                                color: 'var(--text-muted)',
+                                fontWeight: '600'
+                            }}>
+                                Hint
                             </span>
                             <p style={{
-                                fontSize: '0.95rem',
-                                color: 'rgba(255,255,255,0.7)',
-                                margin: 0,
-                                textAlign: 'center',
-                                fontFamily: '"Outfit", sans-serif',
+                                fontSize: '0.9rem',
+                                color: 'var(--text-secondary)',
+                                margin: '6px 0 0',
                                 fontStyle: 'italic',
-                                lineHeight: '1.4'
+                                lineHeight: '1.5'
                             }}>
                                 {englishHint.trim()}
                             </p>
@@ -179,252 +177,352 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
                   </>
               );
           })()}
-          
 
-          <p style={{ marginTop: 'auto', color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem' }}>
-            Tap to flip
+          <p style={{
+              marginTop: 'auto',
+              paddingTop: '16px',
+              color: 'var(--text-muted)',
+              fontSize: '0.75rem',
+              fontWeight: '500',
+              letterSpacing: '0.05em'
+          }}>
+            TAP TO REVEAL
           </p>
         </div>
 
         {/* BACK (English) */}
         <div
           style={{
-            position: 'relative', 
+            position: 'relative',
             width: '100%',
-            minHeight: '400px', 
+            minHeight: '380px',
             backfaceVisibility: 'hidden',
-            backgroundColor: '#18181b', 
-            color: '#fff',
-            borderRadius: '32px',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+            backgroundColor: 'var(--card-bg)',
+            color: 'var(--text-primary)',
+            borderRadius: 'var(--radius-lg)',
+            boxShadow: 'var(--card-shadow)',
             transform: 'rotateY(180deg)',
             display: 'flex',
             flexDirection: 'column',
-            padding: '32px',
-            paddingBottom: '32px',
-            boxSizing: 'border-box',
-            border: '1px solid rgba(255,255,255,0.08)',
-           }}
+            padding: '24px',
+            paddingBottom: '100px',
+            border: '1px solid var(--border)',
+          }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', marginBottom: '10px' }}>
-             <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)' }}>
-                ENGLISH
-             </span>
-             {/* Delete Button */}
-             <button 
+          {/* Top bar */}
+          <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+              marginBottom: '12px'
+          }}>
+             <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                {card.tone && (
+                    <span style={{
+                        background: toneColor.bg,
+                        color: toneColor.text,
+                        padding: '3px 8px',
+                        borderRadius: '6px',
+                        fontSize: '0.7rem',
+                        fontWeight: '600',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.04em'
+                    }}>
+                        {card.tone}
+                    </span>
+                )}
+                {card.native_speaking && (
+                    <span style={{
+                        background: 'var(--success-soft)',
+                        color: 'var(--success)',
+                        padding: '3px 8px',
+                        borderRadius: '6px',
+                        fontSize: '0.7rem',
+                        fontWeight: '600',
+                        letterSpacing: '0.04em'
+                    }}>
+                        NATIVE
+                    </span>
+                )}
+             </div>
+             <button
                 onClick={(e) => { e.stopPropagation(); onDelete(); }}
                 style={{
-                    background: 'rgba(239, 68, 68, 0.1)',
-                    border: '1px solid rgba(239, 68, 68, 0.2)',
-                    borderRadius: '8px',
+                    background: 'var(--danger-soft)',
+                    border: 'none',
+                    borderRadius: '6px',
                     color: '#fca5a5',
                     padding: '4px 8px',
-                    fontSize: '0.75rem',
+                    fontSize: '0.7rem',
+                    fontWeight: '600',
                     cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px'
                 }}
              >
-                 🗑️ Delete
+                 Delete
              </button>
           </div>
 
           {!isNoteOpen ? (
               <>
-                <h3 style={{ 
-                    fontSize: (card.back?.length || 0) > 50 ? '1.4rem' : '2rem', 
-                    margin: '0 0 16px 0', 
-                    color: '#fff', 
+                {/* Word */}
+                <h3 style={{
+                    fontSize: (card.back?.length || 0) > 40 ? '1.3rem' : '1.8rem',
+                    margin: '0 0 4px 0',
+                    color: 'var(--text-primary)',
                     fontWeight: '800',
-                    lineHeight: '1.3'
+                    lineHeight: '1.3',
+                    letterSpacing: '-0.02em'
                 }}>
                     {card.back || 'No Definition'}
                 </h3>
-                
+
+                {/* Pronunciation */}
                 {card.pronunciation && (
-                    <div style={{ fontSize: '1rem', color: 'var(--accent)', fontFamily: 'monospace', marginBottom: '16px' }}>
-                        {card.pronunciation}
+                    <div style={{
+                        fontSize: '0.9rem',
+                        color: 'var(--accent)',
+                        fontFamily: "'Inter', monospace",
+                        marginBottom: '12px',
+                        fontWeight: '500'
+                    }}>
+                        /{card.pronunciation}/
                     </div>
                 )}
 
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '24px' }}>
-                    {card.tone && (
-                        <span style={{ 
-                        background: 'rgba(255,255,255,0.1)',
-                        color: '#9ca3af',
-                        padding: '4px 10px', 
-                        borderRadius: '8px',
-                        fontSize: '0.75rem',
-                        fontWeight: '600',
-                        }}>
-                            {card.tone.toUpperCase()}
-                        </span>
-                    )}
-                </div>
-
+                {/* Word Forms */}
                 {card.word_forms && Object.values(card.word_forms).some(v => !!v) && (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
                         {Object.entries(card.word_forms).map(([pos, val]) => (
                             val && typeof val === 'string' && (
-                                <div key={pos} style={{ 
-                                    background: 'rgba(255, 255, 255, 0.05)', 
-                                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                                    borderRadius: '8px', 
-                                    padding: '6px 10px', 
-                                    fontSize: '0.9rem', 
-                                    color: '#e5e7eb',
+                                <div key={pos} style={{
+                                    background: 'rgba(255, 255, 255, 0.04)',
+                                    border: '1px solid var(--border)',
+                                    borderRadius: '6px',
+                                    padding: '4px 8px',
+                                    fontSize: '0.8rem',
+                                    color: 'var(--text-secondary)',
                                     display: 'flex',
                                     alignItems: 'baseline',
-                                    gap: '6px'
+                                    gap: '4px'
                                 }}>
-                                    <span style={{ 
-                                        textTransform: 'uppercase', 
-                                        fontSize: '0.65rem', 
-                                        color: '#9ca3af', 
-                                        fontWeight: 'bold',
-                                        letterSpacing: '0.5px'
+                                    <span style={{
+                                        textTransform: 'uppercase',
+                                        fontSize: '0.6rem',
+                                        color: 'var(--text-muted)',
+                                        fontWeight: '700',
+                                        letterSpacing: '0.04em'
                                     }}>
                                         {pos}
                                     </span>
-                                    <span style={{ fontFamily: 'monospace' }}>{val}</span>
+                                    <span>{val}</span>
                                 </div>
                             )
                         ))}
                     </div>
                 )}
 
-                <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '8px 0' }} />
+                {/* Divider */}
+                <div style={{ borderTop: '1px solid var(--border)', margin: '4px 0 12px' }} />
 
+                {/* Examples */}
                 {card.examples && card.examples.length > 0 && (
-                    <div style={{ textAlign: 'left', marginTop: '16px' }}>
-                    <ul style={{ paddingLeft: '16px', margin: 0, listStyle: 'circle' }}>
-                        {card.examples.map((ex, i) => (
-                        <li key={i} style={{ marginBottom: '12px', fontSize: '0.9rem', lineHeight: '1.5', color: '#d1d5db' }}>
-                            {cleanExample(ex)}
-                        </li>
+                    <div style={{ marginBottom: '12px' }}>
+                        {card.examples.slice(0, 3).map((ex, i) => (
+                            <p key={i} style={{
+                                margin: '0 0 8px',
+                                fontSize: '0.85rem',
+                                lineHeight: '1.5',
+                                color: 'var(--text-secondary)',
+                                paddingLeft: '10px',
+                                borderLeft: '2px solid var(--border)'
+                            }}>
+                                {ex}
+                            </p>
                         ))}
-                    </ul>
                     </div>
                 )}
-                
+
+                {/* Other Meanings */}
+                {card.other_meanings && card.other_meanings.length > 0 && (
+                    <div style={{
+                        marginBottom: '12px',
+                        padding: '10px',
+                        background: 'rgba(99, 102, 241, 0.06)',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid rgba(99, 102, 241, 0.1)'
+                    }}>
+                        <span style={{
+                            fontSize: '0.65rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em',
+                            color: 'var(--text-muted)',
+                            fontWeight: '700',
+                            display: 'block',
+                            marginBottom: '6px'
+                        }}>
+                            Also means
+                        </span>
+                        {card.other_meanings.map((m, i) => (
+                            <div key={i} style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                fontSize: '0.82rem',
+                                marginBottom: i < card.other_meanings!.length - 1 ? '4px' : 0
+                            }}>
+                                <span style={{ color: 'var(--text-secondary)' }}>{m.english}</span>
+                                <span style={{
+                                    color: 'var(--text-muted)',
+                                    fontFamily: 'Vazirmatn, sans-serif',
+                                    direction: 'rtl',
+                                    fontSize: '0.85rem'
+                                }}>{m.persian}</span>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* User note */}
                 {card.user_notes && (
-                     <div style={{ marginTop: '20px', padding: '10px', background: 'rgba(255,200,0,0.1)', borderRadius: '8px', borderLeft: '3px solid gold' }}>
-                         <small style={{ color: 'gold', display: 'block', marginBottom: '4px' }}>YOUR NOTE:</small>
-                         <div style={{ fontSize: '0.9rem', fontStyle: 'italic', color: '#eee' }}>{card.user_notes}</div>
+                     <div style={{
+                         padding: '10px 12px',
+                         background: 'rgba(245, 158, 11, 0.08)',
+                         borderRadius: 'var(--radius-sm)',
+                         borderLeft: '3px solid var(--warning)'
+                     }}>
+                         <small style={{
+                             color: 'var(--warning)',
+                             display: 'block',
+                             marginBottom: '4px',
+                             fontSize: '0.65rem',
+                             fontWeight: '700',
+                             textTransform: 'uppercase',
+                             letterSpacing: '0.08em'
+                         }}>Your Note</small>
+                         <div style={{ fontSize: '0.85rem', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                             {card.user_notes}
+                         </div>
                      </div>
                 )}
 
-                 <div style={{ height: '140px', flexShrink: 0, width: '100%' }} />
-
-                 <div style={{ 
-                     position: 'absolute', 
-                     bottom: '20px', 
-                     left: '0', 
-                     width: '100%', 
-                     display: 'flex', 
-                     justifyContent: 'center', 
-                     gap: '20px',
-                     padding: '0 20px',
+                 {/* Bottom action buttons */}
+                 <div style={{
+                     position: 'absolute',
+                     bottom: '20px',
+                     left: '0',
+                     width: '100%',
+                     display: 'flex',
+                     justifyContent: 'center',
+                     gap: '12px',
+                     padding: '0 24px',
                      boxSizing: 'border-box'
                  }}>
-                    <button 
+                    <button
                         onClick={(e) => { e.stopPropagation(); onPlayAudio(); }}
                         style={{
-                            background: 'rgba(255,255,255,0.1)',
-                            border: '1px solid rgba(255,255,255,0.2)',
+                            background: 'rgba(255,255,255,0.06)',
+                            border: '1px solid var(--border)',
                             borderRadius: '50%',
-                            width: '60px',
-                            height: '60px',
+                            width: '48px',
+                            height: '48px',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            fontSize: '1.5rem',
+                            fontSize: '1.2rem',
                             cursor: 'pointer',
-                            color: '#fff'
+                            color: 'var(--text-secondary)'
                         }}
                     >
-                        🔊
+                        &#9834;
                     </button>
-                    
-                    <button 
+
+                    <button
                          onClick={(e) => { e.stopPropagation(); setIsNoteOpen(true); }}
                          style={{
-                             background: card.user_notes ? 'rgba(244, 114, 182, 0.2)' : 'rgba(255,255,255,0.1)',
-                             border: `1px solid ${card.user_notes ? '#f472b6' : 'rgba(255,255,255,0.2)'}`,
+                             background: card.user_notes ? 'rgba(245, 158, 11, 0.1)' : 'rgba(255,255,255,0.06)',
+                             border: `1px solid ${card.user_notes ? 'rgba(245, 158, 11, 0.2)' : 'var(--border)'}`,
                              borderRadius: '50%',
-                             width: '60px',
-                             height: '60px',
+                             width: '48px',
+                             height: '48px',
                              display: 'flex',
                              alignItems: 'center',
                              justifyContent: 'center',
-                             fontSize: '1.5rem',
+                             fontSize: '1.1rem',
                              cursor: 'pointer',
-                             color: card.user_notes ? '#f472b6' : '#fff'
+                             color: card.user_notes ? 'var(--warning)' : 'var(--text-secondary)'
                          }}
                     >
-                        📝
+                        &#9998;
                     </button>
                  </div>
-
               </>
           ) : (
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }} onClick={e => e.stopPropagation()}>
-                  <h4 style={{ margin: '0 0 10px 0', color: '#f472b6' }}>Add Voice Note</h4>
+                  <h4 style={{ margin: '0 0 10px 0', color: 'var(--warning)', fontSize: '0.9rem', fontWeight: '700' }}>
+                      Add Note
+                  </h4>
                   <textarea
                     value={noteText}
                     onChange={(e) => setNoteText(e.target.value)}
-                    placeholder="Speak..."
+                    placeholder="Type or speak..."
                     style={{
                         flex: 1,
-                        background: 'rgba(0,0,0,0.3)',
-                        border: '1px solid rgba(255,255,255,0.2)',
-                        borderRadius: '12px',
-                        color: '#fff',
+                        background: 'rgba(0,0,0,0.2)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 'var(--radius-sm)',
+                        color: 'var(--text-primary)',
                         padding: '12px',
-                        fontSize: '1rem',
+                        fontSize: '0.95rem',
                         resize: 'none',
                         outline: 'none',
-                        marginBottom: '10px'
+                        marginBottom: '10px',
+                        minHeight: '100px'
                     }}
                   />
-                  <div style={{ display: 'flex', gap: '10px', height: '60px' }}>
+                  <div style={{ display: 'flex', gap: '8px', height: '48px' }}>
                       <button
                         onClick={toggleRecording}
                         style={{
                             flex: 1,
-                            borderRadius: '12px',
+                            borderRadius: 'var(--radius-sm)',
                             border: 'none',
-                            background: isRecording ? '#ef4444' : '#3b82f6',
+                            background: isRecording ? 'var(--danger)' : 'var(--accent)',
                             color: '#fff',
-                            fontWeight: 'bold',
-                            fontSize: '1.2rem',
+                            fontWeight: '700',
+                            fontSize: '0.9rem',
                             cursor: 'pointer'
                         }}
                       >
-                          {isRecording ? '🛑' : '🎤'}
+                          {isRecording ? 'Stop' : 'Record'}
                       </button>
-                      
+
                       <button
                         onClick={handleSave}
                         style={{
                             flex: 1,
-                            borderRadius: '12px',
+                            borderRadius: 'var(--radius-sm)',
                             border: 'none',
-                            background: '#10b981',
+                            background: 'var(--success)',
                             color: '#fff',
-                            fontWeight: 'bold',
-                            fontSize: '1.2rem',
+                            fontWeight: '700',
+                            fontSize: '0.9rem',
                             cursor: 'pointer'
                         }}
                       >
-                          💾
+                          Save
                       </button>
                   </div>
-                  <button 
-                     onClick={() => setIsNoteOpen(false)}
+                  <button
+                     onClick={(e) => { e.stopPropagation(); setIsNoteOpen(false); }}
                      style={{
-                         background: 'transparent', border: 'none', color: '#aaa', marginTop: '10px', cursor: 'pointer'
+                         background: 'transparent',
+                         border: 'none',
+                         color: 'var(--text-muted)',
+                         marginTop: '8px',
+                         cursor: 'pointer',
+                         fontSize: '0.85rem',
+                         fontWeight: '500'
                      }}
                   >
                       Cancel

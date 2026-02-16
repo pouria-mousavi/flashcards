@@ -1,45 +1,70 @@
 :root {
-  --bg-color: #0f172a;
-  --card-bg: #1e293b;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --accent: #3b82f6;
-  --success: #22c55e;
-  --warning: #eab308;
+  --bg-color: #09090b;
+  --card-bg: #18181b;
+  --surface: #27272a;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.15);
+  --success: #10b981;
+  --success-soft: rgba(16, 185, 129, 0.15);
+  --warning: #f59e0b;
+  --warning-soft: rgba(245, 158, 11, 0.15);
   --danger: #ef4444;
-  --card-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --danger-soft: rgba(239, 68, 68, 0.15);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
   margin: 0;
-  font-family: 'Satoshi', 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
-  /* Allow scrolling but prevent bounce if possible, though 'auto' is safer for content access */
-  overflow-y: auto; 
-  overflow-x: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
   height: 100%;
-  min-height: 100dvh;
-  /* Safe area for mobile notch/home bar */
-  padding-bottom: env(safe-area-inset-bottom);
+  height: 100dvh;
+  touch-action: manipulation;
 }
 
 #root {
-  width: 100vw;
-  min-height: 100dvh;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
-  /* overflow: hidden;  <-- Causing crop! Removed. */
+  overflow: hidden;
 }
 
 button {
   cursor: pointer;
   border: none;
   font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-/* Utilities */
+input, textarea {
+  font-family: inherit;
+}
+
 .flex-center {
   display: flex;
   align-items: center;
@@ -49,4 +74,27 @@ button {
 .full-screen {
   width: 100%;
   height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.app-container {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
 }

@@ -24,6 +24,10 @@ export interface Database {
           interval: number
           ease_factor: number
           created_at: string
+          user_notes: string | null
+          word_forms: Json | null
+          other_meanings: Json | null
+          native_speaking: boolean | null
         }
         Insert: {
           id?: string
@@ -31,12 +35,17 @@ export interface Database {
           back: string
           pronunciation?: string | null
           tone?: string | null
+          synonyms?: string | null
           examples?: string[] | null
           state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
           next_review?: string
           interval?: number
           ease_factor?: number
           created_at?: string
+          user_notes?: string | null
+          word_forms?: Json | null
+          other_meanings?: Json | null
+          native_speaking?: boolean | null
         }
         Update: {
           id?: string
@@ -44,12 +53,17 @@ export interface Database {
           back?: string
           pronunciation?: string | null
           tone?: string | null
+          synonyms?: string | null
           examples?: string[] | null
           state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
           next_review?: string
           interval?: number
           ease_factor?: number
           created_at?: string
+          user_notes?: string | null
+          word_forms?: Json | null
+          other_meanings?: Json | null
+          native_speaking?: boolean | null
         }
       }
     }

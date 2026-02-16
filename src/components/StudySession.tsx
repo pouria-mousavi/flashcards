@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import FlashcardComponent from './Flashcard';
@@ -25,69 +25,95 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
     setQueue(cards);
   }, [cards]);
 
-   useEffect(() => {
+  // Voice selection: prefer natural-sounding American English voices
+  useEffect(() => {
       const loadVoices = () => {
           const vs = window.speechSynthesis.getVoices();
-          // Prefer "Google US English", then any "en-US", then fallback
-          let preferred = vs.find(v => v.name === 'Google US English');
-          if (!preferred) preferred = vs.find(v => v.lang === 'en-US');
+          if (vs.length === 0) return;
 
-          if (preferred) setVoice(preferred);
+          // Priority order for natural American accent
+          const preferredNames = [
+              'Samantha',              // macOS/iOS - very natural
+              'Google US English',     // Chrome on Android/desktop
+              'Microsoft Jenny Online (Natural)',
+              'Microsoft Aria Online (Natural)',
+              'Microsoft Guy Online (Natural)',
+              'Alex',                  // macOS fallback
+          ];
+
+          let selected: SpeechSynthesisVoice | undefined;
+
+          // Try preferred voices by name
+          for (const name of preferredNames) {
+              selected = vs.find(v => v.name === name);
+              if (selected) break;
+          }
+
+          // Fallback: any en-US voice, prefer ones with "Natural" or "Premium" in name
+          if (!selected) {
+              const enUS = vs.filter(v => v.lang === 'en-US' || v.lang === 'en_US');
+              selected = enUS.find(v => /natural|premium|enhanced/i.test(v.name));
+              if (!selected) selected = enUS[0];
+          }
+
+          // Final fallback: any English voice
+          if (!selected) {
+              selected = vs.find(v => v.lang.startsWith('en'));
+          }
+
+          if (selected) setVoice(selected);
       };
-      
+
       loadVoices();
       window.speechSynthesis.onvoiceschanged = loadVoices;
   }, []);
 
-  const handlePlayAudio = (text?: string) => {
+  const handlePlayAudio = useCallback((text?: string) => {
       if (!text) return;
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       if (voice) utterance.voice = voice;
-      utterance.rate = 0.9;
+      utterance.rate = 0.85;
+      utterance.pitch = 1.0;
       window.speechSynthesis.speak(utterance);
-  };
+  }, [voice]);
 
   const handleRate = (rating: number) => {
     const currentCard = queue[currentCardIndex];
     if (!currentCard) return;
 
-    // Calculate new stats
     const updates = calculateSM2(currentCard, rating);
     const updatedCard = { ...currentCard, ...updates };
 
-    // Update Parent/DB
     onUpdateCard(updatedCard);
-    
-    // Confetti for "Easy"
+
     if (rating === 5) {
       confetti({
-        particleCount: 50,
-        spread: 60,
+        particleCount: 40,
+        spread: 55,
         origin: { y: 0.7 },
-        colors: ['#10b981', '#34d399']
+        colors: ['#10b981', '#34d399', '#6ee7b7']
       });
     }
 
     setIsFlipped(false);
-    
-    // Anki Re-queue Logic
+
+    // Re-queue if due within 10 minutes
     const now = Date.now();
     let isRequeued = false;
-    
+
     if (updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now < 10 * 60 * 1000)) {
-        // Re-queue in memory
         setQueue(prev => [...prev, updatedCard]);
         isRequeued = true;
     }
 
-    // Sync Session State to LocalStorage (Progress Saving)
+    // Sync session to localStorage
     try {
         const SESSION_KEY = 'flashcards_active_session';
         const saved = localStorage.getItem(SESSION_KEY);
         if (saved) {
             const session = JSON.parse(saved);
-            session.currentIndex = currentCardIndex + 1; // Update index
+            session.currentIndex = currentCardIndex + 1;
             if (isRequeued && session.cardIds) {
                  session.cardIds.push(updatedCard.id);
             }
@@ -95,7 +121,9 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
         }
     } catch (e) { console.error("Session sync failed", e); }
 
-    if (currentCardIndex < queue.length - 1) {
+    // Check if there are more cards (accounting for potential re-queue)
+    const effectiveLength = isRequeued ? queue.length + 1 : queue.length;
+    if (currentCardIndex < effectiveLength - 1) {
       setTimeout(() => setCurrentCardIndex(prev => prev + 1), 200);
     } else {
       onSessionComplete();
@@ -103,10 +131,9 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
   };
 
   const handleSaveNote = async (cardId: string, note: string) => {
-      // 1. Update in Supabase (Partial update)
       const { error } = await supabase
         .from('cards')
-        .update({ user_notes: note }) // ONLY updating notes
+        .update({ user_notes: note })
         .eq('id', cardId);
 
       if (error) {
@@ -114,9 +141,8 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
           alert("Failed to save note!");
           return;
       }
-      
-      // Update local queue state so UI reflects change immediately
-      setQueue(prev => prev.map(c => 
+
+      setQueue(prev => prev.map(c =>
           c.id === cardId ? { ...c, user_notes: note } : c
       ));
   };
@@ -124,14 +150,60 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
   const handleDelete = (cardId: string) => {
       if (confirm("Are you sure you want to PERMANENTLY delete this card?")) {
           onDeleteCard(cardId);
-          // Remove locally immediately to avoid UI glitch
-          setQueue(prev => prev.filter(c => c.id !== cardId));
-          setIsFlipped(false); // Reset flip state for the next card
+
+          // BUG FIX: When deleting a card, the queue shrinks.
+          // We must NOT increment the index - the next card slides into the current position.
+          // Also update localStorage to reflect the removal.
+          setQueue(prev => {
+              const newQueue = prev.filter(c => c.id !== cardId);
+
+              // Sync updated queue to localStorage
+              try {
+                  const SESSION_KEY = 'flashcards_active_session';
+                  const saved = localStorage.getItem(SESSION_KEY);
+                  if (saved) {
+                      const session = JSON.parse(saved);
+                      session.cardIds = newQueue.map(c => c.id);
+                      // Keep currentIndex the same (next card slides in)
+                      session.currentIndex = Math.min(currentCardIndex, newQueue.length - 1);
+                      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+                  }
+              } catch (e) { console.error("Session sync failed", e); }
+
+              return newQueue;
+          });
+
+          setIsFlipped(false);
       }
   };
 
-  if (queue.length === 0) return <div className="flex-center full-screen">All caught up! 🎉</div>;
-  
+  if (queue.length === 0) {
+      return (
+          <div className="flex-center full-screen" style={{
+              flexDirection: 'column',
+              gap: '16px',
+              color: 'var(--text-secondary)'
+          }}>
+              <span style={{ fontSize: '3rem' }}>&#10003;</span>
+              <span style={{ fontSize: '1.1rem', fontWeight: '600' }}>All caught up!</span>
+              <button
+                  onClick={onPause}
+                  style={{
+                      marginTop: '16px',
+                      padding: '12px 32px',
+                      borderRadius: 'var(--radius)',
+                      background: 'var(--accent)',
+                      color: '#fff',
+                      fontWeight: '600',
+                      fontSize: '0.95rem'
+                  }}
+              >
+                  Back to Deck
+              </button>
+          </div>
+      );
+  }
+
   if (currentCardIndex >= queue.length) {
       onSessionComplete();
       return null;
@@ -139,55 +211,94 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
 
   const currentCard = queue[currentCardIndex];
   const cardsLeft = queue.length - currentCardIndex;
+  const progress = ((currentCardIndex) / queue.length) * 100;
 
   return (
-    <div className="flex-center full-screen" style={{ flexDirection: 'column', position: 'relative', height: '100vh', overflow: 'hidden' }}>
-      
-      {/* Header Controls */}
-      <div style={{ position: 'absolute', top: '20px', left: '20px', right: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
-        <button 
+    <div className="flex-center full-screen" style={{
+        flexDirection: 'column',
+        position: 'relative',
+        height: '100dvh',
+        overflow: 'hidden',
+        background: 'var(--bg-color)'
+    }}>
+
+      {/* Progress bar */}
+      <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '3px',
+          background: 'var(--border)',
+          zIndex: 15
+      }}>
+          <div style={{
+              height: '100%',
+              width: `${progress}%`,
+              background: 'var(--accent)',
+              transition: 'width 0.3s ease',
+              borderRadius: '0 2px 2px 0'
+          }} />
+      </div>
+
+      {/* Header */}
+      <div style={{
+          position: 'absolute',
+          top: '12px',
+          left: '16px',
+          right: '16px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          zIndex: 10
+      }}>
+        <button
             onClick={onPause}
-            style={{ 
-                background: 'rgba(255,255,255,0.1)', 
-                color: 'var(--text-secondary)', 
-                border: 'none', 
-                padding: '8px 16px', 
-                borderRadius: '12px',
-                fontSize: '0.9rem',
-                cursor: 'pointer'
+            style={{
+                background: 'rgba(255,255,255,0.06)',
+                color: 'var(--text-muted)',
+                border: 'none',
+                padding: '8px 14px',
+                borderRadius: 'var(--radius-sm)',
+                fontSize: '0.85rem',
+                fontWeight: '500'
             }}
         >
-            ← Pause
+            &#8592; Back
         </button>
-        <div style={{ color: 'var(--text-secondary)' }}>
-            {cardsLeft} cards
+        <div style={{
+            color: 'var(--text-muted)',
+            fontSize: '0.85rem',
+            fontWeight: '500'
+        }}>
+            {cardsLeft} left
         </div>
       </div>
 
-      {/* Card Area - Scrollable */}
-      <div style={{ 
-          flex: 1, 
-          display: 'flex', 
-          alignItems: 'flex-start', // Align start to allow scrolling if tall
-          paddingTop: '80px', // Space for header
-          justifyContent: 'center', 
+      {/* Card area */}
+      <div style={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'flex-start',
+          paddingTop: '56px',
+          justifyContent: 'center',
           width: '100%',
           overflowY: 'auto',
-          paddingBottom: '160px' // Space for fixed footer
+          paddingBottom: '140px'
       }}>
         <AnimatePresence mode='wait'>
             <motion.div
-                key={`${currentCard.id}-${currentCardIndex}`} 
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.2 }}
+                key={`${currentCard.id}-${currentCardIndex}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
                 style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
             >
-                <FlashcardComponent 
-                    card={currentCard} 
-                    isFlipped={isFlipped} 
-                    onFlip={() => setIsFlipped(!isFlipped)} 
+                <FlashcardComponent
+                    card={currentCard}
+                    isFlipped={isFlipped}
+                    onFlip={() => setIsFlipped(!isFlipped)}
                     onSaveNote={handleSaveNote}
                     onDelete={() => handleDelete(currentCard.id)}
                     onPlayAudio={() => handlePlayAudio(currentCard.back)}
@@ -196,35 +307,34 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
         </AnimatePresence>
       </div>
 
-      {/* Controls - Sticky Footer */}
-      <div style={{ 
+      {/* Footer controls */}
+      <div style={{
           position: 'fixed',
           bottom: 0,
           left: 0,
           right: 0,
-          padding: '20px',
-          paddingBottom: 'max(20px, env(safe-area-inset-bottom))',
-          background: 'linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.8) 80%, transparent)',
+          padding: '16px',
+          paddingBottom: 'max(16px, env(safe-area-inset-bottom))',
+          background: 'linear-gradient(to top, var(--bg-color) 60%, transparent)',
           zIndex: 20,
           display: 'flex',
-          justifyContent: 'center',
-          boxSizing: 'border-box'
+          justifyContent: 'center'
       }}>
-        <div style={{ width: '100%', maxWidth: '500px', display: 'flex', gap: '8px' }}>
+        <div style={{ width: '100%', maxWidth: '420px', display: 'flex', gap: '8px' }}>
             {!isFlipped ? (
-                <button 
+                <button
                     onClick={() => setIsFlipped(true)}
-                    style={{ 
-                        width: '100%', 
-                        padding: '20px', 
-                        borderRadius: '20px', 
-                        background: 'var(--accent)', 
+                    style={{
+                        width: '100%',
+                        padding: '18px',
+                        borderRadius: 'var(--radius)',
+                        background: 'var(--accent)',
                         color: 'white',
-                        fontWeight: 'bold',
-                        fontSize: '1.2rem',
-                        boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)',
+                        fontWeight: '700',
+                        fontSize: '1rem',
+                        boxShadow: '0 4px 16px rgba(99, 102, 241, 0.35)',
                         border: 'none',
-                        cursor: 'pointer'
+                        letterSpacing: '-0.01em'
                     }}>
                     Show Answer
                 </button>
@@ -244,28 +354,27 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
 
 function RateButton({ label, color, onClick }: { label: string, color: string, onClick: () => void }) {
     return (
-        <button 
+        <button
             onClick={onClick}
             style={{
                 flex: 1,
-                height: '70px',
-                borderRadius: '16px',
+                height: '56px',
+                borderRadius: 'var(--radius-sm)',
                 background: color,
                 color: '#fff',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'transform 0.1s',
+                transition: 'transform 0.1s, opacity 0.1s',
                 border: 'none',
-                cursor: 'pointer'
+                fontWeight: '700',
+                fontSize: '0.85rem',
+                letterSpacing: '-0.01em'
             }}
-            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.95)'}
-            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-            onTouchStart={e => e.currentTarget.style.transform = 'scale(0.95)'}
-            onTouchEnd={e => e.currentTarget.style.transform = 'scale(1)'}
+            onTouchStart={e => { e.currentTarget.style.transform = 'scale(0.95)'; e.currentTarget.style.opacity = '0.9'; }}
+            onTouchEnd={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.opacity = '1'; }}
         >
-            <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{label}</span>
+            {label}
         </button>
     )
 }
