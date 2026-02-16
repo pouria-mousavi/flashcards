@@ -160,20 +160,21 @@ export default function AddCard({ onAdd, onCancel }: Props) {
                 disabled={loading || !inputText.trim()}
                 style={{
                     padding: '18px',
-                    borderRadius: '20px',
-                    background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)',
+                    borderRadius: 'var(--radius)',
+                    background: 'var(--accent)',
                     color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: '1.1rem',
+                    fontWeight: '700',
+                    fontSize: '1rem',
                     border: 'none',
                     cursor: 'pointer',
-                    opacity: (loading || !inputText.trim()) ? 0.7 : 1,
-                    display: 'flex', 
-                    justifyContent: 'center', 
+                    opacity: (loading || !inputText.trim()) ? 0.6 : 1,
+                    display: 'flex',
+                    justifyContent: 'center',
                     alignItems: 'center',
                     gap: '8px',
-                    boxShadow: '0 8px 20px rgba(109, 40, 217, 0.3)',
-                    transition: 'transform 0.1s'
+                    boxShadow: '0 8px 20px rgba(99, 102, 241, 0.3)',
+                    transition: 'all 0.2s ease',
+                    letterSpacing: '-0.01em'
                 }}
                 >
                     {loading ? '✨ Batch Processing with Claude...' : '✨ Generate All'}
