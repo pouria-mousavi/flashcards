@@ -27,8 +27,10 @@ function App() {
           back: newCard.back,
           pronunciation: newCard.pronunciation,
           tone: newCard.tone,
-          synonyms: newCard.synonyms, // New field
+          synonyms: newCard.synonyms,
           examples: newCard.examples,
+          word_forms: newCard.word_forms,
+          other_meanings: newCard.other_meanings,
           state: newCard.state,
           next_review: new Date(newCard.nextReviewDate).toISOString(),
           interval: newCard.interval,
@@ -50,15 +52,17 @@ function App() {
   };
 
   const deleteCard = async (cardId: string) => {
-      // Optimistic update
+      // Optimistic update - only remove from master cards list.
+      // Do NOT update restoredSession.queue here — StudySession manages its own
+      // local queue (which includes re-queued cards the parent doesn't know about).
+      // Overwriting it would wipe re-queued cards and cause the counter to drop
+      // by more than 1.
       setCards(prev => prev.filter(c => c.id !== cardId));
-      setRestoredSession(prev => prev ? { ...prev, queue: prev.queue.filter(c => c.id !== cardId) } : null);
 
       const { error } = await supabase.from('cards').delete().eq('id', cardId);
       if (error) {
           console.error("Error deleting:", error);
           alert("Failed to delete card from DB!");
-          // Revert if needed, but for now simple alert is enough
       }
   };
   
@@ -197,11 +201,11 @@ function App() {
           pronunciation: partialCard.pronunciation || '',
           tone: partialCard.tone || '',
           word_forms: partialCard.word_forms,
+          other_meanings: partialCard.other_meanings,
           synonyms: partialCard.synonyms,
           examples: partialCard.examples || []
       };
       saveCard(newCard);
-      // setView('dashboard'); // Removed to prevent closing AddCard
   };
 
   return (
