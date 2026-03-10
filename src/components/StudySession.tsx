@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import FlashcardComponent from './Flashcard';
@@ -6,24 +6,74 @@ import { calculateSM2 } from '../utils/sm2';
 import type { Flashcard } from '../utils/sm2';
 import { supabase } from '../lib/supabase';
 
+const SESSION_KEY = 'flashcards_active_session';
+
 interface Props {
   cards: Flashcard[];
   startIndex?: number;
+  startFlipped?: boolean;
   onUpdateCard: (card: Flashcard) => void;
   onDeleteCard: (cardId: string) => void;
   onSessionComplete: () => void;
   onPause: () => void;
 }
 
-export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDeleteCard, onSessionComplete, onPause }: Props) {
-  const [queue, setQueue] = useState<Flashcard[]>([]);
+export default function StudySession({ cards, startIndex = 0, startFlipped = false, onUpdateCard, onDeleteCard, onSessionComplete, onPause }: Props) {
+  // Initialize queue from props ONCE — never replace on parent re-renders
+  const [queue, setQueue] = useState<Flashcard[]>(cards);
   const [currentCardIndex, setCurrentCardIndex] = useState(startIndex);
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(startFlipped);
   const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
+  const completedRef = useRef(false);
 
+  // Sync isFlipped to localStorage on every flip
+  const syncFlipToStorage = useCallback((flipped: boolean) => {
+      try {
+          const saved = localStorage.getItem(SESSION_KEY);
+          if (saved) {
+              const session = JSON.parse(saved);
+              session.isFlipped = flipped;
+              localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+          }
+      } catch (e) { /* silent */ }
+  }, []);
+
+  const handleFlip = useCallback(() => {
+      setIsFlipped(prev => {
+          const next = !prev;
+          syncFlipToStorage(next);
+          return next;
+      });
+  }, [syncFlipToStorage]);
+
+  // Safety: flush session state to localStorage when app goes to background
   useEffect(() => {
-    setQueue(cards);
-  }, [cards]);
+      const handleVisibility = () => {
+          if (document.visibilityState === 'hidden') {
+              // Flush current state to localStorage before app sleeps
+              try {
+                  const saved = localStorage.getItem(SESSION_KEY);
+                  if (saved) {
+                      const session = JSON.parse(saved);
+                      session.currentIndex = currentCardIndex;
+                      session.isFlipped = isFlipped;
+                      session.cardIds = queue.map(c => c.id);
+                      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+                  }
+              } catch (e) { /* silent */ }
+          }
+      };
+      document.addEventListener('visibilitychange', handleVisibility);
+      return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, [currentCardIndex, isFlipped, queue]);
+
+  // Fix: Move session completion into useEffect instead of render body
+  useEffect(() => {
+      if (!completedRef.current && queue.length > 0 && currentCardIndex >= queue.length) {
+          completedRef.current = true;
+          onSessionComplete();
+      }
+  }, [currentCardIndex, queue.length, onSessionComplete]);
 
   // Voice selection: prefer natural-sounding American English voices
   useEffect(() => {
@@ -31,32 +81,28 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
           const vs = window.speechSynthesis.getVoices();
           if (vs.length === 0) return;
 
-          // Priority order for natural American accent
           const preferredNames = [
-              'Samantha',              // macOS/iOS - very natural
-              'Google US English',     // Chrome on Android/desktop
+              'Samantha',
+              'Google US English',
               'Microsoft Jenny Online (Natural)',
               'Microsoft Aria Online (Natural)',
               'Microsoft Guy Online (Natural)',
-              'Alex',                  // macOS fallback
+              'Alex',
           ];
 
           let selected: SpeechSynthesisVoice | undefined;
 
-          // Try preferred voices by name
           for (const name of preferredNames) {
               selected = vs.find(v => v.name === name);
               if (selected) break;
           }
 
-          // Fallback: any en-US voice, prefer ones with "Natural" or "Premium" in name
           if (!selected) {
               const enUS = vs.filter(v => v.lang === 'en-US' || v.lang === 'en_US');
               selected = enUS.find(v => /natural|premium|enhanced/i.test(v.name));
               if (!selected) selected = enUS[0];
           }
 
-          // Final fallback: any English voice
           if (!selected) {
               selected = vs.find(v => v.lang.startsWith('en'));
           }
@@ -109,11 +155,11 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
 
     // Sync session to localStorage
     try {
-        const SESSION_KEY = 'flashcards_active_session';
         const saved = localStorage.getItem(SESSION_KEY);
         if (saved) {
             const session = JSON.parse(saved);
             session.currentIndex = currentCardIndex + 1;
+            session.isFlipped = false;
             if (isRequeued && session.cardIds) {
                  session.cardIds.push(updatedCard.id);
             }
@@ -126,7 +172,8 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
     if (currentCardIndex < effectiveLength - 1) {
       setTimeout(() => setCurrentCardIndex(prev => prev + 1), 200);
     } else {
-      onSessionComplete();
+      // Will be handled by the useEffect above
+      setCurrentCardIndex(effectiveLength);
     }
   };
 
@@ -151,21 +198,17 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
       if (confirm("Are you sure you want to PERMANENTLY delete this card?")) {
           onDeleteCard(cardId);
 
-          // BUG FIX: When deleting a card, the queue shrinks.
-          // We must NOT increment the index - the next card slides into the current position.
-          // Also update localStorage to reflect the removal.
           setQueue(prev => {
               const newQueue = prev.filter(c => c.id !== cardId);
 
               // Sync updated queue to localStorage
               try {
-                  const SESSION_KEY = 'flashcards_active_session';
                   const saved = localStorage.getItem(SESSION_KEY);
                   if (saved) {
                       const session = JSON.parse(saved);
                       session.cardIds = newQueue.map(c => c.id);
-                      // Keep currentIndex the same (next card slides in)
                       session.currentIndex = Math.min(currentCardIndex, newQueue.length - 1);
+                      session.isFlipped = false;
                       localStorage.setItem(SESSION_KEY, JSON.stringify(session));
                   }
               } catch (e) { console.error("Session sync failed", e); }
@@ -187,7 +230,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
               <span style={{ fontSize: '3rem' }}>&#10003;</span>
               <span style={{ fontSize: '1.1rem', fontWeight: '600' }}>All caught up!</span>
               <button
-                  onClick={onPause}
+                  onClick={onSessionComplete}
                   style={{
                       marginTop: '16px',
                       padding: '12px 32px',
@@ -204,8 +247,8 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
       );
   }
 
+  // Session completion handled by useEffect — just render nothing if past end
   if (currentCardIndex >= queue.length) {
-      onSessionComplete();
       return null;
   }
 
@@ -298,7 +341,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
                 <FlashcardComponent
                     card={currentCard}
                     isFlipped={isFlipped}
-                    onFlip={() => setIsFlipped(!isFlipped)}
+                    onFlip={handleFlip}
                     onSaveNote={handleSaveNote}
                     onDelete={() => handleDelete(currentCard.id)}
                     onPlayAudio={() => handlePlayAudio(currentCard.back)}
@@ -323,7 +366,7 @@ export default function StudySession({ cards, startIndex = 0, onUpdateCard, onDe
         <div style={{ width: '100%', maxWidth: '420px', display: 'flex', gap: '8px' }}>
             {!isFlipped ? (
                 <button
-                    onClick={() => setIsFlipped(true)}
+                    onClick={handleFlip}
                     style={{
                         width: '100%',
                         padding: '18px',
