@@ -6,8 +6,9 @@ import type { Flashcard } from './utils/sm2';
 import StudySession from './components/StudySession';
 import Dashboard from './components/Dashboard';
 import AddCard from './components/AddCard';
+import ScenarioChallenge from './components/ScenarioChallenge';
 
-type View = 'dashboard' | 'study' | 'add';
+type View = 'dashboard' | 'study' | 'add' | 'scenario';
 
 const SESSION_KEY = 'flashcards_active_session';
 
@@ -252,6 +253,7 @@ function App() {
           cards={cards}
           onStartStudy={() => handleStartStudy(false)}
           onAddCard={() => setView('add')}
+          onStartChallenge={() => setView('scenario')}
           hasActiveSession={!!restoredSession}
         />
       )}
@@ -270,6 +272,12 @@ function App() {
         <AddCard
           onAdd={handleAddCard}
           onCancel={() => setView('dashboard')}
+        />
+      )}
+      {view === 'scenario' && (
+        <ScenarioChallenge
+          cards={cards}
+          onClose={() => setView('dashboard')}
         />
       )}
     </div>

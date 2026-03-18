@@ -81,33 +81,58 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
           const vs = window.speechSynthesis.getVoices();
           if (vs.length === 0) return;
 
+          // 1. Try exact preferred American voices by name (partial match)
           const preferredNames = [
               'Samantha',
               'Google US English',
               'Microsoft Jenny Online (Natural)',
               'Microsoft Aria Online (Natural)',
               'Microsoft Guy Online (Natural)',
+              'Microsoft Zira',
               'Alex',
+              'Fred',
+              'Victoria',
+              'Evan',
+              'Allison',
+              'Ava',
+              'Nicky',
+              'Tom',
           ];
 
           let selected: SpeechSynthesisVoice | undefined;
 
           for (const name of preferredNames) {
-              selected = vs.find(v => v.name === name);
+              selected = vs.find(v => v.name.includes(name));
               if (selected) break;
           }
 
+          // 2. Filter strictly for en-US locale, prefer enhanced/premium
           if (!selected) {
-              const enUS = vs.filter(v => v.lang === 'en-US' || v.lang === 'en_US');
+              const enUS = vs.filter(v =>
+                  v.lang === 'en-US' || v.lang === 'en_US'
+              );
               selected = enUS.find(v => /natural|premium|enhanced/i.test(v.name));
               if (!selected) selected = enUS[0];
           }
 
+          // 3. Last resort: any English voice that is NOT British/Australian/etc.
           if (!selected) {
-              selected = vs.find(v => v.lang.startsWith('en'));
+              selected = vs.find(v =>
+                  v.lang.startsWith('en') &&
+                  !v.lang.includes('GB') &&
+                  !v.lang.includes('AU') &&
+                  !v.lang.includes('IN') &&
+                  !v.lang.includes('ZA') &&
+                  !v.lang.includes('IE') &&
+                  !v.lang.includes('NZ') &&
+                  !/daniel|kate|oliver|fiona|moira|tessa|rishi|veena/i.test(v.name)
+              );
           }
 
-          if (selected) setVoice(selected);
+          if (selected) {
+              console.log(`[TTS] Selected voice: "${selected.name}" (${selected.lang})`);
+              setVoice(selected);
+          }
       };
 
       loadVoices();

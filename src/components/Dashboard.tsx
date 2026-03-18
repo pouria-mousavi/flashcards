@@ -6,6 +6,7 @@ interface Props {
   cards: Flashcard[];
   onStartStudy: () => void;
   onAddCard: () => void;
+  onStartChallenge: () => void;
   hasActiveSession?: boolean;
 }
 
@@ -45,7 +46,7 @@ function classifyCards(cards: Flashcard[]): LeitnerBox[] {
   ];
 }
 
-export default function Dashboard({ cards, onStartStudy, onAddCard, hasActiveSession }: Props) {
+export default function Dashboard({ cards, onStartStudy, onAddCard, onStartChallenge, hasActiveSession }: Props) {
   const totalCards = cards.length;
   const now = Date.now();
   const dueCount = cards.filter(c => c.nextReviewDate <= now).length;
@@ -148,6 +149,27 @@ export default function Dashboard({ cards, onStartStudy, onAddCard, hasActiveSes
             : (dueCount > 0
               ? `Study ${Math.min(dueCount, 50)} Cards`
               : "All Caught Up")}
+        </button>
+
+        <button
+          onClick={onStartChallenge}
+          style={{
+            padding: '16px',
+            fontSize: '0.95rem',
+            fontWeight: '600',
+            background: 'rgba(16, 185, 129, 0.1)',
+            color: '#34d399',
+            borderRadius: 'var(--radius)',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            transition: 'all 0.2s ease',
+            letterSpacing: '-0.01em',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px'
+          }}
+        >
+          🎯 Daily Challenge
         </button>
 
         <button
