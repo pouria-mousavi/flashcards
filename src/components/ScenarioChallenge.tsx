@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import type { Flashcard } from '../utils/sm2';
@@ -15,20 +15,11 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         const now = Date.now();
         const HOURS_48 = 48 * 60 * 60 * 1000;
 
-        // Only cards that have a scenario written
         const withScenario = cards.filter(c => !!c.scenario);
 
-        // Filter to cards that were studied/reviewed in the last 48 hours
-        // A card was "recently studied" if:
-        // - It's in LEARNING/RELEARNING (actively being studied right now)
-        // - It's in REVIEW and nextReviewDate was set recently (meaning it was just rated)
-        // - It's NEW but was created in the last 48h (just added)
         const recentlyStudied = withScenario.filter(c => {
             if (c.state === 'LEARNING' || c.state === 'RELEARNING') return true;
             if (c.state === 'REVIEW') {
-                // If the card's next review is in the future, it was recently rated
-                // Check if interval suggests it was rated recently
-                // nextReviewDate - (interval in ms) ≈ when it was last rated
                 const lastRated = c.nextReviewDate - (c.interval * 24 * 60 * 60 * 1000);
                 return (now - lastRated) <= HOURS_48;
             }
@@ -38,103 +29,22 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
             return false;
         });
 
-        // If we have enough recently studied cards, use those
-        // Otherwise expand to all cards with scenarios (fallback for first-time use)
         const pool = recentlyStudied.length >= 5 ? recentlyStudied : withScenario;
 
-        // Shuffle
         const shuffled = [...pool].sort(() => Math.random() - 0.5);
         return shuffled.slice(0, 10);
     }, [cards]);
 
-    // ── State: queue supports re-adding missed cards ──
+    // ── State ──
     const [queue, setQueue] = useState<Flashcard[]>(initialCards);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [isListening, setIsListening] = useState(false);
-    const [transcript, setTranscript] = useState('');
-    const [interimText, setInterimText] = useState('');
     const [revealed, setRevealed] = useState(false);
     const [gotCount, setGotCount] = useState(0);
     const [missedCount, setMissedCount] = useState(0);
     const [missedCards, setMissedCards] = useState<Flashcard[]>([]);
     const [finished, setFinished] = useState(false);
-    const recognitionRef = useRef<any>(null);
-    const isListeningRef = useRef(false);
-
-    // Setup speech recognition
-    useEffect(() => {
-        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-        if (!SpeechRecognition) return;
-
-        const recog = new SpeechRecognition();
-        recog.continuous = true;
-        recog.interimResults = true;
-        recog.lang = 'en-US';
-
-        recog.onresult = (event: any) => {
-            let final = '';
-            let interim = '';
-            for (let i = 0; i < event.results.length; i++) {
-                if (event.results[i].isFinal) {
-                    final += event.results[i][0].transcript + ' ';
-                } else {
-                    interim += event.results[i][0].transcript;
-                }
-            }
-            if (final) setTranscript(prev => (prev + ' ' + final).trim());
-            setInterimText(interim);
-        };
-
-        recog.onerror = (event: any) => {
-            console.error("Speech recognition error", event.error);
-            if (event.error !== 'no-speech') {
-                setIsListening(false);
-                isListeningRef.current = false;
-            }
-        };
-
-        recog.onend = () => {
-            if (isListeningRef.current) {
-                try { recog.start(); } catch (_) { /* already started */ }
-            } else {
-                setIsListening(false);
-            }
-        };
-
-        recognitionRef.current = recog;
-
-        return () => {
-            try { recog.stop(); } catch (_) {/* */}
-        };
-    }, []);
-
-    const toggleListening = useCallback(() => {
-        if (!recognitionRef.current) {
-            alert("Speech recognition is not supported in this browser.");
-            return;
-        }
-
-        if (isListening) {
-            isListeningRef.current = false;
-            recognitionRef.current.stop();
-            setIsListening(false);
-        } else {
-            try {
-                recognitionRef.current.start();
-                isListeningRef.current = true;
-                setIsListening(true);
-            } catch (e) {
-                console.error(e);
-            }
-        }
-    }, [isListening]);
 
     const handleReveal = () => {
-        if (isListening) {
-            isListeningRef.current = false;
-            recognitionRef.current?.stop();
-            setIsListening(false);
-        }
         setRevealed(true);
     };
 
@@ -142,8 +52,6 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         if (currentIndex < queue.length - 1) {
             setTimeout(() => {
                 setCurrentIndex(prev => prev + 1);
-                setTranscript('');
-                setInterimText('');
                 setRevealed(false);
             }, 400);
         } else {
@@ -165,9 +73,7 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         } else {
             setMissedCount(prev => prev + 1);
             setMissedCards(prev => [...prev, currentCard]);
-
-            // ── KEY FIX: Re-add missed cards to the end of the queue ──
-            // This means they'll come back again later in the session
+            // Re-add missed cards to the end of the queue
             setQueue(prev => [...prev, currentCard]);
         }
 
@@ -216,7 +122,6 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         const total = gotCount + missedCount;
         const pct = total > 0 ? Math.round((gotCount / total) * 100) : 0;
 
-        // Unique missed cards (deduplicated since a card can be missed multiple times)
         const uniqueMissed = Array.from(
             new Map(missedCards.map(c => [c.id, c])).values()
         );
@@ -296,7 +201,7 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                     </div>
                 </div>
 
-                {/* Missed words review — show full sentence answers */}
+                {/* Missed words review */}
                 {uniqueMissed.length > 0 && (
                     <div style={{
                         width: '100%',
@@ -370,56 +275,11 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
     // --- Main challenge UI ---
     const currentCard = queue[currentIndex];
     const scenarioText = currentCard.scenario || (currentCard.front || '').split('===HINT===')[0]?.trim();
-    // The answer is the full sentence (scenarioAnswer), NOT just the bare word
     const targetAnswer = currentCard.scenarioAnswer || currentCard.back || '';
     const targetWord = currentCard.back || '';
     const totalOriginal = initialCards.length;
-    // Progress based on original cards only (re-queued missed ones don't inflate progress)
     const completedOriginal = Math.min(currentIndex, totalOriginal);
     const progress = (completedOriginal / totalOriginal) * 100;
-
-    // Check if transcript contains key words from the target
-    const checkMatch = (target: string, spoken: string): boolean => {
-        const spokenLower = spoken.toLowerCase().replace(/[^a-z0-9'\s-]/g, '');
-        const targetLower = target.toLowerCase().replace(/[^a-z0-9'\s-]/g, '');
-
-        // Full phrase match
-        if (spokenLower.includes(targetLower)) return true;
-
-        // Check against the key word (back of card)
-        const keyWordLower = targetWord.toLowerCase().replace(/[^a-z0-9'\s-]/g, '');
-        if (spokenLower.includes(keyWordLower)) return true;
-
-        // For multi-word targets, check if significant words appear
-        const targetWords = targetLower.split(/\s+/).filter(w => w.length > 3);
-        if (targetWords.length === 0) return spokenLower.includes(targetLower);
-
-        const matchCount = targetWords.filter(w => spokenLower.includes(w)).length;
-        return matchCount >= Math.ceil(targetWords.length * 0.5);
-    };
-
-    const hasMatch = transcript.length > 0 && checkMatch(targetAnswer, transcript);
-    const displayTranscript = transcript + (interimText ? ' ' + interimText : '');
-
-    // Highlight matching words in transcript
-    const highlightTranscript = (text: string, target: string) => {
-        if (!text) return null;
-        const allTargetWords = (target + ' ' + targetWord).toLowerCase().split(/\s+/).filter(w => w.length > 2);
-        const words = text.split(/(\s+)/);
-
-        return words.map((word, i) => {
-            const clean = word.toLowerCase().replace(/[^a-z0-9'-]/g, '');
-            const isMatch = allTargetWords.some(tw => clean.includes(tw) || tw.includes(clean));
-            return (
-                <span key={i} style={{
-                    color: isMatch && revealed ? 'var(--success)' : 'var(--text-primary)',
-                    fontWeight: isMatch && revealed ? '700' : '400',
-                }}>
-                    {word}
-                </span>
-            );
-        });
-    };
 
     return (
         <div className="flex-center full-screen" style={{
@@ -508,8 +368,6 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                paddingTop: '64px',
-                paddingBottom: '200px',
                 width: '100%',
                 overflowY: 'auto',
                 padding: '64px 20px 200px',
@@ -564,92 +422,28 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                             </p>
                         </div>
 
-                        {/* Transcript area */}
-                        {(displayTranscript || isListening) && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                style={{
-                                    background: 'var(--card-bg)',
-                                    borderRadius: 'var(--radius)',
-                                    padding: '20px',
-                                    border: `1px solid ${isListening ? 'var(--accent)' : 'var(--border)'}`,
-                                    minHeight: '60px',
-                                    transition: 'border-color 0.3s',
-                                }}
-                            >
-                                <span style={{
-                                    fontSize: '0.65rem',
-                                    fontWeight: '700',
-                                    color: isListening ? 'var(--accent)' : 'var(--text-muted)',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '0.08em',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '6px',
-                                    marginBottom: '8px'
-                                }}>
-                                    {isListening && (
-                                        <motion.span
-                                            animate={{ opacity: [1, 0.3, 1] }}
-                                            transition={{ repeat: Infinity, duration: 1.2 }}
-                                            style={{
-                                                width: '6px',
-                                                height: '6px',
-                                                borderRadius: '50%',
-                                                background: 'var(--danger)',
-                                                display: 'inline-block'
-                                            }}
-                                        />
-                                    )}
-                                    {isListening ? 'Listening...' : 'You said'}
-                                </span>
-                                <p style={{
-                                    margin: 0,
-                                    fontSize: '1rem',
-                                    lineHeight: '1.6',
-                                    color: 'var(--text-primary)',
-                                }}>
-                                    {revealed
-                                        ? highlightTranscript(displayTranscript, targetAnswer)
-                                        : displayTranscript
-                                    }
-                                    {isListening && !displayTranscript && (
-                                        <span style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>
-                                            Speak naturally...
-                                        </span>
-                                    )}
-                                </p>
-                            </motion.div>
-                        )}
-
-                        {/* Revealed answer — shows FULL SENTENCE, not just the word */}
+                        {/* Revealed answer */}
                         {revealed && (
                             <motion.div
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 style={{
-                                    background: hasMatch
-                                        ? 'rgba(16, 185, 129, 0.08)'
-                                        : 'rgba(245, 158, 11, 0.08)',
+                                    background: 'rgba(245, 158, 11, 0.08)',
                                     borderRadius: 'var(--radius)',
                                     padding: '20px',
-                                    border: `1px solid ${hasMatch
-                                        ? 'rgba(16, 185, 129, 0.2)'
-                                        : 'rgba(245, 158, 11, 0.2)'
-                                    }`,
+                                    border: '1px solid rgba(245, 158, 11, 0.2)',
                                 }}
                             >
                                 <span style={{
                                     fontSize: '0.65rem',
                                     fontWeight: '700',
-                                    color: hasMatch ? 'var(--success)' : 'var(--warning)',
+                                    color: 'var(--warning)',
                                     textTransform: 'uppercase',
                                     letterSpacing: '0.08em',
                                     display: 'block',
                                     marginBottom: '10px'
                                 }}>
-                                    {hasMatch ? '✓ You got it!' : 'How you could say it'}
+                                    Answer
                                 </span>
 
                                 {/* Full sentence answer */}
@@ -705,95 +499,28 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                 background: 'linear-gradient(to top, var(--bg-color) 60%, transparent)',
                 zIndex: 20,
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '12px',
+                justifyContent: 'center',
             }}>
-                <div style={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+                <div style={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {!revealed ? (
-                        <>
-                            {/* Mic button */}
-                            <motion.button
-                                onClick={toggleListening}
-                                whileTap={{ scale: 0.92 }}
-                                animate={isListening ? {
-                                    boxShadow: [
-                                        '0 0 0 0 rgba(239, 68, 68, 0.4)',
-                                        '0 0 0 16px rgba(239, 68, 68, 0)',
-                                    ],
-                                } : {}}
-                                transition={isListening ? {
-                                    repeat: Infinity,
-                                    duration: 1.5,
-                                } : {}}
-                                style={{
-                                    width: '72px',
-                                    height: '72px',
-                                    borderRadius: '50%',
-                                    background: isListening ? 'var(--danger)' : 'var(--accent)',
-                                    border: 'none',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '1.8rem',
-                                    color: '#fff',
-                                    boxShadow: isListening
-                                        ? '0 4px 20px rgba(239, 68, 68, 0.4)'
-                                        : '0 4px 20px rgba(99, 102, 241, 0.4)',
-                                    transition: 'background 0.2s',
-                                }}
-                            >
-                                {isListening ? '◼' : '🎤'}
-                            </motion.button>
-
-                            <span style={{
-                                fontSize: '0.75rem',
-                                color: 'var(--text-muted)',
-                                fontWeight: '500'
-                            }}>
-                                {isListening ? 'Tap to stop' : 'Tap to speak'}
-                            </span>
-
-                            {/* Reveal button */}
-                            {transcript && (
-                                <motion.button
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    onClick={handleReveal}
-                                    style={{
-                                        width: '100%',
-                                        padding: '16px',
-                                        borderRadius: 'var(--radius)',
-                                        background: 'var(--surface)',
-                                        border: '1px solid var(--border)',
-                                        color: 'var(--text-primary)',
-                                        fontWeight: '700',
-                                        fontSize: '0.95rem',
-                                    }}
-                                >
-                                    Reveal Answer
-                                </motion.button>
-                            )}
-
-                            {/* Skip button */}
-                            {!transcript && !isListening && (
-                                <button
-                                    onClick={handleReveal}
-                                    style={{
-                                        background: 'transparent',
-                                        border: 'none',
-                                        color: 'var(--text-muted)',
-                                        fontSize: '0.8rem',
-                                        fontWeight: '500',
-                                        padding: '8px',
-                                    }}
-                                >
-                                    Skip — show answer
-                                </button>
-                            )}
-                        </>
+                        <button
+                            onClick={handleReveal}
+                            style={{
+                                width: '100%',
+                                padding: '18px',
+                                borderRadius: 'var(--radius)',
+                                background: 'var(--accent)',
+                                color: 'white',
+                                fontWeight: '700',
+                                fontSize: '1rem',
+                                boxShadow: '0 4px 16px rgba(99, 102, 241, 0.35)',
+                                border: 'none',
+                                letterSpacing: '-0.01em'
+                            }}
+                        >
+                            Show Answer
+                        </button>
                     ) : (
-                        /* Got it / Missed buttons */
                         <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
                             <button
                                 onClick={() => handleResult('missed')}
