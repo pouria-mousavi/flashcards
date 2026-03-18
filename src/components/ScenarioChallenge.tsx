@@ -10,56 +10,53 @@ interface Props {
 
 export default function ScenarioChallenge({ cards, onClose }: Props) {
 
-    // Pick 10 cards that HAVE scenarios, prioritizing actively studied ones
-    const scenarioCards = useMemo(() => {
-        // Only consider cards that have a scenario written
+    // ── Card selection: only cards studied in the last 48 hours WITH scenarios ──
+    const initialCards = useMemo(() => {
+        const now = Date.now();
+        const HOURS_48 = 48 * 60 * 60 * 1000;
+
+        // Only cards that have a scenario written
         const withScenario = cards.filter(c => !!c.scenario);
 
-        // Priority 1: cards actively being learned (LEARNING / RELEARNING)
-        const activeLearning = withScenario.filter(c =>
-            c.state === 'LEARNING' || c.state === 'RELEARNING'
-        );
-
-        // Priority 2: REVIEW cards (recently studied)
-        const reviewed = withScenario.filter(c =>
-            c.state === 'REVIEW'
-        ).sort((a, b) => b.nextReviewDate - a.nextReviewDate);
-
-        // Priority 3: NEW cards with scenarios
-        const newWithScenario = withScenario.filter(c =>
-            c.state === 'NEW'
-        ).sort((a, b) => b.createdAt - a.createdAt);
-
-        // Build pool with priorities
-        const pool: Flashcard[] = [];
-        const seen = new Set<string>();
-
-        const addCards = (source: Flashcard[]) => {
-            for (const c of source) {
-                if (!seen.has(c.id) && pool.length < 20) {
-                    pool.push(c);
-                    seen.add(c.id);
-                }
+        // Filter to cards that were studied/reviewed in the last 48 hours
+        // A card was "recently studied" if:
+        // - It's in LEARNING/RELEARNING (actively being studied right now)
+        // - It's in REVIEW and nextReviewDate was set recently (meaning it was just rated)
+        // - It's NEW but was created in the last 48h (just added)
+        const recentlyStudied = withScenario.filter(c => {
+            if (c.state === 'LEARNING' || c.state === 'RELEARNING') return true;
+            if (c.state === 'REVIEW') {
+                // If the card's next review is in the future, it was recently rated
+                // Check if interval suggests it was rated recently
+                // nextReviewDate - (interval in ms) ≈ when it was last rated
+                const lastRated = c.nextReviewDate - (c.interval * 24 * 60 * 60 * 1000);
+                return (now - lastRated) <= HOURS_48;
             }
-        };
+            if (c.state === 'NEW') {
+                return (now - c.createdAt) <= HOURS_48;
+            }
+            return false;
+        });
 
-        addCards(activeLearning);
-        addCards(reviewed);
-        addCards(newWithScenario);
+        // If we have enough recently studied cards, use those
+        // Otherwise expand to all cards with scenarios (fallback for first-time use)
+        const pool = recentlyStudied.length >= 5 ? recentlyStudied : withScenario;
 
-        // Shuffle and take 10
+        // Shuffle
         const shuffled = [...pool].sort(() => Math.random() - 0.5);
         return shuffled.slice(0, 10);
     }, [cards]);
 
+    // ── State: queue supports re-adding missed cards ──
+    const [queue, setQueue] = useState<Flashcard[]>(initialCards);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState('');
     const [interimText, setInterimText] = useState('');
     const [revealed, setRevealed] = useState(false);
-    const [results, setResults] = useState<('got_it' | 'missed' | null)[]>(
-        new Array(10).fill(null)
-    );
+    const [gotCount, setGotCount] = useState(0);
+    const [missedCount, setMissedCount] = useState(0);
+    const [missedCards, setMissedCards] = useState<Flashcard[]>([]);
     const [finished, setFinished] = useState(false);
     const recognitionRef = useRef<any>(null);
     const isListeningRef = useRef(false);
@@ -97,7 +94,6 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         };
 
         recog.onend = () => {
-            // Auto-restart if still supposed to be listening
             if (isListeningRef.current) {
                 try { recog.start(); } catch (_) { /* already started */ }
             } else {
@@ -142,23 +138,8 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         setRevealed(true);
     };
 
-    const handleResult = (result: 'got_it' | 'missed') => {
-        setResults(prev => {
-            const next = [...prev];
-            next[currentIndex] = result;
-            return next;
-        });
-
-        if (result === 'got_it') {
-            confetti({
-                particleCount: 30,
-                spread: 50,
-                origin: { y: 0.7 },
-                colors: ['#10b981', '#34d399', '#6ee7b7']
-            });
-        }
-
-        if (currentIndex < scenarioCards.length - 1) {
+    const advanceToNext = () => {
+        if (currentIndex < queue.length - 1) {
             setTimeout(() => {
                 setCurrentIndex(prev => prev + 1);
                 setTranscript('');
@@ -170,8 +151,31 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         }
     };
 
+    const handleResult = (result: 'got_it' | 'missed') => {
+        const currentCard = queue[currentIndex];
+
+        if (result === 'got_it') {
+            setGotCount(prev => prev + 1);
+            confetti({
+                particleCount: 30,
+                spread: 50,
+                origin: { y: 0.7 },
+                colors: ['#10b981', '#34d399', '#6ee7b7']
+            });
+        } else {
+            setMissedCount(prev => prev + 1);
+            setMissedCards(prev => [...prev, currentCard]);
+
+            // ── KEY FIX: Re-add missed cards to the end of the queue ──
+            // This means they'll come back again later in the session
+            setQueue(prev => [...prev, currentCard]);
+        }
+
+        advanceToNext();
+    };
+
     // --- No cards available ---
-    if (scenarioCards.length === 0) {
+    if (queue.length === 0) {
         return (
             <div className="flex-center full-screen" style={{
                 flexDirection: 'column',
@@ -181,15 +185,15 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                 background: 'var(--bg-color)'
             }}>
                 <span style={{ fontSize: '2.5rem' }}>📭</span>
-                <span style={{ fontSize: '1.1rem', fontWeight: '700' }}>No recently studied cards yet</span>
+                <span style={{ fontSize: '1.1rem', fontWeight: '700' }}>No recently studied cards with scenarios</span>
                 <p style={{
                     color: 'var(--text-muted)',
                     fontSize: '0.85rem',
                     textAlign: 'center',
-                    maxWidth: '280px',
+                    maxWidth: '300px',
                     lineHeight: '1.6'
                 }}>
-                    Study some flashcards first, then come back to practice using them in context!
+                    Study some flashcards first, then come back within 48 hours to practice using them in real situations!
                 </p>
                 <button onClick={onClose} style={{
                     marginTop: '8px',
@@ -209,11 +213,14 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
 
     // --- Finished screen ---
     if (finished) {
-        const gotCount = results.filter(r => r === 'got_it').length;
-        const total = scenarioCards.length;
-        const pct = Math.round((gotCount / total) * 100);
+        const total = gotCount + missedCount;
+        const pct = total > 0 ? Math.round((gotCount / total) * 100) : 0;
 
-        // Celebration confetti on good score
+        // Unique missed cards (deduplicated since a card can be missed multiple times)
+        const uniqueMissed = Array.from(
+            new Map(missedCards.map(c => [c.id, c])).values()
+        );
+
         if (pct >= 70) {
             setTimeout(() => confetti({
                 particleCount: 100,
@@ -227,7 +234,8 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                 flexDirection: 'column',
                 gap: '20px',
                 padding: '24px',
-                background: 'var(--bg-color)'
+                background: 'var(--bg-color)',
+                overflowY: 'auto',
             }}>
                 <motion.div
                     initial={{ scale: 0 }}
@@ -277,7 +285,7 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                             fontSize: '2rem',
                             fontWeight: '800',
                             color: 'var(--danger)',
-                        }}>{total - gotCount}</div>
+                        }}>{missedCount}</div>
                         <div style={{
                             fontSize: '0.75rem',
                             color: 'var(--text-muted)',
@@ -288,11 +296,11 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                     </div>
                 </div>
 
-                {/* Missed words review */}
-                {results.some(r => r === 'missed') && (
+                {/* Missed words review — show full sentence answers */}
+                {uniqueMissed.length > 0 && (
                     <div style={{
                         width: '100%',
-                        maxWidth: '340px',
+                        maxWidth: '380px',
                         background: 'var(--card-bg)',
                         borderRadius: 'var(--radius)',
                         padding: '16px',
@@ -305,35 +313,40 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                             textTransform: 'uppercase',
                             letterSpacing: '0.06em',
                             display: 'block',
-                            marginBottom: '10px'
+                            marginBottom: '12px'
                         }}>Words to revisit</span>
-                        {scenarioCards.map((c, i) =>
-                            results[i] === 'missed' ? (
-                                <div key={c.id} style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    padding: '8px 0',
-                                    borderBottom: '1px solid var(--border)',
-                                    gap: '12px'
+                        {uniqueMissed.map((c) => (
+                            <div key={c.id} style={{
+                                padding: '12px 0',
+                                borderBottom: '1px solid var(--border)',
+                            }}>
+                                <div style={{
+                                    fontSize: '0.95rem',
+                                    fontWeight: '700',
+                                    color: 'var(--text-primary)',
+                                    marginBottom: '4px',
                                 }}>
-                                    <span style={{
-                                        fontSize: '0.85rem',
-                                        fontWeight: '600',
-                                        color: 'var(--text-primary)'
-                                    }}>{c.back}</span>
-                                    <span style={{
-                                        fontSize: '0.8rem',
-                                        color: 'var(--text-muted)',
-                                        fontFamily: 'Vazirmatn, sans-serif',
-                                        direction: 'rtl',
-                                        textAlign: 'right',
-                                        flexShrink: 0,
-                                        maxWidth: '50%'
-                                    }}>{(c.front || '').split('===HINT===')[0]?.trim()}</span>
+                                    {c.scenarioAnswer || c.back}
                                 </div>
-                            ) : null
-                        )}
+                                <div style={{
+                                    fontSize: '0.8rem',
+                                    color: 'var(--accent)',
+                                    marginBottom: '6px',
+                                }}>
+                                    {c.back} {c.pronunciation && <span style={{ color: 'var(--text-muted)' }}>{c.pronunciation}</span>}
+                                </div>
+                                <div style={{
+                                    fontSize: '0.8rem',
+                                    color: 'var(--text-muted)',
+                                    fontFamily: 'Vazirmatn, sans-serif',
+                                    direction: 'rtl',
+                                    textAlign: 'right',
+                                    lineHeight: '1.8',
+                                }}>
+                                    {c.scenario || (c.front || '').split('===HINT===')[0]?.trim()}
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 )}
 
@@ -355,10 +368,15 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
     }
 
     // --- Main challenge UI ---
-    const currentCard = scenarioCards[currentIndex];
+    const currentCard = queue[currentIndex];
     const scenarioText = currentCard.scenario || (currentCard.front || '').split('===HINT===')[0]?.trim();
+    // The answer is the full sentence (scenarioAnswer), NOT just the bare word
+    const targetAnswer = currentCard.scenarioAnswer || currentCard.back || '';
     const targetWord = currentCard.back || '';
-    const progress = ((currentIndex) / scenarioCards.length) * 100;
+    const totalOriginal = initialCards.length;
+    // Progress based on original cards only (re-queued missed ones don't inflate progress)
+    const completedOriginal = Math.min(currentIndex, totalOriginal);
+    const progress = (completedOriginal / totalOriginal) * 100;
 
     // Check if transcript contains key words from the target
     const checkMatch = (target: string, spoken: string): boolean => {
@@ -368,6 +386,10 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         // Full phrase match
         if (spokenLower.includes(targetLower)) return true;
 
+        // Check against the key word (back of card)
+        const keyWordLower = targetWord.toLowerCase().replace(/[^a-z0-9'\s-]/g, '');
+        if (spokenLower.includes(keyWordLower)) return true;
+
         // For multi-word targets, check if significant words appear
         const targetWords = targetLower.split(/\s+/).filter(w => w.length > 3);
         if (targetWords.length === 0) return spokenLower.includes(targetLower);
@@ -376,18 +398,18 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         return matchCount >= Math.ceil(targetWords.length * 0.5);
     };
 
-    const hasMatch = transcript.length > 0 && checkMatch(targetWord, transcript);
+    const hasMatch = transcript.length > 0 && checkMatch(targetAnswer, transcript);
     const displayTranscript = transcript + (interimText ? ' ' + interimText : '');
 
     // Highlight matching words in transcript
     const highlightTranscript = (text: string, target: string) => {
         if (!text) return null;
-        const targetWords = target.toLowerCase().split(/\s+/).filter(w => w.length > 2);
+        const allTargetWords = (target + ' ' + targetWord).toLowerCase().split(/\s+/).filter(w => w.length > 2);
         const words = text.split(/(\s+)/);
 
         return words.map((word, i) => {
             const clean = word.toLowerCase().replace(/[^a-z0-9'-]/g, '');
-            const isMatch = targetWords.some(tw => clean.includes(tw) || tw.includes(clean));
+            const isMatch = allTargetWords.some(tw => clean.includes(tw) || tw.includes(clean));
             return (
                 <span key={i} style={{
                     color: isMatch && revealed ? 'var(--success)' : 'var(--text-primary)',
@@ -417,7 +439,7 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                 zIndex: 15
             }}>
                 <motion.div
-                    animate={{ width: `${progress}%` }}
+                    animate={{ width: `${Math.min(progress, 100)}%` }}
                     transition={{ duration: 0.3 }}
                     style={{
                         height: '100%',
@@ -466,7 +488,16 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                     }}>
                         CHALLENGE
                     </span>
-                    {currentIndex + 1}/{scenarioCards.length}
+                    {currentIndex + 1}/{queue.length}
+                    {queue.length > totalOriginal && (
+                        <span style={{
+                            fontSize: '0.65rem',
+                            color: 'var(--warning)',
+                            fontWeight: '600',
+                        }}>
+                            +{queue.length - totalOriginal} retry
+                        </span>
+                    )}
                 </div>
             </div>
 
@@ -520,7 +551,7 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
 
                             {/* Persian situation text */}
                             <p style={{
-                                fontSize: scenarioText.length > 80 ? '1rem' : scenarioText.length > 40 ? '1.15rem' : '1.3rem',
+                                fontSize: scenarioText.length > 100 ? '0.95rem' : scenarioText.length > 60 ? '1.05rem' : '1.2rem',
                                 fontFamily: 'Vazirmatn, sans-serif',
                                 fontWeight: '600',
                                 direction: 'rtl',
@@ -580,7 +611,7 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                                     color: 'var(--text-primary)',
                                 }}>
                                     {revealed
-                                        ? highlightTranscript(displayTranscript, targetWord)
+                                        ? highlightTranscript(displayTranscript, targetAnswer)
                                         : displayTranscript
                                     }
                                     {isListening && !displayTranscript && (
@@ -592,7 +623,7 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                             </motion.div>
                         )}
 
-                        {/* Revealed answer */}
+                        {/* Revealed answer — shows FULL SENTENCE, not just the word */}
                         {revealed && (
                             <motion.div
                                 initial={{ opacity: 0, y: 10 }}
@@ -616,29 +647,49 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                                     textTransform: 'uppercase',
                                     letterSpacing: '0.08em',
                                     display: 'block',
-                                    marginBottom: '8px'
+                                    marginBottom: '10px'
                                 }}>
-                                    {hasMatch ? '✓ You got it!' : 'Target expression'}
+                                    {hasMatch ? '✓ You got it!' : 'How you could say it'}
                                 </span>
+
+                                {/* Full sentence answer */}
                                 <p style={{
                                     margin: 0,
-                                    fontSize: (targetWord.length > 40) ? '1.1rem' : '1.3rem',
-                                    fontWeight: '700',
+                                    fontSize: targetAnswer.length > 60 ? '1rem' : '1.15rem',
+                                    fontWeight: '600',
                                     color: 'var(--text-primary)',
-                                    lineHeight: '1.4'
+                                    lineHeight: '1.5',
+                                    marginBottom: '10px',
                                 }}>
-                                    {targetWord}
+                                    "{targetAnswer}"
                                 </p>
-                                {currentCard.pronunciation && (
+
+                                {/* Key word + pronunciation */}
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px',
+                                    flexWrap: 'wrap',
+                                }}>
                                     <span style={{
-                                        fontSize: '0.85rem',
+                                        background: 'rgba(99, 102, 241, 0.15)',
                                         color: 'var(--accent)',
-                                        marginTop: '4px',
-                                        display: 'block'
+                                        padding: '4px 10px',
+                                        borderRadius: '6px',
+                                        fontSize: '0.85rem',
+                                        fontWeight: '700',
                                     }}>
-                                        {currentCard.pronunciation}
+                                        {targetWord}
                                     </span>
-                                )}
+                                    {currentCard.pronunciation && (
+                                        <span style={{
+                                            fontSize: '0.8rem',
+                                            color: 'var(--text-muted)',
+                                        }}>
+                                            {currentCard.pronunciation}
+                                        </span>
+                                    )}
+                                </div>
                             </motion.div>
                         )}
                     </motion.div>
@@ -703,7 +754,7 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                                 {isListening ? 'Tap to stop' : 'Tap to speak'}
                             </span>
 
-                            {/* Reveal button - show after any speech */}
+                            {/* Reveal button */}
                             {transcript && (
                                 <motion.button
                                     initial={{ opacity: 0, y: 10 }}

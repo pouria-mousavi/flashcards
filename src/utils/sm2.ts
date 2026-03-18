@@ -44,6 +44,7 @@ export interface Flashcard {
   other_meanings?: OtherMeaning[];
   native_speaking?: boolean;
   scenario?: string;
+  scenarioAnswer?: string;
 }
 
 // Anki-like SM-2 configuration
@@ -222,5 +223,6 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         })(),
         native_speaking: row.native_speaking ?? false,
         scenario: (row as any).scenario || undefined,
+        scenarioAnswer: (row as any).scenario_answer || undefined,
     };
 }
