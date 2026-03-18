@@ -10,26 +10,24 @@ interface Props {
 
 export default function ScenarioChallenge({ cards, onClose }: Props) {
 
-    // Pick 10 cards: recently studied first, fallback to recently created
+    // Pick 10 cards that HAVE scenarios, prioritizing actively studied ones
     const scenarioCards = useMemo(() => {
-        const now = Date.now();
-        const TWO_DAYS = 2 * 24 * 60 * 60 * 1000;
+        // Only consider cards that have a scenario written
+        const withScenario = cards.filter(c => !!c.scenario);
 
         // Priority 1: cards actively being learned (LEARNING / RELEARNING)
-        const activeLearning = cards.filter(c =>
+        const activeLearning = withScenario.filter(c =>
             c.state === 'LEARNING' || c.state === 'RELEARNING'
         );
 
-        // Priority 2: recently reviewed cards (REVIEW with recent next_review)
-        const recentlyReviewed = cards.filter(c =>
-            c.state === 'REVIEW' &&
-            c.nextReviewDate > now - TWO_DAYS
+        // Priority 2: REVIEW cards (recently studied)
+        const reviewed = withScenario.filter(c =>
+            c.state === 'REVIEW'
         ).sort((a, b) => b.nextReviewDate - a.nextReviewDate);
 
-        // Priority 3: recently created NEW cards
-        const recentNew = cards.filter(c =>
-            c.state === 'NEW' &&
-            c.createdAt > now - TWO_DAYS
+        // Priority 3: NEW cards with scenarios
+        const newWithScenario = withScenario.filter(c =>
+            c.state === 'NEW'
         ).sort((a, b) => b.createdAt - a.createdAt);
 
         // Build pool with priorities
@@ -46,16 +44,8 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
         };
 
         addCards(activeLearning);
-        addCards(recentlyReviewed);
-        addCards(recentNew);
-
-        // If still not enough, add any non-NEW cards sorted by recent activity
-        if (pool.length < 10) {
-            const rest = cards
-                .filter(c => c.state !== 'NEW' && !seen.has(c.id))
-                .sort((a, b) => b.nextReviewDate - a.nextReviewDate);
-            addCards(rest);
-        }
+        addCards(reviewed);
+        addCards(newWithScenario);
 
         // Shuffle and take 10
         const shuffled = [...pool].sort(() => Math.random() - 0.5);
@@ -366,7 +356,7 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
 
     // --- Main challenge UI ---
     const currentCard = scenarioCards[currentIndex];
-    const [persianText] = (currentCard.front || '').split('===HINT===');
+    const scenarioText = currentCard.scenario || (currentCard.front || '').split('===HINT===')[0]?.trim();
     const targetWord = currentCard.back || '';
     const progress = ((currentIndex) / scenarioCards.length) * 100;
 
@@ -525,21 +515,21 @@ export default function ScenarioChallenge({ cards, onClose }: Props) {
                                 display: 'block',
                                 marginBottom: '14px'
                             }}>
-                                How would you say this in English?
+                                تصور کن تو این موقعیتی — به انگلیسی چی میگی؟
                             </span>
 
                             {/* Persian situation text */}
                             <p style={{
-                                fontSize: persianText.trim().length > 40 ? '1.2rem' : '1.5rem',
+                                fontSize: scenarioText.length > 80 ? '1rem' : scenarioText.length > 40 ? '1.15rem' : '1.3rem',
                                 fontFamily: 'Vazirmatn, sans-serif',
-                                fontWeight: '700',
+                                fontWeight: '600',
                                 direction: 'rtl',
                                 textAlign: 'right',
-                                lineHeight: '1.8',
+                                lineHeight: '2',
                                 color: 'var(--text-primary)',
                                 margin: 0,
                             }}>
-                                {persianText?.trim()}
+                                {scenarioText}
                             </p>
                         </div>
 
