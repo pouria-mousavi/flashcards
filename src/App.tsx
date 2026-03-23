@@ -95,7 +95,8 @@ function App() {
     const sortedReviews = [...reviews].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
     const sortedNew = [...newCards].sort((a, b) => b.createdAt - a.createdAt);
 
-    return [...sortedReviews, ...sortedNew];
+    // LIFO: newest cards first, then reviews (last in, first served)
+    return [...sortedNew, ...sortedReviews];
   };
 
   // --- Load Data & Restore Session ---
