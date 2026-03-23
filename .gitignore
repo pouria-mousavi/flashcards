@@ -24,3 +24,19 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Data processing artifacts
+Resources/
+enrich_batch_*.json
+enriched_*.json
+rewrite_batch_*.json
+rewritten_*.json
+all_new_cards_deduped.json
+all_words_processed.json
+book4_*.json
+existing_db_words.json
+existing_words.json
+extracted_book*.json
+manual_cards.json
+messy_fronts.json
+words_export.json
