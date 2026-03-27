@@ -23,7 +23,7 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
   const [queue, setQueue] = useState<Flashcard[]>(cards);
   const [currentCardIndex, setCurrentCardIndex] = useState(startIndex);
   const [isFlipped, setIsFlipped] = useState(startFlipped);
-  const [voice, setVoice] = useState<SpeechSynthesisVoice | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const completedRef = useRef(false);
 
   // Sync isFlipped to localStorage on every flip
@@ -75,79 +75,28 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
       }
   }, [currentCardIndex, queue.length, onSessionComplete]);
 
-  // Voice selection: prefer natural-sounding American English voices
-  useEffect(() => {
-      const loadVoices = () => {
-          const vs = window.speechSynthesis.getVoices();
-          if (vs.length === 0) return;
-
-          // 1. Try exact preferred American voices by name (partial match)
-          const preferredNames = [
-              'Samantha',
-              'Google US English',
-              'Microsoft Jenny Online (Natural)',
-              'Microsoft Aria Online (Natural)',
-              'Microsoft Guy Online (Natural)',
-              'Microsoft Zira',
-              'Alex',
-              'Fred',
-              'Victoria',
-              'Evan',
-              'Allison',
-              'Ava',
-              'Nicky',
-              'Tom',
-          ];
-
-          let selected: SpeechSynthesisVoice | undefined;
-
-          for (const name of preferredNames) {
-              selected = vs.find(v => v.name.includes(name));
-              if (selected) break;
-          }
-
-          // 2. Filter strictly for en-US locale, prefer enhanced/premium
-          if (!selected) {
-              const enUS = vs.filter(v =>
-                  v.lang === 'en-US' || v.lang === 'en_US'
-              );
-              selected = enUS.find(v => /natural|premium|enhanced/i.test(v.name));
-              if (!selected) selected = enUS[0];
-          }
-
-          // 3. Last resort: any English voice that is NOT British/Australian/etc.
-          if (!selected) {
-              selected = vs.find(v =>
-                  v.lang.startsWith('en') &&
-                  !v.lang.includes('GB') &&
-                  !v.lang.includes('AU') &&
-                  !v.lang.includes('IN') &&
-                  !v.lang.includes('ZA') &&
-                  !v.lang.includes('IE') &&
-                  !v.lang.includes('NZ') &&
-                  !/daniel|kate|oliver|fiona|moira|tessa|rishi|veena/i.test(v.name)
-              );
-          }
-
-          if (selected) {
-              console.log(`[TTS] Selected voice: "${selected.name}" (${selected.lang})`);
-              setVoice(selected);
-          }
-      };
-
-      loadVoices();
-      window.speechSynthesis.onvoiceschanged = loadVoices;
-  }, []);
-
   const handlePlayAudio = useCallback((text?: string) => {
       if (!text) return;
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      if (voice) utterance.voice = voice;
-      utterance.rate = 0.85;
-      utterance.pitch = 1.0;
-      window.speechSynthesis.speak(utterance);
-  }, [voice]);
+      // Stop any currently playing audio
+      if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current = null;
+      }
+      // Use Google Translate TTS — always American English
+      const encoded = encodeURIComponent(text);
+      const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=en-US&client=tw-ob&q=${encoded}`;
+      const audio = new Audio(url);
+      audio.playbackRate = 0.85;
+      audioRef.current = audio;
+      audio.play().catch(() => {
+          // Fallback to speechSynthesis if Google TTS is blocked
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'en-US';
+          utterance.rate = 0.85;
+          window.speechSynthesis.speak(utterance);
+      });
+  }, []);
 
   const handleRate = (rating: number) => {
     const currentCard = queue[currentCardIndex];
