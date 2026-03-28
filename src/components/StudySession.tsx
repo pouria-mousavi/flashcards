@@ -82,9 +82,9 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
           audioRef.current.pause();
           audioRef.current = null;
       }
-      // Use Google Translate TTS — always American English
+      // Use Supabase Edge Function proxy — always American English, no CORS issues
       const encoded = encodeURIComponent(text);
-      const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=en-US&client=tw-ob&q=${encoded}`;
+      const url = `https://dgqkwzuykhmcxvajumne.supabase.co/functions/v1/tts?q=${encoded}`;
       const audio = new Audio(url);
       audio.playbackRate = 0.85;
       audioRef.current = audio;
