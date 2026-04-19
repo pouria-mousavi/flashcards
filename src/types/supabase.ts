@@ -28,6 +28,8 @@ export interface Database {
           word_forms: Json | null
           other_meanings: Json | null
           native_speaking: boolean | null
+          daily_synonym: string | null
+          usage_note: string | null
         }
         Insert: {
           id?: string
@@ -46,6 +48,8 @@ export interface Database {
           word_forms?: Json | null
           other_meanings?: Json | null
           native_speaking?: boolean | null
+          daily_synonym?: string | null
+          usage_note?: string | null
         }
         Update: {
           id?: string
@@ -64,6 +68,8 @@ export interface Database {
           word_forms?: Json | null
           other_meanings?: Json | null
           native_speaking?: boolean | null
+          daily_synonym?: string | null
+          usage_note?: string | null
         }
       }
     }

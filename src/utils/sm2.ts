@@ -43,6 +43,8 @@ export interface Flashcard {
 
   other_meanings?: OtherMeaning[];
   native_speaking?: boolean;
+  dailySynonym?: string;
+  usageNote?: string;
   scenario?: string;
   scenarioAnswer?: string;
 }
@@ -222,6 +224,8 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
             return undefined;
         })(),
         native_speaking: row.native_speaking ?? false,
+        dailySynonym: row.daily_synonym || undefined,
+        usageNote: row.usage_note || undefined,
         scenario: (row as any).scenario || undefined,
         scenarioAnswer: (row as any).scenario_answer || undefined,
     };

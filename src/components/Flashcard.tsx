@@ -290,6 +290,54 @@ export default function Flashcard({ card, isFlipped, onFlip, onSaveNote, onPlayA
                     </div>
                 )}
 
+                {/* Daily Synonym + Usage Note — neutral everyday alternative and when to use each */}
+                {(card.dailySynonym || card.usageNote) && (
+                    <div style={{
+                        marginBottom: '12px',
+                        padding: '10px 12px',
+                        background: 'rgba(16, 185, 129, 0.06)',
+                        border: '1px solid rgba(16, 185, 129, 0.18)',
+                        borderRadius: 'var(--radius-sm)',
+                    }}>
+                        {card.dailySynonym && (
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'baseline',
+                                gap: '8px',
+                                marginBottom: card.usageNote ? '6px' : 0,
+                                flexWrap: 'wrap',
+                            }}>
+                                <span style={{
+                                    fontSize: '0.6rem',
+                                    fontWeight: '700',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.08em',
+                                    color: '#34d399',
+                                }}>
+                                    Say instead
+                                </span>
+                                <span style={{
+                                    color: '#6ee7b7',
+                                    fontWeight: '600',
+                                    fontSize: '0.9rem',
+                                }}>
+                                    {card.dailySynonym}
+                                </span>
+                            </div>
+                        )}
+                        {card.usageNote && (
+                            <div style={{
+                                fontSize: '0.78rem',
+                                color: 'var(--text-secondary)',
+                                lineHeight: '1.5',
+                                fontStyle: 'italic',
+                            }}>
+                                {card.usageNote}
+                            </div>
+                        )}
+                    </div>
+                )}
+
                 {/* Word Forms */}
                 {card.word_forms && Object.values(card.word_forms).some(v => !!v) && (
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
