@@ -62,14 +62,25 @@ const SETTINGS = {
   maxInterval: 365,              // Cap at 1 year
 };
 
+// Minimal shape needed by the SM-2 algorithm. Works for Flashcard or GrammarCard.
+export interface SRSCard {
+    state: CardState;
+    nextReviewDate: number;
+    interval: number;
+    easeFactor: number;
+}
+
 /**
  * SM-2 Algorithm Implementation
  * Rating: 0=Again, 3=Hard, 4=Good, 5=Easy
+ *
+ * Generic over any card with the SRS fields — used by both vocab Flashcards
+ * and GrammarCards.
  */
-export function calculateSM2(
-  card: Flashcard,
+export function calculateSM2<T extends SRSCard>(
+  card: T,
   rating: number
-): Partial<Flashcard> {
+): Partial<T> {
   const now = Date.now();
   const next = { ...card };
 
@@ -228,5 +239,39 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         usageNote: row.usage_note || undefined,
         scenario: (row as any).scenario || undefined,
         scenarioAnswer: (row as any).scenario_answer || undefined,
+    };
+}
+
+// -----------------------------------------------------------------------------
+// Grammar Cards — a separate flashcard type for advanced grammar structures.
+// Front: Persian sentence using the structure. Back: English sentence.
+// Uses the same SM-2 algorithm via the shared SRSCard interface.
+// -----------------------------------------------------------------------------
+
+export interface GrammarCard {
+    id: string;
+    front: string;          // Persian
+    back: string;           // English
+
+    // SRS fields (shared shape with SRSCard)
+    state: CardState;
+    nextReviewDate: number;
+    interval: number;
+    easeFactor: number;
+    createdAt: number;
+}
+
+export function mapGrammarRowToCard(
+    row: Database['public']['Tables']['grammar_cards']['Row']
+): GrammarCard {
+    return {
+        id: row.id,
+        front: row.front,
+        back: row.back,
+        state: row.state as CardState,
+        nextReviewDate: new Date(row.next_review).getTime(),
+        interval: row.interval,
+        easeFactor: row.ease_factor,
+        createdAt: new Date(row.created_at).getTime(),
     };
 }

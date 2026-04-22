@@ -7,7 +7,10 @@ interface Props {
   onStartStudy: () => void;
   onAddCard: () => void;
   onStartChallenge: () => void;
+  onStartGrammar: () => void;
+  grammarDueCount?: number;
   hasActiveSession?: boolean;
+  hasActiveGrammarSession?: boolean;
 }
 
 interface LeitnerBox {
@@ -46,7 +49,10 @@ function classifyCards(cards: Flashcard[]): LeitnerBox[] {
   ];
 }
 
-export default function Dashboard({ cards, onStartStudy, onAddCard, onStartChallenge, hasActiveSession }: Props) {
+export default function Dashboard({
+  cards, onStartStudy, onAddCard, onStartChallenge, onStartGrammar,
+  grammarDueCount = 0, hasActiveSession, hasActiveGrammarSession,
+}: Props) {
   const totalCards = cards.length;
   const now = Date.now();
   const dueCount = cards.filter(c => c.nextReviewDate <= now).length;
@@ -170,6 +176,48 @@ export default function Dashboard({ cards, onStartStudy, onAddCard, onStartChall
           }}
         >
           🎯 Daily Challenge
+        </button>
+
+        <button
+          onClick={onStartGrammar}
+          style={{
+            padding: '16px',
+            fontSize: '0.95rem',
+            fontWeight: '600',
+            background: 'rgba(167, 139, 250, 0.1)',
+            color: '#c4b5fd',
+            borderRadius: 'var(--radius)',
+            border: '1px solid rgba(167, 139, 250, 0.2)',
+            transition: 'all 0.2s ease',
+            letterSpacing: '-0.01em',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px'
+          }}
+        >
+          📚 Grammar
+          {hasActiveGrammarSession ? (
+            <span style={{
+              fontSize: '0.7rem',
+              background: 'rgba(167, 139, 250, 0.25)',
+              padding: '2px 8px',
+              borderRadius: '10px',
+              fontWeight: '700',
+            }}>
+              Resume
+            </span>
+          ) : grammarDueCount > 0 ? (
+            <span style={{
+              fontSize: '0.7rem',
+              background: 'rgba(167, 139, 250, 0.25)',
+              padding: '2px 8px',
+              borderRadius: '10px',
+              fontWeight: '700',
+            }}>
+              {grammarDueCount} due
+            </span>
+          ) : null}
         </button>
 
         <button

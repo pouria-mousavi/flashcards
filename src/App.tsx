@@ -1,22 +1,26 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { supabase, isConfigured } from './lib/supabase';
-import { mapRowToCard } from './utils/sm2';
-import type { Flashcard } from './utils/sm2';
+import { mapRowToCard, mapGrammarRowToCard } from './utils/sm2';
+import type { Flashcard, GrammarCard } from './utils/sm2';
 import StudySession from './components/StudySession';
+import GrammarStudy from './components/GrammarStudy';
 import Dashboard from './components/Dashboard';
 import AddCard from './components/AddCard';
 import ScenarioChallenge from './components/ScenarioChallenge';
 
-type View = 'dashboard' | 'study' | 'add' | 'scenario';
+type View = 'dashboard' | 'study' | 'add' | 'scenario' | 'grammar';
 
 const SESSION_KEY = 'flashcards_active_session';
+const GRAMMAR_SESSION_KEY = 'flashcards_active_grammar_session';
 
 function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
+  const [grammarCards, setGrammarCards] = useState<GrammarCard[]>([]);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<View>('dashboard');
   const [restoredSession, setRestoredSession] = useState<{ queue: Flashcard[], index: number, isFlipped: boolean } | null>(null);
+  const [restoredGrammarSession, setRestoredGrammarSession] = useState<{ queue: GrammarCard[], index: number, isFlipped: boolean } | null>(null);
 
   // --- Helper: rebuild session from localStorage + card data ---
   const rebuildSessionFromStorage = useCallback((cardsData: Flashcard[]) => {
@@ -41,6 +45,29 @@ function App() {
       return null;
   }, []);
 
+  // --- Helper: rebuild grammar session from localStorage ---
+  const rebuildGrammarSessionFromStorage = useCallback((cardsData: GrammarCard[]) => {
+      const saved = localStorage.getItem(GRAMMAR_SESSION_KEY);
+      if (!saved) return null;
+
+      try {
+          const session = JSON.parse(saved);
+          if (session.cardIds && Array.isArray(session.cardIds)) {
+              const queue = session.cardIds
+                  .map((id: string) => cardsData.find(c => c.id === id))
+                  .filter((c: GrammarCard | undefined): c is GrammarCard => !!c);
+              if (queue.length > 0) {
+                  const index = Math.min(session.currentIndex || 0, queue.length - 1);
+                  return { queue, index, isFlipped: session.isFlipped || false };
+              }
+          }
+      } catch (err) {
+          console.error("Failed to restore grammar session", err);
+          localStorage.removeItem(GRAMMAR_SESSION_KEY);
+      }
+      return null;
+  }, []);
+
   // --- Actions ---
   const saveCard = async (newCard: Flashcard) => {
       setCards(prev => [...prev, newCard]);
@@ -61,6 +88,17 @@ function App() {
           ease_factor: newCard.easeFactor
       });
       if (error) console.error('Error saving:', error);
+  };
+
+  const updateGrammarCardStats = async (updatedCard: GrammarCard) => {
+    setGrammarCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
+    const { error } = await supabase.from('grammar_cards').update({
+        state: updatedCard.state,
+        next_review: new Date(updatedCard.nextReviewDate).toISOString(),
+        interval: updatedCard.interval,
+        ease_factor: updatedCard.easeFactor
+    }).eq('id', updatedCard.id);
+    if (error) console.error('Error updating grammar card:', error);
   };
 
   const updateCardStats = async (updatedCard: Flashcard) => {
@@ -175,6 +213,25 @@ function App() {
                 setView('study');
             }
         }
+
+        // --- Also fetch grammar cards (separate table) ---
+        const { data: grammarRows, error: grammarError } = await supabase
+            .from('grammar_cards')
+            .select('*');
+        if (grammarError) {
+            console.error("Failed to load grammar cards", grammarError);
+        } else if (grammarRows && grammarRows.length > 0) {
+            const mappedGrammar = grammarRows.map(mapGrammarRowToCard);
+            setGrammarCards(mappedGrammar);
+
+            // Check for active grammar session
+            const grammarSession = rebuildGrammarSessionFromStorage(mappedGrammar);
+            if (grammarSession) {
+                setRestoredGrammarSession(grammarSession);
+                // Only auto-switch view if no vocab session is already restored
+                if (view === 'dashboard') setView('grammar');
+            }
+        }
       } catch (e) {
         console.error("Failed to load data", e);
       } finally {
@@ -182,7 +239,8 @@ function App() {
       }
     }
     init();
-  }, [rebuildSessionFromStorage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rebuildSessionFromStorage, rebuildGrammarSessionFromStorage]);
 
   // --- Visibilitychange: re-sync session when app returns to foreground ---
   useEffect(() => {
@@ -259,6 +317,47 @@ function App() {
       setView('dashboard');
   };
 
+  // --- Grammar study handlers ---
+  const handleStartGrammar = (freshStart = false) => {
+      if (!freshStart) {
+          const saved = localStorage.getItem(GRAMMAR_SESSION_KEY);
+          if (saved && restoredGrammarSession) {
+              const session = rebuildGrammarSessionFromStorage(grammarCards);
+              if (session) setRestoredGrammarSession(session);
+              setView('grammar');
+              return;
+          }
+      }
+
+      const now = Date.now();
+      const due = grammarCards.filter(c => c.nextReviewDate <= now);
+      const reviews = due.filter(c => c.state !== 'NEW').sort((a, b) => a.nextReviewDate - b.nextReviewDate);
+      const newGrammar = due.filter(c => c.state === 'NEW').sort((a, b) => b.createdAt - a.createdAt);
+      const session = [...newGrammar, ...reviews].slice(0, 20); // smaller sessions for grammar
+
+      if (session.length === 0) {
+          alert("No grammar cards due!");
+          return;
+      }
+
+      const sessionData = {
+          cardIds: session.map(c => c.id),
+          currentIndex: 0,
+          isFlipped: false,
+          timestamp: Date.now()
+      };
+      localStorage.setItem(GRAMMAR_SESSION_KEY, JSON.stringify(sessionData));
+
+      setRestoredGrammarSession({ queue: session, index: 0, isFlipped: false });
+      setView('grammar');
+  };
+
+  const handleGrammarSessionComplete = () => {
+      localStorage.removeItem(GRAMMAR_SESSION_KEY);
+      setRestoredGrammarSession(null);
+      setView('dashboard');
+  };
+
   if (!isConfigured) {
       return (
           <div className="flex-center full-screen" style={{ flexDirection: 'column', color: 'var(--danger)', padding: '20px', textAlign: 'center' }}>
@@ -300,7 +399,10 @@ function App() {
           onStartStudy={() => handleStartStudy(false)}
           onAddCard={() => setView('add')}
           onStartChallenge={() => setView('scenario')}
+          onStartGrammar={() => handleStartGrammar(false)}
+          grammarDueCount={grammarCards.filter(c => c.nextReviewDate <= Date.now()).length}
           hasActiveSession={!!restoredSession}
+          hasActiveGrammarSession={!!restoredGrammarSession}
         />
       )}
       {view === 'study' && restoredSession && (
@@ -312,6 +414,16 @@ function App() {
           onDeleteCard={deleteCard}
           onPause={handleSessionPause}
           onSessionComplete={handleSessionComplete}
+        />
+      )}
+      {view === 'grammar' && restoredGrammarSession && (
+        <GrammarStudy
+          cards={restoredGrammarSession.queue}
+          startIndex={restoredGrammarSession.index}
+          startFlipped={restoredGrammarSession.isFlipped}
+          onUpdateCard={updateGrammarCardStats}
+          onPause={() => setView('dashboard')}
+          onSessionComplete={handleGrammarSessionComplete}
         />
       )}
       {view === 'add' && (

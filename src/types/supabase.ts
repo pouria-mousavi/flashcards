@@ -72,6 +72,38 @@ export interface Database {
           usage_note?: string | null
         }
       }
+      grammar_cards: {
+        Row: {
+          id: string
+          front: string
+          back: string
+          state: string
+          next_review: string
+          interval: number
+          ease_factor: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          front: string
+          back: string
+          state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
+          next_review?: string
+          interval?: number
+          ease_factor?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          front?: string
+          back?: string
+          state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
+          next_review?: string
+          interval?: number
+          ease_factor?: number
+          created_at?: string
+        }
+      }
     }
   }
 }
