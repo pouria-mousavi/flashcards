@@ -85,6 +85,12 @@ function App() {
       }
   };
 
+  // Treat "formal-only" cards as heavy; exclude "informal", mixed tags, etc.
+  const isFormalCard = (c: Flashcard): boolean => {
+      const t = (c.tone || '').toLowerCase();
+      return t.includes('formal') && !t.includes('informal');
+  };
+
   const getDueCards = () => {
     const now = Date.now();
     const due = cards.filter(c => c.nextReviewDate <= now);
@@ -97,6 +103,45 @@ function App() {
 
     // LIFO: newest cards first, then reviews (last in, first served)
     return [...sortedNew, ...sortedReviews];
+  };
+
+  // Build a session with a balanced formal / non-formal mix so you don't
+  // grind through 50 formal words in a row. Target ~40% formal, 60% other,
+  // interleaved so they alternate. Falls back gracefully if one bucket is small.
+  const buildSession = (size = 50): Flashcard[] => {
+      const ordered = getDueCards();
+
+      const formal: Flashcard[] = [];
+      const lighter: Flashcard[] = [];
+      for (const c of ordered) {
+          if (isFormalCard(c)) formal.push(c); else lighter.push(c);
+      }
+
+      const targetFormal = Math.round(size * 0.4); // e.g., 20 out of 50
+      let takeFormal = Math.min(targetFormal, formal.length);
+      let takeLighter = Math.min(size - takeFormal, lighter.length);
+
+      // If one bucket fell short, backfill from the other so we still hit `size`.
+      const shortfall = size - takeFormal - takeLighter;
+      if (shortfall > 0) {
+          if (formal.length > takeFormal) {
+              takeFormal = Math.min(formal.length, takeFormal + shortfall);
+          } else if (lighter.length > takeLighter) {
+              takeLighter = Math.min(lighter.length, takeLighter + shortfall);
+          }
+      }
+
+      const pickedFormal = formal.slice(0, takeFormal);
+      const pickedLighter = lighter.slice(0, takeLighter);
+
+      // Interleave — start with a lighter card so the session opens easy.
+      const session: Flashcard[] = [];
+      const maxLen = Math.max(pickedFormal.length, pickedLighter.length);
+      for (let i = 0; i < maxLen; i++) {
+          if (i < pickedLighter.length) session.push(pickedLighter[i]);
+          if (i < pickedFormal.length) session.push(pickedFormal[i]);
+      }
+      return session;
   };
 
   // --- Load Data & Restore Session ---
@@ -186,7 +231,7 @@ function App() {
         }
     }
 
-    const due = getDueCards().slice(0, 50);
+    const due = buildSession(50);
     if (due.length === 0) {
         alert("No cards due!");
         return;
