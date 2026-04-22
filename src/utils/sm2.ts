@@ -15,6 +15,7 @@ export interface OtherMeaning {
 }
 
 export interface Flashcard {
+  type?: 'vocab';  // discriminator — optional for backwards compat, set by mapper
   id: string;
   front: string;
   back: string;
@@ -190,6 +191,7 @@ export function calculateSM2<T extends SRSCard>(
 // Mapper to convert DB Row -> App Flashcard
 export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']): Flashcard {
     return {
+        type: 'vocab',
         id: row.id,
         front: row.front,
         back: row.back,
@@ -249,6 +251,7 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
 // -----------------------------------------------------------------------------
 
 export interface GrammarCard {
+    type: 'grammar';
     id: string;
     front: string;          // Persian
     back: string;           // English
@@ -265,6 +268,7 @@ export function mapGrammarRowToCard(
     row: Database['public']['Tables']['grammar_cards']['Row']
 ): GrammarCard {
     return {
+        type: 'grammar',
         id: row.id,
         front: row.front,
         back: row.back,
@@ -275,3 +279,8 @@ export function mapGrammarRowToCard(
         createdAt: new Date(row.created_at).getTime(),
     };
 }
+
+// Union type used by the unified study session
+export type StudyCard = Flashcard | GrammarCard;
+
+export const isGrammarCard = (c: StudyCard): c is GrammarCard => c.type === 'grammar';

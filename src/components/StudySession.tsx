@@ -2,17 +2,17 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import FlashcardComponent from './Flashcard';
-import { calculateSM2 } from '../utils/sm2';
-import type { Flashcard } from '../utils/sm2';
+import { calculateSM2, isGrammarCard } from '../utils/sm2';
+import type { Flashcard, StudyCard } from '../utils/sm2';
 import { supabase } from '../lib/supabase';
 
 const SESSION_KEY = 'flashcards_active_session';
 
 interface Props {
-  cards: Flashcard[];
+  cards: StudyCard[];
   startIndex?: number;
   startFlipped?: boolean;
-  onUpdateCard: (card: Flashcard) => void;
+  onUpdateCard: (card: StudyCard) => void;
   onDeleteCard: (cardId: string) => void;
   onSessionComplete: () => void;
   onPause: () => void;
@@ -20,7 +20,7 @@ interface Props {
 
 export default function StudySession({ cards, startIndex = 0, startFlipped = false, onUpdateCard, onDeleteCard, onSessionComplete, onPause }: Props) {
   // Initialize queue from props ONCE — never replace on parent re-renders
-  const [queue, setQueue] = useState<Flashcard[]>(cards);
+  const [queue, setQueue] = useState<StudyCard[]>(cards);
   const [currentCardIndex, setCurrentCardIndex] = useState(startIndex);
   const [isFlipped, setIsFlipped] = useState(startFlipped);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -103,7 +103,7 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
     if (!currentCard) return;
 
     const updates = calculateSM2(currentCard, rating);
-    const updatedCard = { ...currentCard, ...updates };
+    const updatedCard: StudyCard = { ...currentCard, ...updates } as StudyCard;
 
     onUpdateCard(updatedCard);
 
@@ -312,14 +312,23 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
                 transition={{ duration: 0.2, ease: 'easeOut' }}
                 style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
             >
-                <FlashcardComponent
-                    card={currentCard}
-                    isFlipped={isFlipped}
-                    onFlip={handleFlip}
-                    onSaveNote={handleSaveNote}
-                    onDelete={() => handleDelete(currentCard.id)}
-                    onPlayAudio={() => handlePlayAudio(currentCard.back)}
-                />
+                {isGrammarCard(currentCard) ? (
+                    <GrammarCardView
+                        card={currentCard}
+                        isFlipped={isFlipped}
+                        onFlip={handleFlip}
+                        onPlayAudio={() => handlePlayAudio(currentCard.back)}
+                    />
+                ) : (
+                    <FlashcardComponent
+                        card={currentCard as Flashcard}
+                        isFlipped={isFlipped}
+                        onFlip={handleFlip}
+                        onSaveNote={handleSaveNote}
+                        onDelete={() => handleDelete(currentCard.id)}
+                        onPlayAudio={() => handlePlayAudio((currentCard as Flashcard).back)}
+                    />
+                )}
             </motion.div>
         </AnimatePresence>
       </div>
@@ -394,4 +403,139 @@ function RateButton({ label, color, onClick }: { label: string, color: string, o
             {label}
         </button>
     )
+}
+
+// Inline grammar card view — rendered in the unified session when card.type === 'grammar'
+import type { GrammarCard } from '../utils/sm2';
+function GrammarCardView({
+    card, isFlipped, onFlip, onPlayAudio,
+}: {
+    card: GrammarCard;
+    isFlipped: boolean;
+    onFlip: () => void;
+    onPlayAudio: () => void;
+}) {
+    return (
+        <div
+            onClick={!isFlipped ? onFlip : undefined}
+            style={{
+                width: '100%',
+                maxWidth: '460px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '16px',
+                padding: '0 20px',
+                cursor: !isFlipped ? 'pointer' : 'default',
+            }}
+        >
+            {/* Grammar badge */}
+            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <span style={{
+                    background: 'rgba(167, 139, 250, 0.15)',
+                    color: '#c4b5fd',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    fontSize: '0.65rem',
+                    fontWeight: '700',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                }}>
+                    Grammar
+                </span>
+            </div>
+
+            {/* Front — Persian sentence */}
+            <div style={{
+                background: 'var(--card-bg)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '28px 24px',
+                border: '1px solid var(--border)',
+                boxShadow: 'var(--card-shadow)',
+            }}>
+                <span style={{
+                    fontSize: '0.65rem',
+                    fontWeight: '700',
+                    color: 'var(--text-muted)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    display: 'block',
+                    marginBottom: '14px'
+                }}>
+                    چطور این جمله رو به انگلیسی بگی؟
+                </span>
+
+                <p style={{
+                    fontSize: card.front.length > 100 ? '1rem' : card.front.length > 60 ? '1.1rem' : '1.2rem',
+                    fontFamily: 'Vazirmatn, sans-serif',
+                    fontWeight: '600',
+                    direction: 'rtl',
+                    textAlign: 'right',
+                    lineHeight: '2',
+                    color: 'var(--text-primary)',
+                    margin: 0,
+                }}>
+                    {card.front}
+                </p>
+            </div>
+
+            {/* Back — English sentence (revealed on flip) */}
+            {isFlipped && (
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{
+                        background: 'rgba(167, 139, 250, 0.08)',
+                        borderRadius: 'var(--radius)',
+                        padding: '22px 20px',
+                        border: '1px solid rgba(167, 139, 250, 0.25)',
+                    }}
+                >
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        marginBottom: '10px',
+                    }}>
+                        <span style={{
+                            fontSize: '0.65rem',
+                            fontWeight: '700',
+                            color: '#c4b5fd',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em',
+                        }}>
+                            English
+                        </span>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); onPlayAudio(); }}
+                            style={{
+                                background: 'rgba(167, 139, 250, 0.18)',
+                                color: '#c4b5fd',
+                                border: 'none',
+                                borderRadius: '50%',
+                                width: '32px',
+                                height: '32px',
+                                fontSize: '0.9rem',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                            aria-label="Play audio"
+                        >
+                            ♪
+                        </button>
+                    </div>
+                    <p style={{
+                        margin: 0,
+                        fontSize: card.back.length > 100 ? '1rem' : '1.1rem',
+                        fontWeight: '500',
+                        color: 'var(--text-primary)',
+                        lineHeight: '1.6',
+                    }}>
+                        {card.back}
+                    </p>
+                </motion.div>
+            )}
+        </div>
+    );
 }

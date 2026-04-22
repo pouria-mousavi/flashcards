@@ -1,16 +1,14 @@
 import { motion } from 'framer-motion';
 import { CardState } from '../utils/sm2';
-import type { Flashcard } from '../utils/sm2';
+import type { Flashcard, GrammarCard } from '../utils/sm2';
 
 interface Props {
   cards: Flashcard[];
+  grammarCards?: GrammarCard[];
   onStartStudy: () => void;
   onAddCard: () => void;
   onStartChallenge: () => void;
-  onStartGrammar: () => void;
-  grammarDueCount?: number;
   hasActiveSession?: boolean;
-  hasActiveGrammarSession?: boolean;
 }
 
 interface LeitnerBox {
@@ -50,12 +48,13 @@ function classifyCards(cards: Flashcard[]): LeitnerBox[] {
 }
 
 export default function Dashboard({
-  cards, onStartStudy, onAddCard, onStartChallenge, onStartGrammar,
-  grammarDueCount = 0, hasActiveSession, hasActiveGrammarSession,
+  cards, grammarCards = [], onStartStudy, onAddCard, onStartChallenge, hasActiveSession,
 }: Props) {
-  const totalCards = cards.length;
+  const totalCards = cards.length + grammarCards.length;
   const now = Date.now();
-  const dueCount = cards.filter(c => c.nextReviewDate <= now).length;
+  const dueCount =
+      cards.filter(c => c.nextReviewDate <= now).length +
+      grammarCards.filter(c => c.nextReviewDate <= now).length;
   const hasDue = dueCount > 0;
 
   const boxes = classifyCards(cards);
@@ -153,7 +152,7 @@ export default function Dashboard({
           {hasActiveSession
             ? "Resume Session"
             : (dueCount > 0
-              ? `Study ${Math.min(dueCount, 50)} Cards`
+              ? `Study ${Math.min(dueCount, 60)} Cards`
               : "All Caught Up")}
         </button>
 
@@ -176,48 +175,6 @@ export default function Dashboard({
           }}
         >
           🎯 Daily Challenge
-        </button>
-
-        <button
-          onClick={onStartGrammar}
-          style={{
-            padding: '16px',
-            fontSize: '0.95rem',
-            fontWeight: '600',
-            background: 'rgba(167, 139, 250, 0.1)',
-            color: '#c4b5fd',
-            borderRadius: 'var(--radius)',
-            border: '1px solid rgba(167, 139, 250, 0.2)',
-            transition: 'all 0.2s ease',
-            letterSpacing: '-0.01em',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px'
-          }}
-        >
-          📚 Grammar
-          {hasActiveGrammarSession ? (
-            <span style={{
-              fontSize: '0.7rem',
-              background: 'rgba(167, 139, 250, 0.25)',
-              padding: '2px 8px',
-              borderRadius: '10px',
-              fontWeight: '700',
-            }}>
-              Resume
-            </span>
-          ) : grammarDueCount > 0 ? (
-            <span style={{
-              fontSize: '0.7rem',
-              background: 'rgba(167, 139, 250, 0.25)',
-              padding: '2px 8px',
-              borderRadius: '10px',
-              fontWeight: '700',
-            }}>
-              {grammarDueCount} due
-            </span>
-          ) : null}
         </button>
 
         <button
