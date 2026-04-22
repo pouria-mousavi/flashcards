@@ -123,10 +123,10 @@ function App() {
     return [...sortedNew, ...sortedReviews];
   };
 
-  // Build a session with a balanced formal-vocab / everything-else mix, so you
-  // don't grind through 60 formal words in a row. Target ~40% formal-vocab,
-  // 60% lighter (grammar + non-formal vocab). Falls back gracefully if one
-  // bucket is small.
+  // Build a session with non-formal vocab as the FOCUS (~75%), leaving
+  // room for ~25% formal vocab sprinkled in. Grammar cards fall in the
+  // "lighter" bucket alongside non-formal vocab. Falls back gracefully
+  // if one bucket is small.
   const buildSession = (size = 60): StudyCard[] => {
       const ordered = getDueCards();
 
@@ -136,7 +136,7 @@ function App() {
           if (isFormalCard(c)) formal.push(c); else lighter.push(c);
       }
 
-      const targetFormal = Math.round(size * 0.4); // e.g., 24 out of 60
+      const targetFormal = Math.round(size * 0.25); // 15 out of 60
       let takeFormal = Math.min(targetFormal, formal.length);
       let takeLighter = Math.min(size - takeFormal, lighter.length);
 
@@ -153,12 +153,16 @@ function App() {
       const pickedFormal = formal.slice(0, takeFormal);
       const pickedLighter = lighter.slice(0, takeLighter);
 
-      // Interleave — start with a lighter card so the session opens easy.
-      const session: StudyCard[] = [];
-      const maxLen = Math.max(pickedFormal.length, pickedLighter.length);
-      for (let i = 0; i < maxLen; i++) {
-          if (i < pickedLighter.length) session.push(pickedLighter[i]);
-          if (i < pickedFormal.length) session.push(pickedFormal[i]);
+      // Space formal cards evenly across the whole session so they don't
+      // clump at the start. E.g., 15 formal in 60 total → ~1 formal every 4 cards.
+      const session: StudyCard[] = [...pickedLighter];
+      if (pickedFormal.length > 0 && session.length > 0) {
+          const gap = Math.max(1, Math.floor(session.length / pickedFormal.length));
+          // Insert each formal at position gap*(i+1) (accounting for prior inserts)
+          pickedFormal.forEach((card, i) => {
+              const insertAt = Math.min(gap * (i + 1) + i, session.length);
+              session.splice(insertAt, 0, card);
+          });
       }
       return session;
   };
