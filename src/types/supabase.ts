@@ -77,6 +77,7 @@ export interface Database {
           id: string
           front: string
           back: string
+          structure: string | null
           state: string
           next_review: string
           interval: number
@@ -87,6 +88,7 @@ export interface Database {
           id?: string
           front: string
           back: string
+          structure?: string | null
           state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
           next_review?: string
           interval?: number
@@ -97,6 +99,7 @@ export interface Database {
           id?: string
           front?: string
           back?: string
+          structure?: string | null
           state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
           next_review?: string
           interval?: number

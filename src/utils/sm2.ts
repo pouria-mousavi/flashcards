@@ -255,6 +255,7 @@ export interface GrammarCard {
     id: string;
     front: string;          // Persian
     back: string;           // English
+    structure?: string;     // Name of the grammar structure (e.g., "Mixed Conditional")
 
     // SRS fields (shared shape with SRSCard)
     state: CardState;
@@ -272,6 +273,7 @@ export function mapGrammarRowToCard(
         id: row.id,
         front: row.front,
         back: row.back,
+        structure: row.structure || undefined,
         state: row.state as CardState,
         nextReviewDate: new Date(row.next_review).getTime(),
         interval: row.interval,

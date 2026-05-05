@@ -534,6 +534,34 @@ function GrammarCardView({
                     }}>
                         {card.back}
                     </p>
+
+                    {/* Structure badge — what to learn from this sentence */}
+                    {card.structure && (
+                        <div style={{
+                            marginTop: '14px',
+                            paddingTop: '12px',
+                            borderTop: '1px solid rgba(167, 139, 250, 0.18)',
+                        }}>
+                            <span style={{
+                                fontSize: '0.6rem',
+                                fontWeight: '700',
+                                color: '#c4b5fd',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.08em',
+                                display: 'block',
+                                marginBottom: '4px',
+                            }}>
+                                Structure
+                            </span>
+                            <span style={{
+                                fontSize: '0.95rem',
+                                fontWeight: '600',
+                                color: '#ddd6fe',
+                            }}>
+                                {card.structure}
+                            </span>
+                        </div>
+                    )}
                 </motion.div>
             )}
         </div>
