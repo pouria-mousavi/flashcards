@@ -105,6 +105,16 @@ function App() {
       return t.includes('formal') && !t.includes('informal');
   };
 
+  // Fisher-Yates shuffle — used to break up topic clusters in NEW cards
+  const shuffle = <T,>(arr: T[]): T[] => {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+  };
+
   // Due cards across BOTH tables, merged and prioritized.
   const getDueCards = (): StudyCard[] => {
     const now = Date.now();
@@ -116,11 +126,19 @@ function App() {
     const reviews = allDue.filter(c => c.state !== 'NEW');
     const newCards = allDue.filter(c => c.state === 'NEW');
 
+    // Reviews stay sorted by due date (oldest first)
     const sortedReviews = [...reviews].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
-    const sortedNew = [...newCards].sort((a, b) => b.createdAt - a.createdAt);
 
-    // LIFO: newest cards first, then reviews (last in, first served)
-    return [...sortedNew, ...sortedReviews];
+    // NEW cards: shuffle to break up topic clusters from batch imports
+    // (e.g., 6 "smell" words added together would otherwise cluster).
+    // We still bias toward recently-added by taking the top 250 newest first.
+    const recentNew = [...newCards]
+        .sort((a, b) => b.createdAt - a.createdAt)
+        .slice(0, 250);
+    const shuffledNew = shuffle(recentNew);
+
+    // NEW cards come before reviews (LIFO across types)
+    return [...shuffledNew, ...sortedReviews];
   };
 
   // Build a session with non-formal vocab as the FOCUS (~75%), leaving
