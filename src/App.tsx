@@ -98,13 +98,6 @@ function App() {
       }
   };
 
-  // Treat "formal-only" vocab as heavy; grammar cards and non-formal vocab are lighter.
-  const isFormalCard = (c: StudyCard): boolean => {
-      if (isGrammarCard(c)) return false;
-      const t = (c.tone || '').toLowerCase();
-      return t.includes('formal') && !t.includes('informal');
-  };
-
   // Fisher-Yates shuffle — used to break up topic clusters in NEW cards
   const shuffle = <T,>(arr: T[]): T[] => {
       const a = [...arr];
@@ -141,43 +134,44 @@ function App() {
     return [...shuffledNew, ...sortedReviews];
   };
 
-  // Build a session with non-formal vocab as the FOCUS (~75%), leaving
-  // room for ~25% formal vocab sprinkled in. Grammar cards fall in the
-  // "lighter" bucket alongside non-formal vocab. Falls back gracefully
-  // if one bucket is small.
-  const buildSession = (size = 60): StudyCard[] => {
-      const ordered = getDueCards();
+  // Build a short, completable session.
+  //
+  // The key lever for finishing sessions: CAP new cards. New cards are
+  // high-effort (building memory from scratch); reviews are quick wins.
+  // A short session of mostly reviews + a few new cards is far easier to
+  // finish than 60 brand-new words. (This is exactly Anki's new-cards-per-day model.)
+  //
+  // Defaults: 20 cards total, max 8 new. The new cards are spread evenly
+  // among the reviews so you get a rhythm of quick-win → challenge → quick-win.
+  const buildSession = (size = 20, newCap = 8): StudyCard[] => {
+      const due = getDueCards(); // shuffled new first, then reviews by due date
+      const newCards = due.filter(c => c.state === 'NEW');
+      const reviewCards = due.filter(c => c.state !== 'NEW');
 
-      const formal: StudyCard[] = [];
-      const lighter: StudyCard[] = [];
-      for (const c of ordered) {
-          if (isFormalCard(c)) formal.push(c); else lighter.push(c);
-      }
+      let takeNew = Math.min(newCap, newCards.length);
+      let takeReview = Math.min(size - takeNew, reviewCards.length);
 
-      const targetFormal = Math.round(size * 0.25); // 15 out of 60
-      let takeFormal = Math.min(targetFormal, formal.length);
-      let takeLighter = Math.min(size - takeFormal, lighter.length);
-
-      // If one bucket fell short, backfill from the other so we still hit `size`.
-      const shortfall = size - takeFormal - takeLighter;
+      // Backfill: if reviews run short, top up with more new cards so the
+      // session still reaches `size` (and vice versa).
+      const shortfall = size - takeNew - takeReview;
       if (shortfall > 0) {
-          if (formal.length > takeFormal) {
-              takeFormal = Math.min(formal.length, takeFormal + shortfall);
-          } else if (lighter.length > takeLighter) {
-              takeLighter = Math.min(lighter.length, takeLighter + shortfall);
+          if (newCards.length > takeNew) {
+              takeNew = Math.min(newCards.length, takeNew + shortfall);
+          } else if (reviewCards.length > takeReview) {
+              takeReview = Math.min(reviewCards.length, takeReview + shortfall);
           }
       }
 
-      const pickedFormal = formal.slice(0, takeFormal);
-      const pickedLighter = lighter.slice(0, takeLighter);
+      const pickedNew = newCards.slice(0, takeNew);
+      const pickedReview = reviewCards.slice(0, takeReview);
 
-      // Space formal cards evenly across the whole session so they don't
-      // clump at the start. E.g., 15 formal in 60 total → ~1 formal every 4 cards.
-      const session: StudyCard[] = [...pickedLighter];
-      if (pickedFormal.length > 0 && session.length > 0) {
-          const gap = Math.max(1, Math.floor(session.length / pickedFormal.length));
-          // Insert each formal at position gap*(i+1) (accounting for prior inserts)
-          pickedFormal.forEach((card, i) => {
+      // Spread the harder new cards evenly through the reviews. Start with a
+      // review for an easy opener.
+      const session: StudyCard[] = [...pickedReview];
+      if (pickedNew.length > 0) {
+          if (session.length === 0) return pickedNew;
+          const gap = Math.max(1, Math.floor(session.length / pickedNew.length));
+          pickedNew.forEach((card, i) => {
               const insertAt = Math.min(gap * (i + 1) + i, session.length);
               session.splice(insertAt, 0, card);
           });
@@ -280,7 +274,7 @@ function App() {
         }
     }
 
-    const due = buildSession(60);
+    const due = buildSession(20, 8);
     if (due.length === 0) {
         alert("No cards due!");
         return;

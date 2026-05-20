@@ -152,7 +152,7 @@ export default function Dashboard({
           {hasActiveSession
             ? "Resume Session"
             : (dueCount > 0
-              ? `Study ${Math.min(dueCount, 60)} Cards`
+              ? `Study ${Math.min(dueCount, 20)} Cards`
               : "All Caught Up")}
         </button>
 
