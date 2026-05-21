@@ -292,12 +292,6 @@ function App() {
     setView('study');
   };
 
-  const handleStartFresh = () => {
-      localStorage.removeItem(SESSION_KEY);
-      setRestoredSession(null);
-      handleStartStudy(true);
-  };
-
   const handleSessionPause = () => {
       setView('dashboard');
   };
@@ -348,7 +342,6 @@ function App() {
           cards={cards}
           grammarCards={grammarCards}
           onStartStudy={() => handleStartStudy(false)}
-          onStartFresh={handleStartFresh}
           onAddCard={() => setView('add')}
           onStartChallenge={() => setView('scenario')}
           hasActiveSession={!!restoredSession}
