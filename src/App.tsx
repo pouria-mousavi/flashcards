@@ -10,7 +10,7 @@ import ScenarioChallenge from './components/ScenarioChallenge';
 
 type View = 'dashboard' | 'study' | 'add' | 'scenario';
 
-const SESSION_KEY = 'flashcards_active_session';
+const SESSION_KEY = 'flashcards_active_session_v2';
 
 function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
