@@ -2,6 +2,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { supabase, isConfigured } from './lib/supabase';
 import { mapRowToCard, mapGrammarRowToCard, isGrammarCard } from './utils/sm2';
+import { SESSION_KEY } from './lib/session';
 import type { Flashcard, GrammarCard, StudyCard } from './utils/sm2';
 import StudySession from './components/StudySession';
 import Dashboard from './components/Dashboard';
@@ -9,8 +10,6 @@ import AddCard from './components/AddCard';
 import ScenarioChallenge from './components/ScenarioChallenge';
 
 type View = 'dashboard' | 'study' | 'add' | 'scenario';
-
-const SESSION_KEY = 'flashcards_active_session_v2';
 
 function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);

@@ -5,8 +5,7 @@ import FlashcardComponent from './Flashcard';
 import { calculateSM2, isGrammarCard } from '../utils/sm2';
 import type { Flashcard, StudyCard } from '../utils/sm2';
 import { supabase } from '../lib/supabase';
-
-const SESSION_KEY = 'flashcards_active_session';
+import { SESSION_KEY } from '../lib/session';
 
 interface Props {
   cards: StudyCard[];
