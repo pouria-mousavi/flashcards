@@ -72,6 +72,47 @@ export interface Database {
           usage_note?: string | null
         }
       }
+      swedish_cards: {
+        Row: {
+          id: string
+          front: string
+          front_lang: string
+          back: string
+          back_lang: string
+          examples: Json | null
+          state: string
+          next_review: string
+          interval: number
+          ease_factor: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          front: string
+          front_lang?: string
+          back: string
+          back_lang?: string
+          examples?: Json | null
+          state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
+          next_review?: string
+          interval?: number
+          ease_factor?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          front?: string
+          front_lang?: string
+          back?: string
+          back_lang?: string
+          examples?: Json | null
+          state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
+          next_review?: string
+          interval?: number
+          ease_factor?: number
+          created_at?: string
+        }
+      }
       grammar_cards: {
         Row: {
           id: string

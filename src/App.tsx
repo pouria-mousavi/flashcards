@@ -1,13 +1,15 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { supabase, isConfigured } from './lib/supabase';
-import { mapRowToCard, mapGrammarRowToCard, isGrammarCard } from './utils/sm2';
-import { SESSION_KEY } from './lib/session';
-import type { Flashcard, GrammarCard, StudyCard } from './utils/sm2';
+import { mapRowToCard, mapGrammarRowToCard, mapSwedishRowToCard, isGrammarCard } from './utils/sm2';
+import { SESSION_KEY, SWEDISH_SESSION_KEY, ACTIVE_LANGUAGE_KEY } from './lib/session';
+import type { Flashcard, GrammarCard, StudyCard, SwedishCard, Lang } from './utils/sm2';
 import StudySession from './components/StudySession';
 import Dashboard from './components/Dashboard';
 import AddCard from './components/AddCard';
 import ScenarioChallenge from './components/ScenarioChallenge';
+import SwedishDashboard from './components/SwedishDashboard';
+import SwedishStudySession from './components/SwedishStudySession';
 
 type View = 'dashboard' | 'study' | 'add' | 'scenario';
 
@@ -17,6 +19,13 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<View>('dashboard');
   const [restoredSession, setRestoredSession] = useState<{ queue: StudyCard[], index: number, isFlipped: boolean } | null>(null);
+
+  // --- Swedish: a fully separate deck + session, never merged with English ---
+  const [swedishCards, setSwedishCards] = useState<SwedishCard[]>([]);
+  const [swedishSession, setSwedishSession] = useState<{ queue: SwedishCard[], index: number, isFlipped: boolean } | null>(null);
+  const [activeLanguage, setActiveLanguage] = useState<Lang>(() =>
+      localStorage.getItem(ACTIVE_LANGUAGE_KEY) === 'sv' ? 'sv' : 'en'
+  );
 
   // --- Helper: rebuild session from localStorage + card data (vocab + grammar) ---
   const rebuildSessionFromStorage = useCallback((vocab: Flashcard[], grammar: GrammarCard[]) => {
@@ -41,6 +50,30 @@ function App() {
       } catch (err) {
           console.error("Failed to restore session", err);
           localStorage.removeItem(SESSION_KEY);
+      }
+      return null;
+  }, []);
+
+  // --- Helper: rebuild Swedish session from its OWN storage key (isolated) ---
+  const rebuildSwedishSessionFromStorage = useCallback((deck: SwedishCard[]) => {
+      const saved = localStorage.getItem(SWEDISH_SESSION_KEY);
+      if (!saved) return null;
+      try {
+          const session = JSON.parse(saved);
+          if (session.cardIds && Array.isArray(session.cardIds)) {
+              const lookup = new Map<string, SwedishCard>();
+              for (const c of deck) lookup.set(c.id, c);
+              const queue = session.cardIds
+                  .map((id: string) => lookup.get(id))
+                  .filter((c: SwedishCard | undefined): c is SwedishCard => !!c);
+              if (queue.length > 0) {
+                  const index = Math.min(session.currentIndex || 0, queue.length - 1);
+                  return { queue, index, isFlipped: session.isFlipped || false };
+              }
+          }
+      } catch (err) {
+          console.error("Failed to restore Swedish session", err);
+          localStorage.removeItem(SWEDISH_SESSION_KEY);
       }
       return null;
   }, []);
@@ -85,6 +118,20 @@ function App() {
     }).eq('id', updatedCard.id);
 
     if (error) console.error(`Error updating ${table}:`, error);
+  };
+
+  // Swedish update — writes ONLY to swedish_cards, never the English tables.
+  const updateSwedishCardStats = async (updatedCard: SwedishCard) => {
+    setSwedishCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
+
+    const { error } = await supabase.from('swedish_cards').update({
+        state: updatedCard.state,
+        next_review: new Date(updatedCard.nextReviewDate).toISOString(),
+        interval: updatedCard.interval,
+        ease_factor: updatedCard.easeFactor
+    }).eq('id', updatedCard.id);
+
+    if (error) console.error('Error updating swedish_cards:', error);
   };
 
   const deleteCard = async (cardId: string) => {
@@ -186,6 +233,50 @@ function App() {
       return session;
   };
 
+  // --- Swedish: same SRS prioritization as English, applied to the Swedish deck ---
+  // Priority: NEW (LIFO, shuffled) → actively-learning → graduated reviews.
+  const getSwedishDueCards = (): SwedishCard[] => {
+      const now = Date.now();
+      const allDue = swedishCards.filter(c => c.nextReviewDate <= now);
+      const newCards = allDue.filter(c => c.state === 'NEW');
+      const learning = allDue.filter(c => c.state === 'LEARNING' || c.state === 'RELEARNING');
+      const reviews = allDue.filter(c => c.state === 'REVIEW');
+      const sortedLearning = [...learning].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
+      const sortedReviews = [...reviews].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
+      const recentNew = [...newCards].sort((a, b) => b.createdAt - a.createdAt).slice(0, 250);
+      const shuffledNew = shuffle(recentNew);
+      return [...shuffledNew, ...sortedLearning, ...sortedReviews];
+  };
+
+  const buildSwedishSession = (size = 20, newCap = 8): SwedishCard[] => {
+      const due = getSwedishDueCards();
+      const newCards = due.filter(c => c.state === 'NEW');
+      const reviewCards = due.filter(c => c.state !== 'NEW');
+
+      let takeNew = Math.min(newCap, newCards.length);
+      let takeReview = Math.min(size - takeNew, reviewCards.length);
+
+      const shortfall = size - takeNew - takeReview;
+      if (shortfall > 0) {
+          if (newCards.length > takeNew) takeNew = Math.min(newCards.length, takeNew + shortfall);
+          else if (reviewCards.length > takeReview) takeReview = Math.min(reviewCards.length, takeReview + shortfall);
+      }
+
+      const pickedNew = newCards.slice(0, takeNew);
+      const pickedReview = reviewCards.slice(0, takeReview);
+
+      const session: SwedishCard[] = [...pickedReview];
+      if (pickedNew.length > 0) {
+          if (session.length === 0) return pickedNew;
+          const gap = Math.max(1, Math.floor(session.length / pickedNew.length));
+          pickedNew.forEach((card, i) => {
+              const insertAt = Math.min(gap * (i + 1) + i, session.length);
+              session.splice(insertAt, 0, card);
+          });
+      }
+      return session;
+  };
+
   // --- Load Data & Restore Session ---
   useEffect(() => {
     async function init() {
@@ -221,10 +312,27 @@ function App() {
             setGrammarCards(mappedGrammar);
         }
 
-        // Restore any active session (queue may contain both types)
-        const session = rebuildSessionFromStorage(mappedCards, mappedGrammar);
-        if (session) {
-            setRestoredSession(session);
+        // --- Also fetch Swedish cards (fully separate deck) ---
+        const { data: swedishRows, error: swedishError } = await supabase
+            .from('swedish_cards')
+            .select('*');
+        let mappedSwedish: SwedishCard[] = [];
+        if (swedishError) {
+            console.error("Failed to load swedish cards", swedishError);
+        } else if (swedishRows) {
+            mappedSwedish = swedishRows.map(mapSwedishRowToCard);
+            setSwedishCards(mappedSwedish);
+        }
+
+        // Restore each language's active session from its OWN storage key.
+        const engSession = rebuildSessionFromStorage(mappedCards, mappedGrammar);
+        if (engSession) setRestoredSession(engSession);
+        const svSession = rebuildSwedishSessionFromStorage(mappedSwedish);
+        if (svSession) setSwedishSession(svSession);
+
+        // Only jump straight into a session if it belongs to the active language.
+        const lang = localStorage.getItem(ACTIVE_LANGUAGE_KEY) === 'sv' ? 'sv' : 'en';
+        if ((lang === 'en' && engSession) || (lang === 'sv' && svSession)) {
             setView('study');
         }
       } catch (e) {
@@ -235,27 +343,37 @@ function App() {
     }
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rebuildSessionFromStorage]);
+  }, [rebuildSessionFromStorage, rebuildSwedishSessionFromStorage]);
 
-  // --- Visibilitychange: re-sync session when app returns to foreground ---
+  // --- Visibilitychange: re-sync the ACTIVE language's session on foreground ---
   useEffect(() => {
       const handleVisibility = () => {
-          if (document.visibilityState === 'visible' && cards.length > 0) {
+          if (document.visibilityState !== 'visible') return;
+
+          if (activeLanguage === 'sv') {
+              if (swedishCards.length === 0) return;
+              const session = rebuildSwedishSessionFromStorage(swedishCards);
+              if (session) {
+                  setSwedishSession(session);
+              } else {
+                  setSwedishSession(null);
+                  if (view === 'study') setView('dashboard');
+              }
+          } else {
+              if (cards.length === 0) return;
               const session = rebuildSessionFromStorage(cards, grammarCards);
               if (session) {
                   setRestoredSession(session);
               } else {
                   setRestoredSession(null);
-                  if (view === 'study') {
-                      setView('dashboard');
-                  }
+                  if (view === 'study') setView('dashboard');
               }
           }
       };
 
       document.addEventListener('visibilitychange', handleVisibility);
       return () => document.removeEventListener('visibilitychange', handleVisibility);
-  }, [cards, grammarCards, view, rebuildSessionFromStorage]);
+  }, [cards, grammarCards, swedishCards, activeLanguage, view, rebuildSessionFromStorage, rebuildSwedishSessionFromStorage]);
 
   // --- Beforeunload: safety net to ensure session is saved ---
   useEffect(() => {
@@ -309,6 +427,51 @@ function App() {
       setView('dashboard');
   };
 
+  // --- Swedish session controls (mirror the English ones, separate storage) ---
+  const handleStartSwedishStudy = (freshStart = false) => {
+      if (!freshStart) {
+          const saved = localStorage.getItem(SWEDISH_SESSION_KEY);
+          if (saved && swedishSession) {
+              const session = rebuildSwedishSessionFromStorage(swedishCards);
+              if (session) setSwedishSession(session);
+              setView('study');
+              return;
+          }
+      }
+
+      const due = buildSwedishSession(20, 8);
+      if (due.length === 0) {
+          alert("No Swedish cards due!");
+          return;
+      }
+
+      const sessionData = {
+          cardIds: due.map(c => c.id),
+          currentIndex: 0,
+          isFlipped: false,
+          timestamp: Date.now()
+      };
+      localStorage.setItem(SWEDISH_SESSION_KEY, JSON.stringify(sessionData));
+
+      setSwedishSession({ queue: due, index: 0, isFlipped: false });
+      setView('study');
+  };
+
+  const handleSwedishSessionComplete = () => {
+      localStorage.removeItem(SWEDISH_SESSION_KEY);
+      setSwedishSession(null);
+      setView('dashboard');
+  };
+
+  // Switch between the English and Swedish sections. Always lands on the
+  // dashboard so you never carry one language's view into the other.
+  const switchLanguage = (lang: Lang) => {
+      if (lang === activeLanguage) return;
+      setActiveLanguage(lang);
+      localStorage.setItem(ACTIVE_LANGUAGE_KEY, lang);
+      setView('dashboard');
+  };
+
   if (!isConfigured) {
       return (
           <div className="flex-center full-screen" style={{ flexDirection: 'column', color: 'var(--danger)', padding: '20px', textAlign: 'center' }}>
@@ -342,6 +505,33 @@ function App() {
       saveCard(newCard);
   };
 
+  // Swedish section — entirely separate render tree from English.
+  if (activeLanguage === 'sv') {
+    return (
+      <div className="app-container">
+        {view === 'study' && swedishSession ? (
+          <SwedishStudySession
+            cards={swedishSession.queue}
+            startIndex={swedishSession.index}
+            startFlipped={swedishSession.isFlipped}
+            onUpdateCard={updateSwedishCardStats}
+            onPause={handleSessionPause}
+            onSessionComplete={handleSwedishSessionComplete}
+          />
+        ) : (
+          <SwedishDashboard
+            cards={swedishCards}
+            onStartStudy={() => handleStartSwedishStudy(false)}
+            hasActiveSession={!!swedishSession}
+            activeLanguage={activeLanguage}
+            onSwitchLanguage={switchLanguage}
+          />
+        )}
+      </div>
+    );
+  }
+
+  // English section (unchanged behavior).
   return (
     <div className="app-container">
       {view === 'dashboard' && (
@@ -352,6 +542,8 @@ function App() {
           onAddCard={() => setView('add')}
           onStartChallenge={() => setView('scenario')}
           hasActiveSession={!!restoredSession}
+          activeLanguage={activeLanguage}
+          onSwitchLanguage={switchLanguage}
         />
       )}
       {view === 'study' && restoredSession && (

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { CardState } from '../utils/sm2';
-import type { Flashcard, GrammarCard } from '../utils/sm2';
+import type { Flashcard, GrammarCard, Lang } from '../utils/sm2';
+import LanguageSwitcher from './LanguageSwitcher';
 
 interface Props {
   cards: Flashcard[];
@@ -9,6 +10,8 @@ interface Props {
   onAddCard: () => void;
   onStartChallenge: () => void;
   hasActiveSession?: boolean;
+  activeLanguage?: Lang;
+  onSwitchLanguage?: (lang: Lang) => void;
 }
 
 interface LeitnerBox {
@@ -49,6 +52,7 @@ function classifyCards(cards: Flashcard[]): LeitnerBox[] {
 
 export default function Dashboard({
   cards, grammarCards = [], onStartStudy, onAddCard, onStartChallenge, hasActiveSession,
+  activeLanguage = 'en', onSwitchLanguage,
 }: Props) {
   const totalCards = cards.length + grammarCards.length;
   const now = Date.now();
@@ -73,6 +77,11 @@ export default function Dashboard({
       overflowY: 'auto',
       background: 'var(--bg-color)'
     }}>
+
+      {/* Language switcher — entry point between the two sections */}
+      {onSwitchLanguage && (
+        <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />
+      )}
 
       {/* Title */}
       <div style={{ textAlign: 'center' }}>

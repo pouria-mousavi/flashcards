@@ -286,3 +286,67 @@ export function mapGrammarRowToCard(
 export type StudyCard = Flashcard | GrammarCard;
 
 export const isGrammarCard = (c: StudyCard): c is GrammarCard => c.type === 'grammar';
+
+// -----------------------------------------------------------------------------
+// Swedish Cards — a SEPARATE language deck. Deliberately NOT part of StudyCard /
+// the English session, so the two languages can never be mixed. Same SM-2
+// algorithm via the shared SRSCard shape.
+//
+// Each card has a front and back, one Swedish and one English (frontLang tells
+// you which). Examples live only on the back, written in the back-side language,
+// each paired with a translation in the opposite language. Every piece of text
+// (front, back, each example) is individually playable via TTS in its own lang.
+// -----------------------------------------------------------------------------
+
+export type Lang = 'sv' | 'en';
+
+export interface SwedishExample {
+    text: string;         // sentence in the back-side language
+    translation?: string; // same sentence in the opposite language
+}
+
+export interface SwedishCard {
+    type: 'swedish';
+    id: string;
+    front: string;
+    frontLang: Lang;
+    back: string;
+    backLang: Lang;
+    examples?: SwedishExample[];
+
+    // SRS fields (shared shape with SRSCard)
+    state: CardState;
+    nextReviewDate: number;
+    interval: number;
+    easeFactor: number;
+    createdAt: number;
+}
+
+export function mapSwedishRowToCard(
+    row: Database['public']['Tables']['swedish_cards']['Row']
+): SwedishCard {
+    return {
+        type: 'swedish',
+        id: row.id,
+        front: row.front,
+        frontLang: (row.front_lang === 'en' ? 'en' : 'sv'),
+        back: row.back,
+        backLang: (row.back_lang === 'sv' ? 'sv' : 'en'),
+        examples: (() => {
+            if (Array.isArray(row.examples)) {
+                return (row.examples as unknown as SwedishExample[])
+                    .filter(e => e && typeof e.text === 'string')
+                    .map(e => ({
+                        text: e.text,
+                        translation: typeof e.translation === 'string' ? e.translation : undefined,
+                    }));
+            }
+            return undefined;
+        })(),
+        state: row.state as CardState,
+        nextReviewDate: new Date(row.next_review).getTime(),
+        interval: row.interval,
+        easeFactor: row.ease_factor,
+        createdAt: new Date(row.created_at).getTime(),
+    };
+}
