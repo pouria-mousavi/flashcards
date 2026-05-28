@@ -116,10 +116,16 @@ function App() {
         ...grammarCards.filter(c => c.nextReviewDate <= now),
     ];
 
-    const reviews = allDue.filter(c => c.state !== 'NEW');
     const newCards = allDue.filter(c => c.state === 'NEW');
+    // Cards mid-acquisition (short intervals, due in minutes/hours). These are
+    // the ones you JUST studied — they must be reinforced promptly or the memory
+    // is lost. They always lead the review portion, ahead of the older backlog.
+    const learning = allDue.filter(c => c.state === 'LEARNING' || c.state === 'RELEARNING');
+    // Graduated cards waiting for their next spaced review.
+    const reviews = allDue.filter(c => c.state === 'REVIEW');
 
-    // Reviews stay sorted by due date (oldest first)
+    // Both sorted oldest-due-first within their tier.
+    const sortedLearning = [...learning].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
     const sortedReviews = [...reviews].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
 
     // NEW cards: shuffle to break up topic clusters from batch imports
@@ -130,8 +136,10 @@ function App() {
         .slice(0, 250);
     const shuffledNew = shuffle(recentNew);
 
-    // NEW cards come before reviews (LIFO across types)
-    return [...shuffledNew, ...sortedReviews];
+    // Priority: NEW (LIFO) → actively-learning → graduated reviews.
+    // Putting learning ahead of reviews is what surfaces cards you studied
+    // recently instead of burying them under a months-old review backlog.
+    return [...shuffledNew, ...sortedLearning, ...sortedReviews];
   };
 
   // Build a short, completable session.
