@@ -11,12 +11,13 @@ interface Props {
   startIndex?: number;
   startFlipped?: boolean;
   onUpdateCard: (card: SwedishCard) => void;
+  onDeleteCard: (cardId: string) => void;
   onSessionComplete: () => void;
   onPause: () => void;
 }
 
 export default function SwedishStudySession({
-  cards, startIndex = 0, startFlipped = false, onUpdateCard, onSessionComplete, onPause,
+  cards, startIndex = 0, startFlipped = false, onUpdateCard, onDeleteCard, onSessionComplete, onPause,
 }: Props) {
   // Initialize queue from props ONCE — never replace on parent re-renders.
   const [queue, setQueue] = useState<SwedishCard[]>(cards);
@@ -70,6 +71,32 @@ export default function SwedishStudySession({
       onSessionComplete();
     }
   }, [currentCardIndex, queue.length, onSessionComplete]);
+
+  const handleDelete = (cardId: string) => {
+    if (confirm('Are you sure you want to PERMANENTLY delete this card?')) {
+      onDeleteCard(cardId);
+
+      setQueue(prev => {
+        const newQueue = prev.filter(c => c.id !== cardId);
+
+        // Keep the session storage in lockstep so a reload restores correctly.
+        try {
+          const saved = localStorage.getItem(SWEDISH_SESSION_KEY);
+          if (saved) {
+            const session = JSON.parse(saved);
+            session.cardIds = newQueue.map(c => c.id);
+            session.currentIndex = Math.min(currentCardIndex, newQueue.length - 1);
+            session.isFlipped = false;
+            localStorage.setItem(SWEDISH_SESSION_KEY, JSON.stringify(session));
+          }
+        } catch (e) { console.error('Swedish session sync failed', e); }
+
+        return newQueue;
+      });
+
+      setIsFlipped(false);
+    }
+  };
 
   const handleRate = (rating: number) => {
     const currentCard = queue[currentCardIndex];
@@ -172,7 +199,7 @@ export default function SwedishStudySession({
             transition={{ duration: 0.2, ease: 'easeOut' }}
             style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
           >
-            <SwedishCardView card={currentCard} isFlipped={isFlipped} onFlip={handleFlip} />
+            <SwedishCardView card={currentCard} isFlipped={isFlipped} onFlip={handleFlip} onDelete={() => handleDelete(currentCard.id)} />
           </motion.div>
         </AnimatePresence>
       </div>

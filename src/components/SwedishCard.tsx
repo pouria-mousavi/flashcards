@@ -40,9 +40,10 @@ interface Props {
   card: SwedishCard;
   isFlipped: boolean;
   onFlip: () => void;
+  onDelete?: () => void;
 }
 
-export default function SwedishCardView({ card, isFlipped, onFlip }: Props) {
+export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: Props) {
   return (
     <div
       onClick={!isFlipped ? onFlip : undefined}
@@ -79,7 +80,27 @@ export default function SwedishCardView({ card, isFlipped, onFlip }: Props) {
           }}>
             {LANG_LABEL[card.frontLang]}
           </span>
-          <Speaker text={card.front} lang={card.frontLang} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {onDelete && (
+              <button
+                onClick={(e) => { e.stopPropagation(); onDelete(); }}
+                aria-label="Delete card"
+                style={{
+                  background: 'var(--danger-soft)',
+                  border: 'none',
+                  borderRadius: '6px',
+                  color: '#fca5a5',
+                  padding: '4px 8px',
+                  fontSize: '0.7rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                }}
+              >
+                Delete
+              </button>
+            )}
+            <Speaker text={card.front} lang={card.frontLang} />
+          </div>
         </div>
 
         <p style={{

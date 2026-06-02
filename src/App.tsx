@@ -134,6 +134,17 @@ function App() {
     if (error) console.error('Error updating swedish_cards:', error);
   };
 
+  // Swedish delete — removes ONLY from swedish_cards, never the English tables.
+  const deleteSwedishCard = async (cardId: string) => {
+    setSwedishCards(prev => prev.filter(c => c.id !== cardId));
+
+    const { error } = await supabase.from('swedish_cards').delete().eq('id', cardId);
+    if (error) {
+      console.error('Error deleting swedish card:', error);
+      alert('Failed to delete card from DB!');
+    }
+  };
+
   const deleteCard = async (cardId: string) => {
       setCards(prev => prev.filter(c => c.id !== cardId));
 
@@ -515,6 +526,7 @@ function App() {
             startIndex={swedishSession.index}
             startFlipped={swedishSession.isFlipped}
             onUpdateCard={updateSwedishCardStats}
+            onDeleteCard={deleteSwedishCard}
             onPause={handleSessionPause}
             onSessionComplete={handleSwedishSessionComplete}
           />
