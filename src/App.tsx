@@ -7,11 +7,10 @@ import type { Flashcard, GrammarCard, StudyCard, SwedishCard, Lang } from './uti
 import StudySession from './components/StudySession';
 import Dashboard from './components/Dashboard';
 import AddCard from './components/AddCard';
-import ScenarioChallenge from './components/ScenarioChallenge';
 import SwedishDashboard from './components/SwedishDashboard';
 import SwedishStudySession from './components/SwedishStudySession';
 
-type View = 'dashboard' | 'study' | 'add' | 'scenario';
+type View = 'dashboard' | 'study' | 'add';
 
 function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
@@ -552,7 +551,6 @@ function App() {
           grammarCards={grammarCards}
           onStartStudy={() => handleStartStudy(false)}
           onAddCard={() => setView('add')}
-          onStartChallenge={() => setView('scenario')}
           hasActiveSession={!!restoredSession}
           activeLanguage={activeLanguage}
           onSwitchLanguage={switchLanguage}
@@ -573,12 +571,6 @@ function App() {
         <AddCard
           onAdd={handleAddCard}
           onCancel={() => setView('dashboard')}
-        />
-      )}
-      {view === 'scenario' && (
-        <ScenarioChallenge
-          cards={cards}
-          onClose={() => setView('dashboard')}
         />
       )}
     </div>

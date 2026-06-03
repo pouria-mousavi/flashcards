@@ -8,7 +8,6 @@ interface Props {
   grammarCards?: GrammarCard[];
   onStartStudy: () => void;
   onAddCard: () => void;
-  onStartChallenge: () => void;
   hasActiveSession?: boolean;
   activeLanguage?: Lang;
   onSwitchLanguage?: (lang: Lang) => void;
@@ -51,7 +50,7 @@ function classifyCards(cards: Flashcard[]): LeitnerBox[] {
 }
 
 export default function Dashboard({
-  cards, grammarCards = [], onStartStudy, onAddCard, onStartChallenge, hasActiveSession,
+  cards, grammarCards = [], onStartStudy, onAddCard, hasActiveSession,
   activeLanguage = 'en', onSwitchLanguage,
 }: Props) {
   const totalCards = cards.length + grammarCards.length;
@@ -163,27 +162,6 @@ export default function Dashboard({
             : (dueCount > 0
               ? `Study ${Math.min(dueCount, 20)} Cards`
               : "All Caught Up")}
-        </button>
-
-        <button
-          onClick={onStartChallenge}
-          style={{
-            padding: '16px',
-            fontSize: '0.95rem',
-            fontWeight: '600',
-            background: 'rgba(16, 185, 129, 0.1)',
-            color: '#34d399',
-            borderRadius: 'var(--radius)',
-            border: '1px solid rgba(16, 185, 129, 0.2)',
-            transition: 'all 0.2s ease',
-            letterSpacing: '-0.01em',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px'
-          }}
-        >
-          🎯 Daily Challenge
         </button>
 
         <button
