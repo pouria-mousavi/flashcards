@@ -9,8 +9,9 @@ const TTS_ENDPOINT = 'https://dgqkwzuykhmcxvajumne.supabase.co/functions/v1/tts'
 
 // Bump this to bust stale cached clips (the endpoint caches audio for 24h, so
 // clips fetched before a voice change keep replaying the old engine until this
-// changes the request URL). 'v2' = Azure neural rollout.
-const TTS_VERSION = 'v2';
+// changes the request URL). 'v2' = Azure neural rollout; 'v3' = natural rate
+// (dropped the slowdown that was flattening sentence melody).
+const TTS_VERSION = 'v3';
 
 export type TtsLang = 'en' | 'sv';
 
