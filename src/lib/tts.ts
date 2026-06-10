@@ -1,9 +1,9 @@
 // Locale-aware text-to-speech.
 //
-// Plays audio through the Supabase `tts` edge function, which proxies Google
-// Translate TTS. The `lang` query param selects the voice locale (added so the
-// Swedish deck can use a native Swedish voice). Falls back to the browser's
-// SpeechSynthesis if the proxy is blocked.
+// Plays audio through the Supabase `tts` edge function, which uses Azure neural
+// voices (native Swedish prosody) and falls back to Google Translate TTS if
+// Azure errors. The `lang` query param selects the voice locale. Falls back to
+// the browser's SpeechSynthesis if the proxy itself is unreachable.
 
 const TTS_ENDPOINT = 'https://dgqkwzuykhmcxvajumne.supabase.co/functions/v1/tts';
 
@@ -32,7 +32,9 @@ export function playTTS(text?: string | null, lang: TtsLang = 'en'): void {
 
   const url = `${TTS_ENDPOINT}?lang=${lang}&q=${encodeURIComponent(text)}`;
   const audio = new Audio(url);
-  audio.playbackRate = 0.9;
+  // The edge function already slows neural speech ~5%; keep client at 1.0 so
+  // the two don't compound into an unnaturally slow clip.
+  audio.playbackRate = 1.0;
   currentAudio = audio;
 
   audio.play().catch(() => {
