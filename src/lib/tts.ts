@@ -7,6 +7,11 @@
 
 const TTS_ENDPOINT = 'https://dgqkwzuykhmcxvajumne.supabase.co/functions/v1/tts';
 
+// Bump this to bust stale cached clips (the endpoint caches audio for 24h, so
+// clips fetched before a voice change keep replaying the old engine until this
+// changes the request URL). 'v2' = Azure neural rollout.
+const TTS_VERSION = 'v2';
+
 export type TtsLang = 'en' | 'sv';
 
 const BROWSER_LOCALE: Record<TtsLang, string> = {
@@ -30,7 +35,7 @@ export function playTTS(text?: string | null, lang: TtsLang = 'en'): void {
     window.speechSynthesis.cancel();
   }
 
-  const url = `${TTS_ENDPOINT}?lang=${lang}&q=${encodeURIComponent(text)}`;
+  const url = `${TTS_ENDPOINT}?lang=${lang}&v=${TTS_VERSION}&q=${encodeURIComponent(text)}`;
   const audio = new Audio(url);
   // The edge function already slows neural speech ~5%; keep client at 1.0 so
   // the two don't compound into an unnaturally slow clip.
