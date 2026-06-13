@@ -85,38 +85,36 @@ export function calculateSM2<T extends SRSCard>(
   const now = Date.now();
   const next = { ...card };
 
-  // Infer learning step from interval
-  let stepIndex = 0;
-  if (next.state === CardState.LEARNING) {
-      if (next.interval >= 10) stepIndex = 1;
-  }
-
   // Store the previous interval for lapse recovery
   const previousReviewInterval = next.state === CardState.REVIEW ? next.interval : 1;
 
   // --- NEW or LEARNING ---
+  // Day-based scheduling: any PASSING answer (Hard/Good/Easy) on a new or
+  // learning card graduates it to a whole-day interval, so a card you answer
+  // today never comes back the same day — not even in a later session that day.
+  // Only "Again" keeps it short, so a card you got WRONG is relearned now.
   if (next.state === CardState.NEW || next.state === CardState.LEARNING) {
     if (rating === 0) {
+        // Again — failed: relearn within THIS session (under the 10-min
+        // re-queue threshold), not in a later same-day session.
         next.state = CardState.LEARNING;
-        next.interval = SETTINGS.learningSteps[0];
+        next.interval = 1; // minute
         next.nextReviewDate = now + next.interval * 60 * 1000;
     } else if (rating === 3) {
-        next.state = CardState.LEARNING;
-        if (next.interval === 0) next.interval = 1;
-        next.nextReviewDate = now + next.interval * 60 * 1000;
-    } else if (rating === 4) {
-        if (stepIndex < SETTINGS.learningSteps.length - 1) {
-            next.interval = SETTINGS.learningSteps[stepIndex + 1];
-            next.state = CardState.LEARNING;
-            next.nextReviewDate = now + next.interval * 60 * 1000;
-        } else {
-            next.state = CardState.REVIEW;
-            next.interval = SETTINGS.graduatingInterval;
-            next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
-        }
-    } else if (rating === 5) {
+        // Hard — graduate to tomorrow, with a small ease penalty.
         next.state = CardState.REVIEW;
-        next.interval = SETTINGS.easyInterval;
+        next.interval = SETTINGS.graduatingInterval; // 1 day
+        next.easeFactor = Math.max(1.3, next.easeFactor - 0.15);
+        next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+    } else if (rating === 4) {
+        // Good — graduate to tomorrow.
+        next.state = CardState.REVIEW;
+        next.interval = SETTINGS.graduatingInterval; // 1 day
+        next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+    } else if (rating === 5) {
+        // Easy — graduate a few days out.
+        next.state = CardState.REVIEW;
+        next.interval = SETTINGS.easyInterval; // 4 days
         next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
     }
   }
