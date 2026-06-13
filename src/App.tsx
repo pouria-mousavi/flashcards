@@ -449,7 +449,7 @@ function App() {
           }
       }
 
-      const due = buildSwedishSession(20, 8);
+      const due = buildSwedishSession(50, 12);
       if (due.length === 0) {
           alert("No Swedish cards due!");
           return;

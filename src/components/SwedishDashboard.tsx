@@ -148,7 +148,7 @@ export default function SwedishDashboard({
         >
           {hasActiveSession
             ? 'Resume Session'
-            : (dueCount > 0 ? `Study ${Math.min(dueCount, 20)} Cards` : (totalCards === 0 ? 'No cards yet' : 'All Caught Up'))}
+            : (dueCount > 0 ? `Study ${Math.min(dueCount, 50)} Cards` : (totalCards === 0 ? 'No cards yet' : 'All Caught Up'))}
         </button>
       </div>
     </div>
