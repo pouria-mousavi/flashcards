@@ -303,15 +303,32 @@ export interface SwedishExample {
     translation?: string; // same sentence in the opposite language
 }
 
-// Verb conjugation (the principal parts Swedish learners drill). Present is the
-// form stored on the card's `back`. Only verb cards carry this.
-export interface SwedishVerbForms {
+export type SwedishPos = 'verb' | 'noun' | 'adjective';
+
+// Inflection table stored per card (only on verb/noun/adjective cards). Which
+// fields are populated depends on `pos`. The card's `back` is the headword
+// (present tense for verbs, indefinite singular for nouns, base form for adj).
+export interface SwedishWordForms {
+    pos?: SwedishPos;
+    // verb — principal parts
     infinitive?: string;  // att tala
     present?: string;     // talar
     past?: string;        // talade (preteritum)
     supine?: string;      // talat (supinum — used with har/hade)
     imperative?: string;  // tala!
     group?: number;       // conjugation group 1–4
+    // noun — the four forms + gender
+    gender?: 'en' | 'ett';
+    indefinite?: string;       // en bok
+    definite?: string;         // boken
+    pluralIndefinite?: string; // böcker
+    pluralDefinite?: string;   // böckerna
+    // adjective — agreement + comparison
+    base?: string;        // stor (en-form)
+    neuter?: string;      // stort (ett-form)
+    plural?: string;      // stora (plural / definite)
+    comparative?: string; // större
+    superlative?: string; // störst
 }
 
 export interface SwedishCard {
@@ -322,7 +339,7 @@ export interface SwedishCard {
     back: string;
     backLang: Lang;
     examples?: SwedishExample[];
-    verbForms?: SwedishVerbForms;
+    wordForms?: SwedishWordForms;
 
     // SRS fields (shared shape with SRSCard)
     state: CardState;
@@ -353,14 +370,21 @@ export function mapSwedishRowToCard(
             }
             return undefined;
         })(),
-        verbForms: (() => {
+        wordForms: (() => {
             const wf = row.word_forms;
             if (wf && typeof wf === 'object' && !Array.isArray(wf)) {
                 const o = wf as Record<string, unknown>;
-                const result: SwedishVerbForms = {};
-                for (const key of ['infinitive', 'present', 'past', 'supine', 'imperative'] as const) {
+                const result: SwedishWordForms = {};
+                const strKeys = [
+                    'infinitive', 'present', 'past', 'supine', 'imperative',
+                    'indefinite', 'definite', 'pluralIndefinite', 'pluralDefinite',
+                    'base', 'neuter', 'plural', 'comparative', 'superlative',
+                ] as const;
+                for (const key of strKeys) {
                     if (typeof o[key] === 'string') result[key] = o[key] as string;
                 }
+                if (o.pos === 'verb' || o.pos === 'noun' || o.pos === 'adjective') result.pos = o.pos;
+                if (o.gender === 'en' || o.gender === 'ett') result.gender = o.gender;
                 if (typeof o.group === 'number') result.group = o.group as number;
                 return Object.keys(result).length > 0 ? result : undefined;
             }

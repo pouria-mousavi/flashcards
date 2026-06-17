@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { playTTS } from '../lib/tts';
-import type { SwedishCard, SwedishVerbForms, Lang } from '../utils/sm2';
+import type { SwedishCard, SwedishWordForms, Lang } from '../utils/sm2';
 
 // Swedish accent — distinct from English indigo so the two decks feel separate.
 const SV_ACCENT = '#60a5fa';
@@ -43,15 +43,35 @@ const GROUP_LABEL: Record<number, string> = {
   4: 'Group 4 (strong)',
 };
 
-// Conjugation table for Swedish verb cards: infinitive, present, past (preteritum),
-// supine (with har), imperative — each Swedish form individually playable.
-function VerbForms({ forms, lang }: { forms: SwedishVerbForms; lang: Lang }) {
+// Inflection table for Swedish verb / noun / adjective cards. Builds the rows
+// for the card's part of speech; each Swedish form is individually playable.
+function WordForms({ forms, lang }: { forms: SwedishWordForms; lang: Lang }) {
   const rows: { label: string; display: string; speak: string }[] = [];
-  if (forms.infinitive) rows.push({ label: 'Infinitive', display: `att ${forms.infinitive}`, speak: forms.infinitive });
-  if (forms.present) rows.push({ label: 'Present', display: forms.present, speak: forms.present });
-  if (forms.past) rows.push({ label: 'Past', display: forms.past, speak: forms.past });
-  if (forms.supine) rows.push({ label: 'Supine', display: `har ${forms.supine}`, speak: forms.supine });
-  if (forms.imperative) rows.push({ label: 'Imperative', display: `${forms.imperative}!`, speak: forms.imperative });
+  let heading = 'Forms';
+
+  if (forms.pos === 'noun') {
+    heading = `Noun forms${forms.gender ? ` · ${forms.gender}-word` : ''}`;
+    if (forms.indefinite) rows.push({ label: 'Indefinite', display: forms.indefinite, speak: forms.indefinite });
+    if (forms.definite) rows.push({ label: 'Definite', display: forms.definite, speak: forms.definite });
+    if (forms.pluralIndefinite) rows.push({ label: 'Plural', display: forms.pluralIndefinite, speak: forms.pluralIndefinite });
+    if (forms.pluralDefinite) rows.push({ label: 'Plural def.', display: forms.pluralDefinite, speak: forms.pluralDefinite });
+  } else if (forms.pos === 'adjective') {
+    heading = 'Adjective forms';
+    if (forms.base) rows.push({ label: 'En-form', display: forms.base, speak: forms.base });
+    if (forms.neuter) rows.push({ label: 'Ett-form', display: forms.neuter, speak: forms.neuter });
+    if (forms.plural) rows.push({ label: 'Plural / def.', display: forms.plural, speak: forms.plural });
+    if (forms.comparative) rows.push({ label: 'Comparative', display: forms.comparative, speak: forms.comparative });
+    if (forms.superlative) rows.push({ label: 'Superlative', display: forms.superlative, speak: forms.superlative });
+  } else {
+    // verb (default)
+    heading = `Verb forms${forms.group && GROUP_LABEL[forms.group] ? ` · ${GROUP_LABEL[forms.group]}` : ''}`;
+    if (forms.infinitive) rows.push({ label: 'Infinitive', display: `att ${forms.infinitive}`, speak: forms.infinitive });
+    if (forms.present) rows.push({ label: 'Present', display: forms.present, speak: forms.present });
+    if (forms.past) rows.push({ label: 'Past', display: forms.past, speak: forms.past });
+    if (forms.supine) rows.push({ label: 'Supine', display: `har ${forms.supine}`, speak: forms.supine });
+    if (forms.imperative) rows.push({ label: 'Imperative', display: `${forms.imperative}!`, speak: forms.imperative });
+  }
+
   if (rows.length === 0) return null;
 
   return (
@@ -69,18 +89,18 @@ function VerbForms({ forms, lang }: { forms: SwedishVerbForms; lang: Lang }) {
         textTransform: 'uppercase',
         letterSpacing: '0.08em',
       }}>
-        Verb forms{forms.group && GROUP_LABEL[forms.group] ? ` · ${GROUP_LABEL[forms.group]}` : ''}
+        {heading}
       </span>
       {rows.map((r) => (
         <div key={r.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{
             flexShrink: 0,
-            width: '74px',
-            fontSize: '0.7rem',
+            width: '92px',
+            fontSize: '0.68rem',
             fontWeight: '600',
             color: 'var(--text-muted)',
             textTransform: 'uppercase',
-            letterSpacing: '0.03em',
+            letterSpacing: '0.02em',
           }}>
             {r.label}
           </span>
@@ -217,9 +237,9 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
             </p>
           </div>
 
-          {/* Verb forms — only on Swedish verb cards (principal parts + imperative) */}
-          {card.verbForms && (
-            <VerbForms forms={card.verbForms} lang={card.backLang} />
+          {/* Inflection table — only on Swedish verb / noun / adjective cards */}
+          {card.wordForms && (
+            <WordForms forms={card.wordForms} lang={card.backLang} />
           )}
 
           {/* Examples — always on the back, in the back language, each playable */}
