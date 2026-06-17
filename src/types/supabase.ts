@@ -80,6 +80,7 @@ export interface Database {
           back: string
           back_lang: string
           examples: Json | null
+          word_forms: Json | null
           state: string
           next_review: string
           interval: number
@@ -93,6 +94,7 @@ export interface Database {
           back: string
           back_lang?: string
           examples?: Json | null
+          word_forms?: Json | null
           state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
           next_review?: string
           interval?: number
@@ -106,6 +108,7 @@ export interface Database {
           back?: string
           back_lang?: string
           examples?: Json | null
+          word_forms?: Json | null
           state?: 'NEW' | 'LEARNING' | 'REVIEW' | 'RELEARNING'
           next_review?: string
           interval?: number

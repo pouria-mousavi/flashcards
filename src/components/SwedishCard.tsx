@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { playTTS } from '../lib/tts';
-import type { SwedishCard, Lang } from '../utils/sm2';
+import type { SwedishCard, SwedishVerbForms, Lang } from '../utils/sm2';
 
 // Swedish accent — distinct from English indigo so the two decks feel separate.
 const SV_ACCENT = '#60a5fa';
@@ -33,6 +33,64 @@ function Speaker({ text, lang, size = 32 }: { text: string; lang: Lang; size?: n
     >
       🔊
     </button>
+  );
+}
+
+const GROUP_LABEL: Record<number, string> = {
+  1: 'Group 1 (-ar)',
+  2: 'Group 2 (-er)',
+  3: 'Group 3 (-r)',
+  4: 'Group 4 (strong)',
+};
+
+// Conjugation table for Swedish verb cards: infinitive, present, past (preteritum),
+// supine (with har), imperative — each Swedish form individually playable.
+function VerbForms({ forms, lang }: { forms: SwedishVerbForms; lang: Lang }) {
+  const rows: { label: string; display: string; speak: string }[] = [];
+  if (forms.infinitive) rows.push({ label: 'Infinitive', display: `att ${forms.infinitive}`, speak: forms.infinitive });
+  if (forms.present) rows.push({ label: 'Present', display: forms.present, speak: forms.present });
+  if (forms.past) rows.push({ label: 'Past', display: forms.past, speak: forms.past });
+  if (forms.supine) rows.push({ label: 'Supine', display: `har ${forms.supine}`, speak: forms.supine });
+  if (forms.imperative) rows.push({ label: 'Imperative', display: `${forms.imperative}!`, speak: forms.imperative });
+  if (rows.length === 0) return null;
+
+  return (
+    <div style={{
+      borderTop: `1px solid ${SV_BORDER}`,
+      paddingTop: '16px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '10px',
+    }}>
+      <span style={{
+        fontSize: '0.6rem',
+        fontWeight: '700',
+        color: SV_ACCENT,
+        textTransform: 'uppercase',
+        letterSpacing: '0.08em',
+      }}>
+        Verb forms{forms.group && GROUP_LABEL[forms.group] ? ` · ${GROUP_LABEL[forms.group]}` : ''}
+      </span>
+      {rows.map((r) => (
+        <div key={r.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{
+            flexShrink: 0,
+            width: '74px',
+            fontSize: '0.7rem',
+            fontWeight: '600',
+            color: 'var(--text-muted)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.03em',
+          }}>
+            {r.label}
+          </span>
+          <span style={{ flex: 1, minWidth: 0, fontSize: '1rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+            {r.display}
+          </span>
+          <Speaker text={r.speak} lang={lang} size={26} />
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -158,6 +216,11 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
               {card.back}
             </p>
           </div>
+
+          {/* Verb forms — only on Swedish verb cards (principal parts + imperative) */}
+          {card.verbForms && (
+            <VerbForms forms={card.verbForms} lang={card.backLang} />
+          )}
 
           {/* Examples — always on the back, in the back language, each playable */}
           {card.examples && card.examples.length > 0 && (

@@ -303,6 +303,17 @@ export interface SwedishExample {
     translation?: string; // same sentence in the opposite language
 }
 
+// Verb conjugation (the principal parts Swedish learners drill). Present is the
+// form stored on the card's `back`. Only verb cards carry this.
+export interface SwedishVerbForms {
+    infinitive?: string;  // att tala
+    present?: string;     // talar
+    past?: string;        // talade (preteritum)
+    supine?: string;      // talat (supinum — used with har/hade)
+    imperative?: string;  // tala!
+    group?: number;       // conjugation group 1–4
+}
+
 export interface SwedishCard {
     type: 'swedish';
     id: string;
@@ -311,6 +322,7 @@ export interface SwedishCard {
     back: string;
     backLang: Lang;
     examples?: SwedishExample[];
+    verbForms?: SwedishVerbForms;
 
     // SRS fields (shared shape with SRSCard)
     state: CardState;
@@ -338,6 +350,19 @@ export function mapSwedishRowToCard(
                         text: e.text,
                         translation: typeof e.translation === 'string' ? e.translation : undefined,
                     }));
+            }
+            return undefined;
+        })(),
+        verbForms: (() => {
+            const wf = row.word_forms;
+            if (wf && typeof wf === 'object' && !Array.isArray(wf)) {
+                const o = wf as Record<string, unknown>;
+                const result: SwedishVerbForms = {};
+                for (const key of ['infinitive', 'present', 'past', 'supine', 'imperative'] as const) {
+                    if (typeof o[key] === 'string') result[key] = o[key] as string;
+                }
+                if (typeof o.group === 'number') result.group = o.group as number;
+                return Object.keys(result).length > 0 ? result : undefined;
             }
             return undefined;
         })(),
