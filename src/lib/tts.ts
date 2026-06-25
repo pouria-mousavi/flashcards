@@ -24,7 +24,10 @@ const BROWSER_LOCALE: Record<TtsLang, string> = {
 // clip instead of overlapping.
 let currentAudio: HTMLAudioElement | null = null;
 
-export function playTTS(text?: string | null, lang: TtsLang = 'en'): void {
+// `emphasis` (optional) is a verbatim substring of `text` that should carry the
+// sentence stress (betoning). The edge function wraps it in SSML <prosody> so the
+// neural voice puts the focus on that word, the way a native speaker would.
+export function playTTS(text?: string | null, lang: TtsLang = 'en', emphasis?: string | null): void {
   if (!text) return;
 
   // Stop anything currently playing.
@@ -36,7 +39,8 @@ export function playTTS(text?: string | null, lang: TtsLang = 'en'): void {
     window.speechSynthesis.cancel();
   }
 
-  const url = `${TTS_ENDPOINT}?lang=${lang}&v=${TTS_VERSION}&q=${encodeURIComponent(text)}`;
+  let url = `${TTS_ENDPOINT}?lang=${lang}&v=${TTS_VERSION}&q=${encodeURIComponent(text)}`;
+  if (emphasis) url += `&emph=${encodeURIComponent(emphasis)}`;
   const audio = new Audio(url);
   // The edge function already slows neural speech ~5%; keep client at 1.0 so
   // the two don't compound into an unnaturally slow clip.

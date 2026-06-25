@@ -301,6 +301,7 @@ export type Lang = 'sv' | 'en';
 export interface SwedishExample {
     text: string;         // sentence in the back-side language
     translation?: string; // same sentence in the opposite language
+    emphasis?: string;    // verbatim substring of `text` to stress (betoning)
 }
 
 export type SwedishPos = 'verb' | 'noun' | 'adjective';
@@ -366,6 +367,7 @@ export function mapSwedishRowToCard(
                     .map(e => ({
                         text: e.text,
                         translation: typeof e.translation === 'string' ? e.translation : undefined,
+                        emphasis: typeof e.emphasis === 'string' ? e.emphasis : undefined,
                     }));
             }
             return undefined;

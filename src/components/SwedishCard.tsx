@@ -10,10 +10,10 @@ const SV_BORDER = 'rgba(96, 165, 250, 0.28)';
 const LANG_LABEL: Record<Lang, string> = { sv: 'Svenska', en: 'English' };
 
 // Small round speaker button — plays the given text in its own language.
-function Speaker({ text, lang, size = 32 }: { text: string; lang: Lang; size?: number }) {
+function Speaker({ text, lang, size = 32, emphasis }: { text: string; lang: Lang; size?: number; emphasis?: string }) {
   return (
     <button
-      onClick={(e) => { e.stopPropagation(); playTTS(text, lang); }}
+      onClick={(e) => { e.stopPropagation(); playTTS(text, lang, emphasis); }}
       aria-label={`Play ${LANG_LABEL[lang]} audio`}
       style={{
         flexShrink: 0,
@@ -263,7 +263,7 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
 
               {card.examples.map((ex, i) => (
                 <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-                  <Speaker text={ex.text} lang={card.backLang} size={28} />
+                  <Speaker text={ex.text} lang={card.backLang} size={28} emphasis={ex.emphasis} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p style={{
                       margin: 0,
