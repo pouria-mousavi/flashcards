@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { playTTS } from '../lib/tts';
 import type { SwedishCard, SwedishWordForms, Lang } from '../utils/sm2';
@@ -72,45 +73,85 @@ function WordForms({ forms, lang }: { forms: SwedishWordForms; lang: Lang }) {
     if (forms.imperative) rows.push({ label: 'Imperative', display: `${forms.imperative}!`, speak: forms.imperative });
   }
 
-  if (rows.length === 0) return null;
+  const preps = forms.pos === 'verb' && forms.prepositions ? forms.prepositions : [];
+  if (rows.length === 0 && preps.length === 0) return null;
+
+  const sectionStyle: CSSProperties = {
+    borderTop: `1px solid ${SV_BORDER}`,
+    paddingTop: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+  };
+  const headingStyle: CSSProperties = {
+    fontSize: '0.6rem',
+    fontWeight: 700,
+    color: SV_ACCENT,
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
+  };
 
   return (
-    <div style={{
-      borderTop: `1px solid ${SV_BORDER}`,
-      paddingTop: '16px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '10px',
-    }}>
-      <span style={{
-        fontSize: '0.6rem',
-        fontWeight: '700',
-        color: SV_ACCENT,
-        textTransform: 'uppercase',
-        letterSpacing: '0.08em',
-      }}>
-        {heading}
-      </span>
-      {rows.map((r) => (
-        <div key={r.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{
-            flexShrink: 0,
-            width: '92px',
-            fontSize: '0.68rem',
-            fontWeight: '600',
-            color: 'var(--text-muted)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.02em',
-          }}>
-            {r.label}
-          </span>
-          <span style={{ flex: 1, minWidth: 0, fontSize: '1rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-            {r.display}
-          </span>
-          <Speaker text={r.speak} lang={lang} size={26} />
+    <>
+      {rows.length > 0 && (
+        <div style={sectionStyle}>
+          <span style={headingStyle}>{heading}</span>
+          {rows.map((r) => (
+            <div key={r.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{
+                flexShrink: 0,
+                width: '92px',
+                fontSize: '0.68rem',
+                fontWeight: '600',
+                color: 'var(--text-muted)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.02em',
+              }}>
+                {r.label}
+              </span>
+              <span style={{ flex: 1, minWidth: 0, fontSize: '1rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                {r.display}
+              </span>
+              <Speaker text={r.speak} lang={lang} size={26} />
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      )}
+
+      {preps.length > 0 && (
+        <div style={sectionStyle}>
+          <span style={headingStyle}>
+            Prepositions{preps.length > 1 ? ` (${preps.length})` : ''}
+          </span>
+          {preps.map((p, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+              <span style={{
+                flexShrink: 0,
+                minWidth: '40px',
+                fontSize: '1rem',
+                fontWeight: 700,
+                color: SV_ACCENT,
+              }}>
+                {p.prep}
+              </span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                {p.example && (
+                  <p style={{ margin: 0, fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.4 }}>
+                    {p.example}
+                  </p>
+                )}
+                {p.note && (
+                  <p style={{ margin: p.example ? '2px 0 0 0' : 0, fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                    {p.note}
+                  </p>
+                )}
+              </div>
+              {p.example && <Speaker text={p.example} lang={lang} size={26} />}
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 

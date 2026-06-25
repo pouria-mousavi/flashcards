@@ -330,6 +330,14 @@ export interface SwedishWordForms {
     plural?: string;      // stora (plural / definite)
     comparative?: string; // större
     superlative?: string; // störst
+    // verb — the preposition(s) it typically takes (with a usage note each)
+    prepositions?: SwedishPrep[];
+}
+
+export interface SwedishPrep {
+    prep: string;     // the preposition, e.g. "på" (or "—" when none)
+    example?: string; // a short Swedish collocation, e.g. "titta på tv"
+    note?: string;    // English explanation of this preposition's use
 }
 
 export interface SwedishCard {
@@ -388,6 +396,17 @@ export function mapSwedishRowToCard(
                 if (o.pos === 'verb' || o.pos === 'noun' || o.pos === 'adjective') result.pos = o.pos;
                 if (o.gender === 'en' || o.gender === 'ett') result.gender = o.gender;
                 if (typeof o.group === 'number') result.group = o.group as number;
+                if (Array.isArray(o.prepositions)) {
+                    const preps = (o.prepositions as unknown[])
+                        .filter((p): p is Record<string, unknown> => !!p && typeof p === 'object')
+                        .filter(p => typeof p.prep === 'string')
+                        .map(p => ({
+                            prep: p.prep as string,
+                            example: typeof p.example === 'string' ? p.example : undefined,
+                            note: typeof p.note === 'string' ? p.note : undefined,
+                        }));
+                    if (preps.length > 0) result.prepositions = preps;
+                }
                 return Object.keys(result).length > 0 ? result : undefined;
             }
             return undefined;
