@@ -97,7 +97,11 @@ function WordForms({ forms, lang }: { forms: SwedishWordForms; lang: Lang }) {
         <div style={sectionStyle}>
           <span style={headingStyle}>{heading}</span>
           {rows.map((r) => (
-            <div key={r.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div
+              key={r.label}
+              onClick={(e) => { e.stopPropagation(); playTTS(r.speak, lang); }}
+              style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', padding: '3px 0' }}
+            >
               <span style={{
                 flexShrink: 0,
                 width: '92px',
@@ -124,7 +128,11 @@ function WordForms({ forms, lang }: { forms: SwedishWordForms; lang: Lang }) {
             Prepositions{preps.length > 1 ? ` (${preps.length})` : ''}
           </span>
           {preps.map((p, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+            <div
+              key={i}
+              onClick={p.example ? (e) => { e.stopPropagation(); playTTS(p.example!, lang); } : undefined}
+              style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: p.example ? 'pointer' : 'default', padding: '3px 0' }}
+            >
               <span style={{
                 flexShrink: 0,
                 minWidth: '40px',
@@ -267,13 +275,17 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
               </span>
               <Speaker text={card.back} lang={card.backLang} />
             </div>
-            <p style={{
-              margin: 0,
-              fontSize: card.back.length > 60 ? '1.3rem' : '1.5rem',
-              fontWeight: '600',
-              color: 'var(--text-primary)',
-              lineHeight: '1.4',
-            }}>
+            <p
+              onClick={(e) => { e.stopPropagation(); playTTS(card.back, card.backLang); }}
+              style={{
+                margin: 0,
+                fontSize: card.back.length > 60 ? '1.3rem' : '1.5rem',
+                fontWeight: '600',
+                color: 'var(--text-primary)',
+                lineHeight: '1.4',
+                cursor: 'pointer',
+              }}
+            >
               {card.back}
             </p>
           </div>
@@ -303,7 +315,11 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
               </span>
 
               {card.examples.map((ex, i) => (
-                <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                <div
+                  key={i}
+                  onClick={(e) => { e.stopPropagation(); playTTS(ex.text, card.backLang, ex.emphasis); }}
+                  style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', cursor: 'pointer' }}
+                >
                   <Speaker text={ex.text} lang={card.backLang} size={28} emphasis={ex.emphasis} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p style={{
