@@ -49,6 +49,36 @@ of marks is generous and forgiving (false positives are cheap — the user delet
 strays). The effort goes into interpretation and *card design*: turning what the
 section teaches into cards that make it genuinely learnable, not just recognizable.
 
+## Card design — every card is a TEST, not a note
+
+Finding the right learnable is only half the job. The other half is shaping it
+into a card that *works during review*. A flashcard is a quiz item: the learner
+reads the front, attempts an answer out loud, flips, and checks. Design rules:
+
+1. **The front poses ONE concrete, attemptable task.** The gold standard is a
+   production prompt: *Say it in Swedish: "She never takes the car."* If the
+   learner can't tell precisely what answer the front demands, the card is broken.
+2. **The back IS the answer** — the exact Swedish to produce, nothing else in the
+   main field. *"Hon tar aldrig bilen."*
+3. **The rule is a footnote, never the answer.** Put the pattern/explanation in
+   the example/notes area (*"inte/alltid/aldrig come right after the verb"*), so
+   the learner produces the sentence and *then* sees why it works.
+4. **Never leak the answer on the front.** If the front contains the Swedish the
+   back asks for (*"Vilken vs Vilket — which is which?"*), there is nothing left
+   to retrieve. Fronts stay in English (plus at most a scaffold hint like
+   *start with "På kvällen…"* or *careful where inte goes*).
+5. **Atomic.** One decision point per card. A contrast (den/det, vilken/vilket)
+   can live on one card ONLY as a paired production task (*Say: "Which street?
+   Which year?"*), never as an essay-style "explain the difference".
+6. **Never ask the learner to recite a rule.** Not *"how do you form the
+   imperative?"* but *"Give the commands: Work! Read! Come!"* → *arbeta! läs!
+   kom!* — the rule appears as a note on the back.
+
+**The self-test (apply to every card before emitting):** read the front, cover
+the back. Can you state exactly what answer is expected, and could a diligent
+learner produce it? If not, redesign — usually by converting the rule into a
+representative sentence to produce.
+
 ## Scope boundary
 
 This skill ONLY extracts content and produces a CSV file. It does **not** insert
@@ -137,6 +167,12 @@ Heuristics for spotting the deeper layer:
 Prefer a small number of **well-designed** cards that teach the pattern over a pile
 of near-identical sentence cards that only drill one instance. When you do card the
 pattern, still keep at least one natural example so it's concrete, not abstract.
+
+**How a pattern becomes a card:** pick ONE representative sentence that forces the
+pattern, make producing that sentence the card (front = English prompt + optional
+scaffold hint, back = the Swedish), and state the rule as a note on the back. The
+learner drills the instance; the note generalizes it. Never make "the rule" itself
+the thing the front asks for — see the Card design section.
 
 ### 3a. Extract whole SENTENCES and question patterns as their own cards
 A recurring failure is treating a page as a bag of single words and skipping the
@@ -227,6 +263,8 @@ Pattern/rule/contrast cards use `type: grammar`. Fixed say-it-verbatim phrases u
   learnable?" If the answer is just "it reproduces a sentence," check whether a
   deeper pattern/rule/contrast is the real lesson (see 3-deep). Copy the surface
   verbatim only when the surface *is* the point (fixed, say-it-as-is phrases).
+- **Every card is a test.** Front = one attemptable production task; back = the
+  exact answer; rule = footnote. Run the self-test on every card before emitting.
 - **Diagnose first.** Don't emit a single card until you can state, in one sentence,
   what the section teaches. Cards serve that diagnosis.
 - **One learnable, one well-made card.** Split a mark into multiple cards if it
