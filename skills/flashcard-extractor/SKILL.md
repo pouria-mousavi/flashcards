@@ -1,281 +1,235 @@
 ---
 name: flashcard-extractor
 description: >-
-  Turn photos or scans of an annotated book or notebook page into language-learning
-  flashcards. Use this skill WHENEVER the user shares an image of a textbook,
-  workbook, or handwritten notes and wants flashcards, vocab cards, or Anki-style
-  cards out of it — especially for Swedish learning. Trigger on phrases like "make
-  flashcards from this page", "I marked up my textbook", "turn my notes into cards",
-  "extract my underlined words", or any image where the user has underlined, boxed,
-  bracketed, highlighted, or hand-annotated content they want to study. The skill
-  acts like a professional Swedish teacher: it reads every sentence, diagnoses what
-  the section is actually trying to teach, finds the deeper learnable (a pattern,
-  contrast, or rule — not just copy-pasted text), and designs smart cards for it,
-  then emits a clean CSV of front/back cards. It does NOT save to any database — it
-  hands the CSV to the calling agent, which decides what to do with it.
+  Turn photos or scans of annotated book, workbook, or notebook pages into
+  language-learning flashcards — especially for Swedish. Use this skill WHENEVER
+  the user shares images of study pages (or says pages are waiting in an inbox)
+  and wants flashcards, vocab cards, or Anki-style cards out of them — trigger
+  on "make flashcards from this page", "extract cards", "add these pages to my
+  deck", "I marked up my textbook", or any image with underlined, boxed,
+  highlighted, or hand-annotated content to study. The skill acts like a
+  professional Swedish teacher: it reads every sentence, diagnoses what the
+  section is actually trying to teach, digs out the deeper learnable (a
+  pattern, contrast, or collocation — not just the printed text), and designs
+  every card as a TEST with a production-task front and an exact-answer back.
+  It emits a clean CSV of front/back cards. It does NOT save to any database —
+  the calling agent owns persistence and dedupe.
 ---
 
 # Flashcard Extractor
 
-Convert a user's annotated study page into flashcards. The user marks up their
-own textbook/notes (underlines, boxes, brackets, highlights, margin notes) to
-flag what matters; this skill reads the page **the way an experienced Swedish
-teacher would**, works out what the section is actually trying to teach, and
-produces cards that capture that real learnable.
-
-## Act as a professional Swedish teacher, not a text scraper
-
-This is the heart of the skill. You are not a highlighter-to-CSV converter. You
-are a smart, experienced tutor sitting with the learner's book, reading **every
-sentence on the page**, asking: *"What is this section teaching? What would a good
-student actually need to internalize here — and what is the single best card to
-make that stick?"*
-
-Two failure modes to actively avoid:
-
-1. **Blind copy-paste.** Lifting a question and its answer verbatim into a card is
-   sometimes exactly right (a fixed phrase the learner will say word-for-word). But
-   often the real lesson lives *underneath* the sentence — a grammar pattern, a
-   word-order rule, an en/ett contrast, a preposition that "just goes with" a verb,
-   a false-friend, a register choice. Copy-pasting the surface sentence leaves that
-   deeper thing **unlearnable**. Your job is to find it and build a card that
-   teaches it.
-2. **Bag-of-words scraping.** Treating the page as a pile of isolated words and
-   missing the pattern, the contrast, or the reusable sentence that the whole
-   section is built around.
-
-So: **first diagnose what the page teaches, then design cards for it.** Detection
-of marks is generous and forgiving (false positives are cheap — the user deletes
-strays). The effort goes into interpretation and *card design*: turning what the
-section teaches into cards that make it genuinely learnable, not just recognizable.
-
-## Card design — every card is a TEST, not a note
-
-Finding the right learnable is only half the job. The other half is shaping it
-into a card that *works during review*. A flashcard is a quiz item: the learner
-reads the front, attempts an answer out loud, flips, and checks. Design rules:
-
-1. **The front poses ONE concrete, attemptable task.** The gold standard is a
-   production prompt: *Say it in Swedish: "She never takes the car."* If the
-   learner can't tell precisely what answer the front demands, the card is broken.
-2. **The back IS the answer** — the exact Swedish to produce, nothing else in the
-   main field. *"Hon tar aldrig bilen."*
-3. **The rule is a footnote, never the answer.** Put the pattern/explanation in
-   the example/notes area (*"inte/alltid/aldrig come right after the verb"*), so
-   the learner produces the sentence and *then* sees why it works.
-4. **Never leak the answer on the front.** If the front contains the Swedish the
-   back asks for (*"Vilken vs Vilket — which is which?"*), there is nothing left
-   to retrieve. Fronts stay in English (plus at most a scaffold hint like
-   *start with "På kvällen…"* or *careful where inte goes*).
-5. **Atomic.** One decision point per card. A contrast (den/det, vilken/vilket)
-   can live on one card ONLY as a paired production task (*Say: "Which street?
-   Which year?"*), never as an essay-style "explain the difference".
-6. **Never ask the learner to recite a rule.** Not *"how do you form the
-   imperative?"* but *"Give the commands: Work! Read! Come!"* → *arbeta! läs!
-   kom!* — the rule appears as a note on the back.
-
-**The self-test (apply to every card before emitting):** read the front, cover
-the back. Can you state exactly what answer is expected, and could a diligent
-learner produce it? If not, redesign — usually by converting the rule into a
-representative sentence to produce.
+Turn a learner's annotated study pages into flashcards that actually teach.
+The user photographs pages they have marked up (underlines, boxes, highlights,
+margin notes, sticky notes). Read those pages the way an experienced Swedish
+teacher would, work out what each section is trying to teach, and design cards
+that make it stick.
 
 ## Scope boundary
 
-This skill ONLY extracts content and produces a CSV file. It does **not** insert
-cards into a database, dedupe against existing cards, or know any DB schema. Output
-the CSV and report what you made; the calling agent owns persistence.
+Extract content and produce a CSV — nothing else. No database inserts, no
+deduping against an existing deck, no schema knowledge. Output the CSV, report
+what you made, and let the calling agent own persistence.
+
+## Identity: a teacher, not a scraper
+
+Two failure modes have actually happened with this skill and drew user
+complaints. Everything below exists to prevent them:
+
+1. **Blind copy-paste.** Lifting printed text verbatim into cards. That is
+   right ONLY when the sentence is a fixed phrase the learner will say
+   word-for-word (*Vad kostar det?*). Usually the lesson lives underneath the
+   sentence: a word-order rule, an en/ett contrast, a verb's obligatory
+   preposition, a false friend. Copy-pasting the surface leaves that deeper
+   thing unlearnable.
+2. **Notes dressed as flashcards.** Cards whose front cannot be answered:
+   *"where does inte go in a main clause?"* (a rule to recite) or *"Vilken vs
+   Vilket"* (the answer printed on the front). These got the learnable right
+   and still failed during real reviews, because a flashcard is a QUIZ ITEM,
+   not a summary. The learner reads the front, attempts an answer out loud,
+   flips, checks. If the front doesn't support that loop, the card is broken.
+
+So the job has two halves, both mandatory:
+**Law 1 — diagnose the real learnable. Law 2 — design a card that tests it.**
+
+## Law 1: Diagnose before you extract
+
+Read the whole page end to end — every sentence, including dialogue lines,
+FOKUS boxes, example tables, exercise answers the learner filled in, sticky
+notes. Then answer for yourself:
+
+- **What material is this?** (Assume Swedish unless clearly otherwise.)
+  Vocabulary list, grammar lesson, dialogue, reading passage, exercises?
+- **What is this section actually teaching?** State it in one sentence: *"how
+  to ask about someone's job"*, *"om vs i for frequency"*, *"the en/ett gender
+  contrast"*, *"V2 word order after a fronted time adverbial"*. This diagnosis
+  drives every card decision. Do not emit a single card before you can state it.
+- **What supporting material is present?** Printed glosses, answer keys,
+  conjugation tables, the learner's own handwriting — these feed accurate
+  backs and reveal the drilled pattern.
+
+Exercise pages are where diagnosis matters most: the filled-in answers
+(*skriver, öppnar, kvart i åtta*) are NOT the lesson — the system behind them
+is. Card the system, not the blanks.
+
+If multiple images are shared, process each page but keep one combined output.
+
+## Law 2: Every card is a TEST
+
+Design rules, all six load-bearing:
+
+1. **The front poses ONE concrete, attemptable task.** Gold standard is a
+   production prompt: *Say it in Swedish: "She never takes the car."* If you
+   cannot say precisely what answer the front demands, the card is broken.
+2. **The back IS the answer** — the exact Swedish to produce, nothing else in
+   the main field: *Hon tar aldrig bilen.*
+3. **The rule is a footnote, never the answer.** Put patterns and explanations
+   in the example/notes area (*"inte/alltid/aldrig come right after the
+   verb"*), so the learner produces first and sees why second.
+4. **Never leak the answer on the front.** Not the Swedish being asked for,
+   and not a hint that spells it out (*"definite: en-word adds -en"* → answer
+   `katten` given away). Fronts stay in English plus at most a scaffold hint:
+   *start with "På kvällen…"*, *careful where inte goes*, *not the same word
+   as "per day"*.
+5. **Atomic.** One decision point per card. A contrast (den/det, om/i) may
+   share one card ONLY as a paired production task (*Say: "Which street?
+   Which year?"*), never as "explain the difference".
+6. **Never ask the learner to recite a rule.** Not *"how do you form the
+   imperative?"* but *Give the commands: "Work!" "Read!" "Come!"* →
+   *arbeta! läs! kom!* — with the formation rule as a back-side note.
+
+**The self-test — run it on every card before emitting:** read the front,
+cover the back. Can you state exactly what answer is expected, and could a
+diligent learner produce it? If not, redesign — usually by converting the rule
+into one representative sentence to produce.
 
 ## Workflow
 
-### 1. Read the whole page and diagnose the lesson (context before marks)
-Before hunting for annotations, read the page end to end like a teacher preparing
-to explain it. Answer for yourself:
-
-- **What language / material is it?** (Assume Swedish unless clearly otherwise.) A
-  vocabulary list, a grammar lesson, a reading passage, dialogue, exercises?
-- **What is this section actually teaching?** Name the pedagogical point in one
-  sentence: *"how to ask about someone's job", "the difference between* om *and* på
-  *for time", "ordinal numbers", "reflexive verbs", "en/ett gender on family
-  words", "word order after a time adverbial".* This diagnosis is the most
-  important output of the whole read — every card decision flows from it.
-- **What supporting material is present** — printed glosses, translations, margin
-  notes, answer keys, conjugation tables, example dialogues? These feed accurate
-  backs and reveal the pattern being drilled.
-
-Only after you can state what the section teaches should you start selecting cards.
-If multiple images are shared, process each page, but keep one combined output.
+### 1. Read and diagnose
+Law 1 above. One-sentence diagnosis per section before any extraction.
 
 ### 2. Find the annotations
-Look for learner-applied marks:
-- **Underlines / wavy underlines** under a word, phrase, or grammar form
-- **Boxes / rectangles / circles / ovals** around a word or whole sentence
-- **Brackets, braces, or vertical bars** spanning a phrase or clause
-- **Highlighter** over text
-- **Margin notes, arrows, asterisks, stars, question marks** pointing at text
-- **Handwritten text** the user added (translations, conjugations, examples)
+Look for learner-applied marks: underlines (straight or wavy), boxes, circles,
+brackets and braces, highlighter, margin notes, arrows, asterisks, question
+marks, and any handwriting (translations, conjugations, sticky-note practice
+sentences). Detection is generous — a few false positives are cheap (the user
+deletes strays); a missed marked item is not. Distinguish learner marks from
+the book's printed emphasis best-effort; when unsure, include and flag in the
+`note` field. Anything hand-marked is always kept.
 
-Best-effort distinguish learner marks from the book's own printed emphasis (bold,
-colored design boxes, printed underlines). When unsure, **include it** — over-
-extraction is cheap, missing a marked item is not. Flag genuinely uncertain ones
-in the `note` field rather than dropping them.
+### 3. Choose the learnables
+Work from three sources at once:
 
-### 3. Interpret each mark — the core step
-For every marked item, decide what the learner is trying to capture. Use the
-page's context. Common cases:
+**a. Marked items.** Interpret each mark in page context — why did the learner
+flag this, and what card helps them learn it?
 
-| What's marked | Likely intent | Card shape |
-|---|---|---|
-| A single word | Learn vocabulary | front = the word; back = English meaning |
-| A verb form (e.g. *springer*) | Learn the verb | front = the marked form, optionally with its infinitive (*springa*); back = English |
-| A noun | Learn word + gender | front = noun with article if known (*en bil*); back = English |
-| A phrase / idiom / collocation | Learn the chunk | front = the phrase; back = English meaning |
-| A grammar structure (pattern, rule, conjugation) | Learn the rule | front = a concrete example of the pattern (or the pattern itself); back = the rule explained in English |
-| A whole boxed sentence | "This sentence matters" | front = the sentence; back = English translation/meaning |
-
-Preserve the marked Swedish **faithfully** on the front (don't silently rewrite
-it). You may *add* a helpful base form or article when it aids learning, but keep
-what the learner actually marked recognizable.
-
-### 3-deep. Find the deeper learnable — the tutor's real value-add
-For each thing worth teaching, ask: *"Is the real lesson the surface sentence, or
-something underneath it?"* When it's underneath, make the card teach that, not just
-reproduce the text. This is where you stop being a scraper and start being a
-teacher. Examples of surface → deeper:
-
-| On the page (surface) | The deeper thing a teacher would card |
+| What's marked | Card to design |
 |---|---|
-| *Hur mycket är klockan?* boxed | The **time-asking pattern** + that Swedish uses *är* ("is"), not "have" — plus the answer pattern *Klockan är …* |
-| *Jag har bott här i tre år* | *ha bott* = present perfect for a still-true state, and **i** for duration → a card on "i + time = for X (duration)" |
-| *en bil, ett hus* both marked | The **en/ett gender contrast** itself as one card, not two lookups |
-| *Jag tycker om att läsa* | *tycka **om*** is a two-part verb ("like"); card the collocation + that *om* is obligatory, not the whole sentence |
-| A list *första, andra, tredje* | The **ordinal-number system/pattern**, with the irregular ones flagged |
-| *Hon är road av …* / *intresserad av …* | The recurring *adjektiv + **av*** preposition pattern, generalized |
-| A dialogue asking someone's job | The reusable **question pattern** (*Vad jobbar du med? / Vad har du för yrke?*) as a say-it-verbatim card |
+| A single word | Vocabulary card: English → the word (with en/ett article for nouns, present form for verbs) |
+| A verb form | The verb + its system: infinitive, tense forms, and any obligatory preposition |
+| A phrase / collocation / idiom | The chunk as one unit — chunks are what fluency is made of |
+| A whole boxed sentence | The sentence — verbatim if it's a fixed phrase, else the pattern inside it |
+| A grammar structure | One representative sentence that forces the structure (see 3c) |
 
-Heuristics for spotting the deeper layer:
-- **A pattern repeated 2–3+ times** on the page (same structure, different words) →
-  card the pattern, optionally plus one concrete instance. The repetition IS the lesson.
-- **A word that only works with a particular preposition/particle** (*tycka om,
-  intresserad av, bero på, i tre år*) → card the collocation and note the glue word.
-- **A contrast the section sets up** (en/ett, *den/det*, *this vs that*, present vs
-  perfect, formal vs informal) → card the contrast directly.
-- **An irregular or surprising form** (irregular plural, sound change, false friend)
-  → card it explicitly as the exception it is.
-- **A fixed, high-utility phrase the learner will say verbatim** → yes, card it as-is;
-  here the surface *is* the lesson. (Copy-paste is right *when the phrase is the point.*)
+**b. Complete sentences and Q&A patterns — even unmarked.** Dialogue lines,
+FOKUS examples, and model Q&A in exercise boxes are prime cards: they are what
+the learner will actually say (*Vilken gata bor du på?*, *Vad har du för
+yrke?*). A sentence is not "covered" just because one of its words is also a
+card, and vice versa. When in doubt, include the sentence.
 
-Prefer a small number of **well-designed** cards that teach the pattern over a pile
-of near-identical sentence cards that only drill one instance. When you do card the
-pattern, still keep at least one natural example so it's concrete, not abstract.
+**c. The deeper layer — the teacher's real value-add.** For each section ask:
+*is the real lesson the surface text, or something underneath?* Signals:
 
-**How a pattern becomes a card:** pick ONE representative sentence that forces the
-pattern, make producing that sentence the card (front = English prompt + optional
-scaffold hint, back = the Swedish), and state the rule as a note on the back. The
-learner drills the instance; the note generalizes it. Never make "the rule" itself
-the thing the front asks for — see the Card design section.
+- **A pattern repeated 2–3+ times** (same structure, different words) — the
+  repetition IS the lesson. Card the pattern via one representative instance.
+- **A word that only works with a particular preposition/particle** (*tycka
+  om, intresserad av, bero på, i tre år*) — card the collocation, note the
+  glue word.
+- **A contrast the section sets up** (en/ett, den/det, om/i, halv counting
+  toward the NEXT hour) — card the contrast as a paired production task.
+- **An irregular or surprising form** (irregular plural, false friend,
+  *dammsugare* = pastry AND vacuum cleaner) — card it as the exception it is.
+- **A fixed, high-utility phrase** — card it verbatim; here the surface IS the
+  lesson, and copy-paste is correct.
 
-### 3a. Extract whole SENTENCES and question patterns as their own cards
-A recurring failure is treating a page as a bag of single words and skipping the
-**complete, reusable sentences and question/answer patterns** — which are often
-the most valuable thing on the page. Do NOT do that. In addition to vocabulary:
+**Calibration — comprehensive on learnables, not on duplicate text.** Cover
+every distinct thing the section teaches; no per-page cap, no "best subset"
+self-limiting. But when one pattern appears in five near-identical example
+sentences, make ONE well-designed pattern card plus an example — collapsing
+redundant instances is not skipping content. Drop only: (a) duplicates within
+this run (dedupe on the Swedish form, ignoring leading en/ett/att), and
+(b) ultra-basic words any learner past lesson one owns: *hej*, personal
+pronouns (*jag, du, han, hon, vi, ni, de*), *ja/nej*, *och/men*, *inte*, bare
+*en/ett*. Borderline between useful and too easy → INCLUDE.
 
-- **Make a card for every complete, useful sentence or fixed question pattern**,
-  especially ones the learner will say verbatim: *"Vilken gata bor du på?",
-  "Vad har du för telefonnummer?", "Vilket år är du född?", "Hur många grader är
-  det i dag?", "Vet du vad klockan är?", "Vad är klockan?", "När är det lunch?",
-  "Hur dags är det lunch?", "Vilken tid börjar vi?"*. Front = English, back =
-  the full Swedish sentence.
-- Dialogue lines, FOKUS example sentences, and the model Q&A in exercise boxes are
-  prime sentence cards — pull them even if not underlined.
-- **A sentence is not "covered" just because one of its words is also a card, and
-  vice versa.** A word appearing inside another card's *example* still deserves its
-  own card if it's a useful standalone sentence/phrase. (The earlier no-word-vs-
-  sentence-redundancy idea was reverted — when in doubt, include the sentence.)
-- Keep the Swedish exactly as written; give each its English translation as the back.
+### 3c. How a pattern becomes a card
+Pick ONE representative sentence that forces the pattern. Front = English
+production prompt (+ optional scaffold hint). Back = the Swedish. Rule = a
+note alongside the examples. The learner drills the instance; the note
+generalizes it.
 
-### 3b. Calibration — high recall on *distinct learnables*, not on duplicate text
-Cover **every distinct thing the section teaches** — words, phrases, collocations,
-grammar patterns, contrasts, useful sentences, question patterns. High recall on
-*learnables* is the goal; do not self-limit to a small "best" subset and do not
-impose a per-page cap. This is fully compatible with the "fewer, well-designed
-cards" idea in 3-deep — they operate on different axes:
+**Example — the page drills V2 word order:**
+- ✗ front: "word order: the verb comes second" (rule recitation — rejected in
+  real use)
+- ✓ front: `Say: "In the evening she reads the news." (start with "in the
+  evening")` → back: `På kvällen läser hon nyheterna.` → note: *the verb must
+  stay in 2nd position, so the subject flips to after it*
 
-- **Coverage (be comprehensive):** don't skip a topic the page teaches. If the
-  section teaches five distinct things, all five should be represented.
-- **Design (be intelligent):** when one pattern shows up in several near-identical
-  example sentences, prefer **one pattern card + a concrete example** over five
-  sentence cards that all drill the same structure. Collapsing redundant *instances*
-  is not the same as skipping content — the learnable is still covered, better.
-
-Drop only:
-
-1. **Redundant** — already a card, a duplicate this run, or a third near-identical
-   instance of a pattern you've already carded well (dedupe on the Swedish form,
-   ignoring leading en/ett/att).
-2. **Too easy / super-obvious** — ultra-basic, high-frequency words any learner
-   past lesson one already owns: greetings like *hej*, personal pronouns *jag, du,
-   han, hon, vi, ni, de*, *ja/nej*, *och/men*, *inte*, and the bare articles
-   *en/ett*. Skip these.
-
-Everything else that carries real meaning — content words, useful phrases,
-non-obvious cognates with gender/spelling quirks, idioms, grammar patterns,
-sentences — should be extracted. When a single item is borderline between "useful"
-and "too easy," lean toward INCLUDING it. Anything the learner explicitly
-hand-marked is always kept.
+**Example — the page contrasts frequency expressions:**
+- ✗ front: "per week — use I (i veckan)" (answer printed on the front)
+- ✓ front: `per week / per month (careful — a different word than "per day")`
+  → back: `i veckan / i månaden`
 
 ### 4. Fill the back
-Source the English meaning in this priority order:
-1. **The user's own handwriting** — if they wrote a translation/note next to the
-   marked item, that is the intended answer. Use it (tidy spelling/casing only).
-2. **A gloss printed on the page** — vocab-list translations, margin glosses,
-   answer keys.
-3. **Generate it yourself** — if no meaning is on the page (e.g. a sentence is just
-   boxed), produce an accurate, natural English translation/explanation.
+Source the meaning in priority order — record provenance in `note`:
+1. **The learner's own handwriting** (`user handwriting`) — their translation
+   is the intended answer; tidy spelling only.
+2. **A gloss printed on the page** (`book gloss`) — vocab lists, margin
+   glosses, answer keys.
+3. **Generate it yourself** (`generated`) — accurate, natural translation.
+   Flagging provenance lets the user trust or verify generated backs.
 
-Record provenance in the `note` field: `user handwriting`, `book gloss`, or
-`generated`. This lets the user trust or double-check generated backs.
+Swedish must be correct standard Swedish with å/ä/ö intact. Surface en/ett
+gender on nouns. Never invent Swedish the learner didn't mark and you can't
+verify — when uncertain, flag it.
 
-### 5. Emit the CSV
-Build a JSON array of card objects, then run the bundled script so quoting is
-always correct (Swedish text is full of commas and quotes):
+### 5. Self-test pass
+Run the Law 2 self-test over the full card list. Fix or drop anything that
+fails. This pass is cheap; a broken card annoys the user at every review until
+they delete it.
+
+### 6. Emit the CSV
+Build a JSON array of card objects, then run the bundled script (hand-rolled
+CSV quoting breaks on Swedish commas/quotes):
 
 ```bash
 python scripts/write_cards.py cards.json -o flashcards.csv
 ```
 
-Card object keys: `front` (req), `back` (req), `type` (`word`|`phrase`|`grammar`|
-`sentence`), `note` (provenance / any caveat). The CSV header is
-`front,back,type,note`.
+Card keys: `front` (req), `back` (req), `type` (`word` | `phrase` | `grammar`
+| `sentence`), `note` (provenance / caveats). Header: `front,back,type,note`.
+Pattern/contrast/rule cards → `grammar`. Fixed say-it-verbatim phrases →
+`sentence` or `phrase`.
 
-### 6. Report back
-Lead with the **teacher's read**: in one or two sentences, say what you judged the
-section to be teaching — this shows your reasoning and lets the user correct it.
-Then: how many cards, broken down by type; **which cards capture a deeper
-pattern/contrast** (vs. verbatim phrases) and why; which backs were *generated* (so
-they can verify); and any items you flagged as low-confidence. Give the path to the
-CSV. Do not save it anywhere else — that's the calling agent's job.
+### 7. Report back
+Lead with the **teacher's read**: one or two sentences on what you judged each
+section to be teaching — this exposes your reasoning so the user can correct
+it. Then: card count by type; which cards capture a deeper pattern (vs
+verbatim phrases) and why; which backs were generated; anything low-confidence.
+Give the CSV path. Do not save anywhere else — persistence belongs to the
+calling agent.
 
-Pattern/rule/contrast cards use `type: grammar`. Fixed say-it-verbatim phrases use
-`type: sentence` or `phrase`.
+## Principles (condensed)
 
-## Principles
-- **Teach, don't transcribe.** Every card should answer "what does this make
-  learnable?" If the answer is just "it reproduces a sentence," check whether a
-  deeper pattern/rule/contrast is the real lesson (see 3-deep). Copy the surface
-  verbatim only when the surface *is* the point (fixed, say-it-as-is phrases).
-- **Every card is a test.** Front = one attemptable production task; back = the
-  exact answer; rule = footnote. Run the self-test on every card before emitting.
-- **Diagnose first.** Don't emit a single card until you can state, in one sentence,
-  what the section teaches. Cards serve that diagnosis.
-- **One learnable, one well-made card.** Split a mark into multiple cards if it
-  bundles distinct learnables; collapse several near-identical instances of one
-  pattern into a single pattern card plus an example.
-- **Faithful front, accurate back.** Never invent Swedish the user didn't mark or
-  that isn't correct standard Swedish.
-- **When in doubt, include and flag** rather than omit a genuine learnable.
-- **Swedish defaults**: surface en/ett gender and verb infinitives when they help,
-  but only as additions, never replacing the marked form.
+- **Diagnose first.** No cards before you can state what the section teaches.
+- **Teach, don't transcribe.** Verbatim only when the surface is the point.
+- **Every card is a test.** Production front, exact-answer back, rule as
+  footnote. Self-test everything.
+- **One learnable, one well-made card.** Split bundles; collapse near-identical
+  instances into one pattern card plus an example.
+- **When in doubt, include and flag** rather than silently omit — but never at
+  the cost of card design.
 
 ## Files
-- `scripts/write_cards.py` — turns a JSON array of cards into valid UTF-8 CSV.
-  Skips cards missing front or back and warns on stderr.
+
+- `scripts/write_cards.py` — JSON array of cards → valid UTF-8 CSV. Skips
+  cards missing front or back, warns on stderr.
