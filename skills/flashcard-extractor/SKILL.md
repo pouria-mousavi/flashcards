@@ -97,6 +97,22 @@ Design rules, all six load-bearing:
    imperative?"* but *Give the commands: "Work!" "Read!" "Come!"* →
    *arbeta! läs! kom!* — with the formation rule as a back-side note.
 
+7. **No single-word fronts — ever (user rule, 2026-07-07).** Extracting a verb
+   or noun never yields a card whose front is just the English word ("hope(s)",
+   "a meeting"). The front always asks the learner to PRODUCE A SENTENCE that
+   forces the word: *Make a sentence: "I hope the course starts soon."* → back:
+   *Jag hoppas att kursen börjar snart.* The word is learned inside usage, and
+   the back is a complete, TTS-friendly sentence.
+8. **One form, one card.** A verb's forms are separate cards, each forcing one
+   form in a sentence: present (*Say: "I work every day."*), past (*Say: "I
+   worked yesterday."* → *Jag jobbade i går.*), perfect (*Say: "I have worked
+   a lot today."* → *Jag har jobbat mycket i dag.*), infinitive after a modal
+   (*Say: "I want to work less."* → *Jag vill jobba mindre.*). Nouns get a
+   singular-in-a-sentence card and a plural-in-a-sentence card (*Say: "I have
+   three books."* → *Jag har tre böcker.*). Don't pile every form onto one
+   overloaded back — the full inflection table may ride along as reference on
+   the main card only.
+
 **The self-test — run it on every card before emitting:** read the front,
 cover the back. Can you state exactly what answer is expected, and could a
 diligent learner produce it? If not, redesign — usually by converting the rule
