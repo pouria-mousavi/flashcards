@@ -1,24 +1,32 @@
 :root {
-  --bg-color: #09090b;
-  --card-bg: #18181b;
-  --surface: #27272a;
-  --text-primary: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --accent: #6366f1;
-  --accent-soft: rgba(99, 102, 241, 0.15);
-  --success: #10b981;
-  --success-soft: rgba(16, 185, 129, 0.15);
-  --warning: #f59e0b;
-  --warning-soft: rgba(245, 158, 11, 0.15);
-  --danger: #ef4444;
-  --danger-soft: rgba(239, 68, 68, 0.15);
-  --border: rgba(255, 255, 255, 0.06);
-  --border-hover: rgba(255, 255, 255, 0.12);
-  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-lg: 24px;
+  /* Deep-space base with a faint blue undertone */
+  --bg-color: #07080d;
+  --card-bg: rgba(255, 255, 255, 0.035);
+  --card-bg-solid: #12141c;
+  --surface: rgba(255, 255, 255, 0.06);
+  --text-primary: #f4f5f7;
+  --text-secondary: #9ba1ae;
+  --text-muted: #6b7280;
+  --accent: #818cf8;
+  --accent-soft: rgba(129, 140, 248, 0.14);
+  --success: #34d399;
+  --success-soft: rgba(52, 211, 153, 0.14);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.14);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.14);
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(255, 255, 255, 0.14);
+  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px -8px rgba(0, 0, 0, 0.5);
+  --radius: 20px;
+  --radius-sm: 13px;
+  --radius-lg: 26px;
+
+  /* Per-language identity gradients */
+  --grad-en: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+  --grad-sv: linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%);
+  --glow-en: rgba(129, 140, 248, 0.35);
+  --glow-sv: rgba(56, 189, 248, 0.35);
 }
 
 * {
@@ -38,10 +46,23 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01';
   overflow: hidden;
   height: 100%;
   height: 100dvh;
   touch-action: manipulation;
+}
+
+/* Ambient aurora — two soft glows that give the black depth without noise */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(52% 38% at 18% -6%, rgba(99, 102, 241, 0.13), transparent 70%),
+    radial-gradient(46% 34% at 88% 108%, rgba(34, 211, 238, 0.08), transparent 70%);
 }
 
 #root {
@@ -51,6 +72,8 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 button {
@@ -59,6 +82,11 @@ button {
   font-family: inherit;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 input, textarea {
@@ -74,6 +102,27 @@ input, textarea {
 .full-screen {
   width: 100%;
   height: 100%;
+}
+
+/* Tactile press feedback for any interactive element */
+.pressable {
+  transition: transform 0.12s ease, opacity 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+.pressable:active {
+  transform: scale(0.965);
+  opacity: 0.92;
+}
+
+/* Glass surface — the app's core material */
+.glass {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
 }
 
 ::-webkit-scrollbar {

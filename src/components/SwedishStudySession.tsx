@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import SwedishCardView from './SwedishCard';
-import { calculateSM2, LEARNING_REQUEUE_WINDOW_MS } from '../utils/sm2';
+import { calculateSM2, LEARNING_REQUEUE_WINDOW_MS, previewIntervalLabel } from '../utils/sm2';
 import type { SwedishCard } from '../utils/sm2';
 import { SWEDISH_SESSION_KEY } from '../lib/session';
 
@@ -197,21 +197,22 @@ export default function SwedishStudySession({
   const progress = (currentCardIndex / queue.length) * 100;
 
   return (
-    <div className="flex-center full-screen" style={{ flexDirection: 'column', position: 'relative', height: '100dvh', overflow: 'hidden', background: 'var(--bg-color)' }}>
+    <div className="flex-center full-screen" style={{ flexDirection: 'column', position: 'relative', height: '100dvh', overflow: 'hidden' }}>
       {/* Progress bar */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'var(--border)', zIndex: 15 }}>
-        <div style={{ height: '100%', width: `${progress}%`, background: '#3b82f6', transition: 'width 0.3s ease', borderRadius: '0 2px 2px 0' }} />
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'rgba(255,255,255,0.05)', zIndex: 15 }}>
+        <div style={{ height: '100%', width: `${progress}%`, background: 'var(--grad-sv)', transition: 'width 0.3s ease', borderRadius: '0 2px 2px 0', boxShadow: '0 0 12px var(--glow-sv)' }} />
       </div>
 
       {/* Header */}
-      <div style={{ position: 'absolute', top: '12px', left: '16px', right: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
+      <div style={{ position: 'absolute', top: '14px', left: '16px', right: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
         <button
           onClick={onPause}
-          style={{ background: 'rgba(255,255,255,0.06)', color: 'var(--text-muted)', border: 'none', padding: '8px 14px', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem', fontWeight: '500' }}
+          className="pressable glass"
+          style={{ color: 'var(--text-secondary)', padding: '8px 15px', borderRadius: '999px', fontSize: '0.85rem', fontWeight: 600, background: 'transparent' }}
         >
           &#8592; Back
         </button>
-        <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontWeight: '500' }}>
+        <div className="glass tabular" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, padding: '8px 14px', borderRadius: '999px' }}>
           {cardsLeft} left
         </div>
       </div>
@@ -238,16 +239,17 @@ export default function SwedishStudySession({
           {!isFlipped ? (
             <button
               onClick={handleFlip}
-              style={{ width: '100%', padding: '18px', borderRadius: 'var(--radius)', background: '#3b82f6', color: 'white', fontWeight: '700', fontSize: '1rem', boxShadow: '0 4px 16px rgba(59, 130, 246, 0.35)', border: 'none', letterSpacing: '-0.01em' }}
+              className="pressable"
+              style={{ width: '100%', padding: '18px', borderRadius: 'var(--radius)', background: 'var(--grad-sv)', color: '#06121f', fontWeight: 700, fontSize: '1rem', boxShadow: '0 10px 30px -6px var(--glow-sv), 0 1px 0 rgba(255,255,255,0.25) inset', border: 'none', letterSpacing: '-0.01em' }}
             >
               Show Answer
             </button>
           ) : (
             <>
-              <RateButton label="Again" color="var(--danger)" onClick={() => handleRate(0)} />
-              <RateButton label="Hard" color="var(--warning)" onClick={() => handleRate(3)} />
-              <RateButton label="Good" color="#3b82f6" onClick={() => handleRate(4)} />
-              <RateButton label="Easy" color="var(--success)" onClick={() => handleRate(5)} />
+              <RateButton label="Again" hint={previewIntervalLabel(currentCard, 0)} color="#f87171" onClick={() => handleRate(0)} />
+              <RateButton label="Hard" hint={previewIntervalLabel(currentCard, 3)} color="#fbbf24" onClick={() => handleRate(3)} />
+              <RateButton label="Good" hint={previewIntervalLabel(currentCard, 4)} color="#60a5fa" onClick={() => handleRate(4)} />
+              <RateButton label="Easy" hint={previewIntervalLabel(currentCard, 5)} color="#34d399" onClick={() => handleRate(5)} />
             </>
           )}
         </div>
@@ -256,15 +258,30 @@ export default function SwedishStudySession({
   );
 }
 
-function RateButton({ label, color, onClick }: { label: string; color: string; onClick: () => void }) {
+function RateButton({ label, hint, color, onClick }: { label: string; hint: string; color: string; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      style={{ flex: 1, height: '56px', borderRadius: 'var(--radius-sm)', background: color, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.1s, opacity 0.1s', border: 'none', fontWeight: '700', fontSize: '0.85rem', letterSpacing: '-0.01em' }}
-      onTouchStart={e => { e.currentTarget.style.transform = 'scale(0.95)'; e.currentTarget.style.opacity = '0.9'; }}
-      onTouchEnd={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.opacity = '1'; }}
+      className="pressable"
+      style={{
+        flex: 1,
+        height: '60px',
+        borderRadius: 'var(--radius-sm)',
+        background: `${color}1f`,
+        border: `1px solid ${color}40`,
+        color,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '2px',
+        fontWeight: 700,
+        fontSize: '0.85rem',
+        letterSpacing: '-0.01em',
+      }}
     >
-      {label}
+      <span>{label}</span>
+      <span className="tabular" style={{ fontSize: '0.62rem', fontWeight: 600, opacity: 0.75 }}>{hint}</span>
     </button>
   );
 }

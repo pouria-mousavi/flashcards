@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import type { Lang } from '../utils/sm2';
 
 interface Props {
@@ -14,13 +15,12 @@ const OPTIONS: { lang: Lang; label: string }[] = [
 // language sections — selecting one swaps the whole deck/session.
 export default function LanguageSwitcher({ active, onChange }: Props) {
   return (
-    <div style={{
+    <div className="glass" style={{
       display: 'inline-flex',
-      background: 'var(--card-bg)',
-      border: '1px solid var(--border)',
       borderRadius: '999px',
-      padding: '3px',
+      padding: '4px',
       gap: '2px',
+      position: 'relative',
     }}>
       {OPTIONS.map(opt => {
         const isActive = opt.lang === active;
@@ -28,20 +28,35 @@ export default function LanguageSwitcher({ active, onChange }: Props) {
           <button
             key={opt.lang}
             onClick={() => !isActive && onChange(opt.lang)}
+            className="pressable"
             style={{
-              padding: '6px 16px',
+              position: 'relative',
+              padding: '7px 18px',
               borderRadius: '999px',
               border: 'none',
               fontSize: '0.8rem',
-              fontWeight: '700',
+              fontWeight: 700,
               letterSpacing: '-0.01em',
               cursor: isActive ? 'default' : 'pointer',
-              background: isActive ? 'var(--accent)' : 'transparent',
+              background: 'transparent',
               color: isActive ? '#fff' : 'var(--text-muted)',
-              transition: 'all 0.15s ease',
+              transition: 'color 0.2s ease',
             }}
           >
-            {opt.label}
+            {isActive && (
+              <motion.span
+                layoutId="lang-thumb"
+                transition={{ type: 'spring', stiffness: 500, damping: 38 }}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: '999px',
+                  background: opt.lang === 'sv' ? 'var(--grad-sv)' : 'var(--grad-en)',
+                  boxShadow: `0 4px 14px ${opt.lang === 'sv' ? 'var(--glow-sv)' : 'var(--glow-en)'}`,
+                }}
+              />
+            )}
+            <span style={{ position: 'relative', zIndex: 1 }}>{opt.label}</span>
           </button>
         );
       })}

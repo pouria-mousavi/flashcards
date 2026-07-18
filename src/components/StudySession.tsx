@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import FlashcardComponent from './Flashcard';
-import { calculateSM2, isGrammarCard, LEARNING_REQUEUE_WINDOW_MS } from '../utils/sm2';
+import { calculateSM2, isGrammarCard, LEARNING_REQUEUE_WINDOW_MS, previewIntervalLabel } from '../utils/sm2';
 import type { Flashcard, StudyCard } from '../utils/sm2';
 import { supabase } from '../lib/supabase';
 import { SESSION_KEY } from '../lib/session';
@@ -271,22 +271,23 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
           left: 0,
           right: 0,
           height: '3px',
-          background: 'var(--border)',
+          background: 'rgba(255,255,255,0.05)',
           zIndex: 15
       }}>
           <div style={{
               height: '100%',
               width: `${progress}%`,
-              background: 'var(--accent)',
+              background: 'var(--grad-en)',
               transition: 'width 0.3s ease',
-              borderRadius: '0 2px 2px 0'
+              borderRadius: '0 2px 2px 0',
+              boxShadow: '0 0 12px var(--glow-en)'
           }} />
       </div>
 
       {/* Header */}
       <div style={{
           position: 'absolute',
-          top: '12px',
+          top: '14px',
           left: '16px',
           right: '16px',
           display: 'flex',
@@ -296,22 +297,24 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
       }}>
         <button
             onClick={onPause}
+            className="pressable glass"
             style={{
-                background: 'rgba(255,255,255,0.06)',
-                color: 'var(--text-muted)',
-                border: 'none',
-                padding: '8px 14px',
-                borderRadius: 'var(--radius-sm)',
+                color: 'var(--text-secondary)',
+                padding: '8px 15px',
+                borderRadius: '999px',
                 fontSize: '0.85rem',
-                fontWeight: '500'
+                fontWeight: 600,
+                background: 'transparent'
             }}
         >
             &#8592; Back
         </button>
-        <div style={{
-            color: 'var(--text-muted)',
-            fontSize: '0.85rem',
-            fontWeight: '500'
+        <div className="glass tabular" style={{
+            color: 'var(--text-secondary)',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            padding: '8px 14px',
+            borderRadius: '999px'
         }}>
             {cardsLeft} left
         </div>
@@ -375,15 +378,16 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
             {!isFlipped ? (
                 <button
                     onClick={handleFlip}
+                    className="pressable"
                     style={{
                         width: '100%',
                         padding: '18px',
                         borderRadius: 'var(--radius)',
-                        background: 'var(--accent)',
-                        color: 'white',
-                        fontWeight: '700',
+                        background: 'var(--grad-en)',
+                        color: '#0d0a1f',
+                        fontWeight: 700,
                         fontSize: '1rem',
-                        boxShadow: '0 4px 16px rgba(99, 102, 241, 0.35)',
+                        boxShadow: '0 10px 30px -6px var(--glow-en), 0 1px 0 rgba(255,255,255,0.25) inset',
                         border: 'none',
                         letterSpacing: '-0.01em'
                     }}>
@@ -391,10 +395,10 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
                 </button>
             ) : (
                 <>
-                    <RateButton label="Again" color="var(--danger)" onClick={() => handleRate(0)} />
-                    <RateButton label="Hard" color="var(--warning)" onClick={() => handleRate(3)} />
-                    <RateButton label="Good" color="var(--accent)" onClick={() => handleRate(4)} />
-                    <RateButton label="Easy" color="var(--success)" onClick={() => handleRate(5)} />
+                    <RateButton label="Again" hint={previewIntervalLabel(currentCard, 0)} color="#f87171" onClick={() => handleRate(0)} />
+                    <RateButton label="Hard" hint={previewIntervalLabel(currentCard, 3)} color="#fbbf24" onClick={() => handleRate(3)} />
+                    <RateButton label="Good" hint={previewIntervalLabel(currentCard, 4)} color="#818cf8" onClick={() => handleRate(4)} />
+                    <RateButton label="Easy" hint={previewIntervalLabel(currentCard, 5)} color="#34d399" onClick={() => handleRate(5)} />
                 </>
             )}
         </div>
@@ -403,29 +407,30 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
   );
 }
 
-function RateButton({ label, color, onClick }: { label: string, color: string, onClick: () => void }) {
+function RateButton({ label, hint, color, onClick }: { label: string, hint: string, color: string, onClick: () => void }) {
     return (
         <button
             onClick={onClick}
+            className="pressable"
             style={{
                 flex: 1,
-                height: '56px',
+                height: '60px',
                 borderRadius: 'var(--radius-sm)',
-                background: color,
-                color: '#fff',
+                background: `${color}1f`,
+                border: `1px solid ${color}40`,
+                color,
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'transform 0.1s, opacity 0.1s',
-                border: 'none',
-                fontWeight: '700',
+                gap: '2px',
+                fontWeight: 700,
                 fontSize: '0.85rem',
                 letterSpacing: '-0.01em'
             }}
-            onTouchStart={e => { e.currentTarget.style.transform = 'scale(0.95)'; e.currentTarget.style.opacity = '0.9'; }}
-            onTouchEnd={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.opacity = '1'; }}
         >
-            {label}
+            <span>{label}</span>
+            <span className="tabular" style={{ fontSize: '0.62rem', fontWeight: 600, opacity: 0.75 }}>{hint}</span>
         </button>
     )
 }

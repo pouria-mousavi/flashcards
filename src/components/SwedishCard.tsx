@@ -185,13 +185,15 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
       }}
     >
       {/* Front — text + its own speaker */}
-      <div style={{
-        background: 'var(--card-bg)',
+      <div className="glass" style={{
         borderRadius: 'var(--radius-lg)',
         padding: '28px 24px',
-        border: '1px solid var(--border)',
         boxShadow: 'var(--card-shadow)',
+        position: 'relative',
+        overflow: 'hidden',
       }}>
+        {/* Gradient hairline — the card's identity strip */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2.5px', background: 'var(--grad-sv)', opacity: 0.8 }} />
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -247,10 +249,13 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           style={{
-            background: SV_SOFT,
+            background: 'linear-gradient(180deg, rgba(96, 165, 250, 0.10), rgba(34, 211, 238, 0.05))',
+            backdropFilter: 'blur(14px)',
+            WebkitBackdropFilter: 'blur(14px)',
             borderRadius: 'var(--radius)',
             padding: '22px 20px',
             border: `1px solid ${SV_BORDER}`,
+            boxShadow: '0 12px 32px -12px rgba(14, 90, 180, 0.35)',
             display: 'flex',
             flexDirection: 'column',
             gap: '18px',

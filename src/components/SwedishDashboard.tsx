@@ -32,11 +32,11 @@ function classify(cards: SwedishCard[]): Tier[] {
     }
   });
   return [
-    { label: 'New', count: counts[0], color: '#a1a1aa' },
-    { label: 'Learning', count: counts[1], color: '#f59e0b' },
-    { label: 'Young', count: counts[2], color: '#60a5fa' },
-    { label: 'Maturing', count: counts[3], color: '#3b82f6' },
-    { label: 'Mature', count: counts[4], color: '#10b981' },
+    { label: 'New', count: counts[0], color: '#9ba1ae' },
+    { label: 'Learning', count: counts[1], color: '#fbbf24' },
+    { label: 'Young', count: counts[2], color: '#7dd3fc' },
+    { label: 'Maturing', count: counts[3], color: '#60a5fa' },
+    { label: 'Mature', count: counts[4], color: '#34d399' },
   ];
 }
 
@@ -47,6 +47,7 @@ export default function SwedishDashboard({
   const now = Date.now();
   const dueCount = cards.filter(c => c.nextReviewDate <= now).length;
   const hasDue = dueCount > 0;
+  const canStudy = hasDue || hasActiveSession;
   const tiers = classify(cards);
   const maxCount = Math.max(...tiers.map(t => t.count), 1);
 
@@ -57,92 +58,113 @@ export default function SwedishDashboard({
       alignItems: 'center',
       justifyContent: 'center',
       padding: '48px 24px',
-      gap: '28px',
+      gap: '26px',
       width: '100%',
       height: '100dvh',
       overflowY: 'auto',
-      background: 'var(--bg-color)',
     }}>
       {/* Language switcher — entry point between the two sections */}
       <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />
 
-      {/* Title */}
-      <div style={{ textAlign: 'center' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: '800', margin: '0 0 4px 0', letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>
-          Svenska
+      {/* Hero — the number that matters today */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        style={{ textAlign: 'center' }}
+      >
+        <h1 className="tabular" style={{
+          fontSize: 'clamp(3.4rem, 16vw, 4.6rem)',
+          fontWeight: 800,
+          margin: 0,
+          lineHeight: 1,
+          letterSpacing: '-0.04em',
+          background: 'var(--grad-sv)',
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }}>
+          {dueCount}
         </h1>
-        <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: '500' }}>
-          {totalCards} {totalCards === 1 ? 'card' : 'cards'} total
+        <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.01em' }}>
+          due now · Svenska
         </p>
-      </div>
+        <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+          {totalCards} {totalCards === 1 ? 'card' : 'cards'} in the deck
+        </p>
+      </motion.div>
 
-      {/* Simple state breakdown */}
-      <div style={{
+      {/* State breakdown */}
+      <div className="glass" style={{
         width: '100%',
-        maxWidth: '360px',
-        background: 'var(--card-bg)',
+        maxWidth: '380px',
         borderRadius: 'var(--radius)',
-        padding: '20px 14px 16px',
-        border: '1px solid var(--border)',
-        boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.12)',
+        padding: '22px 16px 16px',
+        boxShadow: 'var(--card-shadow)',
       }}>
-        <div style={{ display: 'flex', gap: '5px', alignItems: 'flex-end', height: '110px' }}>
+        <div style={{ display: 'flex', gap: '6px', alignItems: 'flex-end', height: '108px' }}>
           {tiers.map((t, i) => {
-            const fillH = Math.max((t.count / maxCount) * 92, t.count > 0 ? 20 : 4);
+            const fillH = Math.max((t.count / maxCount) * 88, t.count > 0 ? 18 : 4);
             return (
-              <div key={t.label} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%', gap: '6px' }}>
-                <span style={{ fontSize: t.count >= 1000 ? '0.75rem' : '1rem', fontWeight: '800', color: t.count > 0 ? t.color : 'var(--text-muted)', opacity: t.count > 0 ? 1 : 0.4 }}>
+              <div key={t.label} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%', gap: '7px' }}>
+                <span className="tabular" style={{ fontSize: t.count >= 1000 ? '0.72rem' : '0.95rem', fontWeight: 800, letterSpacing: '-0.02em', color: t.count > 0 ? t.color : 'var(--text-muted)', opacity: t.count > 0 ? 1 : 0.35 }}>
                   {t.count}
                 </span>
                 <motion.div
                   initial={{ height: 0 }}
                   animate={{ height: fillH }}
-                  transition={{ delay: 0.15 + i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  style={{ width: '100%', background: t.count > 0 ? `${t.color}22` : 'rgba(0,0,0,0.2)', borderTop: t.count > 0 ? `2px solid ${t.color}` : 'none', borderRadius: '4px 4px 2px 2px' }}
+                  transition={{ delay: 0.15 + i * 0.06, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    width: '100%',
+                    background: `linear-gradient(to top, ${t.color}0a, ${t.color}30)`,
+                    borderTop: t.count > 0 ? `2px solid ${t.color}` : '2px solid transparent',
+                    borderRadius: '7px 7px 3px 3px',
+                    boxShadow: t.count > 0 ? `0 -6px 18px -6px ${t.color}55` : 'none',
+                  }}
                 />
               </div>
             );
           })}
         </div>
-        <div style={{ display: 'flex', gap: '5px', marginTop: '6px' }}>
+        <div style={{ display: 'flex', gap: '6px', marginTop: '8px' }}>
           {tiers.map(t => (
-            <span key={t.label} style={{ flex: 1, textAlign: 'center', fontSize: '0.55rem', fontWeight: '600', color: t.count > 0 ? t.color : 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.02em', opacity: t.count > 0 ? 0.85 : 0.4 }}>
+            <span key={t.label} style={{ flex: 1, textAlign: 'center', fontSize: '0.55rem', fontWeight: 700, color: t.count > 0 ? t.color : 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', opacity: t.count > 0 ? 0.9 : 0.35 }}>
               {t.label}
             </span>
           ))}
         </div>
       </div>
 
-      {/* Due badge */}
-      {(hasDue || hasActiveSession) && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '20px', background: 'rgba(96, 165, 250, 0.12)', border: '1px solid rgba(96, 165, 250, 0.2)' }}>
+      {/* Session-in-progress pill */}
+      {hasActiveSession && (
+        <div className="glass" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '999px' }}>
           <motion.div
-            animate={{ opacity: [0.4, 1, 0.4] }}
+            animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.2, 1] }}
             transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#60a5fa', flexShrink: 0 }}
+            style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22d3ee', flexShrink: 0 }}
           />
-          <span style={{ fontSize: '0.8rem', fontWeight: '600', color: '#60a5fa' }}>
-            {hasActiveSession ? 'Session in progress' : `${dueCount} due for review`}
+          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#7dd3fc' }}>
+            Session in progress
           </span>
         </div>
       )}
 
       {/* Action button */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', maxWidth: '360px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', maxWidth: '380px' }}>
         <button
           onClick={onStartStudy}
-          disabled={!hasDue && !hasActiveSession}
+          disabled={!canStudy}
+          className="pressable"
           style={{
             padding: '18px',
             fontSize: '1rem',
-            fontWeight: '700',
-            background: (hasDue || hasActiveSession) ? '#3b82f6' : 'var(--card-bg)',
-            color: (hasDue || hasActiveSession) ? '#fff' : 'var(--text-muted)',
+            fontWeight: 700,
+            background: canStudy ? 'var(--grad-sv)' : 'var(--card-bg)',
+            color: canStudy ? '#06121f' : 'var(--text-muted)',
             borderRadius: 'var(--radius)',
-            boxShadow: (hasDue || hasActiveSession) ? '0 8px 24px rgba(59, 130, 246, 0.3)' : 'none',
-            opacity: (!hasDue && !hasActiveSession) ? 0.5 : 1,
-            transition: 'all 0.2s ease',
-            border: 'none',
+            boxShadow: canStudy ? '0 10px 30px -6px var(--glow-sv), 0 1px 0 rgba(255,255,255,0.25) inset' : 'none',
+            opacity: canStudy ? 1 : 0.5,
+            border: canStudy ? 'none' : '1px solid var(--border)',
             letterSpacing: '-0.01em',
           }}
         >

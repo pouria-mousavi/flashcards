@@ -211,6 +211,19 @@ export function calculateSM2<T extends SRSCard>(
  */
 export const LEARNING_REQUEUE_WINDOW_MS = 20 * MIN_MS;
 
+/**
+ * Human label for when a card would come back if rated `rating` now —
+ * shown under the rating buttons (Anki-style): "1m", "6m", "1d", "25d".
+ */
+export function previewIntervalLabel<T extends SRSCard>(card: T, rating: number): string {
+  const next = calculateSM2(card, rating);
+  const ms = (next.nextReviewDate ?? Date.now()) - Date.now();
+  if (ms < 60 * MIN_MS) return `${Math.max(1, Math.round(ms / MIN_MS))}m`;
+  const days = Math.max(1, Math.round(ms / DAY_MS));
+  if (days >= 30) return `${Math.round(days / 30)}mo`;
+  return `${days}d`;
+}
+
 // Mapper to convert DB Row -> App Flashcard
 export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']): Flashcard {
     return {
