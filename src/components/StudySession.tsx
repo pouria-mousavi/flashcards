@@ -139,7 +139,7 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
         particleCount: 40,
         spread: 55,
         origin: { y: 0.7 },
-        colors: ['#10b981', '#34d399', '#6ee7b7']
+        colors: ['#7c5cf6', '#a78bfa', '#c4b5fd']
       });
     }
 
@@ -384,7 +384,7 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
                         padding: '18px',
                         borderRadius: 'var(--radius)',
                         background: 'var(--grad-en)',
-                        color: '#0d0a1f',
+                        color: 'var(--cta-ink-en)',
                         fontWeight: 700,
                         fontSize: '1rem',
                         boxShadow: '0 10px 30px -6px var(--glow-en), 0 1px 0 rgba(255,255,255,0.25) inset',
@@ -395,10 +395,10 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
                 </button>
             ) : (
                 <>
-                    <RateButton label="Again" hint={previewIntervalLabel(currentCard, 0)} color="#f87171" onClick={() => handleRate(0)} />
-                    <RateButton label="Hard" hint={previewIntervalLabel(currentCard, 3)} color="#fbbf24" onClick={() => handleRate(3)} />
-                    <RateButton label="Good" hint={previewIntervalLabel(currentCard, 4)} color="#818cf8" onClick={() => handleRate(4)} />
-                    <RateButton label="Easy" hint={previewIntervalLabel(currentCard, 5)} color="#34d399" onClick={() => handleRate(5)} />
+                    <RateButton label="Again" hint={previewIntervalLabel(currentCard, 0)} tone="again" onClick={() => handleRate(0)} />
+                    <RateButton label="Hard" hint={previewIntervalLabel(currentCard, 3)} tone="hard" onClick={() => handleRate(3)} />
+                    <RateButton label="Good" hint={previewIntervalLabel(currentCard, 4)} tone="good" onClick={() => handleRate(4)} />
+                    <RateButton label="Easy" hint={previewIntervalLabel(currentCard, 5)} tone="easy" onClick={() => handleRate(5)} />
                 </>
             )}
         </div>
@@ -407,7 +407,7 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
   );
 }
 
-function RateButton({ label, hint, color, onClick }: { label: string, hint: string, color: string, onClick: () => void }) {
+function RateButton({ label, hint, tone, onClick }: { label: string, hint: string, tone: string, onClick: () => void }) {
     return (
         <button
             onClick={onClick}
@@ -416,9 +416,9 @@ function RateButton({ label, hint, color, onClick }: { label: string, hint: stri
                 flex: 1,
                 height: '60px',
                 borderRadius: 'var(--radius-sm)',
-                background: `${color}1f`,
-                border: `1px solid ${color}40`,
-                color,
+                background: `var(--rate-${tone}-bg)`,
+                border: `1px solid var(--rate-${tone}-bd)`,
+                color: `var(--rate-${tone})`,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

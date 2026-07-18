@@ -1,32 +1,116 @@
+/* ---------------------------------------------------------------------------
+   Theme system — warm light by default, warm dark via [data-theme="dark"].
+   The app sets data-theme on <html>: auto (light 06:00–14:59, dark after
+   15:00 and overnight) with a manual override.
+--------------------------------------------------------------------------- */
+
 :root {
-  /* Deep-space base with a faint blue undertone */
-  --bg-color: #07080d;
-  --card-bg: rgba(255, 255, 255, 0.035);
-  --card-bg-solid: #12141c;
-  --surface: rgba(255, 255, 255, 0.06);
-  --text-primary: #f4f5f7;
-  --text-secondary: #9ba1ae;
-  --text-muted: #6b7280;
-  --accent: #818cf8;
-  --accent-soft: rgba(129, 140, 248, 0.14);
+  /* Warm paper light */
+  --bg-color: #faf7f2;
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --card-bg-solid: #ffffff;
+  --surface: rgba(28, 25, 23, 0.05);
+  --text-primary: #1c1917;
+  --text-secondary: #57534e;
+  --text-muted: #a8a29e;
+  --accent: #7c5cf6;
+  --accent-soft: rgba(124, 92, 246, 0.12);
+  --success: #059669;
+  --success-soft: rgba(5, 150, 105, 0.12);
+  --warning: #d97706;
+  --warning-soft: rgba(217, 119, 6, 0.12);
+  --danger: #dc2626;
+  --danger-soft: rgba(220, 38, 38, 0.10);
+  --border: rgba(28, 25, 23, 0.08);
+  --border-hover: rgba(28, 25, 23, 0.16);
+  --card-shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 16px 40px -16px rgba(28, 25, 23, 0.16);
+  --radius: 20px;
+  --radius-sm: 13px;
+  --radius-lg: 26px;
+
+  /* Per-language identity — iris violet / Swedish gold */
+  --grad-en: linear-gradient(135deg, #7c5cf6 0%, #b78af7 100%);
+  --grad-sv: linear-gradient(135deg, #f59e0b 0%, #f4691e 100%);
+  --glow-en: rgba(124, 92, 246, 0.30);
+  --glow-sv: rgba(244, 105, 30, 0.28);
+  --cta-ink-en: #ffffff;
+  --cta-ink-sv: #2a1602;
+
+  /* Svenska accent (cards, labels) */
+  --accent-sv: #d97706;
+  --accent-sv-soft: rgba(217, 119, 6, 0.10);
+  --accent-sv-border: rgba(217, 119, 6, 0.28);
+  --card-tint-sv: linear-gradient(180deg, rgba(245, 158, 11, 0.10), rgba(244, 105, 30, 0.05));
+
+  /* Rating buttons — text / tint / border per rating */
+  --rate-again: #dc2626;
+  --rate-again-bg: rgba(220, 38, 38, 0.09);
+  --rate-again-bd: rgba(220, 38, 38, 0.28);
+  --rate-hard: #d97706;
+  --rate-hard-bg: rgba(217, 119, 6, 0.10);
+  --rate-hard-bd: rgba(217, 119, 6, 0.30);
+  --rate-good: #7c5cf6;
+  --rate-good-bg: rgba(124, 92, 246, 0.10);
+  --rate-good-bd: rgba(124, 92, 246, 0.30);
+  --rate-easy: #059669;
+  --rate-easy-bg: rgba(5, 150, 105, 0.10);
+  --rate-easy-bd: rgba(5, 150, 105, 0.30);
+
+  /* Ambient aurora */
+  --aurora:
+    radial-gradient(50% 36% at 16% -4%, rgba(124, 92, 246, 0.09), transparent 70%),
+    radial-gradient(44% 32% at 90% 106%, rgba(245, 158, 11, 0.10), transparent 70%);
+}
+
+[data-theme="dark"] {
+  /* Warm espresso dark — no blue cast */
+  --bg-color: #0f0d0b;
+  --card-bg: rgba(255, 255, 255, 0.045);
+  --card-bg-solid: #1a1714;
+  --surface: rgba(255, 255, 255, 0.07);
+  --text-primary: #f5f3f0;
+  --text-secondary: #a8a29e;
+  --text-muted: #6f6a64;
+  --accent: #a78bfa;
+  --accent-soft: rgba(167, 139, 250, 0.14);
   --success: #34d399;
   --success-soft: rgba(52, 211, 153, 0.14);
   --warning: #fbbf24;
   --warning-soft: rgba(251, 191, 36, 0.14);
   --danger: #f87171;
   --danger-soft: rgba(248, 113, 113, 0.14);
-  --border: rgba(255, 255, 255, 0.07);
-  --border-hover: rgba(255, 255, 255, 0.14);
-  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px -8px rgba(0, 0, 0, 0.5);
-  --radius: 20px;
-  --radius-sm: 13px;
-  --radius-lg: 26px;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.16);
+  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px -8px rgba(0, 0, 0, 0.55);
 
-  /* Per-language identity gradients */
-  --grad-en: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
-  --grad-sv: linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%);
-  --glow-en: rgba(129, 140, 248, 0.35);
-  --glow-sv: rgba(56, 189, 248, 0.35);
+  --grad-en: linear-gradient(135deg, #8b6cf8 0%, #c4a3fa 100%);
+  --grad-sv: linear-gradient(135deg, #fbbf24 0%, #f97335 100%);
+  --glow-en: rgba(139, 108, 248, 0.35);
+  --glow-sv: rgba(249, 115, 53, 0.32);
+  --cta-ink-en: #17102e;
+  --cta-ink-sv: #2a1602;
+
+  --accent-sv: #fbbf24;
+  --accent-sv-soft: rgba(251, 191, 36, 0.10);
+  --accent-sv-border: rgba(251, 191, 36, 0.26);
+  --card-tint-sv: linear-gradient(180deg, rgba(251, 191, 36, 0.09), rgba(249, 115, 53, 0.05));
+
+  --rate-again: #f87171;
+  --rate-again-bg: rgba(248, 113, 113, 0.12);
+  --rate-again-bd: rgba(248, 113, 113, 0.30);
+  --rate-hard: #fbbf24;
+  --rate-hard-bg: rgba(251, 191, 36, 0.12);
+  --rate-hard-bd: rgba(251, 191, 36, 0.30);
+  --rate-good: #a78bfa;
+  --rate-good-bg: rgba(167, 139, 250, 0.12);
+  --rate-good-bd: rgba(167, 139, 250, 0.30);
+  --rate-easy: #34d399;
+  --rate-easy-bg: rgba(52, 211, 153, 0.12);
+  --rate-easy-bd: rgba(52, 211, 153, 0.30);
+
+  --aurora:
+    radial-gradient(52% 38% at 18% -6%, rgba(139, 108, 248, 0.13), transparent 70%),
+    radial-gradient(46% 34% at 88% 108%, rgba(249, 115, 53, 0.09), transparent 70%);
 }
 
 * {
@@ -51,18 +135,18 @@ body {
   height: 100%;
   height: 100dvh;
   touch-action: manipulation;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Ambient aurora — two soft glows that give the black depth without noise */
+/* Ambient aurora — soft identity glows behind everything */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background:
-    radial-gradient(52% 38% at 18% -6%, rgba(99, 102, 241, 0.13), transparent 70%),
-    radial-gradient(46% 34% at 88% 108%, rgba(34, 211, 238, 0.08), transparent 70%);
+  background: var(--aurora);
+  transition: opacity 0.4s ease;
 }
 
 #root {
@@ -134,7 +218,7 @@ input, textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--surface);
   border-radius: 2px;
 }
 

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { CardState } from '../utils/sm2';
 import type { Flashcard, GrammarCard, Lang } from '../utils/sm2';
 import LanguageSwitcher from './LanguageSwitcher';
+import ThemeToggle from './ThemeToggle';
 
 interface Props {
   cards: Flashcard[];
@@ -40,11 +41,11 @@ function classifyCards(cards: Flashcard[]): Tier[] {
   });
 
   return [
-    { label: 'New', count: counts[0], color: '#9ba1ae' },
-    { label: 'Learning', count: counts[1], color: '#fbbf24' },
-    { label: 'Young', count: counts[2], color: '#a5b4fc' },
-    { label: 'Maturing', count: counts[3], color: '#c084fc' },
-    { label: 'Mature', count: counts[4], color: '#34d399' },
+    { label: 'New', count: counts[0], color: '#a8a29e' },
+    { label: 'Learning', count: counts[1], color: '#f59e0b' },
+    { label: 'Young', count: counts[2], color: '#f97316' },
+    { label: 'Maturing', count: counts[3], color: '#8b5cf6' },
+    { label: 'Mature', count: counts[4], color: '#10b981' },
   ];
 }
 
@@ -76,9 +77,12 @@ export default function Dashboard({
       overflowY: 'auto',
     }}>
       {/* Language switcher — entry point between the two sections */}
-      {onSwitchLanguage && (
-        <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />
-      )}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {onSwitchLanguage && (
+          <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />
+        )}
+        <ThemeToggle />
+      </div>
 
       {/* Hero — the number that matters today */}
       <motion.div
@@ -174,7 +178,7 @@ export default function Dashboard({
             fontSize: '1rem',
             fontWeight: 700,
             background: canStudy ? 'var(--grad-en)' : 'var(--card-bg)',
-            color: canStudy ? '#0d0a1f' : 'var(--text-muted)',
+            color: canStudy ? 'var(--cta-ink-en)' : 'var(--text-muted)',
             borderRadius: 'var(--radius)',
             boxShadow: canStudy ? '0 10px 30px -6px var(--glow-en), 0 1px 0 rgba(255,255,255,0.25) inset' : 'none',
             opacity: canStudy ? 1 : 0.5,

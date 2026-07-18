@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { CardState } from '../utils/sm2';
 import type { SwedishCard, Lang } from '../utils/sm2';
 import LanguageSwitcher from './LanguageSwitcher';
+import ThemeToggle from './ThemeToggle';
 
 interface Props {
   cards: SwedishCard[];
@@ -32,11 +33,11 @@ function classify(cards: SwedishCard[]): Tier[] {
     }
   });
   return [
-    { label: 'New', count: counts[0], color: '#9ba1ae' },
-    { label: 'Learning', count: counts[1], color: '#fbbf24' },
-    { label: 'Young', count: counts[2], color: '#7dd3fc' },
-    { label: 'Maturing', count: counts[3], color: '#60a5fa' },
-    { label: 'Mature', count: counts[4], color: '#34d399' },
+    { label: 'New', count: counts[0], color: '#a8a29e' },
+    { label: 'Learning', count: counts[1], color: '#f59e0b' },
+    { label: 'Young', count: counts[2], color: '#f97316' },
+    { label: 'Maturing', count: counts[3], color: '#8b5cf6' },
+    { label: 'Mature', count: counts[4], color: '#10b981' },
   ];
 }
 
@@ -63,8 +64,11 @@ export default function SwedishDashboard({
       height: '100dvh',
       overflowY: 'auto',
     }}>
-      {/* Language switcher — entry point between the two sections */}
-      <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />
+      {/* Language switcher + theme — the app's control strip */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />
+        <ThemeToggle />
+      </div>
 
       {/* Hero — the number that matters today */}
       <motion.div
@@ -141,9 +145,9 @@ export default function SwedishDashboard({
           <motion.div
             animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.2, 1] }}
             transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22d3ee', flexShrink: 0 }}
+            style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent-sv)', flexShrink: 0 }}
           />
-          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#7dd3fc' }}>
+          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent-sv)' }}>
             Session in progress
           </span>
         </div>
@@ -160,7 +164,7 @@ export default function SwedishDashboard({
             fontSize: '1rem',
             fontWeight: 700,
             background: canStudy ? 'var(--grad-sv)' : 'var(--card-bg)',
-            color: canStudy ? '#06121f' : 'var(--text-muted)',
+            color: canStudy ? 'var(--cta-ink-sv)' : 'var(--text-muted)',
             borderRadius: 'var(--radius)',
             boxShadow: canStudy ? '0 10px 30px -6px var(--glow-sv), 0 1px 0 rgba(255,255,255,0.25) inset' : 'none',
             opacity: canStudy ? 1 : 0.5,

@@ -39,7 +39,7 @@ export default function LanguageSwitcher({ active, onChange }: Props) {
               letterSpacing: '-0.01em',
               cursor: isActive ? 'default' : 'pointer',
               background: 'transparent',
-              color: isActive ? '#fff' : 'var(--text-muted)',
+              color: isActive ? (opt.lang === 'sv' ? 'var(--cta-ink-sv)' : 'var(--cta-ink-en)') : 'var(--text-muted)',
               transition: 'color 0.2s ease',
             }}
           >

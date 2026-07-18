@@ -4,9 +4,9 @@ import { playTTS } from '../lib/tts';
 import type { SwedishCard, SwedishWordForms, Lang } from '../utils/sm2';
 
 // Swedish accent — distinct from English indigo so the two decks feel separate.
-const SV_ACCENT = '#60a5fa';
-const SV_SOFT = 'rgba(96, 165, 250, 0.10)';
-const SV_BORDER = 'rgba(96, 165, 250, 0.28)';
+const SV_ACCENT = 'var(--accent-sv)';
+const SV_SOFT = 'var(--accent-sv-soft)';
+const SV_BORDER = 'var(--accent-sv-border)';
 
 const LANG_LABEL: Record<Lang, string> = { sv: 'Svenska', en: 'English' };
 
@@ -249,13 +249,13 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           style={{
-            background: 'linear-gradient(180deg, rgba(96, 165, 250, 0.10), rgba(34, 211, 238, 0.05))',
+            background: 'var(--card-tint-sv)',
             backdropFilter: 'blur(14px)',
             WebkitBackdropFilter: 'blur(14px)',
             borderRadius: 'var(--radius)',
             padding: '22px 20px',
             border: `1px solid ${SV_BORDER}`,
-            boxShadow: '0 12px 32px -12px rgba(14, 90, 180, 0.35)',
+            boxShadow: '0 12px 32px -14px var(--glow-sv)',
             display: 'flex',
             flexDirection: 'column',
             gap: '18px',

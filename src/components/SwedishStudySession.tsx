@@ -143,7 +143,7 @@ export default function SwedishStudySession({
         particleCount: 40,
         spread: 55,
         origin: { y: 0.7 },
-        colors: ['#60a5fa', '#3b82f6', '#93c5fd'],
+        colors: ['#f59e0b', '#f4691e', '#fbbf24'],
       });
     }
 
@@ -240,16 +240,16 @@ export default function SwedishStudySession({
             <button
               onClick={handleFlip}
               className="pressable"
-              style={{ width: '100%', padding: '18px', borderRadius: 'var(--radius)', background: 'var(--grad-sv)', color: '#06121f', fontWeight: 700, fontSize: '1rem', boxShadow: '0 10px 30px -6px var(--glow-sv), 0 1px 0 rgba(255,255,255,0.25) inset', border: 'none', letterSpacing: '-0.01em' }}
+              style={{ width: '100%', padding: '18px', borderRadius: 'var(--radius)', background: 'var(--grad-sv)', color: 'var(--cta-ink-sv)', fontWeight: 700, fontSize: '1rem', boxShadow: '0 10px 30px -6px var(--glow-sv), 0 1px 0 rgba(255,255,255,0.25) inset', border: 'none', letterSpacing: '-0.01em' }}
             >
               Show Answer
             </button>
           ) : (
             <>
-              <RateButton label="Again" hint={previewIntervalLabel(currentCard, 0)} color="#f87171" onClick={() => handleRate(0)} />
-              <RateButton label="Hard" hint={previewIntervalLabel(currentCard, 3)} color="#fbbf24" onClick={() => handleRate(3)} />
-              <RateButton label="Good" hint={previewIntervalLabel(currentCard, 4)} color="#60a5fa" onClick={() => handleRate(4)} />
-              <RateButton label="Easy" hint={previewIntervalLabel(currentCard, 5)} color="#34d399" onClick={() => handleRate(5)} />
+              <RateButton label="Again" hint={previewIntervalLabel(currentCard, 0)} tone="again" onClick={() => handleRate(0)} />
+              <RateButton label="Hard" hint={previewIntervalLabel(currentCard, 3)} tone="hard" onClick={() => handleRate(3)} />
+              <RateButton label="Good" hint={previewIntervalLabel(currentCard, 4)} tone="good" onClick={() => handleRate(4)} />
+              <RateButton label="Easy" hint={previewIntervalLabel(currentCard, 5)} tone="easy" onClick={() => handleRate(5)} />
             </>
           )}
         </div>
@@ -258,7 +258,7 @@ export default function SwedishStudySession({
   );
 }
 
-function RateButton({ label, hint, color, onClick }: { label: string; hint: string; color: string; onClick: () => void }) {
+function RateButton({ label, hint, tone, onClick }: { label: string; hint: string; tone: string; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
@@ -267,9 +267,9 @@ function RateButton({ label, hint, color, onClick }: { label: string; hint: stri
         flex: 1,
         height: '60px',
         borderRadius: 'var(--radius-sm)',
-        background: `${color}1f`,
-        border: `1px solid ${color}40`,
-        color,
+        background: `var(--rate-${tone}-bg)`,
+        border: `1px solid var(--rate-${tone}-bd)`,
+        color: `var(--rate-${tone})`,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
