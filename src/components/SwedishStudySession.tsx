@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import SwedishCardView from './SwedishCard';
-import { calculateSM2 } from '../utils/sm2';
+import { calculateSM2, LEARNING_REQUEUE_WINDOW_MS } from '../utils/sm2';
 import type { SwedishCard } from '../utils/sm2';
 import { SWEDISH_SESSION_KEY } from '../lib/session';
 
@@ -72,29 +72,60 @@ export default function SwedishStudySession({
     }
   }, [currentCardIndex, queue.length, onSessionComplete]);
 
-  const handleDelete = (cardId: string) => {
-    if (confirm('Are you sure you want to PERMANENTLY delete this card?')) {
-      onDeleteCard(cardId);
-
+  // Honor learning-step delays: if the card we're about to show is a re-queued
+  // learning card that is NOT due yet, and a due card still waits later in the
+  // queue, rotate the early card to the back and show the due one instead.
+  // If nothing else is due, we show it early (Anki does the same).
+  useEffect(() => {
+    const card = queue[currentCardIndex];
+    if (!card) return;
+    const now = Date.now();
+    if (card.nextReviewDate > now && queue.slice(currentCardIndex + 1).some(c => c.nextReviewDate <= now)) {
+      setIsFlipped(false); // never reveal the swapped-in card's answer
       setQueue(prev => {
-        const newQueue = prev.filter(c => c.id !== cardId);
-
-        // Keep the session storage in lockstep so a reload restores correctly.
+        const copy = [...prev];
+        const [early] = copy.splice(currentCardIndex, 1);
+        copy.push(early);
         try {
           const saved = localStorage.getItem(SWEDISH_SESSION_KEY);
           if (saved) {
             const session = JSON.parse(saved);
-            session.cardIds = newQueue.map(c => c.id);
-            session.currentIndex = Math.min(currentCardIndex, newQueue.length - 1);
+            session.cardIds = copy.map(c => c.id);
             session.isFlipped = false;
             localStorage.setItem(SWEDISH_SESSION_KEY, JSON.stringify(session));
           }
-        } catch (e) { console.error('Swedish session sync failed', e); }
-
-        return newQueue;
+        } catch { /* silent */ }
+        return copy;
       });
+    }
+  }, [currentCardIndex, queue]);
 
+  const handleDelete = (cardId: string) => {
+    if (confirm('Are you sure you want to PERMANENTLY delete this card?')) {
+      onDeleteCard(cardId);
+
+      // A re-queued card can appear at several positions. Removing copies
+      // BEFORE the pointer shifts everything left — adjust the index to match,
+      // or later cards get silently skipped / the session ends early.
+      const removedBefore = queue.slice(0, currentCardIndex).filter(c => c.id === cardId).length;
+      const newQueue = queue.filter(c => c.id !== cardId);
+      const newIndex = Math.max(0, currentCardIndex - removedBefore);
+
+      setQueue(newQueue);
+      setCurrentCardIndex(newIndex);
       setIsFlipped(false);
+
+      // Keep the session storage in lockstep so a reload restores correctly.
+      try {
+        const saved = localStorage.getItem(SWEDISH_SESSION_KEY);
+        if (saved) {
+          const session = JSON.parse(saved);
+          session.cardIds = newQueue.map(c => c.id);
+          session.currentIndex = newIndex;
+          session.isFlipped = false;
+          localStorage.setItem(SWEDISH_SESSION_KEY, JSON.stringify(session));
+        }
+      } catch (e) { console.error('Swedish session sync failed', e); }
     }
   };
 
@@ -118,10 +149,10 @@ export default function SwedishStudySession({
 
     setIsFlipped(false);
 
-    // Re-queue if due again within 10 minutes (same pattern as the English deck).
+    // Re-queue learning-step cards so they return within THIS session.
     const now = Date.now();
     let isRequeued = false;
-    if (updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now < 10 * 60 * 1000)) {
+    if (updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now <= LEARNING_REQUEUE_WINDOW_MS)) {
       setQueue(prev => [...prev, updatedCard]);
       isRequeued = true;
     }
@@ -139,12 +170,9 @@ export default function SwedishStudySession({
       }
     } catch (e) { console.error('Swedish session sync failed', e); }
 
-    const effectiveLength = isRequeued ? queue.length + 1 : queue.length;
-    if (currentCardIndex < effectiveLength - 1) {
-      setTimeout(() => setCurrentCardIndex(prev => prev + 1), 200);
-    } else {
-      setCurrentCardIndex(effectiveLength);
-    }
+    // Advance synchronously — a deferred advance opens a window where the
+    // rotation effect / visibility flush observe a stale index.
+    setCurrentCardIndex(prev => prev + 1);
   };
 
   if (queue.length === 0) {

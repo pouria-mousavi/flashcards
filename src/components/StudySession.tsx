@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import FlashcardComponent from './Flashcard';
-import { calculateSM2, isGrammarCard } from '../utils/sm2';
+import { calculateSM2, isGrammarCard, LEARNING_REQUEUE_WINDOW_MS } from '../utils/sm2';
 import type { Flashcard, StudyCard } from '../utils/sm2';
 import { supabase } from '../lib/supabase';
 import { SESSION_KEY } from '../lib/session';
@@ -74,6 +74,34 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
       }
   }, [currentCardIndex, queue.length, onSessionComplete]);
 
+  // Honor learning-step delays: if the card we're about to show is a re-queued
+  // learning card that is NOT due yet, and a due card still waits later in the
+  // queue, rotate the early card to the back and show the due one instead.
+  // If nothing else is due, we show it early (Anki does the same).
+  useEffect(() => {
+      const card = queue[currentCardIndex];
+      if (!card) return;
+      const now = Date.now();
+      if (card.nextReviewDate > now && queue.slice(currentCardIndex + 1).some(c => c.nextReviewDate <= now)) {
+          setIsFlipped(false); // never reveal the swapped-in card's answer
+          setQueue(prev => {
+              const copy = [...prev];
+              const [early] = copy.splice(currentCardIndex, 1);
+              copy.push(early);
+              try {
+                  const saved = localStorage.getItem(SESSION_KEY);
+                  if (saved) {
+                      const session = JSON.parse(saved);
+                      session.cardIds = copy.map(c => c.id);
+                      session.isFlipped = false;
+                      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+                  }
+              } catch { /* silent */ }
+              return copy;
+          });
+      }
+  }, [currentCardIndex, queue]);
+
   const handlePlayAudio = useCallback((text?: string) => {
       if (!text) return;
       // Stop any currently playing audio
@@ -117,11 +145,11 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
 
     setIsFlipped(false);
 
-    // Re-queue if due within 10 minutes
+    // Re-queue learning-step cards so they return within THIS session.
     const now = Date.now();
     let isRequeued = false;
 
-    if (updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now < 10 * 60 * 1000)) {
+    if (updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now <= LEARNING_REQUEUE_WINDOW_MS)) {
         setQueue(prev => [...prev, updatedCard]);
         isRequeued = true;
     }
@@ -140,14 +168,9 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
         }
     } catch (e) { console.error("Session sync failed", e); }
 
-    // Check if there are more cards (accounting for potential re-queue)
-    const effectiveLength = isRequeued ? queue.length + 1 : queue.length;
-    if (currentCardIndex < effectiveLength - 1) {
-      setTimeout(() => setCurrentCardIndex(prev => prev + 1), 200);
-    } else {
-      // Will be handled by the useEffect above
-      setCurrentCardIndex(effectiveLength);
-    }
+    // Advance synchronously — a deferred advance opens a window where the
+    // rotation effect / visibility flush observe a stale index.
+    setCurrentCardIndex(prev => prev + 1);
   };
 
   const handleSaveNote = async (cardId: string, note: string) => {
@@ -171,25 +194,28 @@ export default function StudySession({ cards, startIndex = 0, startFlipped = fal
       if (confirm("Are you sure you want to PERMANENTLY delete this card?")) {
           onDeleteCard(cardId);
 
-          setQueue(prev => {
-              const newQueue = prev.filter(c => c.id !== cardId);
+          // A re-queued card can appear at several positions. Removing copies
+          // BEFORE the pointer shifts everything left — adjust the index to
+          // match, or later cards get skipped / the session ends early.
+          const removedBefore = queue.slice(0, currentCardIndex).filter(c => c.id === cardId).length;
+          const newQueue = queue.filter(c => c.id !== cardId);
+          const newIndex = Math.max(0, currentCardIndex - removedBefore);
 
-              // Sync updated queue to localStorage
-              try {
-                  const saved = localStorage.getItem(SESSION_KEY);
-                  if (saved) {
-                      const session = JSON.parse(saved);
-                      session.cardIds = newQueue.map(c => c.id);
-                      session.currentIndex = Math.min(currentCardIndex, newQueue.length - 1);
-                      session.isFlipped = false;
-                      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-                  }
-              } catch (e) { console.error("Session sync failed", e); }
-
-              return newQueue;
-          });
-
+          setQueue(newQueue);
+          setCurrentCardIndex(newIndex);
           setIsFlipped(false);
+
+          // Sync updated queue to localStorage
+          try {
+              const saved = localStorage.getItem(SESSION_KEY);
+              if (saved) {
+                  const session = JSON.parse(saved);
+                  session.cardIds = newQueue.map(c => c.id);
+                  session.currentIndex = newIndex;
+                  session.isFlipped = false;
+                  localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+              }
+          } catch (e) { console.error("Session sync failed", e); }
       }
   };
 

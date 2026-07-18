@@ -71,12 +71,27 @@ export interface SRSCard {
     easeFactor: number;
 }
 
+const MIN_MS = 60 * 1000;
+const DAY_MS = 24 * 60 * 60 * 1000;
+
 /**
- * SM-2 Algorithm Implementation
+ * Anki-style SM-2 with real learning steps.
  * Rating: 0=Again, 3=Hard, 4=Good, 5=Easy
  *
- * Generic over any card with the SRS fields — used by both vocab Flashcards
- * and GrammarCards.
+ * Units for `interval`:
+ *  - LEARNING:   minutes — the card's current position on the learning ladder
+ *                (SETTINGS.learningSteps). 1 → first step, 10 → last step.
+ *  - RELEARNING: DAYS — the preserved pre-lapse REVIEW interval, so lapse
+ *                recovery can compute from it. The relearning delay itself is
+ *                a fixed number of minutes and is NOT stored in `interval`.
+ *  - REVIEW:     days.
+ *
+ * Learning ladder (steps [1, 10] minutes):
+ *  - Again → back to step 1 (1 min)
+ *  - Hard  → between current and next step (new card: 6 min); repeats last step
+ *  - Good  → next step; past the last step → graduate to 1 day
+ *  - Easy  → graduate immediately to 4 days
+ * Ease factor is untouched while a card is in learning (Anki behavior).
  */
 export function calculateSM2<T extends SRSCard>(
   card: T,
@@ -84,107 +99,117 @@ export function calculateSM2<T extends SRSCard>(
 ): Partial<T> {
   const now = Date.now();
   const next = { ...card };
+  const steps = SETTINGS.learningSteps;
 
-  // Store the previous interval for lapse recovery
-  const previousReviewInterval = next.state === CardState.REVIEW ? next.interval : 1;
-
-  // --- NEW or LEARNING ---
-  // Day-based scheduling: any PASSING answer (Hard/Good/Easy) on a new or
-  // learning card graduates it to a whole-day interval, so a card you answer
-  // today never comes back the same day — not even in a later session that day.
-  // Only "Again" keeps it short, so a card you got WRONG is relearned now.
+  // --- NEW or LEARNING: walk the minutes ladder ---
   if (next.state === CardState.NEW || next.state === CardState.LEARNING) {
+    // Position on the ladder: NEW cards sit at the first step.
+    const cur = next.state === CardState.NEW ? steps[0] : next.interval;
+    const nextStep = steps.find(s => s > cur);
+
     if (rating === 0) {
-        // Again — failed: relearn within THIS session (under the 10-min
-        // re-queue threshold), not in a later same-day session.
+        // Again — restart the ladder.
         next.state = CardState.LEARNING;
-        next.interval = 1; // minute
-        next.nextReviewDate = now + next.interval * 60 * 1000;
+        next.interval = steps[0];
+        next.nextReviewDate = now + next.interval * MIN_MS;
     } else if (rating === 3) {
-        // Hard — graduate to tomorrow, with a small ease penalty.
-        next.state = CardState.REVIEW;
-        next.interval = SETTINGS.graduatingInterval; // 1 day
-        next.easeFactor = Math.max(1.3, next.easeFactor - 0.15);
-        next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+        // Hard — halfway between current and next step (or repeat the last).
+        next.state = CardState.LEARNING;
+        next.interval = nextStep ? Math.round((cur + nextStep) / 2) : cur;
+        next.nextReviewDate = now + next.interval * MIN_MS;
     } else if (rating === 4) {
-        // Good — graduate to tomorrow.
-        next.state = CardState.REVIEW;
-        next.interval = SETTINGS.graduatingInterval; // 1 day
-        next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+        if (nextStep) {
+            // Good — advance to the next step.
+            next.state = CardState.LEARNING;
+            next.interval = nextStep;
+            next.nextReviewDate = now + next.interval * MIN_MS;
+        } else {
+            // Good past the last step — graduate to tomorrow.
+            next.state = CardState.REVIEW;
+            next.interval = SETTINGS.graduatingInterval;
+            next.nextReviewDate = now + next.interval * DAY_MS;
+        }
     } else if (rating === 5) {
-        // Easy — graduate a few days out.
+        // Easy — skip the ladder, graduate a few days out.
         next.state = CardState.REVIEW;
-        next.interval = SETTINGS.easyInterval; // 4 days
-        next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+        next.interval = SETTINGS.easyInterval;
+        next.nextReviewDate = now + next.interval * DAY_MS;
     }
   }
 
   // --- REVIEW ---
   else if (next.state === CardState.REVIEW) {
       if (rating === 0) {
-          // Lapse: move to relearning
+          // Lapse: into relearning. KEEP `interval` (pre-lapse days) so
+          // graduation can recover from it; the delay is a fixed step.
           next.state = CardState.RELEARNING;
           next.easeFactor = Math.max(1.3, next.easeFactor - 0.2);
-          // Store the pre-lapse interval so we can recover it
-          next.interval = SETTINGS.relearningSteps[0]; // 10m in minutes
-          next.nextReviewDate = now + next.interval * 60 * 1000;
+          next.nextReviewDate = now + SETTINGS.relearningSteps[0] * MIN_MS;
       } else if (rating === 3) {
-          // Hard: small increase, penalty to ease
-          next.interval = Math.max(SETTINGS.minimumInterval, Math.round(next.interval * SETTINGS.hardInterval));
+          // Hard: small growth (always at least +1 day), ease penalty.
+          next.interval = Math.max(next.interval + 1, Math.round(next.interval * SETTINGS.hardInterval));
           next.easeFactor = Math.max(1.3, next.easeFactor - 0.15);
-          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+          next.nextReviewDate = now + next.interval * DAY_MS;
       } else if (rating === 4) {
-          // Good: standard interval growth
-          next.interval = Math.round(next.interval * next.easeFactor);
-          // SM-2 ease factor adjustment
+          // Good: standard growth (always at least +1 day).
+          next.interval = Math.max(next.interval + 1, Math.round(next.interval * next.easeFactor));
           const q = rating;
           next.easeFactor = Math.max(1.3, next.easeFactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)));
-          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+          next.nextReviewDate = now + next.interval * DAY_MS;
       } else if (rating === 5) {
-          // Easy: interval * EF * easyBonus
-          next.interval = Math.round(next.interval * next.easeFactor * SETTINGS.easyBonus);
+          // Easy: growth with bonus (always at least +1 day), ease reward.
+          next.interval = Math.max(next.interval + 1, Math.round(next.interval * next.easeFactor * SETTINGS.easyBonus));
           const q = rating;
           next.easeFactor = Math.max(1.3, next.easeFactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)));
-          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+          next.nextReviewDate = now + next.interval * DAY_MS;
       }
   }
 
-  // --- RELEARNING ---
+  // --- RELEARNING (interval holds the preserved pre-lapse DAYS) ---
   else if (next.state === CardState.RELEARNING) {
+      const preLapse = Math.max(1, next.interval);
+
       if (rating === 0) {
-          // Again: stay in relearning
-          next.easeFactor = Math.max(1.3, next.easeFactor - 0.2);
-          next.interval = SETTINGS.relearningSteps[0];
-          next.nextReviewDate = now + next.interval * 60 * 1000;
+          // Again: repeat the relearning step; interval (pre-lapse) preserved.
+          // No ease penalty here — the lapse already charged -0.2 once
+          // (Anki: ease is untouched while relearning).
+          next.interval = preLapse;
+          next.nextReviewDate = now + SETTINGS.relearningSteps[0] * MIN_MS;
       } else if (rating === 3) {
-          // Hard: graduate back but with reduced interval
-          next.state = CardState.REVIEW;
-          next.interval = Math.max(SETTINGS.minimumInterval, Math.round(previousReviewInterval * SETTINGS.lapseNewInterval));
-          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+          // Hard: repeat the step with a longer delay; stay relearning.
+          next.interval = preLapse;
+          next.nextReviewDate = now + Math.round(SETTINGS.relearningSteps[0] * 1.5) * MIN_MS;
       } else if (rating === 4) {
-          // Good: graduate back
+          // Good: graduate back at half the pre-lapse interval.
           next.state = CardState.REVIEW;
-          next.interval = Math.max(SETTINGS.minimumInterval, Math.round(previousReviewInterval * SETTINGS.lapseNewInterval));
-          const q = rating;
-          next.easeFactor = Math.max(1.3, next.easeFactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)));
-          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+          next.interval = Math.max(SETTINGS.minimumInterval, Math.round(preLapse * SETTINGS.lapseNewInterval));
+          next.nextReviewDate = now + next.interval * DAY_MS;
       } else if (rating === 5) {
-          // Easy: graduate back with better interval
+          // Easy: graduate back a bit above the Good recovery.
           next.state = CardState.REVIEW;
-          next.interval = Math.max(SETTINGS.minimumInterval, previousReviewInterval);
+          const goodIvl = Math.max(SETTINGS.minimumInterval, Math.round(preLapse * SETTINGS.lapseNewInterval));
+          next.interval = Math.max(goodIvl + 1, Math.round(preLapse * 0.75));
           const q = rating;
           next.easeFactor = Math.max(1.3, next.easeFactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)));
-          next.nextReviewDate = now + next.interval * 24 * 60 * 60 * 1000;
+          next.nextReviewDate = now + next.interval * DAY_MS;
       }
   }
 
-  // Cap interval
-  if (next.state === CardState.REVIEW) {
-      next.interval = Math.min(next.interval, SETTINGS.maxInterval);
+  // Cap interval — and reschedule from the CAPPED value, so the stored
+  // interval always matches the actual gap until the next review.
+  if (next.state === CardState.REVIEW && next.interval > SETTINGS.maxInterval) {
+      next.interval = SETTINGS.maxInterval;
+      next.nextReviewDate = now + next.interval * DAY_MS;
   }
 
   return next;
 }
+
+/**
+ * How long before a card's due time the session may re-queue/show it.
+ * Covers every learning/relearning step (1–15 min) with headroom.
+ */
+export const LEARNING_REQUEUE_WINDOW_MS = 20 * MIN_MS;
 
 // Mapper to convert DB Row -> App Flashcard
 export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']): Flashcard {
@@ -318,6 +343,14 @@ export interface SwedishWordForms {
     supine?: string;      // talat (supinum — used with har/hade)
     imperative?: string;  // tala!
     group?: number;       // conjugation group 1–4
+    irregular?: boolean;  // true for oregelbundna verbs (är, har, gör, kan…)
+    formExamples?: {      // a Swedish example sentence per form
+        infinitive?: string;
+        present?: string;
+        past?: string;
+        supine?: string;
+        imperative?: string;
+    };
     // noun — the four forms + gender
     gender?: 'en' | 'ett';
     indefinite?: string;       // en bok

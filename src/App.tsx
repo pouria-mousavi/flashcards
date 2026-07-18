@@ -1,9 +1,98 @@
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { supabase, isConfigured } from './lib/supabase';
-import { mapRowToCard, mapGrammarRowToCard, mapSwedishRowToCard, isGrammarCard } from './utils/sm2';
+import { mapRowToCard, mapGrammarRowToCard, mapSwedishRowToCard, isGrammarCard, LEARNING_REQUEUE_WINDOW_MS } from './utils/sm2';
 import { SESSION_KEY, SWEDISH_SESSION_KEY, ACTIVE_LANGUAGE_KEY } from './lib/session';
-import type { Flashcard, GrammarCard, StudyCard, SwedishCard, Lang } from './utils/sm2';
+import type { Flashcard, GrammarCard, StudyCard, SwedishCard, Lang, CardState } from './utils/sm2';
+
+// --- Durable SRS writes -----------------------------------------------------
+// Every rating's DB update is buffered here first and removed on success. If
+// the app is killed mid-write (common as a phone PWA), the update replays on
+// the next launch instead of silently resurrecting the card's old due date.
+const PENDING_UPDATES_KEY = 'pending_srs_updates_v1';
+
+interface PendingUpdate {
+  table: string;
+  id: string;
+  fields: { state: string; next_review: string; interval: number; ease_factor: number };
+  ts: number;
+}
+
+function readPendingUpdates(): Record<string, PendingUpdate> {
+  try { return JSON.parse(localStorage.getItem(PENDING_UPDATES_KEY) || '{}'); } catch { return {}; }
+}
+function writePendingUpdates(map: Record<string, PendingUpdate>) {
+  try { localStorage.setItem(PENDING_UPDATES_KEY, JSON.stringify(map)); } catch { /* storage full — degrade */ }
+}
+function queuePendingUpdate(table: string, id: string, fields: PendingUpdate['fields']): number {
+  const map = readPendingUpdates();
+  const ts = Date.now();
+  map[`${table}:${id}`] = { table, id, fields, ts };
+  writePendingUpdates(map);
+  return ts;
+}
+// Only clears the entry if it is still the SAME version that was written —
+// a slow older write must never delete a newer rating from the buffer.
+function clearPendingUpdate(table: string, id: string, ts: number) {
+  const map = readPendingUpdates();
+  const key = `${table}:${id}`;
+  if (map[key] && map[key].ts === ts) {
+    delete map[key];
+    writePendingUpdates(map);
+  }
+}
+let flushInProgress = false;
+async function flushPendingUpdates() {
+  if (flushInProgress) return;
+  flushInProgress = true;
+  try {
+    for (const key of Object.keys(readPendingUpdates())) {
+      // Re-read right before writing — the entry may have been replaced by a
+      // newer rating (or already cleared) while earlier writes were in flight.
+      const p = readPendingUpdates()[key];
+      if (!p) continue;
+      const { error } = await supabase.from(p.table).update(p.fields).eq('id', p.id);
+      if (!error) clearPendingUpdate(p.table, p.id, p.ts);
+    }
+  } finally {
+    flushInProgress = false;
+  }
+}
+
+// Supabase caps un-paginated selects at 1000 rows — always page through, with
+// a stable ORDER BY so page boundaries can't skip or duplicate rows.
+async function fetchAllRows(table: string): Promise<any[]> {
+  const all: any[] = [];
+  const PAGE_SIZE = 1000;
+  let from = 0;
+  while (true) {
+    const { data, error } = await supabase.from(table).select('*')
+      .order('id', { ascending: true })
+      .range(from, from + PAGE_SIZE - 1);
+    if (error) throw error;
+    if (!data || data.length === 0) break;
+    all.push(...data);
+    if (data.length < PAGE_SIZE) break;
+    from += PAGE_SIZE;
+  }
+  return all;
+}
+
+// Overlay a still-pending (unflushed) SRS write onto a freshly fetched card so
+// the UI reflects the user's latest ratings even if the network write failed.
+function overlayPending<C extends { id: string; state: CardState; nextReviewDate: number; interval: number; easeFactor: number }>(
+  card: C, table: string, pending: Record<string, PendingUpdate>
+): C {
+  const p = pending[`${table}:${card.id}`];
+  if (!p) return card;
+  return {
+    ...card,
+    state: p.fields.state as CardState,
+    nextReviewDate: new Date(p.fields.next_review).getTime(),
+    interval: p.fields.interval,
+    easeFactor: p.fields.ease_factor,
+  };
+}
 import StudySession from './components/StudySession';
 import Dashboard from './components/Dashboard';
 import AddCard from './components/AddCard';
@@ -25,6 +114,7 @@ function App() {
   const [activeLanguage, setActiveLanguage] = useState<Lang>(() =>
       localStorage.getItem(ACTIVE_LANGUAGE_KEY) === 'sv' ? 'sv' : 'en'
   );
+  const initFailedRef = useRef(false);
 
   // --- Helper: rebuild session from localStorage + card data (vocab + grammar) ---
   const rebuildSessionFromStorage = useCallback((vocab: Flashcard[], grammar: GrammarCard[]) => {
@@ -41,10 +131,24 @@ function App() {
               const queue = session.cardIds
                   .map((id: string) => lookup.get(id))
                   .filter((c: StudyCard | undefined): c is StudyCard => !!c);
-              if (queue.length > 0) {
-                  const index = Math.min(session.currentIndex || 0, queue.length - 1);
-                  return { queue, index, isFlipped: session.isFlipped || false };
+
+              const index = Math.min(session.currentIndex || 0, queue.length);
+              // A session whose index is past the end already finished —
+              // clear it instead of clamping back onto the last rated card.
+              if (queue.length === 0 || index >= queue.length) {
+                  localStorage.removeItem(SESSION_KEY);
+                  return null;
               }
+              // Drop not-yet-shown cards that are nowhere near due (stale
+              // session from another device / already rated elsewhere).
+              const cutoff = Date.now() + LEARNING_REQUEUE_WINDOW_MS;
+              const shown = queue.slice(0, index);
+              const remaining = queue.slice(index).filter((c: StudyCard) => c.nextReviewDate <= cutoff);
+              if (remaining.length === 0) {
+                  localStorage.removeItem(SESSION_KEY);
+                  return null;
+              }
+              return { queue: [...shown, ...remaining], index, isFlipped: session.isFlipped || false };
           }
       } catch (err) {
           console.error("Failed to restore session", err);
@@ -65,10 +169,24 @@ function App() {
               const queue = session.cardIds
                   .map((id: string) => lookup.get(id))
                   .filter((c: SwedishCard | undefined): c is SwedishCard => !!c);
-              if (queue.length > 0) {
-                  const index = Math.min(session.currentIndex || 0, queue.length - 1);
-                  return { queue, index, isFlipped: session.isFlipped || false };
+
+              const index = Math.min(session.currentIndex || 0, queue.length);
+              // A session whose index is past the end already finished —
+              // clear it instead of clamping back onto the last rated card.
+              if (queue.length === 0 || index >= queue.length) {
+                  localStorage.removeItem(SWEDISH_SESSION_KEY);
+                  return null;
               }
+              // Drop not-yet-shown cards that are nowhere near due (stale
+              // session from another device / already rated elsewhere).
+              const cutoff = Date.now() + LEARNING_REQUEUE_WINDOW_MS;
+              const shown = queue.slice(0, index);
+              const remaining = queue.slice(index).filter((c: SwedishCard) => c.nextReviewDate <= cutoff);
+              if (remaining.length === 0) {
+                  localStorage.removeItem(SWEDISH_SESSION_KEY);
+                  return null;
+              }
+              return { queue: [...shown, ...remaining], index, isFlipped: session.isFlipped || false };
           }
       } catch (err) {
           console.error("Failed to restore Swedish session", err);
@@ -109,28 +227,34 @@ function App() {
         setCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
     }
 
-    const { error } = await supabase.from(table).update({
+    const fields = {
         state: updatedCard.state,
         next_review: new Date(updatedCard.nextReviewDate).toISOString(),
         interval: updatedCard.interval,
         ease_factor: updatedCard.easeFactor
-    }).eq('id', updatedCard.id);
-
-    if (error) console.error(`Error updating ${table}:`, error);
+    };
+    // Buffer first so a killed app / failed request replays on next launch.
+    const ts = queuePendingUpdate(table, updatedCard.id, fields);
+    const { error } = await supabase.from(table).update(fields).eq('id', updatedCard.id);
+    if (error) console.error(`Error updating ${table} (kept pending for replay):`, error);
+    else clearPendingUpdate(table, updatedCard.id, ts);
   };
 
   // Swedish update — writes ONLY to swedish_cards, never the English tables.
   const updateSwedishCardStats = async (updatedCard: SwedishCard) => {
     setSwedishCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
 
-    const { error } = await supabase.from('swedish_cards').update({
+    const fields = {
         state: updatedCard.state,
         next_review: new Date(updatedCard.nextReviewDate).toISOString(),
         interval: updatedCard.interval,
         ease_factor: updatedCard.easeFactor
-    }).eq('id', updatedCard.id);
-
-    if (error) console.error('Error updating swedish_cards:', error);
+    };
+    // Buffer first so a killed app / failed request replays on next launch.
+    const ts = queuePendingUpdate('swedish_cards', updatedCard.id, fields);
+    const { error } = await supabase.from('swedish_cards').update(fields).eq('id', updatedCard.id);
+    if (error) console.error('Error updating swedish_cards (kept pending for replay):', error);
+    else clearPendingUpdate('swedish_cards', updatedCard.id, ts);
   };
 
   // Swedish delete — removes ONLY from swedish_cards, never the English tables.
@@ -291,54 +415,55 @@ function App() {
   useEffect(() => {
     async function init() {
       try {
-        // Supabase defaults to 1000 rows — paginate to fetch all cards
-        const allRows: any[] = [];
-        const PAGE_SIZE = 1000;
-        let from = 0;
-        while (true) {
-            const { data: page, error } = await supabase
-                .from('cards')
-                .select('*')
-                .range(from, from + PAGE_SIZE - 1);
-            if (error) throw error;
-            if (!page || page.length === 0) break;
-            allRows.push(...page);
-            if (page.length < PAGE_SIZE) break;
-            from += PAGE_SIZE;
-        }
+        // Replay any rating writes that never reached the DB (killed app,
+        // dropped network) BEFORE fetching, so the fetch reflects them.
+        await flushPendingUpdates();
+        // Whatever is STILL pending (offline) gets overlaid client-side.
+        const pending = readPendingUpdates();
 
-        const mappedCards = allRows.length > 0 ? allRows.map(mapRowToCard) : [];
+        // All fetches paginate — Supabase silently caps selects at 1000 rows.
+        const allRows = await fetchAllRows('cards');
+        const mappedCards = allRows.map(mapRowToCard).map(c => overlayPending(c, 'cards', pending));
         setCards(mappedCards);
 
         // --- Also fetch grammar cards (separate table) ---
-        const { data: grammarRows, error: grammarError } = await supabase
-            .from('grammar_cards')
-            .select('*');
         let mappedGrammar: GrammarCard[] = [];
-        if (grammarError) {
-            console.error("Failed to load grammar cards", grammarError);
-        } else if (grammarRows) {
-            mappedGrammar = grammarRows.map(mapGrammarRowToCard);
+        let grammarOk = true;
+        try {
+            const grammarRows = await fetchAllRows('grammar_cards');
+            mappedGrammar = grammarRows.map(mapGrammarRowToCard).map(c => overlayPending(c, 'grammar_cards', pending));
             setGrammarCards(mappedGrammar);
+        } catch (grammarError) {
+            grammarOk = false;
+            console.error("Failed to load grammar cards", grammarError);
         }
 
         // --- Also fetch Swedish cards (fully separate deck) ---
-        const { data: swedishRows, error: swedishError } = await supabase
-            .from('swedish_cards')
-            .select('*');
         let mappedSwedish: SwedishCard[] = [];
-        if (swedishError) {
-            console.error("Failed to load swedish cards", swedishError);
-        } else if (swedishRows) {
-            mappedSwedish = swedishRows.map(mapSwedishRowToCard);
+        let swedishOk = true;
+        try {
+            const swedishRows = await fetchAllRows('swedish_cards');
+            mappedSwedish = swedishRows.map(mapSwedishRowToCard).map(c => overlayPending(c, 'swedish_cards', pending));
             setSwedishCards(mappedSwedish);
+        } catch (swedishError) {
+            swedishOk = false;
+            console.error("Failed to load swedish cards", swedishError);
         }
 
         // Restore each language's active session from its OWN storage key.
-        const engSession = rebuildSessionFromStorage(mappedCards, mappedGrammar);
-        if (engSession) setRestoredSession(engSession);
-        const svSession = rebuildSwedishSessionFromStorage(mappedSwedish);
-        if (svSession) setSwedishSession(svSession);
+        // Only rebuild against decks that actually loaded — rebuilding against
+        // a missing deck would wrongly treat its cards as deleted and could
+        // destroy the saved session over a transient network failure.
+        let engSession = null;
+        if (grammarOk) {
+            engSession = rebuildSessionFromStorage(mappedCards, mappedGrammar);
+            if (engSession) setRestoredSession(engSession);
+        }
+        let svSession = null;
+        if (swedishOk) {
+            svSession = rebuildSwedishSessionFromStorage(mappedSwedish);
+            if (svSession) setSwedishSession(svSession);
+        }
 
         // Only jump straight into a session if it belongs to the active language.
         const lang = localStorage.getItem(ACTIVE_LANGUAGE_KEY) === 'sv' ? 'sv' : 'en';
@@ -346,6 +471,7 @@ function App() {
             setView('study');
         }
       } catch (e) {
+        initFailedRef.current = true;
         console.error("Failed to load data", e);
       } finally {
         setLoading(false);
@@ -354,6 +480,22 @@ function App() {
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rebuildSessionFromStorage, rebuildSwedishSessionFromStorage]);
+
+  // Retry buffered rating writes whenever connectivity/foreground returns.
+  // If the initial load failed (offline launch), a reload gets the decks back.
+  useEffect(() => {
+    const flush = () => {
+      if (initFailedRef.current && navigator.onLine) { window.location.reload(); return; }
+      flushPendingUpdates();
+    };
+    const onVisible = () => { if (document.visibilityState === 'visible') flush(); };
+    window.addEventListener('online', flush);
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      window.removeEventListener('online', flush);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
+  }, []);
 
   // --- Visibilitychange: re-sync the ACTIVE language's session on foreground ---
   useEffect(() => {
