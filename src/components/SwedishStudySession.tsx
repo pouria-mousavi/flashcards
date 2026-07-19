@@ -14,10 +14,11 @@ interface Props {
   onDeleteCard: (cardId: string) => void;
   onSessionComplete: () => void;
   onPause: () => void;
+  onOpenReference?: () => void;
 }
 
 export default function SwedishStudySession({
-  cards, startIndex = 0, startFlipped = false, onUpdateCard, onDeleteCard, onSessionComplete, onPause,
+  cards, startIndex = 0, startFlipped = false, onUpdateCard, onDeleteCard, onSessionComplete, onPause, onOpenReference,
 }: Props) {
   // Initialize queue from props ONCE — never replace on parent re-renders.
   const [queue, setQueue] = useState<SwedishCard[]>(cards);
@@ -212,8 +213,20 @@ export default function SwedishStudySession({
         >
           &#8592; Back
         </button>
-        <div className="glass tabular" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, padding: '8px 14px', borderRadius: '999px' }}>
-          {cardsLeft} left
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {onOpenReference && (
+            <button
+              onClick={onOpenReference}
+              className="pressable glass"
+              aria-label="Open grammar tables"
+              style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, padding: '8px 14px', borderRadius: '999px', background: 'transparent' }}
+            >
+              ⊞ Tables
+            </button>
+          )}
+          <div className="glass tabular" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, padding: '8px 14px', borderRadius: '999px' }}>
+            {cardsLeft} left
+          </div>
         </div>
       </div>
 

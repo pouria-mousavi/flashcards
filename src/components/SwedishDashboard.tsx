@@ -10,6 +10,7 @@ interface Props {
   hasActiveSession?: boolean;
   activeLanguage: Lang;
   onSwitchLanguage: (lang: Lang) => void;
+  onOpenReference?: () => void;
 }
 
 interface Tier {
@@ -42,7 +43,7 @@ function classify(cards: SwedishCard[]): Tier[] {
 }
 
 export default function SwedishDashboard({
-  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage,
+  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference,
 }: Props) {
   const totalCards = cards.length;
   const now = Date.now();
@@ -176,6 +177,24 @@ export default function SwedishDashboard({
             ? 'Resume Session'
             : (dueCount > 0 ? `Study ${Math.min(dueCount, 50)} Cards` : (totalCards === 0 ? 'No cards yet' : 'All Caught Up'))}
         </button>
+
+        {onOpenReference && (
+          <button
+            onClick={onOpenReference}
+            className="pressable glass"
+            style={{
+              padding: '15px',
+              fontSize: '0.95rem',
+              fontWeight: 600,
+              color: 'var(--text-secondary)',
+              borderRadius: 'var(--radius)',
+              background: 'transparent',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            ⊞ Grammar Tables
+          </button>
+        )}
       </div>
     </div>
   );

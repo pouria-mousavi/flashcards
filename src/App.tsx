@@ -98,6 +98,8 @@ import Dashboard from './components/Dashboard';
 import AddCard from './components/AddCard';
 import SwedishDashboard from './components/SwedishDashboard';
 import SwedishStudySession from './components/SwedishStudySession';
+import SwedishReference from './components/SwedishReference';
+import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
 
@@ -115,6 +117,7 @@ function App() {
       localStorage.getItem(ACTIVE_LANGUAGE_KEY) === 'sv' ? 'sv' : 'en'
   );
   const initFailedRef = useRef(false);
+  const [showSwedishReference, setShowSwedishReference] = useState(false);
 
   // --- Helper: rebuild session from localStorage + card data (vocab + grammar) ---
   const rebuildSessionFromStorage = useCallback((vocab: Flashcard[], grammar: GrammarCard[]) => {
@@ -670,6 +673,7 @@ function App() {
             onDeleteCard={deleteSwedishCard}
             onPause={handleSessionPause}
             onSessionComplete={handleSwedishSessionComplete}
+            onOpenReference={() => setShowSwedishReference(true)}
           />
         ) : (
           <SwedishDashboard
@@ -678,8 +682,16 @@ function App() {
             hasActiveSession={!!swedishSession}
             activeLanguage={activeLanguage}
             onSwitchLanguage={switchLanguage}
+            onOpenReference={() => setShowSwedishReference(true)}
           />
         )}
+        {/* Grammar tables — an overlay ABOVE the session, which stays mounted
+            underneath so no study progress is ever lost. */}
+        <AnimatePresence>
+          {showSwedishReference && (
+            <SwedishReference cards={swedishCards} onClose={() => setShowSwedishReference(false)} />
+          )}
+        </AnimatePresence>
       </div>
     );
   }
