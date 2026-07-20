@@ -103,7 +103,16 @@ Design rules, all six load-bearing:
    forces the word: *Make a sentence: "I hope the course starts soon."* → back:
    *Jag hoppas att kursen börjar snart.* The word is learned inside usage, and
    the back is a complete, TTS-friendly sentence.
-8. **One form, one card.** A verb's forms are separate cards, each forcing one
+8. **Pin the synonym choice (user rule, 2026-07-20).** When the English front
+   admits MORE THAN ONE natural Swedish rendering (I'll have → tar / vill ha /
+   skulle vilja ha; work → jobba/arbeta; study → plugga/studera/läsa; watch →
+   titta på/se; like → gilla/tycka om; go → gå/åka; "is" of position →
+   ligger/står; generic you → man/du…), the learner can answer correctly and
+   still mismatch the back — an unfair card. Append a minimal steer that pins
+   the target: *(literally: "I take")*, *(use åka, not ta)*, *(the everyday
+   word, not arbeta)*, *(generic you = man)*. Naming the target word in a
+   contrastive hint is fine; never print the full back sentence.
+9. **One form, one card.** A verb's forms are separate cards, each forcing one
    form in a sentence: present (*Say: "I work every day."*), past (*Say: "I
    worked yesterday."* → *Jag jobbade i går.*), perfect (*Say: "I have worked
    a lot today."* → *Jag har jobbat mycket i dag.*), infinitive after a modal
