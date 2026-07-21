@@ -12,6 +12,7 @@ interface Props {
   hasActiveSession?: boolean;
   activeLanguage?: Lang;
   onSwitchLanguage?: (lang: Lang) => void;
+  onOpenAccount?: () => void;
 }
 
 interface Tier {
@@ -51,7 +52,7 @@ function classifyCards(cards: Flashcard[]): Tier[] {
 
 export default function Dashboard({
   cards, grammarCards = [], onStartStudy, onAddCard, hasActiveSession,
-  activeLanguage = 'en', onSwitchLanguage,
+  activeLanguage = 'en', onSwitchLanguage, onOpenAccount,
 }: Props) {
   const totalCards = cards.length + grammarCards.length;
   const now = Date.now();
@@ -82,6 +83,16 @@ export default function Dashboard({
           <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />
         )}
         <ThemeToggle />
+        {onOpenAccount && (
+          <button
+            onClick={onOpenAccount}
+            className="pressable glass"
+            aria-label="Account"
+            style={{ width: '36px', height: '36px', borderRadius: '999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.95rem', color: 'var(--text-secondary)', background: 'transparent' }}
+          >
+            ⚙
+          </button>
+        )}
       </div>
 
       {/* Hero — the number that matters today */}

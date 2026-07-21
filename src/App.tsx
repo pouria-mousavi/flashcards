@@ -6,53 +6,76 @@ import { SESSION_KEY, SWEDISH_SESSION_KEY, ACTIVE_LANGUAGE_KEY } from './lib/ses
 import type { Flashcard, GrammarCard, StudyCard, SwedishCard, Lang, CardState } from './utils/sm2';
 
 // --- Durable SRS writes -----------------------------------------------------
-// Every rating's DB update is buffered here first and removed on success. If
-// the app is killed mid-write (common as a phone PWA), the update replays on
-// the next launch instead of silently resurrecting the card's old due date.
-const PENDING_UPDATES_KEY = 'pending_srs_updates_v1';
+// Every rating's DB write is buffered locally first and cleared on success, so a
+// killed app / dropped network replays instead of resurrecting an old due date.
+// Namespaced by the signed-in user so two accounts on one device never mix; and
+// op-aware so per-user Swedish progress can UPSERT into sv_progress while the
+// author's English decks still UPDATE by id.
+let currentUid: string | null = null;
+// The buffer key is derived from an EXPLICIT uid captured at queue time — never
+// the live `currentUid`. So a write that resolves AFTER an account switch still
+// clears (and later replays) under the namespace it was originally queued under,
+// instead of leaking into or orphaning against whoever is signed in now.
+function pendingKey(uid: string | null) { return `pending_srs_updates_v3:${uid ?? 'anon'}`; }
 
 interface PendingUpdate {
   table: string;
-  id: string;
-  fields: { state: string; next_review: string; interval: number; ease_factor: number };
+  id: string;                      // card id — buffer key + .eq() target for updates
+  op: 'update' | 'upsert';
+  payload: Record<string, any>;    // fields to write (upsert payload includes conflict keys)
+  conflict?: string;               // onConflict columns for upsert
   ts: number;
 }
 
-function readPendingUpdates(): Record<string, PendingUpdate> {
-  try { return JSON.parse(localStorage.getItem(PENDING_UPDATES_KEY) || '{}'); } catch { return {}; }
+function readPendingUpdates(uid: string | null): Record<string, PendingUpdate> {
+  try { return JSON.parse(localStorage.getItem(pendingKey(uid)) || '{}'); } catch { return {}; }
 }
-function writePendingUpdates(map: Record<string, PendingUpdate>) {
-  try { localStorage.setItem(PENDING_UPDATES_KEY, JSON.stringify(map)); } catch { /* storage full — degrade */ }
+function writePendingUpdates(uid: string | null, map: Record<string, PendingUpdate>) {
+  try { localStorage.setItem(pendingKey(uid), JSON.stringify(map)); } catch { /* storage full — degrade */ }
 }
-function queuePendingUpdate(table: string, id: string, fields: PendingUpdate['fields']): number {
-  const map = readPendingUpdates();
+function queuePending(uid: string | null, table: string, id: string, op: 'update' | 'upsert', payload: Record<string, any>, conflict?: string): number {
+  const map = readPendingUpdates(uid);
   const ts = Date.now();
-  map[`${table}:${id}`] = { table, id, fields, ts };
-  writePendingUpdates(map);
+  map[`${table}:${id}`] = { table, id, op, payload, conflict, ts };
+  writePendingUpdates(uid, map);
   return ts;
 }
 // Only clears the entry if it is still the SAME version that was written —
 // a slow older write must never delete a newer rating from the buffer.
-function clearPendingUpdate(table: string, id: string, ts: number) {
-  const map = readPendingUpdates();
+function clearPending(uid: string | null, table: string, id: string, ts: number) {
+  const map = readPendingUpdates(uid);
   const key = `${table}:${id}`;
   if (map[key] && map[key].ts === ts) {
     delete map[key];
-    writePendingUpdates(map);
+    writePendingUpdates(uid, map);
   }
 }
+
+// Every SRS DB write — direct rating writes AND buffered replays — funnels
+// through this single chain, so two writes to the same row are never in flight
+// at once. Submission order == commit order, so a newer rating can't be
+// clobbered by an older buffered replay landing last.
+let writeChain: Promise<unknown> = Promise.resolve();
+function serializeWrite<T>(fn: () => PromiseLike<T>): Promise<T> {
+  const run = writeChain.then(fn, fn);
+  writeChain = run.then(() => {}, () => {});
+  return run;
+}
+
 let flushInProgress = false;
-async function flushPendingUpdates() {
-  if (flushInProgress) return;
+async function flushPendingUpdates(uid: string | null) {
+  if (flushInProgress || !uid) return;
   flushInProgress = true;
   try {
-    for (const key of Object.keys(readPendingUpdates())) {
+    for (const key of Object.keys(readPendingUpdates(uid))) {
       // Re-read right before writing — the entry may have been replaced by a
       // newer rating (or already cleared) while earlier writes were in flight.
-      const p = readPendingUpdates()[key];
+      const p = readPendingUpdates(uid)[key];
       if (!p) continue;
-      const { error } = await supabase.from(p.table).update(p.fields).eq('id', p.id);
-      if (!error) clearPendingUpdate(p.table, p.id, p.ts);
+      const { error } = await serializeWrite(() => p.op === 'upsert'
+        ? supabase.from(p.table).upsert(p.payload, { onConflict: p.conflict })
+        : supabase.from(p.table).update(p.payload).eq('id', p.id));
+      if (!error) clearPending(uid, p.table, p.id, p.ts);
     }
   } finally {
     flushInProgress = false;
@@ -61,13 +84,13 @@ async function flushPendingUpdates() {
 
 // Supabase caps un-paginated selects at 1000 rows — always page through, with
 // a stable ORDER BY so page boundaries can't skip or duplicate rows.
-async function fetchAllRows(table: string): Promise<any[]> {
+async function fetchAllRows(table: string, orderCol = 'id'): Promise<any[]> {
   const all: any[] = [];
   const PAGE_SIZE = 1000;
   let from = 0;
   while (true) {
     const { data, error } = await supabase.from(table).select('*')
-      .order('id', { ascending: true })
+      .order(orderCol, { ascending: true })
       .range(from, from + PAGE_SIZE - 1);
     if (error) throw error;
     if (!data || data.length === 0) break;
@@ -85,12 +108,13 @@ function overlayPending<C extends { id: string; state: CardState; nextReviewDate
 ): C {
   const p = pending[`${table}:${card.id}`];
   if (!p) return card;
+  const f = p.payload;
   return {
     ...card,
-    state: p.fields.state as CardState,
-    nextReviewDate: new Date(p.fields.next_review).getTime(),
-    interval: p.fields.interval,
-    easeFactor: p.fields.ease_factor,
+    state: f.state as CardState,
+    nextReviewDate: new Date(f.next_review).getTime(),
+    interval: f.interval,
+    easeFactor: f.ease_factor,
   };
 }
 import StudySession from './components/StudySession';
@@ -100,6 +124,11 @@ import SwedishDashboard from './components/SwedishDashboard';
 import SwedishStudySession from './components/SwedishStudySession';
 import SwedishReference from './components/SwedishReference';
 import SwedishGrammar from './components/SwedishGrammar';
+import Auth from './components/Auth';
+import AccountPanel from './components/AccountPanel';
+import { fetchRole } from './lib/auth';
+import type { Role } from './lib/auth';
+import { setTtsTier } from './lib/tts';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
@@ -120,6 +149,12 @@ function App() {
   const initFailedRef = useRef(false);
   const [showSwedishReference, setShowSwedishReference] = useState(false);
   const [showSwedishGrammar, setShowSwedishGrammar] = useState(false);
+  const [showAccount, setShowAccount] = useState(false);
+
+  // --- Auth: who is signed in (null = signed out or not approved) ---
+  const [authReady, setAuthReady] = useState(false);
+  const [role, setRole] = useState<Role | null>(null);
+  const isAdmin = !!role?.isAdmin;
 
   // --- Helper: rebuild session from localStorage + card data (vocab + grammar) ---
   const rebuildSessionFromStorage = useCallback((vocab: Flashcard[], grammar: GrammarCard[]) => {
@@ -128,6 +163,7 @@ function App() {
 
       try {
           const session = JSON.parse(saved);
+          if (session.uid && session.uid !== currentUid) { localStorage.removeItem(SESSION_KEY); return null; }
           if (session.cardIds && Array.isArray(session.cardIds)) {
               const lookup = new Map<string, StudyCard>();
               for (const c of vocab) lookup.set(c.id, c);
@@ -168,6 +204,7 @@ function App() {
       if (!saved) return null;
       try {
           const session = JSON.parse(saved);
+          if (session.uid && session.uid !== currentUid) { localStorage.removeItem(SWEDISH_SESSION_KEY); return null; }
           if (session.cardIds && Array.isArray(session.cardIds)) {
               const lookup = new Map<string, SwedishCard>();
               for (const c of deck) lookup.set(c.id, c);
@@ -239,27 +276,38 @@ function App() {
         ease_factor: updatedCard.easeFactor
     };
     // Buffer first so a killed app / failed request replays on next launch.
-    const ts = queuePendingUpdate(table, updatedCard.id, fields);
-    const { error } = await supabase.from(table).update(fields).eq('id', updatedCard.id);
+    const uid = currentUid;
+    const ts = queuePending(uid, table, updatedCard.id, 'update', fields);
+    const { error } = await serializeWrite(() => supabase.from(table).update(fields).eq('id', updatedCard.id));
     if (error) console.error(`Error updating ${table} (kept pending for replay):`, error);
-    else clearPendingUpdate(table, updatedCard.id, ts);
+    else clearPending(uid, table, updatedCard.id, ts);
   };
 
-  // Swedish update — writes ONLY to swedish_cards, never the English tables.
+  // Swedish update — writes the CURRENT USER's progress into sv_progress. The
+  // shared swedish_cards content is never touched here, so one user's ratings
+  // can never affect anyone else's deck.
   const updateSwedishCardStats = async (updatedCard: SwedishCard) => {
     setSwedishCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
+    // Capture the uid ONCE up front: the payload, the buffer namespace, and the
+    // later clear must all refer to the user who made this rating, even if the
+    // account is switched while the write is in flight.
+    const uid = currentUid;
+    if (!uid) return;
 
-    const fields = {
+    const payload = {
+        user_id: uid,
+        card_id: updatedCard.id,
         state: updatedCard.state,
         next_review: new Date(updatedCard.nextReviewDate).toISOString(),
         interval: updatedCard.interval,
-        ease_factor: updatedCard.easeFactor
+        ease_factor: updatedCard.easeFactor,
+        updated_at: new Date().toISOString(),
     };
     // Buffer first so a killed app / failed request replays on next launch.
-    const ts = queuePendingUpdate('swedish_cards', updatedCard.id, fields);
-    const { error } = await supabase.from('swedish_cards').update(fields).eq('id', updatedCard.id);
-    if (error) console.error('Error updating swedish_cards (kept pending for replay):', error);
-    else clearPendingUpdate('swedish_cards', updatedCard.id, ts);
+    const ts = queuePending(uid, 'sv_progress', updatedCard.id, 'upsert', payload, 'user_id,card_id');
+    const { error } = await serializeWrite(() => supabase.from('sv_progress').upsert(payload, { onConflict: 'user_id,card_id' }));
+    if (error) console.error('Error updating sv_progress (kept pending for replay):', error);
+    else clearPending(uid, 'sv_progress', updatedCard.id, ts);
   };
 
   // Swedish delete — removes ONLY from swedish_cards, never the English tables.
@@ -416,82 +464,143 @@ function App() {
       return session;
   };
 
-  // --- Load Data & Restore Session ---
+  // --- Auth lifecycle: resolve the session, track sign-in / sign-out ---
   useEffect(() => {
-    async function init() {
+    let mounted = true;
+
+    // Resolve the role, retrying transient failures. fetchRole THROWS on a
+    // network/DB error (distinct from a clean "not approved" -> null), so a
+    // flaky connection or a paused DB never downgrades a valid session to the
+    // signed-out state and wipes the in-progress session.
+    const resolveRole = async (attempts = 3): Promise<Role | null> => {
+      for (let i = 0; i < attempts; i++) {
+        try { return await fetchRole(); }
+        catch { if (i < attempts - 1) await new Promise(res => setTimeout(res, 400)); }
+      }
+      throw new Error('role-unresolved');
+    };
+
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      let r: Role | null = null;
+      if (session) { try { r = await resolveRole(); } catch { r = null; } }
+      if (!mounted) return;
+      setRole(r);
+      setAuthReady(true);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!session) { setRole(null); return; }                 // genuine sign-out
+      if (event === 'SIGNED_IN' || event === 'USER_UPDATED' || event === 'TOKEN_REFRESHED') {
+        let r: Role | null;
+        try { r = await resolveRole(); }
+        catch { return; }                                      // transient — keep current role, never log out
+        setRole(prev => (prev && r && prev.userId === r.userId && prev.isAdmin === r.isAdmin) ? prev : r);
+      }
+    });
+    return () => { mounted = false; sub.subscription.unsubscribe(); };
+  }, []);
+
+  // --- Role side-effects: uid namespace, voice tier, cleanup on sign-out ---
+  useEffect(() => {
+    currentUid = role?.userId ?? null;
+    setTtsTier(role?.isAdmin ? 'azure' : 'browser');
+    if (role && !role.isAdmin) {
+      setActiveLanguage('sv');
+      localStorage.setItem(ACTIVE_LANGUAGE_KEY, 'sv');
+    }
+    // Tear down ONLY on a genuine signed-out transition (auth resolved, no role).
+    // Never during the pre-auth `null` on first mount, nor a transient
+    // role-resolution blip — either would wipe the persisted study session out
+    // from under a still-valid login before it can be restored.
+    if (authReady && !role) {
+      setCards([]); setGrammarCards([]); setSwedishCards([]);
+      setRestoredSession(null); setSwedishSession(null);
+      setShowAccount(false); setShowSwedishReference(false); setShowSwedishGrammar(false);
+      setView('dashboard');
+      localStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(SWEDISH_SESSION_KEY);
+    }
+  }, [role, authReady]);
+
+  // --- Load decks + THIS user's progress once a role is known ---
+  useEffect(() => {
+    if (!authReady) return;
+    if (!role) { setLoading(false); return; }
+    let cancelled = false;
+    (async () => {
+      setLoading(true);
+      initFailedRef.current = false;
       try {
-        // Replay any rating writes that never reached the DB (killed app,
-        // dropped network) BEFORE fetching, so the fetch reflects them.
-        await flushPendingUpdates();
-        // Whatever is STILL pending (offline) gets overlaid client-side.
-        const pending = readPendingUpdates();
+        await flushPendingUpdates(role.userId);
+        const pending = readPendingUpdates(role.userId);
 
-        // All fetches paginate — Supabase silently caps selects at 1000 rows.
-        const allRows = await fetchAllRows('cards');
-        const mappedCards = allRows.map(mapRowToCard).map(c => overlayPending(c, 'cards', pending));
-        setCards(mappedCards);
+        // Swedish deck (everyone): shared content + this user's own progress.
+        const svRows = await fetchAllRows('swedish_cards');
+        const progRows = await fetchAllRows('sv_progress', 'card_id');
+        const progMap = new Map<string, any>(progRows.map((p: any) => [p.card_id, p]));
+        const mappedSwedish = svRows.map((r: any) => {
+          const card = mapSwedishRowToCard(r);
+          const p = progMap.get(r.id);
+          if (p) {
+            card.state = p.state as CardState;
+            card.nextReviewDate = new Date(p.next_review).getTime();
+            card.interval = p.interval;
+            card.easeFactor = p.ease_factor;
+          } else {
+            card.state = 'NEW' as CardState;
+            card.nextReviewDate = Date.now();
+            card.interval = 0;
+            card.easeFactor = 2.5;
+          }
+          return card;
+        }).map(c => overlayPending(c, 'sv_progress', pending));
+        if (cancelled) return;
+        setSwedishCards(mappedSwedish);
 
-        // --- Also fetch grammar cards (separate table) ---
+        // English decks: author only.
+        let mappedCards: Flashcard[] = [];
         let mappedGrammar: GrammarCard[] = [];
-        let grammarOk = true;
-        try {
-            const grammarRows = await fetchAllRows('grammar_cards');
-            mappedGrammar = grammarRows.map(mapGrammarRowToCard).map(c => overlayPending(c, 'grammar_cards', pending));
-            setGrammarCards(mappedGrammar);
-        } catch (grammarError) {
-            grammarOk = false;
-            console.error("Failed to load grammar cards", grammarError);
+        let engOk = false;
+        if (role.isAdmin) {
+          engOk = true;
+          try {
+            const rows = await fetchAllRows('cards');
+            mappedCards = rows.map(mapRowToCard).map(c => overlayPending(c, 'cards', pending));
+            if (!cancelled) setCards(mappedCards);
+          } catch (e) { engOk = false; console.error('Failed to load cards', e); }
+          try {
+            const rows = await fetchAllRows('grammar_cards');
+            mappedGrammar = rows.map(mapGrammarRowToCard).map(c => overlayPending(c, 'grammar_cards', pending));
+            if (!cancelled) setGrammarCards(mappedGrammar);
+          } catch (e) { engOk = false; console.error('Failed to load grammar', e); }
         }
 
-        // --- Also fetch Swedish cards (fully separate deck) ---
-        let mappedSwedish: SwedishCard[] = [];
-        let swedishOk = true;
-        try {
-            const swedishRows = await fetchAllRows('swedish_cards');
-            mappedSwedish = swedishRows.map(mapSwedishRowToCard).map(c => overlayPending(c, 'swedish_cards', pending));
-            setSwedishCards(mappedSwedish);
-        } catch (swedishError) {
-            swedishOk = false;
-            console.error("Failed to load swedish cards", swedishError);
-        }
+        // Restore in-flight sessions (uid-stamped; rebuild discards mismatches).
+        const svSession = rebuildSwedishSessionFromStorage(mappedSwedish);
+        if (svSession && !cancelled) setSwedishSession(svSession);
+        const engSession = (role.isAdmin && engOk) ? rebuildSessionFromStorage(mappedCards, mappedGrammar) : null;
+        if (engSession && !cancelled) setRestoredSession(engSession);
 
-        // Restore each language's active session from its OWN storage key.
-        // Only rebuild against decks that actually loaded — rebuilding against
-        // a missing deck would wrongly treat its cards as deleted and could
-        // destroy the saved session over a transient network failure.
-        let engSession = null;
-        if (grammarOk) {
-            engSession = rebuildSessionFromStorage(mappedCards, mappedGrammar);
-            if (engSession) setRestoredSession(engSession);
-        }
-        let svSession = null;
-        if (swedishOk) {
-            svSession = rebuildSwedishSessionFromStorage(mappedSwedish);
-            if (svSession) setSwedishSession(svSession);
-        }
-
-        // Only jump straight into a session if it belongs to the active language.
-        const lang = localStorage.getItem(ACTIVE_LANGUAGE_KEY) === 'sv' ? 'sv' : 'en';
-        if ((lang === 'en' && engSession) || (lang === 'sv' && svSession)) {
-            setView('study');
+        const lang = role.isAdmin ? (localStorage.getItem(ACTIVE_LANGUAGE_KEY) === 'sv' ? 'sv' : 'en') : 'sv';
+        if (!cancelled && ((lang === 'sv' && svSession) || (lang === 'en' && engSession))) {
+          setView('study');
         }
       } catch (e) {
         initFailedRef.current = true;
-        console.error("Failed to load data", e);
+        console.error('Failed to load data', e);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
-    }
-    init();
+    })();
+    return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rebuildSessionFromStorage, rebuildSwedishSessionFromStorage]);
+  }, [authReady, role?.userId, role?.isAdmin]);
 
   // Retry buffered rating writes whenever connectivity/foreground returns.
   // If the initial load failed (offline launch), a reload gets the decks back.
   useEffect(() => {
     const flush = () => {
       if (initFailedRef.current && navigator.onLine) { window.location.reload(); return; }
-      flushPendingUpdates();
+      flushPendingUpdates(currentUid);
     };
     const onVisible = () => { if (document.visibilityState === 'visible') flush(); };
     window.addEventListener('online', flush);
@@ -563,6 +672,7 @@ function App() {
     }
 
     const sessionData = {
+        uid: currentUid,
         cardIds: due.map(c => c.id),
         currentIndex: 0,
         isFlipped: false,
@@ -603,6 +713,7 @@ function App() {
       }
 
       const sessionData = {
+          uid: currentUid,
           cardIds: due.map(c => c.id),
           currentIndex: 0,
           isFlipped: false,
@@ -638,8 +749,17 @@ function App() {
       );
   }
 
+  // Gate everything behind auth. Signed-out (or not-yet-approved) users get the
+  // login/sign-up screen; nothing else in the app is reachable without a role.
+  if (!authReady) {
+      return <div className="flex-center full-screen" style={{ color: 'var(--accent-sv)' }}>Loading…</div>;
+  }
+  if (!role) {
+      return <Auth />;
+  }
+
   if (loading) {
-     return <div className="flex-center full-screen" style={{ color: 'var(--accent)' }}>Loading...</div>;
+     return <div className="flex-center full-screen" style={{ color: 'var(--accent-sv)' }}>Loading…</div>;
   }
 
   const handleAddCard = (partialCard: Partial<Flashcard>) => {
@@ -662,8 +782,10 @@ function App() {
       saveCard(newCard);
   };
 
-  // Swedish section — entirely separate render tree from English.
-  if (activeLanguage === 'sv') {
+  // Swedish section — entirely separate render tree from English. Friends
+  // (non-admins) only ever reach this section, cannot edit, and have no
+  // language switcher.
+  if (activeLanguage === 'sv' || !isAdmin) {
     return (
       <div className="app-container">
         {view === 'study' && swedishSession ? (
@@ -673,6 +795,7 @@ function App() {
             startFlipped={swedishSession.isFlipped}
             onUpdateCard={updateSwedishCardStats}
             onDeleteCard={deleteSwedishCard}
+            canEdit={isAdmin}
             onPause={handleSessionPause}
             onSessionComplete={handleSwedishSessionComplete}
             onOpenReference={() => setShowSwedishReference(true)}
@@ -684,8 +807,10 @@ function App() {
             hasActiveSession={!!swedishSession}
             activeLanguage={activeLanguage}
             onSwitchLanguage={switchLanguage}
+            showSwitcher={isAdmin}
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
+            onOpenAccount={() => setShowAccount(true)}
           />
         )}
         {/* Grammar tables & Grammatik — overlays ABOVE the session, which stays
@@ -699,6 +824,9 @@ function App() {
           {showSwedishGrammar && (
             <SwedishGrammar onClose={() => setShowSwedishGrammar(false)} />
           )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {showAccount && <AccountPanel role={role} onClose={() => setShowAccount(false)} />}
         </AnimatePresence>
       </div>
     );
@@ -716,8 +844,12 @@ function App() {
           hasActiveSession={!!restoredSession}
           activeLanguage={activeLanguage}
           onSwitchLanguage={switchLanguage}
+          onOpenAccount={() => setShowAccount(true)}
         />
       )}
+      <AnimatePresence>
+        {showAccount && <AccountPanel role={role} onClose={() => setShowAccount(false)} />}
+      </AnimatePresence>
       {view === 'study' && restoredSession && (
         <StudySession
           cards={restoredSession.queue}

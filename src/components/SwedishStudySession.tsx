@@ -12,13 +12,14 @@ interface Props {
   startFlipped?: boolean;
   onUpdateCard: (card: SwedishCard) => void;
   onDeleteCard: (cardId: string) => void;
+  canEdit?: boolean;
   onSessionComplete: () => void;
   onPause: () => void;
   onOpenReference?: () => void;
 }
 
 export default function SwedishStudySession({
-  cards, startIndex = 0, startFlipped = false, onUpdateCard, onDeleteCard, onSessionComplete, onPause, onOpenReference,
+  cards, startIndex = 0, startFlipped = false, onUpdateCard, onDeleteCard, canEdit = true, onSessionComplete, onPause, onOpenReference,
 }: Props) {
   // Initialize queue from props ONCE — never replace on parent re-renders.
   const [queue, setQueue] = useState<SwedishCard[]>(cards);
@@ -241,7 +242,7 @@ export default function SwedishStudySession({
             transition={{ duration: 0.2, ease: 'easeOut' }}
             style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
           >
-            <SwedishCardView card={currentCard} isFlipped={isFlipped} onFlip={handleFlip} onDelete={() => handleDelete(currentCard.id)} />
+            <SwedishCardView card={currentCard} isFlipped={isFlipped} onFlip={handleFlip} onDelete={canEdit ? () => handleDelete(currentCard.id) : undefined} />
           </motion.div>
         </AnimatePresence>
       </div>

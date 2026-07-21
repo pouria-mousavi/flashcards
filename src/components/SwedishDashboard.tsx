@@ -12,6 +12,8 @@ interface Props {
   onSwitchLanguage: (lang: Lang) => void;
   onOpenReference?: () => void;
   onOpenGrammar?: () => void;
+  onOpenAccount?: () => void;
+  showSwitcher?: boolean;
 }
 
 interface Tier {
@@ -45,6 +47,7 @@ function classify(cards: SwedishCard[]): Tier[] {
 
 export default function SwedishDashboard({
   cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar,
+  onOpenAccount, showSwitcher = true,
 }: Props) {
   const totalCards = cards.length;
   const now = Date.now();
@@ -66,10 +69,20 @@ export default function SwedishDashboard({
       height: '100dvh',
       overflowY: 'auto',
     }}>
-      {/* Language switcher + theme — the app's control strip */}
+      {/* Control strip — language (author only), theme, account */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />
+        {showSwitcher && <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />}
         <ThemeToggle />
+        {onOpenAccount && (
+          <button
+            onClick={onOpenAccount}
+            className="pressable glass"
+            aria-label="Account"
+            style={{ width: '36px', height: '36px', borderRadius: '999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.95rem', color: 'var(--text-secondary)', background: 'transparent' }}
+          >
+            ⚙
+          </button>
+        )}
       </div>
 
       {/* Hero — the number that matters today */}
