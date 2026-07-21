@@ -11,6 +11,7 @@ interface Props {
   activeLanguage: Lang;
   onSwitchLanguage: (lang: Lang) => void;
   onOpenReference?: () => void;
+  onOpenGrammar?: () => void;
 }
 
 interface Tier {
@@ -43,7 +44,7 @@ function classify(cards: SwedishCard[]): Tier[] {
 }
 
 export default function SwedishDashboard({
-  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference,
+  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar,
 }: Props) {
   const totalCards = cards.length;
   const now = Date.now();
@@ -178,23 +179,44 @@ export default function SwedishDashboard({
             : (dueCount > 0 ? `Study ${Math.min(dueCount, 50)} Cards` : (totalCards === 0 ? 'No cards yet' : 'All Caught Up'))}
         </button>
 
-        {onOpenReference && (
-          <button
-            onClick={onOpenReference}
-            className="pressable glass"
-            style={{
-              padding: '15px',
-              fontSize: '0.95rem',
-              fontWeight: 600,
-              color: 'var(--text-secondary)',
-              borderRadius: 'var(--radius)',
-              background: 'transparent',
-              letterSpacing: '-0.01em',
-            }}
-          >
-            ⊞ Grammar Tables
-          </button>
-        )}
+        <div style={{ display: 'flex', gap: '12px' }}>
+          {onOpenReference && (
+            <button
+              onClick={onOpenReference}
+              className="pressable glass"
+              style={{
+                flex: 1,
+                padding: '15px',
+                fontSize: '0.92rem',
+                fontWeight: 600,
+                color: 'var(--text-secondary)',
+                borderRadius: 'var(--radius)',
+                background: 'transparent',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              ⊞ Tables
+            </button>
+          )}
+          {onOpenGrammar && (
+            <button
+              onClick={onOpenGrammar}
+              className="pressable glass"
+              style={{
+                flex: 1,
+                padding: '15px',
+                fontSize: '0.92rem',
+                fontWeight: 600,
+                color: 'var(--text-secondary)',
+                borderRadius: 'var(--radius)',
+                background: 'transparent',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              § Grammatik
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
