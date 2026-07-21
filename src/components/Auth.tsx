@@ -16,7 +16,7 @@ const field: React.CSSProperties = {
 
 export default function Auth() {
   const [mode, setMode] = useState<Mode>('login');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
@@ -26,22 +26,22 @@ export default function Auth() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null); setNotice(null);
-    if (!email.trim() || !password) { setError('Enter your email and password.'); return; }
+    if (!username.trim() || !password) { setError('Enter your username and password.'); return; }
     setBusy(true);
     try {
       if (mode === 'signup') {
-        const { error: sErr } = await signupWithCode(email, password, code);
+        const { error: sErr } = await signupWithCode(username, password, code);
         if (sErr) { setError(sErr); setBusy(false); return; }
         // Account created — sign straight in.
-        const { error: iErr } = await signIn(email, password);
+        const { error: iErr } = await signIn(username, password);
         if (iErr) {
           setNotice('Account created! You can log in now.');
           setMode('login'); setBusy(false); return;
         }
         // onAuthStateChange in App takes over from here.
       } else {
-        const { error: iErr } = await signIn(email, password);
-        if (iErr) { setError(iErr.message === 'Invalid login credentials' ? 'Wrong email or password.' : iErr.message); setBusy(false); return; }
+        const { error: iErr } = await signIn(username, password);
+        if (iErr) { setError(iErr.message === 'Invalid login credentials' ? 'Wrong username or password.' : iErr.message); setBusy(false); return; }
       }
     } catch {
       setError('Something went wrong. Please try again.');
@@ -65,13 +65,13 @@ export default function Auth() {
             Svenska
           </h1>
           <p style={{ margin: '6px 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            {mode === 'login' ? 'Welcome back — log in to keep learning.' : 'Create your account to start learning.'}
+            {mode === 'login' ? 'Welcome back — log in to keep learning.' : 'Pick any username — no email needed.'}
           </p>
         </div>
 
         <form onSubmit={submit} className="glass" style={{ borderRadius: 'var(--radius)', padding: '20px', boxShadow: 'var(--card-shadow)' }}>
-          <input className="glass" style={field} type="email" autoComplete="email" placeholder="Email"
-            value={email} onChange={e => setEmail(e.target.value)} />
+          <input className="glass" style={field} type="text" autoComplete="username" autoCapitalize="none" spellCheck={false} placeholder="Username"
+            value={username} onChange={e => setUsername(e.target.value)} />
           <input className="glass" style={field} type="password" autoComplete={mode === 'login' ? 'current-password' : 'new-password'} placeholder="Password"
             value={password} onChange={e => setPassword(e.target.value)} />
           {mode === 'signup' && (

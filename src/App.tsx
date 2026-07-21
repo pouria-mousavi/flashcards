@@ -126,8 +126,9 @@ import SwedishReference from './components/SwedishReference';
 import SwedishGrammar from './components/SwedishGrammar';
 import Auth from './components/Auth';
 import AccountPanel from './components/AccountPanel';
-import { fetchRole } from './lib/auth';
+import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
+import type { Session } from '@supabase/supabase-js';
 import { setTtsTier } from './lib/tts';
 import { AnimatePresence } from 'framer-motion';
 
@@ -468,13 +469,13 @@ function App() {
   useEffect(() => {
     let mounted = true;
 
-    // Resolve the role, retrying transient failures. fetchRole THROWS on a
-    // network/DB error (distinct from a clean "not approved" -> null), so a
+    // Resolve the role from a session, retrying transient failures. roleForSession
+    // THROWS on a DB error (distinct from a clean "not approved" -> null), so a
     // flaky connection or a paused DB never downgrades a valid session to the
     // signed-out state and wipes the in-progress session.
-    const resolveRole = async (attempts = 3): Promise<Role | null> => {
+    const resolve = async (session: Session | null, attempts = 3): Promise<Role | null> => {
       for (let i = 0; i < attempts; i++) {
-        try { return await fetchRole(); }
+        try { return await roleForSession(session); }
         catch { if (i < attempts - 1) await new Promise(res => setTimeout(res, 400)); }
       }
       throw new Error('role-unresolved');
@@ -482,18 +483,20 @@ function App() {
 
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       let r: Role | null = null;
-      if (session) { try { r = await resolveRole(); } catch { r = null; } }
+      if (session) { try { r = await resolve(session); } catch { r = null; } }
       if (!mounted) return;
       setRole(r);
       setAuthReady(true);
     });
-    const { data: sub } = supabase.auth.onAuthStateChange(async (event, session) => {
+    // Keep this callback SYNCHRONOUS — never `await` inside it. Supabase invokes
+    // it while holding the auth lock; awaiting (esp. any auth call) would deadlock
+    // and hang the app. We resolve the role off to the side via .then instead.
+    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
       if (!session) { setRole(null); return; }                 // genuine sign-out
       if (event === 'SIGNED_IN' || event === 'USER_UPDATED' || event === 'TOKEN_REFRESHED') {
-        let r: Role | null;
-        try { r = await resolveRole(); }
-        catch { return; }                                      // transient — keep current role, never log out
-        setRole(prev => (prev && r && prev.userId === r.userId && prev.isAdmin === r.isAdmin) ? prev : r);
+        resolve(session)
+          .then(r => { if (mounted) setRole(prev => (prev && r && prev.userId === r.userId && prev.isAdmin === r.isAdmin) ? prev : r); })
+          .catch(() => { /* transient — keep current role, never log out */ });
       }
     });
     return () => { mounted = false; sub.subscription.unsubscribe(); };

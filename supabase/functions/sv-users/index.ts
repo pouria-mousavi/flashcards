@@ -5,6 +5,11 @@ import { createClient } from 'jsr:@supabase/supabase-js@2';
 const INVITE_CODE = 'svenska-fika-7k92';
 const MAX_USERS = 15;
 
+// Friends sign up with a USERNAME, no email. Supabase Auth is email-based, so
+// each username maps to a synthetic address under this domain. Must match
+// SV_DOMAIN in src/lib/auth.ts so login (client-side) resolves the same address.
+const USERNAME_DOMAIN = 'svenska.local';
+
 const cors = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -30,12 +35,18 @@ Deno.serve(async (req: Request) => {
 
   // --- Public: gated signup ---
   if (action === 'signup') {
-    const email = String(body.email || '').trim().toLowerCase();
+    const username = String(body.username || '').trim();
     const password = String(body.password || '');
     const code = String(body.code || '');
     if (code !== INVITE_CODE) return json({ error: 'That invite code is not valid.' }, 403);
-    if (!email || !email.includes('@')) return json({ error: 'Enter a valid email address.' }, 400);
+    if (!/^[A-Za-z0-9][A-Za-z0-9._-]{1,29}$/.test(username)) {
+      return json({ error: 'Pick a username: 2–30 letters, numbers, or . _ -' }, 400);
+    }
     if (password.length < 6) return json({ error: 'Password must be at least 6 characters.' }, 400);
+    // Map username -> synthetic email. Lowercased so login is case-insensitive
+    // and usernames are unique regardless of case (uniqueness is enforced by
+    // auth.users.email). The display name keeps the user's original casing.
+    const email = `${username.toLowerCase()}@${USERNAME_DOMAIN}`;
 
     // Cap check — fail CLOSED: if the count query itself errors, refuse rather
     // than silently letting signups past the cap (count:null would coerce to 0).
@@ -43,16 +54,18 @@ Deno.serve(async (req: Request) => {
     if (cntErr) return json({ error: 'Could not verify availability right now. Please try again.' }, 503);
     if ((count ?? 0) >= MAX_USERS) return json({ error: 'This app is full — ask the owner for a spot.' }, 403);
 
-    const { data: created, error: cErr } = await svc.auth.admin.createUser({ email, password, email_confirm: true });
+    const { data: created, error: cErr } = await svc.auth.admin.createUser({ email, password, email_confirm: true, user_metadata: { username } });
     if (cErr || !created?.user) {
       const dup = /already|registered|exists/i.test(cErr?.message || '');
       // Never surface the raw GoTrue error to the caller; keep a helpful (but
-      // non-secret) hint for the common duplicate-email case.
-      return json({ error: dup ? 'That email is already registered — just log in.' : 'Could not create the account. Check your details or try logging in.' }, 400);
+      // non-secret) hint for the common taken-username case.
+      return json({ error: dup ? 'That username is taken — pick another, or just log in.' : 'Could not create the account. Try a different username.' }, 400);
     }
 
+    // Store the display username (original casing) so the owner's member list
+    // shows the chosen name rather than the synthetic address.
     const { data: inserted, error: aErr } = await svc.from('approved_users')
-      .insert({ user_id: created.user.id, email, is_admin: false })
+      .insert({ user_id: created.user.id, email: username, is_admin: false })
       .select('created_at').single();
     if (aErr || !inserted) {
       const { error: delErr } = await svc.auth.admin.deleteUser(created.user.id);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { changePassword, signOut, adminListUsers, adminDeleteUser, adminConfig } from '../lib/auth';
+import { changePassword, signOut, adminListUsers, adminDeleteUser, adminConfig, displayName } from '../lib/auth';
 import type { Role, AdminUser } from '../lib/auth';
 
 interface Props {
@@ -50,7 +50,7 @@ export default function AccountPanel({ role, onClose }: Props) {
   };
 
   const doDelete = async (u: AdminUser) => {
-    if (!confirm(`Remove ${u.email}? Their progress is permanently deleted.`)) return;
+    if (!confirm(`Remove ${displayName(u.email)}? Their progress is permanently deleted.`)) return;
     const { error } = await adminDeleteUser(u.user_id);
     if (error) { setAdminErr(error); return; }
     setUsers(prev => prev?.filter(x => x.user_id !== u.user_id) ?? null);
@@ -76,7 +76,7 @@ export default function AccountPanel({ role, onClose }: Props) {
 
           <Section title="Signed in as">
             <p style={{ margin: 0, fontSize: '0.95rem', fontWeight: 650, color: 'var(--text-primary)' }}>
-              {role.email} {role.isAdmin && <span style={{ fontSize: '0.7rem', color: 'var(--accent-sv)', fontWeight: 700 }}>· owner</span>}
+              {displayName(role.email)} {role.isAdmin && <span style={{ fontSize: '0.7rem', color: 'var(--accent-sv)', fontWeight: 700 }}>· owner</span>}
             </p>
             <button onClick={() => signOut()} className="pressable"
               style={{ padding: '11px', borderRadius: 'var(--radius-sm)', fontWeight: 700, fontSize: '0.88rem', background: 'var(--danger-soft)', color: 'var(--danger)', border: '1px solid var(--border)' }}>
@@ -113,7 +113,7 @@ export default function AccountPanel({ role, onClose }: Props) {
                   {users.map(u => (
                     <div key={u.user_id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 0', borderBottom: '1px solid var(--border)' }}>
                       <span style={{ fontSize: '0.86rem', color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        {u.email}{u.is_admin && <span style={{ fontSize: '0.68rem', color: 'var(--accent-sv)', fontWeight: 700 }}> · owner</span>}
+                        {displayName(u.email)}{u.is_admin && <span style={{ fontSize: '0.68rem', color: 'var(--accent-sv)', fontWeight: 700 }}> · owner</span>}
                       </span>
                       {!u.is_admin && (
                         <button onClick={() => doDelete(u)} className="pressable"
