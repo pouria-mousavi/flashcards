@@ -506,6 +506,9 @@ function App() {
   useEffect(() => {
     currentUid = role?.userId ?? null;
     setTtsTier(role?.isAdmin ? 'azure' : 'browser');
+    // Mark this device as "has signed in before" so the Auth screen defaults to
+    // Log in for returning users — brand-new devices still land on Sign up.
+    if (role) localStorage.setItem('sv_returning', '1');
     if (role && !role.isAdmin) {
       setActiveLanguage('sv');
       localStorage.setItem(ACTIVE_LANGUAGE_KEY, 'sv');

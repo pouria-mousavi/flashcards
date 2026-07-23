@@ -15,7 +15,12 @@ const field: React.CSSProperties = {
 };
 
 export default function Auth() {
-  const [mode, setMode] = useState<Mode>('login');
+  // A new device (nobody has signed in here yet) lands on Sign up — friends
+  // opening the shared link don't have an account. Once someone has signed in on
+  // this browser we remember it and default back to Log in.
+  const [mode, setMode] = useState<Mode>(() =>
+    (typeof localStorage !== 'undefined' && localStorage.getItem('sv_returning')) ? 'login' : 'signup'
+  );
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
