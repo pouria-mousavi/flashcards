@@ -126,6 +126,7 @@ import SwedishReference from './components/SwedishReference';
 import SwedishGrammar from './components/SwedishGrammar';
 import Auth from './components/Auth';
 import AccountPanel from './components/AccountPanel';
+import MilestoneToast from './components/MilestoneToast';
 import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
@@ -133,6 +134,14 @@ import { setTtsTier } from './lib/tts';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
+
+// One-time announcement shown to every user on their next visit. To announce
+// something new later, change the `id` — the old one stays dismissed forever.
+const A1_PART1_MILESTONE = {
+  id: 'a1-part-1-complete',
+  title: 'A1 Part 1 is complete!',
+  body: 'Every word, sentence and grammar point from the whole course is now in the deck.',
+} as const;
 
 function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
@@ -834,6 +843,7 @@ function App() {
         <AnimatePresence>
           {showAccount && <AccountPanel role={role} onClose={() => setShowAccount(false)} />}
         </AnimatePresence>
+        <MilestoneToast {...A1_PART1_MILESTONE} />
       </div>
     );
   }
@@ -873,6 +883,7 @@ function App() {
           onCancel={() => setView('dashboard')}
         />
       )}
+      <MilestoneToast {...A1_PART1_MILESTONE} />
     </div>
   );
 
