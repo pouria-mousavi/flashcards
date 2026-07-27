@@ -51,6 +51,17 @@ export const SV_GRAMMAR: GrammarLesson[] = [
           { sv: 'springa → sprang → sprungit', en: 'vowel changes → group 4, memorize it', note: 'i–a–u is a common pattern' },
         ],
       },
+      {
+        kind: 'pairs',
+        title: 'The imperative test (fastest way to find the group)',
+        items: [
+          { sv: 'arbeta! → arbetade', en: 'command ends in -a → group 1', note: 'past -ade' },
+          { sv: 'ring! → ringde', en: 'command ends in a VOICED consonant → 2a', note: 'past -de' },
+          { sv: 'läs! köp! rök! → läste, köpte, rökte', en: 'command ends in k, p, s, t, x → 2b', note: 'past -te' },
+          { sv: 'bo! klä! → bodde, klädde', en: 'command ends in a long vowel → group 3', note: 'past -dde' },
+        ],
+      },
+      { kind: 'note', text: 'Mnemonic for the voiceless letters that force -te: Kalle Sitter På Täget X2000 (k, s, p, t, x). Everything else in group 2 takes -de.' },
       { kind: 'note', text: 'Present = what the dictionary form does after you: group 1 keeps its -a (talar), the others drop or change. If you know the past ending, you know the group.' },
     ],
     full: [
@@ -91,6 +102,88 @@ export const SV_GRAMMAR: GrammarLesson[] = [
       'Sentence adverbs — inte, alltid, ofta, aldrig, bara, gärna — take the slot right after the verb (after the subject too, when the subject has flipped). Jag läser inte. / På kvällen läser jag inte.',
       'Yes/no questions are the one place the verb goes FIRST: Läser du? Går det bra? The fundament is simply empty. Question-word questions put the question word in the fundament: Vad läser du? — and look, the verb is second again.',
       'Nearly every sentence needs a subject, even an empty one: Det regnar (it rains), Det är lunch. If you hear a sentence with no det and no subject, it\'s probably an imperative.',
+    ],
+  },
+  {
+    id: 'satsadverbial',
+    title: 'aldrig, ofta, alltid — where the adverb goes',
+    tag: 'Word order',
+    hook: 'These sit AFTER the verb, not before it like in English.',
+    cheat: [
+      {
+        kind: 'pattern',
+        title: 'The slot',
+        slots: ['subject', 'VERB', 'aldrig / sällan / ofta / alltid', 'rest'],
+        example: { sv: 'Jag går aldrig på bio.', en: 'I never go to the cinema.' },
+      },
+      {
+        kind: 'pairs',
+        title: 'Right vs wrong',
+        items: [
+          { sv: 'Pelle dricker aldrig kaffe.', en: 'Pelle never drinks coffee.', note: '✓ after the verb' },
+          { sv: 'Pelle aldrig dricker kaffe.', en: 'the English order', note: '✗ never do this' },
+          { sv: 'Jag kan inte spela piano.', en: 'with a modal, it follows the MODAL', note: 'not "kan spela inte"' },
+          { sv: 'Gå inte till jobbet!', en: 'in a command, inte comes after the verb', note: 'imperative + inte' },
+        ],
+      },
+      {
+        kind: 'pairs',
+        title: 'ibland is the free one',
+        items: [
+          { sv: 'Ibland ringer jag till mamma.', en: 'first — then the verb comes second (V2)' },
+          { sv: 'Jag ringer till mamma ibland.', en: 'or last — both are fine' },
+          { sv: 'Aldrig går jag på bio.', en: 'aldrig/ofta/alltid normally CANNOT open the sentence', note: '✗' },
+        ],
+      },
+      { kind: 'note', text: 'The reason: aldrig, sällan, ofta, alltid and inte are satsadverbial — they belong to the clause, so they cling to the finite verb. ibland is a time adverbial, so it roams like i går or på måndag.' },
+    ],
+    full: [
+      'English puts these little adverbs before the verb — "I never go", "she always eats". Swedish puts them straight AFTER the finite verb: Jag går aldrig, Hon äter alltid. Getting this wrong is the single most audible learner mistake, because the word order is otherwise identical.',
+      'The family is: aldrig (never), sällan (seldom), ofta (often), alltid (always) — and inte behaves exactly the same way. They are called satsadverbial, "clause adverbs", because they comment on the whole clause, and they attach themselves to the finite verb.',
+      'With a modal or any two-verb construction, "the verb" means the FINITE one — the first one. So it is Jag kan inte spela piano and Jag ska aldrig göra det igen: the adverb slides in after kan/ska, not after the infinitive.',
+      'If you front something else, V2 still rules and the adverb stays behind the verb, now after the subject: På måndagar dricker vi sällan vin. Verb second, subject third, adverb fourth.',
+      'ibland is the exception that proves the rule. Because it is a time adverbial rather than a clause adverbial, it can open the sentence (Ibland ringer jag till mamma — note the inversion) or sit at the very end (Jag ringer till mamma ibland). The others cannot open a neutral sentence; Aldrig går jag på bio is only for dramatic emphasis.',
+      'In a subordinate clause everything flips and the adverb moves BEFORE the verb — att jag aldrig går på bio. That is the "iNte before verb in bisats" rule you will meet later; for now, main clauses are the ones to drill.',
+    ],
+  },
+  {
+    id: 'gilla-tycka-om',
+    title: 'gillar / tycker om / älskar — with att',
+    tag: 'Verbs',
+    hook: 'A noun goes straight in; an activity needs att + infinitive.',
+    cheat: [
+      {
+        kind: 'pattern',
+        title: 'Two shapes',
+        slots: ['gillar / tycker om / älskar', '+ NOUN', 'or', '+ att + INFINITIVE'],
+        example: { sv: 'Jag tycker om musik. · Jag tycker om att lyssna på musik.', en: 'I like music. · I like listening to music.' },
+      },
+      {
+        kind: 'pairs',
+        title: 'Noun vs activity',
+        items: [
+          { sv: 'Jag älskar mat.', en: 'I love food.', note: 'noun — nothing extra' },
+          { sv: 'Jag älskar att laga mat.', en: 'I love cooking.', note: 'activity — att + infinitive' },
+          { sv: 'Ilse gillar att gå på bio.', en: 'Ilse likes going to the cinema.', note: '✓' },
+          { sv: 'Ilse gillar går på bio.', en: '—', note: '✗ never a conjugated verb after gillar' },
+        ],
+      },
+      {
+        kind: 'note',
+        text: 'mycket slides inside the phrasal verb: Jag tycker MYCKET om konst — not "tycker om mycket konst".',
+      },
+      {
+        kind: 'note',
+        text: 'Contrast with modals: kan/vill/ska/måste/brukar take a BARE infinitive (Jag vill gå), while gilla/tycka om/älska need att (Jag gillar ATT gå).',
+      },
+    ],
+    full: [
+      'Three everyday verbs cover "like" and "love": gillar (the casual one), tycker om (the standard one, a phrasal verb), and älskar (love — used more freely than in English, happily about food and TV shows).',
+      'The rule that trips people up is what comes next. If the object is a THING, it goes straight in: Jag gillar musik, Jag älskar mat, Tycker du om naturen? If the object is an ACTIVITY, Swedish needs att plus the infinitive: Jag gillar att sjunga, Jag älskar att laga mat, Tycker du om att titta på konst?',
+      'The mistake to avoid is copying the English -ing straight into a conjugated verb: "Jag gillar går på bio" is wrong. English "going" is not a present tense — it maps onto the Swedish infinitive, so it must be att gå.',
+      'tycka om is separable in the sense that adverbs squeeze between the parts: Jag tycker mycket om konst; Jag tycker inte om kaffe. Keep om glued to the object, not to the verb.',
+      'Note the contrast with modal verbs, which is the other half of this rule: modals (kan, vill, ska, måste, får, brukar) take the infinitive WITHOUT att — Jag vill gå på bio — while these liking-verbs require it. Two families, two habits.',
+      'Useful extras from the same lesson: hellre and helst for preference (Jag vill hellre stanna hemma; Nej, helst inte), and the fact that a plain noun often takes the definite form in Swedish where English uses none — Tycker du om naturen?',
     ],
   },
   {
@@ -268,6 +361,22 @@ export const SV_GRAMMAR: GrammarLesson[] = [
           { sv: 'bra → bättre → bäst · gammal → äldre → äldst', en: 'memorize the top irregulars' },
         ],
       },
+      {
+        kind: 'table',
+        title: 'The awkward squad',
+        columns: ['en', 'ett', 'plural', 'why'],
+        rows: [
+          ['ny', 'nytt', 'nya', 'long vowel → consonant doubles'],
+          ['god', 'gott', 'goda', 'd + t → tt after a long vowel'],
+          ['hård', 'hårt', 'hårda', 'd + t → just t'],
+          ['vit', 'vitt', 'vita', 'already ends in -t, long vowel → doubles'],
+          ['svart', 'svart', 'svarta', 'already ends in -t → no extra t'],
+          ['vacker', 'vackert', 'vackra', '-er/-el drop the e before -a'],
+          ['ledsen', 'ledset', 'ledsna', '-en drops the e before -a'],
+          ['liten', 'litet', 'små', 'completely special'],
+        ],
+      },
+      { kind: 'note', text: 'Some adjectives never change: bra, kul, lila, rosa — and anything ending in -ande (fascinerande). If it looks unchangeable, it probably is.' },
       { kind: 'note', text: 'jätte- glues onto any adjective for "really": jättebra, jättegod, jättetrött — and still agrees: jättegoda kanelbullar.' },
     ],
     full: [
