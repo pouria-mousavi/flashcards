@@ -14,6 +14,8 @@ interface Props {
   onOpenGrammar?: () => void;
   onOpenAccount?: () => void;
   showSwitcher?: boolean;
+  /** New cards that may still be introduced today (daily allowance). */
+  newBudget?: number;
 }
 
 interface Tier {
@@ -47,11 +49,16 @@ function classify(cards: SwedishCard[]): Tier[] {
 
 export default function SwedishDashboard({
   cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar,
-  onOpenAccount, showSwitcher = true,
+  onOpenAccount, showSwitcher = true, newBudget = 0,
 }: Props) {
   const totalCards = cards.length;
   const now = Date.now();
-  const dueCount = cards.filter(c => c.nextReviewDate <= now).length;
+  // Today's workload — NOT the lifetime backlog. Unseen cards are not "due";
+  // they arrive at the daily allowance, so the number is something you can finish.
+  const reviewsDue = cards.filter(c => c.state !== CardState.NEW && c.nextReviewDate <= now).length;
+  const notStarted = cards.filter(c => c.state === CardState.NEW).length;
+  const newToday = Math.min(newBudget, notStarted);
+  const dueCount = reviewsDue + newToday;
   const hasDue = dueCount > 0;
   const canStudy = hasDue || hasActiveSession;
   const tiers = classify(cards);
@@ -106,10 +113,14 @@ export default function SwedishDashboard({
           {dueCount}
         </h1>
         <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.01em' }}>
-          due now · Svenska
+          {dueCount === 0
+            ? 'all done today · Svenska'
+            : reviewsDue === 0
+              ? `today · ${newToday} new ${newToday === 1 ? 'card' : 'cards'}`
+              : `today · ${reviewsDue} ${reviewsDue === 1 ? 'review' : 'reviews'}${newToday > 0 ? ` + ${newToday} new` : ''}`}
         </p>
         <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-          {totalCards} {totalCards === 1 ? 'card' : 'cards'} in the deck
+          {totalCards} in the deck{notStarted > 0 ? ` · ${notStarted} not started` : ''}
         </p>
       </motion.div>
 

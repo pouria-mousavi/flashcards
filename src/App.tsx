@@ -131,6 +131,7 @@ import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
 import { setTtsTier } from './lib/tts';
+import { remainingNewToday, markNewIntroduced } from './lib/newBudget';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
@@ -273,6 +274,13 @@ function App() {
   const updateCardStats = async (updatedCard: StudyCard) => {
     const table = isGrammarCard(updatedCard) ? 'grammar_cards' : 'cards';
 
+    const prevEn = isGrammarCard(updatedCard)
+      ? grammarCards.find(c => c.id === updatedCard.id)
+      : cards.find(c => c.id === updatedCard.id);
+    if (prevEn?.state === 'NEW' && updatedCard.state !== 'NEW') {
+      markNewIntroduced(currentUid ? `${currentUid}:en` : null, updatedCard.id);
+    }
+
     if (isGrammarCard(updatedCard)) {
         setGrammarCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
     } else {
@@ -297,6 +305,12 @@ function App() {
   // shared swedish_cards content is never touched here, so one user's ratings
   // can never affect anyone else's deck.
   const updateSwedishCardStats = async (updatedCard: SwedishCard) => {
+    // Spend a slot from today's new-card allowance the moment a card actually
+    // leaves NEW — so opening the app never costs anything, only studying does.
+    const before = swedishCards.find(c => c.id === updatedCard.id);
+    if (before?.state === 'NEW' && updatedCard.state !== 'NEW') {
+      markNewIntroduced(currentUid, updatedCard.id);
+    }
     setSwedishCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
     // Capture the uid ONCE up front: the payload, the buffer namespace, and the
     // later clear must all refer to the user who made this rating, even if the
@@ -396,7 +410,9 @@ function App() {
   // among the reviews so you get a rhythm of quick-win → challenge → quick-win.
   const buildSession = (size = 20, newCap = 8): StudyCard[] => {
       const due = getDueCards(); // shuffled new first, then reviews by due date
-      const newCards = due.filter(c => c.state === 'NEW');
+      // Same daily new-card gate as the Swedish deck (see lib/newBudget).
+      const budget = remainingNewToday(currentUid ? `${currentUid}:en` : null);
+      const newCards = due.filter(c => c.state === 'NEW').slice(0, budget);
       const reviewCards = due.filter(c => c.state !== 'NEW');
 
       let takeNew = Math.min(newCap, newCards.length);
@@ -447,7 +463,10 @@ function App() {
 
   const buildSwedishSession = (size = 20, newCap = 8): SwedishCard[] => {
       const due = getSwedishDueCards();
-      const newCards = due.filter(c => c.state === 'NEW');
+      // Never introduce more new cards than today's allowance still permits —
+      // the rest of the unseen deck simply waits its turn.
+      const budget = remainingNewToday(currentUid);
+      const newCards = due.filter(c => c.state === 'NEW').slice(0, budget);
       const reviewCards = due.filter(c => c.state !== 'NEW');
 
       let takeNew = Math.min(newCap, newCards.length);
@@ -823,6 +842,7 @@ function App() {
             activeLanguage={activeLanguage}
             onSwitchLanguage={switchLanguage}
             showSwitcher={isAdmin}
+            newBudget={remainingNewToday(currentUid)}
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
             onOpenAccount={() => setShowAccount(true)}
@@ -861,6 +881,7 @@ function App() {
           activeLanguage={activeLanguage}
           onSwitchLanguage={switchLanguage}
           onOpenAccount={() => setShowAccount(true)}
+          newBudget={remainingNewToday(currentUid ? `${currentUid}:en` : null)}
         />
       )}
       <AnimatePresence>
