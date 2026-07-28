@@ -77,9 +77,12 @@ If multiple images are shared, process each page but keep one combined output.
 
 Design rules, all six load-bearing:
 
-1. **The front poses ONE concrete, attemptable task.** Gold standard is a
-   production prompt: *Say it in Swedish: "She never takes the car."* If you
-   cannot say precisely what answer the front demands, the card is broken.
+1. **The front poses ONE concrete, attemptable task** — written as the bare
+   English sentence, with NO instruction prefix and NO wrapping quotes (user
+   rule, 2026-07-28): *She never takes the car.* — NOT `Say: "She never takes
+   the car."` and NOT `Ask: "…"`. The card is already a prompt; the instruction
+   word is noise repeated on every single card. If you cannot say precisely what
+   answer the front demands, the card is broken.
 2. **The back IS the answer** — the exact Swedish to produce, nothing else in
    the main field: *Hon tar aldrig bilen.*
 3. **The rule is a footnote, never the answer.** Put patterns and explanations
@@ -87,38 +90,42 @@ Design rules, all six load-bearing:
    verb"*), so the learner produces first and sees why second.
 4. **Never leak the answer on the front.** Not the Swedish being asked for,
    and not a hint that spells it out (*"definite: en-word adds -en"* → answer
-   `katten` given away). Fronts stay in English plus at most a scaffold hint:
-   *start with "På kvällen…"*, *careful where inte goes*, *not the same word
-   as "per day"*.
+   `katten` given away). Fronts stay in English plus at most a scaffold hint,
+   and the scaffold is in English too: *start with the time phrase*, *careful
+   where the negation goes*, *not the same word as "per day"*.
 5. **Atomic.** One decision point per card. A contrast (den/det, om/i) may
-   share one card ONLY as a paired production task (*Say: "Which street?
-   Which year?"*), never as "explain the difference".
+   share one card ONLY as a paired production task (*Which street? Which year?*), never as "explain the difference".
 6. **Never ask the learner to recite a rule.** Not *"how do you form the
-   imperative?"* but *Give the commands: "Work!" "Read!" "Come!"* →
+   imperative?"* but *Work! Read! Come!* →
    *arbeta! läs! kom!* — with the formation rule as a back-side note.
 
 7. **No single-word fronts — ever (user rule, 2026-07-07).** Extracting a verb
    or noun never yields a card whose front is just the English word ("hope(s)",
    "a meeting"). The front always asks the learner to PRODUCE A SENTENCE that
-   forces the word: *Make a sentence: "I hope the course starts soon."* → back:
+   forces the word: *I hope the course starts soon.* → back:
    *Jag hoppas att kursen börjar snart.* The word is learned inside usage, and
    the back is a complete, TTS-friendly sentence.
-8. **Pin the synonym choice (user rule, 2026-07-20).** When the English front
-   admits MORE THAN ONE natural Swedish rendering (I'll have → tar / vill ha /
-   skulle vilja ha; work → jobba/arbeta; study → plugga/studera/läsa; watch →
-   titta på/se; like → gilla/tycka om; go → gå/åka; "is" of position →
-   ligger/står; generic you → man/du…), the learner can answer correctly and
-   still mismatch the back — an unfair card. Append a minimal steer that pins
-   the target: *(literally: "I take")*, *(use åka, not ta)*, *(the everyday
-   word, not arbeta)*, *(generic you = man)*. Naming the target word in a
-   contrastive hint is fine; never print the full back sentence.
+8. **Pin the synonym choice — in ENGLISH, never with the Swedish word (user
+   rule, revised 2026-07-28).** When the English front admits MORE THAN ONE
+   natural Swedish rendering (I'll have → tar / vill ha / skulle vilja ha; work
+   → jobba/arbeta; study → plugga/studera/läsa; watch → titta på/se; like →
+   gilla/tycka om; go → gå/åka; "is" of position → ligger/står; generic you →
+   man/du…), the learner can answer correctly and still mismatch the back — an
+   unfair card. So disambiguate — but express the DIFFERENCE IN MEANING in
+   English, so recalling the Swedish word is still the test:
+   - ✓ *(travelling by vehicle)* · *(the formal word for work)* · *(watching,
+     not merely seeing)* · *(it's lying flat — use a position verb)* ·
+     *(generic "you" = one/people in general)* · *(literally: "I take")*
+   - ✗ *(use åka, not ta)* · *(the everyday word, not arbeta)* · *(use gilla)* ·
+     *(position verb: ligger)* — these hand over the answer.
+   **NEVER put a Swedish word on the front.** The only exceptions are a quoted
+   English literal gloss of the idiom (*literally: "read a course"*), the
+   grammar labels en-word/ett-word, and proper nouns. Never print the back
+   sentence.
 9. **One form, one card.** A verb's forms are separate cards, each forcing one
-   form in a sentence: present (*Say: "I work every day."*), past (*Say: "I
-   worked yesterday."* → *Jag jobbade i går.*), perfect (*Say: "I have worked
-   a lot today."* → *Jag har jobbat mycket i dag.*), infinitive after a modal
-   (*Say: "I want to work less."* → *Jag vill jobba mindre.*). Nouns get a
-   singular-in-a-sentence card and a plural-in-a-sentence card (*Say: "I have
-   three books."* → *Jag har tre böcker.*). Don't pile every form onto one
+   form in a sentence: present (*I work every day.*), past (*I worked yesterday.* → *Jag jobbade i går.*), perfect (*I have worked a lot today.* → *Jag har jobbat mycket i dag.*), infinitive after a modal
+   (*I want to work less.* → *Jag vill jobba mindre.*). Nouns get a
+   singular-in-a-sentence card and a plural-in-a-sentence card (*I have three books.* → *Jag har tre böcker.*). Don't pile every form onto one
    overloaded back — the full inflection table may ride along as reference on
    the main card only.
 
@@ -195,7 +202,7 @@ generalizes it.
 **Example — the page drills V2 word order:**
 - ✗ front: "word order: the verb comes second" (rule recitation — rejected in
   real use)
-- ✓ front: `Say: "In the evening she reads the news." (start with "in the
+- ✓ front: `In the evening she reads the news. (start with "in the
   evening")` → back: `På kvällen läser hon nyheterna.` → note: *the verb must
   stay in 2nd position, so the subject flips to after it*
 
