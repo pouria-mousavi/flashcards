@@ -111,7 +111,19 @@ Design rules, all six load-bearing:
    → jobba/arbeta; study → plugga/studera/läsa; watch → titta på/se; like →
    gilla/tycka om; go → gå/åka; "is" of position → ligger/står; generic you →
    man/du…), the learner can answer correctly and still mismatch the back — an
-   unfair card. So disambiguate — but express the DIFFERENCE IN MEANING in
+   unfair card. **First try to fix it in the ENGLISH SENTENCE itself — a hint
+   you don't need is the best hint (user rule, 2026-07-30).** If the translation
+   can carry the distinction, rewrite it and add no hint at all:
+   - *I am going to look for a new job. (applying for it, not searching around)*
+     → **I am going to apply for a new job.** — no hint needed
+   - *He talks about his job. (telling/recounting)* → **He tells people about
+     his job.**  ·  *We baked a cake. (a plain cake, not a layered one)* →
+     **We baked a plain cake.**
+   Only when the sentence genuinely cannot carry it, add a SHORT hint. For
+   register that is one keyword — *(formal)*, *(informal)*, *(casual)* — never a
+   sentence. Never explain what the reader can already see.
+
+   When you do write a hint, express the DIFFERENCE IN MEANING in
    English, so recalling the Swedish word is still the test:
    - ✓ *(travelling by vehicle)* · *(the formal word for work)* · *(watching,
      not merely seeing)* · *(it's lying flat — use a position verb)* ·
