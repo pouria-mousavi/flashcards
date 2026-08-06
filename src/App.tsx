@@ -277,6 +277,7 @@ function App() {
   const updateCardStats = async (updatedCard: StudyCard) => {
     const table = isGrammarCard(updatedCard) ? 'grammar_cards' : 'cards';
 
+    markCardStudied(currentUid ? `${currentUid}:en` : null);
     const prevEn = isGrammarCard(updatedCard)
       ? grammarCards.find(c => c.id === updatedCard.id)
       : cards.find(c => c.id === updatedCard.id);
@@ -422,6 +423,8 @@ function App() {
   // Defaults: 20 cards total, max 8 new. The new cards are spread evenly
   // among the reviews so you get a rhythm of quick-win → challenge → quick-win.
   const buildSession = (size = 20, newCap = 8): StudyCard[] => {
+      size = Math.min(size, remainingTodayTotal(currentUid ? `${currentUid}:en` : null));
+      if (size <= 0) return [];
       const due = getDueCards(); // shuffled new first, then reviews by due date
       // Same daily new-card gate as the Swedish deck (see lib/newBudget).
       const budget = remainingNewToday(currentUid ? `${currentUid}:en` : null);
@@ -920,6 +923,7 @@ function App() {
           onSwitchLanguage={switchLanguage}
           onOpenAccount={() => setShowAccount(true)}
           newBudget={remainingNewToday(currentUid ? `${currentUid}:en` : null)}
+          dayCeiling={remainingTodayTotal(currentUid ? `${currentUid}:en` : null)}
         />
       )}
       <AnimatePresence>

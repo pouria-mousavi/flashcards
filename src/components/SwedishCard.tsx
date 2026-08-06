@@ -37,12 +37,55 @@ function Speaker({ text, lang, size = 32, emphasis }: { text: string; lang: Lang
   );
 }
 
-const GROUP_LABEL: Record<number, string> = {
-  1: 'Group 1 (-ar)',
-  2: 'Group 2 (-er)',
-  3: 'Group 3 (-r)',
-  4: 'Group 4 (strong)',
+// The one-line "which family does this word belong to" answer, shown as a badge
+// so it can be recalled and self-checked like any other part of the card.
+const VERB_RULE: Record<number, string> = {
+  1: 'stem ends in -a · past -ade',
+  2: 'stem ends in a consonant · past -de / -te',
+  3: 'one syllable, stressed vowel · past -dde',
+  4: 'strong — the vowel changes, memorise it',
 };
+const DECLENSION_RULE: Record<string, string> = {
+  '1': 'plural -or  (en-words ending in -a)',
+  '2': 'plural -ar',
+  '3': 'plural -er / -r',
+  '4': 'plural -n  (ett-words ending in a vowel)',
+  '5': 'plural unchanged',
+  'irregular': 'vowel change in the plural',
+  'special': 'uncountable — no plural',
+};
+
+function GroupBadge({ forms }: { forms: SwedishWordForms }) {
+  let label: string | null = null;
+  let rule: string | null = null;
+
+  if (forms.pos === 'verb' && forms.group) {
+    label = `Verb · grupp ${forms.group}${forms.irregular ? ' (irregular)' : ''}`;
+    rule = VERB_RULE[forms.group] ?? null;
+  } else if (forms.pos === 'noun' && forms.declension) {
+    const d = forms.declension;
+    label = `Noun · ${/^[0-9]$/.test(d) ? `deklination ${d}` : d}${forms.gender ? ` · ${forms.gender}-word` : ''}`;
+    rule = DECLENSION_RULE[d] ?? null;
+  } else if (forms.pos === 'adjective' && forms.pattern) {
+    label = `Adjective · ${forms.pattern}`;
+    rule = 'en-form / ett-form + t / plural + a';
+  }
+  if (!label) return null;
+
+  return (
+    <div style={{
+      display: 'flex', flexDirection: 'column', gap: '2px',
+      alignSelf: 'flex-start',
+      padding: '7px 12px',
+      borderRadius: '999px',
+      background: 'var(--accent-sv-soft)',
+      border: `1px solid ${SV_BORDER}`,
+    }}>
+      <span style={{ fontSize: '0.74rem', fontWeight: 800, color: SV_ACCENT, letterSpacing: '-0.01em' }}>{label}</span>
+      {rule && <span style={{ fontSize: '0.64rem', color: 'var(--text-muted)', fontWeight: 500 }}>{rule}</span>}
+    </div>
+  );
+}
 
 // Inflection table for Swedish verb / noun / adjective cards. Builds the rows
 // for the card's part of speech; each Swedish form is individually playable.
@@ -51,13 +94,13 @@ function WordForms({ forms, lang }: { forms: SwedishWordForms; lang: Lang }) {
   let heading = 'Forms';
 
   if (forms.pos === 'noun') {
-    heading = `Noun forms${forms.gender ? ` · ${forms.gender}-word` : ''}`;
+    heading = 'Forms';
     if (forms.indefinite) rows.push({ label: 'Indefinite', display: forms.indefinite, speak: forms.indefinite });
     if (forms.definite) rows.push({ label: 'Definite', display: forms.definite, speak: forms.definite });
     if (forms.pluralIndefinite) rows.push({ label: 'Plural', display: forms.pluralIndefinite, speak: forms.pluralIndefinite });
     if (forms.pluralDefinite) rows.push({ label: 'Plural def.', display: forms.pluralDefinite, speak: forms.pluralDefinite });
   } else if (forms.pos === 'adjective') {
-    heading = 'Adjective forms';
+    heading = 'Forms';
     if (forms.base) rows.push({ label: 'En-form', display: forms.base, speak: forms.base });
     if (forms.neuter) rows.push({ label: 'Ett-form', display: forms.neuter, speak: forms.neuter });
     if (forms.plural) rows.push({ label: 'Plural / def.', display: forms.plural, speak: forms.plural });
@@ -65,7 +108,7 @@ function WordForms({ forms, lang }: { forms: SwedishWordForms; lang: Lang }) {
     if (forms.superlative) rows.push({ label: 'Superlative', display: forms.superlative, speak: forms.superlative });
   } else {
     // verb (default)
-    heading = `Verb forms${forms.group && GROUP_LABEL[forms.group] ? ` · ${GROUP_LABEL[forms.group]}` : ''}`;
+    heading = 'Forms';
     if (forms.infinitive) rows.push({ label: 'Infinitive', display: `att ${forms.infinitive}`, speak: forms.infinitive });
     if (forms.present) rows.push({ label: 'Present', display: forms.present, speak: forms.present });
     if (forms.past) rows.push({ label: 'Past', display: forms.past, speak: forms.past });
@@ -96,6 +139,7 @@ function WordForms({ forms, lang }: { forms: SwedishWordForms; lang: Lang }) {
       {rows.length > 0 && (
         <div style={sectionStyle}>
           <span style={headingStyle}>{heading}</span>
+          <GroupBadge forms={forms} />
           {rows.map((r) => (
             <div
               key={r.label}

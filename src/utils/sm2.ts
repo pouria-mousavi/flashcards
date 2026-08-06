@@ -418,6 +418,8 @@ export interface SwedishWordForms {
     definite?: string;         // boken
     pluralIndefinite?: string; // böcker
     pluralDefinite?: string;   // böckerna
+    declension?: string;       // noun declension 1–5 / irregular / special
+    pattern?: string;          // adjective inflection pattern
     // adjective — agreement + comparison
     base?: string;        // stor (en-form)
     neuter?: string;      // stort (ett-form)
@@ -493,6 +495,7 @@ export function mapSwedishRowToCard(
                     'infinitive', 'present', 'past', 'supine', 'imperative',
                     'indefinite', 'definite', 'pluralIndefinite', 'pluralDefinite',
                     'base', 'neuter', 'plural', 'comparative', 'superlative',
+                    'declension', 'pattern',
                 ] as const;
                 for (const key of strKeys) {
                     if (typeof o[key] === 'string') result[key] = o[key] as string;

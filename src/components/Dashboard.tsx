@@ -15,6 +15,8 @@ interface Props {
   onOpenAccount?: () => void;
   /** New cards that may still be introduced today (daily allowance). */
   newBudget?: number;
+  /** Total cards that may still be offered today (hard daily ceiling). */
+  dayCeiling?: number;
 }
 
 interface Tier {
@@ -54,7 +56,7 @@ function classifyCards(cards: Flashcard[]): Tier[] {
 
 export default function Dashboard({
   cards, grammarCards = [], onStartStudy, onAddCard, hasActiveSession,
-  activeLanguage = 'en', onSwitchLanguage, onOpenAccount, newBudget = 0,
+  activeLanguage = 'en', onSwitchLanguage, onOpenAccount, newBudget = 0, dayCeiling = Infinity,
 }: Props) {
   const totalCards = cards.length + grammarCards.length;
   const now = Date.now();
@@ -63,7 +65,9 @@ export default function Dashboard({
   const reviewsDue = all.filter(c => c.state !== CardState.NEW && c.nextReviewDate <= now).length;
   const notStarted = all.filter(c => c.state === CardState.NEW).length;
   const newToday = Math.min(newBudget, notStarted);
-  const dueCount = reviewsDue + newToday;
+  const wanted = reviewsDue + newToday;
+  const dueCount = Math.min(wanted, dayCeiling);
+  const heldBack = Math.max(0, wanted - dueCount);
   const hasDue = dueCount > 0;
   const canStudy = hasDue || hasActiveSession;
 
@@ -128,7 +132,7 @@ export default function Dashboard({
               : `today · ${reviewsDue} ${reviewsDue === 1 ? 'review' : 'reviews'}${newToday > 0 ? ` + ${newToday} new` : ''}`}
         </p>
         <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-          {totalCards} in the deck{notStarted > 0 ? ` · ${notStarted} not started` : ''}
+          {totalCards} in the deck{notStarted > 0 ? ` · ${notStarted} not started` : ''}{heldBack > 0 ? ` · ${heldBack} waiting for tomorrow` : ''}
         </p>
       </motion.div>
 
