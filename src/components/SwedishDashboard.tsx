@@ -16,6 +16,8 @@ interface Props {
   showSwitcher?: boolean;
   /** New cards that may still be introduced today (daily allowance). */
   newBudget?: number;
+  /** Total cards that may still be offered today (hard daily ceiling). */
+  dayCeiling?: number;
 }
 
 interface Tier {
@@ -49,7 +51,7 @@ function classify(cards: SwedishCard[]): Tier[] {
 
 export default function SwedishDashboard({
   cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar,
-  onOpenAccount, showSwitcher = true, newBudget = 0,
+  onOpenAccount, showSwitcher = true, newBudget = 0, dayCeiling = Infinity,
 }: Props) {
   const totalCards = cards.length;
   const now = Date.now();
@@ -58,7 +60,11 @@ export default function SwedishDashboard({
   const reviewsDue = cards.filter(c => c.state !== CardState.NEW && c.nextReviewDate <= now).length;
   const notStarted = cards.filter(c => c.state === CardState.NEW).length;
   const newToday = Math.min(newBudget, notStarted);
-  const dueCount = reviewsDue + newToday;
+  // Today's target is capped by the daily ceiling — anything beyond it waits,
+  // so the number on screen is always something that can actually be finished.
+  const wanted = reviewsDue + newToday;
+  const dueCount = Math.min(wanted, dayCeiling);
+  const heldBack = Math.max(0, wanted - dueCount);
   const hasDue = dueCount > 0;
   const canStudy = hasDue || hasActiveSession;
   const tiers = classify(cards);
@@ -120,7 +126,7 @@ export default function SwedishDashboard({
               : `today · ${reviewsDue} ${reviewsDue === 1 ? 'review' : 'reviews'}${newToday > 0 ? ` + ${newToday} new` : ''}`}
         </p>
         <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-          {totalCards} in the deck{notStarted > 0 ? ` · ${notStarted} not started` : ''}
+          {totalCards} in the deck{notStarted > 0 ? ` · ${notStarted} not started` : ''}{heldBack > 0 ? ` · ${heldBack} waiting for tomorrow` : ''}
         </p>
       </motion.div>
 

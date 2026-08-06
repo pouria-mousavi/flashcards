@@ -131,7 +131,7 @@ import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
 import { setTtsTier } from './lib/tts';
-import { remainingNewToday, markNewIntroduced } from './lib/newBudget';
+import { remainingNewToday, markNewIntroduced, markCardStudied, remainingTodayTotal } from './lib/newBudget';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
@@ -311,6 +311,7 @@ function App() {
     if (before?.state === 'NEW' && updatedCard.state !== 'NEW') {
       markNewIntroduced(currentUid, updatedCard.id);
     }
+    markCardStudied(currentUid);
     setSwedishCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
     // Capture the uid ONCE up front: the payload, the buffer namespace, and the
     // later clear must all refer to the user who made this rating, even if the
@@ -462,6 +463,9 @@ function App() {
   };
 
   const buildSwedishSession = (size = 20, newCap = 8): SwedishCard[] => {
+      // Never offer more than today's remaining ceiling, however far behind we are.
+      size = Math.min(size, remainingTodayTotal(currentUid));
+      if (size <= 0) return [];
       const due = getSwedishDueCards();
       // Never introduce more new cards than today's allowance still permits —
       // the rest of the unseen deck simply waits its turn.
@@ -568,7 +572,9 @@ function App() {
         const pending = readPendingUpdates(role.userId);
 
         // Swedish deck (everyone): shared content + this user's own progress.
-        const svRows = await fetchAllRows('swedish_cards');
+        // Retired cards stay in the database for reference but never enter the
+        // study queue (see swedish_cards.retired).
+        const svRows = (await fetchAllRows('swedish_cards')).filter((r: any) => !r.retired);
         const progRows = await fetchAllRows('sv_progress', 'card_id');
         const progMap = new Map<string, any>(progRows.map((p: any) => [p.card_id, p]));
         const mappedSwedish = svRows.map((r: any) => {
@@ -843,6 +849,7 @@ function App() {
             onSwitchLanguage={switchLanguage}
             showSwitcher={isAdmin}
             newBudget={remainingNewToday(currentUid)}
+            dayCeiling={remainingTodayTotal(currentUid)}
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
             onOpenAccount={() => setShowAccount(true)}
