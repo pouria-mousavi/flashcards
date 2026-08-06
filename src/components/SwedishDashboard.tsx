@@ -12,6 +12,7 @@ interface Props {
   onSwitchLanguage: (lang: Lang) => void;
   onOpenReference?: () => void;
   onOpenGrammar?: () => void;
+  onOpenProgress?: () => void;
   onOpenAccount?: () => void;
   showSwitcher?: boolean;
   /** New cards that may still be introduced today (daily allowance). */
@@ -50,7 +51,7 @@ function classify(cards: SwedishCard[]): Tier[] {
 }
 
 export default function SwedishDashboard({
-  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar,
+  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress,
   onOpenAccount, showSwitcher = true, newBudget = 0, dayCeiling = Infinity,
 }: Props) {
   const totalCards = cards.length;
@@ -86,6 +87,16 @@ export default function SwedishDashboard({
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         {showSwitcher && <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />}
         <ThemeToggle />
+        {onOpenProgress && (
+          <button
+            onClick={onOpenProgress}
+            className="pressable glass"
+            aria-label="Progress"
+            style={{ width: '36px', height: '36px', borderRadius: '999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem', color: 'var(--text-secondary)', background: 'transparent' }}
+          >
+            ◔
+          </button>
+        )}
         {onOpenAccount && (
           <button
             onClick={onOpenAccount}

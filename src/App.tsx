@@ -127,6 +127,8 @@ import SwedishGrammar from './components/SwedishGrammar';
 import Auth from './components/Auth';
 import AccountPanel from './components/AccountPanel';
 import MilestoneToast from './components/MilestoneToast';
+import ProgressPanel from './components/ProgressPanel';
+import { logReview } from './lib/progress';
 import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
@@ -161,6 +163,7 @@ function App() {
   const [showSwedishReference, setShowSwedishReference] = useState(false);
   const [showSwedishGrammar, setShowSwedishGrammar] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
+  const [showProgress, setShowProgress] = useState(false);
 
   // --- Auth: who is signed in (null = signed out or not approved) ---
   const [authReady, setAuthReady] = useState(false);
@@ -312,6 +315,9 @@ function App() {
       markNewIntroduced(currentUid, updatedCard.id);
     }
     markCardStudied(currentUid);
+    // applyMastery has just set these, so this is exact rather than inferred:
+    // consecutiveIncorrect is reset to 0 by any correct answer.
+    logReview((updatedCard.consecutiveIncorrect ?? 0) > 0 ? 0 : 4);
     setSwedishCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
     // Capture the uid ONCE up front: the payload, the buffer namespace, and the
     // later clear must all refer to the user who made this rating, even if the
@@ -326,6 +332,12 @@ function App() {
         next_review: new Date(updatedCard.nextReviewDate).toISOString(),
         interval: updatedCard.interval,
         ease_factor: updatedCard.easeFactor,
+        mastery_level: updatedCard.masteryLevel ?? 0,
+        consecutive_correct: updatedCard.consecutiveCorrect ?? 0,
+        consecutive_incorrect: updatedCard.consecutiveIncorrect ?? 0,
+        total_reviews: updatedCard.totalReviews ?? 0,
+        lapses: updatedCard.lapses ?? 0,
+        priority: updatedCard.priority ?? 'medium',
         updated_at: new Date().toISOString(),
     };
     // Buffer first so a killed app / failed request replays on next launch.
@@ -456,7 +468,10 @@ function App() {
       const learning = allDue.filter(c => c.state === 'LEARNING' || c.state === 'RELEARNING');
       const reviews = allDue.filter(c => c.state === 'REVIEW');
       const sortedLearning = [...learning].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
-      const sortedReviews = [...reviews].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
+      // Struggling cards first within the review tier (fluent's priority idea),
+      // then oldest-due. Learning cards still lead overall — SRS order is intact.
+      const rank = (c: SwedishCard) => c.priority === 'high' ? 0 : c.priority === 'low' ? 2 : 1;
+      const sortedReviews = [...reviews].sort((a, b) => rank(a) - rank(b) || a.nextReviewDate - b.nextReviewDate);
       const recentNew = [...newCards].sort((a, b) => b.createdAt - a.createdAt).slice(0, 250);
       const shuffledNew = shuffle(recentNew);
       return [...shuffledNew, ...sortedLearning, ...sortedReviews];
@@ -552,7 +567,7 @@ function App() {
     if (authReady && !role) {
       setCards([]); setGrammarCards([]); setSwedishCards([]);
       setRestoredSession(null); setSwedishSession(null);
-      setShowAccount(false); setShowSwedishReference(false); setShowSwedishGrammar(false);
+      setShowAccount(false); setShowSwedishReference(false); setShowSwedishGrammar(false); setShowProgress(false);
       setView('dashboard');
       localStorage.removeItem(SESSION_KEY);
       localStorage.removeItem(SWEDISH_SESSION_KEY);
@@ -585,6 +600,12 @@ function App() {
             card.nextReviewDate = new Date(p.next_review).getTime();
             card.interval = p.interval;
             card.easeFactor = p.ease_factor;
+            card.masteryLevel = p.mastery_level ?? 0;
+            card.consecutiveCorrect = p.consecutive_correct ?? 0;
+            card.consecutiveIncorrect = p.consecutive_incorrect ?? 0;
+            card.totalReviews = p.total_reviews ?? 0;
+            card.lapses = p.lapses ?? 0;
+            card.priority = (p.priority as 'high'|'medium'|'low') ?? 'medium';
           } else {
             card.state = 'NEW' as CardState;
             card.nextReviewDate = Date.now();
@@ -852,6 +873,7 @@ function App() {
             dayCeiling={remainingTodayTotal(currentUid)}
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
+            onOpenProgress={() => setShowProgress(true)}
             onOpenAccount={() => setShowAccount(true)}
           />
         )}
@@ -869,6 +891,15 @@ function App() {
         </AnimatePresence>
         <AnimatePresence>
           {showAccount && <AccountPanel role={role} onClose={() => setShowAccount(false)} />}
+        </AnimatePresence>
+        <AnimatePresence>
+          {showProgress && (
+            <ProgressPanel
+              cards={swedishCards}
+              onClose={() => setShowProgress(false)}
+              onOpenGrammar={() => { setShowProgress(false); setShowSwedishGrammar(true); }}
+            />
+          )}
         </AnimatePresence>
         <MilestoneToast {...A1_PART1_MILESTONE} />
       </div>

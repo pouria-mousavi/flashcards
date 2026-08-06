@@ -69,6 +69,43 @@ export interface SRSCard {
     nextReviewDate: number;
     interval: number;
     easeFactor: number;
+
+    // --- Mastery & priority (ported from github.com/m98/fluent) --------------
+    // The interval says WHEN to show a card; these say how well it is owned and
+    // how urgently it needs attention, which the interval alone cannot express.
+    masteryLevel?: number;          // 0-5
+    consecutiveCorrect?: number;
+    consecutiveIncorrect?: number;
+    totalReviews?: number;
+    lapses?: number;
+    priority?: 'high' | 'medium' | 'low';
+}
+
+/**
+ * Mastery / priority bookkeeping, applied on every rating.
+ * fluent's rules, adapted to this app's 0/3/4/5 rating scale:
+ *   - quality >= 3 (Hard/Good/Easy) counts as correct
+ *   - mastery climbs on sustained success, drops after repeated failure
+ *   - priority: failed twice running -> high; comfortably owned -> low
+ */
+export function applyMastery<T extends SRSCard>(card: T, rating: number, next: T): void {
+    const correct = rating >= 3;
+    const cc = correct ? (card.consecutiveCorrect ?? 0) + 1 : 0;
+    const ci = correct ? 0 : (card.consecutiveIncorrect ?? 0) + 1;
+    const reviews = (card.totalReviews ?? 0) + 1;
+    const current = card.masteryLevel ?? 0;
+
+    let mastery = current;
+    if (reviews >= 5 && cc >= 3) mastery = Math.min(5, Math.max(current, 3));
+    else if (reviews >= 2 && cc >= 1 && rating >= 4) mastery = Math.min(5, current + 1);
+    if (ci >= 3) mastery = Math.max(0, current - 1);
+
+    next.consecutiveCorrect = cc;
+    next.consecutiveIncorrect = ci;
+    next.totalReviews = reviews;
+    next.masteryLevel = mastery;
+    next.lapses = (card.lapses ?? 0) + (rating === 0 ? 1 : 0);
+    next.priority = ci >= 2 ? 'high' : mastery >= 3 ? 'low' : 'medium';
 }
 
 const MIN_MS = 60 * 1000;
@@ -202,6 +239,8 @@ export function calculateSM2<T extends SRSCard>(
       next.nextReviewDate = now + next.interval * DAY_MS;
   }
 
+  applyMastery(card, rating, next);
+
   return next;
 }
 
@@ -299,6 +338,15 @@ export interface GrammarCard {
     interval: number;
     easeFactor: number;
     createdAt: number;
+
+    // Mastery & priority (see SRSCard)
+    masteryLevel?: number;
+    consecutiveCorrect?: number;
+    consecutiveIncorrect?: number;
+    totalReviews?: number;
+    lapses?: number;
+    priority?: 'high' | 'medium' | 'low';
+    topic?: string;
 }
 
 export function mapGrammarRowToCard(
@@ -402,12 +450,22 @@ export interface SwedishCard {
     interval: number;
     easeFactor: number;
     createdAt: number;
+
+    // Mastery & priority (see SRSCard)
+    masteryLevel?: number;
+    consecutiveCorrect?: number;
+    consecutiveIncorrect?: number;
+    totalReviews?: number;
+    lapses?: number;
+    priority?: 'high' | 'medium' | 'low';
+    topic?: string;
 }
 
 export function mapSwedishRowToCard(
-    row: Database['public']['Tables']['swedish_cards']['Row']
+    row: Database['public']['Tables']['swedish_cards']['Row'] & { topic?: string | null }
 ): SwedishCard {
     return {
+        topic: (row as any).topic ?? undefined,
         type: 'swedish',
         id: row.id,
         front: row.front,
