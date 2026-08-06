@@ -10,7 +10,15 @@
  * the app never burns the allowance. Tracked per user per local day.
  */
 
-export const NEW_PER_DAY = 25;
+/**
+ * Why 12 and not more: every new card generates ~7 reviews over the following
+ * year (intervals ≈ 1, 3, 8, 20, 50, 125, 300 days), so a steady intake of N
+ * per day settles at roughly 8N cards/day once reviews are counted. At 25/day
+ * that was ~183 reviews/day — measured, and about double a 100-card day — which
+ * is why the queue grew no matter how much was studied. 12/day settles near the
+ * 100/day ceiling.
+ */
+export const NEW_PER_DAY = 12;
 
 interface DayState {
   date: string;
