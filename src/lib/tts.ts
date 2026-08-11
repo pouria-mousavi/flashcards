@@ -35,26 +35,34 @@ export function setTtsTier(tier: 'azure' | 'browser'): void {
 
 // Speak with the device's built-in synthesizer in the right locale, preferring
 // a matching-language voice when the device ships one.
-function speakBrowser(text: string, lang: TtsLang): void {
-  try {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = BROWSER_LOCALE[lang];
-    const match = window.speechSynthesis.getVoices().find(v => v.lang?.toLowerCase().startsWith(lang === 'sv' ? 'sv' : 'en'));
-    if (match) u.voice = match;
-    u.rate = 0.92;
-    window.speechSynthesis.speak(u);
-  } catch {
-    /* silent — audio just won't play */
-  }
+// Resolves when the utterance finishes so callers can chain clips.
+function speakBrowser(text: string, lang: TtsLang): Promise<void> {
+  return new Promise<void>(resolve => {
+    try {
+      if (!('speechSynthesis' in window)) return resolve();
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = BROWSER_LOCALE[lang];
+      const match = window.speechSynthesis.getVoices().find(v => v.lang?.toLowerCase().startsWith(lang === 'sv' ? 'sv' : 'en'));
+      if (match) u.voice = match;
+      u.rate = 0.92;
+      u.onend = () => resolve();
+      u.onerror = () => resolve();
+      window.speechSynthesis.speak(u);
+    } catch {
+      resolve();   /* silent — audio just won't play */
+    }
+  });
 }
 
 // `emphasis` (optional) is a verbatim substring of `text` that should carry the
 // sentence stress (betoning). The edge function wraps it in SSML <prosody> so the
 // neural voice puts the focus on that word, the way a native speaker would.
-export function playTTS(text?: string | null, lang: TtsLang = 'en', emphasis?: string | null): void {
-  if (!text) return;
+// Returns a promise that settles when the clip finishes (or is interrupted by
+// the next play, or fails). Every existing caller ignores it and is unaffected;
+// ChapterReview's "Play all" awaits it to chain a chapter's sentences in order.
+export function playTTS(text?: string | null, lang: TtsLang = 'en', emphasis?: string | null): Promise<void> {
+  if (!text) return Promise.resolve();
 
   // Stop anything currently playing.
   if (currentAudio) {
@@ -67,8 +75,7 @@ export function playTTS(text?: string | null, lang: TtsLang = 'en', emphasis?: s
 
   // Shared friends use the free on-device voice — never the metered endpoint.
   if (ttsTier === 'browser') {
-    speakBrowser(text, lang);
-    return;
+    return speakBrowser(text, lang);
   }
 
   let url = `${TTS_ENDPOINT}?lang=${lang}&v=${TTS_VERSION}&q=${encodeURIComponent(text)}`;
@@ -79,8 +86,17 @@ export function playTTS(text?: string | null, lang: TtsLang = 'en', emphasis?: s
   audio.playbackRate = 1.0;
   currentAudio = audio;
 
-  audio.play().catch(() => {
-    // Fallback: the device voice if the neural endpoint is unreachable.
-    speakBrowser(text, lang);
+  return new Promise<void>(resolve => {
+    let settled = false;
+    const finish = () => { if (!settled) { settled = true; resolve(); } };
+    // 'pause' covers being interrupted by the next playTTS call, so a chained
+    // run never hangs waiting on a clip that was cut off.
+    audio.addEventListener('ended', finish);
+    audio.addEventListener('error', finish);
+    audio.addEventListener('pause', finish);
+    audio.play().catch(() => {
+      // Fallback: the device voice if the neural endpoint is unreachable.
+      speakBrowser(text, lang).then(finish);
+    });
   });
 }

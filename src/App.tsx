@@ -128,6 +128,7 @@ import Auth from './components/Auth';
 import AccountPanel from './components/AccountPanel';
 import MilestoneToast from './components/MilestoneToast';
 import ProgressPanel from './components/ProgressPanel';
+import ChapterReview from './components/ChapterReview';
 import { logReview } from './lib/progress';
 import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
@@ -162,6 +163,7 @@ function App() {
   const initFailedRef = useRef(false);
   const [showSwedishReference, setShowSwedishReference] = useState(false);
   const [showSwedishGrammar, setShowSwedishGrammar] = useState(false);
+  const [showChapterReview, setShowChapterReview] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
 
@@ -883,6 +885,7 @@ function App() {
             dailyTarget={DAILY_TARGET}
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
+            onOpenChapters={() => setShowChapterReview(true)}
             onOpenProgress={() => setShowProgress(true)}
             onOpenAccount={() => setShowAccount(true)}
           />
@@ -897,6 +900,11 @@ function App() {
         <AnimatePresence>
           {showSwedishGrammar && (
             <SwedishGrammar onClose={() => setShowSwedishGrammar(false)} />
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {showChapterReview && (
+            <ChapterReview cards={swedishCards} onClose={() => setShowChapterReview(false)} />
           )}
         </AnimatePresence>
         <AnimatePresence>

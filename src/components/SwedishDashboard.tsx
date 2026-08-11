@@ -13,6 +13,7 @@ interface Props {
   onOpenReference?: () => void;
   onOpenGrammar?: () => void;
   onOpenProgress?: () => void;
+  onOpenChapters?: () => void;
   onOpenAccount?: () => void;
   showSwitcher?: boolean;
   /** New cards that may still be introduced today (governor output). */
@@ -73,7 +74,7 @@ function classify(cards: SwedishCard[]): Tier[] {
 }
 
 export default function SwedishDashboard({
-  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress,
+  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress, onOpenChapters,
   onOpenAccount, showSwitcher = true, newBudget = 0, studiedToday = 0, dailyTarget = 50,
 }: Props) {
   const totalCards = cards.length;
@@ -286,6 +287,24 @@ export default function SwedishDashboard({
               }}
             >
               ⊞ Tables
+            </button>
+          )}
+          {onOpenChapters && (
+            <button
+              onClick={onOpenChapters}
+              className="pressable glass"
+              style={{
+                flex: 1,
+                padding: '15px',
+                fontSize: '0.92rem',
+                fontWeight: 600,
+                color: 'var(--text-secondary)',
+                borderRadius: 'var(--radius)',
+                background: 'transparent',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              ▤ Repetera
             </button>
           )}
           {onOpenGrammar && (

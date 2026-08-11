@@ -474,13 +474,15 @@ export interface SwedishCard {
     lapses?: number;
     priority?: 'high' | 'medium' | 'low';
     topic?: string;
+    chapter?: string;
 }
 
 export function mapSwedishRowToCard(
-    row: Database['public']['Tables']['swedish_cards']['Row'] & { topic?: string | null }
+    row: Database['public']['Tables']['swedish_cards']['Row'] & { topic?: string | null; chapter?: string | null }
 ): SwedishCard {
     return {
         topic: (row as any).topic ?? undefined,
+        chapter: (row as any).chapter ?? undefined,
         type: 'swedish',
         id: row.id,
         front: row.front,
