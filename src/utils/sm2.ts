@@ -281,7 +281,9 @@ export function previewIntervalLabel<T extends SRSCard>(card: T, rating: number)
 }
 
 // Mapper to convert DB Row -> App Flashcard
-export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']): Flashcard {
+export function mapRowToCard(
+    row: Database['public']['Tables']['cards']['Row'] & { priority?: string | null }
+): Flashcard {
     return {
         type: 'vocab',
         id: row.id,
@@ -306,7 +308,7 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         interval: row.interval,
         easeFactor: row.ease_factor,
         createdAt: new Date(row.created_at).getTime(),
-        priority: ((row as any).priority as 'high'|'medium'|'low') ?? 'medium',
+        priority: (row.priority as 'high' | 'medium' | 'low' | null) ?? 'medium',
         user_notes: row.user_notes || undefined,
         word_forms: (() => {
             if (row.word_forms && typeof row.word_forms === 'object' && !Array.isArray(row.word_forms)) {
@@ -368,7 +370,7 @@ export interface GrammarCard {
 }
 
 export function mapGrammarRowToCard(
-    row: Database['public']['Tables']['grammar_cards']['Row']
+    row: Database['public']['Tables']['grammar_cards']['Row'] & { priority?: string | null }
 ): GrammarCard {
     return {
         type: 'grammar',
@@ -381,7 +383,7 @@ export function mapGrammarRowToCard(
         interval: row.interval,
         easeFactor: row.ease_factor,
         createdAt: new Date(row.created_at).getTime(),
-        priority: ((row as any).priority as 'high'|'medium'|'low') ?? 'medium',
+        priority: (row.priority as 'high' | 'medium' | 'low' | null) ?? 'medium',
     };
 }
 
