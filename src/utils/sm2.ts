@@ -50,17 +50,30 @@ export interface Flashcard {
   scenarioAnswer?: string;
 }
 
-// Anki-like SM-2 configuration
+// Anki-like SM-2 configuration.
+//
+// Retuned 2026-08-11 after 309 of 679 scheduled cards (23% of the deck) were
+// found sitting at an interval of ≤4 days and generating 87% of a 170/day review
+// load. Two settings built that bucket and are the reason it kept re-forming:
+//
+//   graduatingInterval: 1  — EVERY card that graduated landed on exactly 1 day
+//     and demanded a review tomorrow, unconditionally.
+//   minimumInterval: 1     — with lapseNewInterval 0.5, a card at interval 1 or 2
+//     that lapsed returned to max(1, round(iv*0.5)) = 1.0 day. Permanently. Once
+//     a card fell into the 1-day slot there was no arithmetic path out of it.
+//
+// Raising the floor to 2 is what makes this fix permanent rather than another
+// temporary reschedule: the 1-day bucket can no longer exist.
 const SETTINGS = {
-  learningSteps: [1, 10],       // Minutes
+  learningSteps: [10],           // Minutes — one step, not two: 2 presentations per new card, not 3
   relearningSteps: [10],         // Minutes
-  graduatingInterval: 1,         // Days
-  easyInterval: 4,               // Days
-  minimumInterval: 1,            // Days
+  graduatingInterval: 3,         // Days — was 1
+  easyInterval: 7,               // Days — was 4; Easy should mean something
+  minimumInterval: 2,            // Days — was 1; closes the permanent 1-day trap
   easyBonus: 1.3,
   hardInterval: 1.2,
-  lapseNewInterval: 0.5,         // After lapse, new interval = old * this (minimum 1 day)
-  maxInterval: 365,              // Cap at 1 year
+  lapseNewInterval: 0.5,         // After lapse, new interval = old * this (floored at minimumInterval)
+  maxInterval: 1095,             // Cap at 3 years — was 365; costs nothing today, saves reviews later
 };
 
 // Minimal shape needed by the SM-2 algorithm. Works for Flashcard or GrammarCard.

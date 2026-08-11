@@ -133,7 +133,7 @@ import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
 import { setTtsTier } from './lib/tts';
-import { remainingNewToday, markNewIntroduced, markCardStudied, remainingTodayTotal } from './lib/newBudget';
+import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, DAILY_TARGET, NEW_CAP } from './lib/newBudget';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
@@ -277,7 +277,7 @@ function App() {
   const updateCardStats = async (updatedCard: StudyCard) => {
     const table = isGrammarCard(updatedCard) ? 'grammar_cards' : 'cards';
 
-    markCardStudied(currentUid ? `${currentUid}:en` : null);
+    markCardStudied(currentUid ? `${currentUid}:en` : null, updatedCard.id);
     const prevEn = isGrammarCard(updatedCard)
       ? grammarCards.find(c => c.id === updatedCard.id)
       : cards.find(c => c.id === updatedCard.id);
@@ -315,7 +315,7 @@ function App() {
     if (before?.state === 'NEW' && updatedCard.state !== 'NEW') {
       markNewIntroduced(currentUid, updatedCard.id);
     }
-    markCardStudied(currentUid);
+    markCardStudied(currentUid, updatedCard.id);
     // applyMastery has just set these, so this is exact rather than inferred:
     // consecutiveIncorrect is reset to 0 by any correct answer.
     logReview((updatedCard.consecutiveIncorrect ?? 0) > 0 ? 0 : 4);
@@ -423,11 +423,13 @@ function App() {
   // Defaults: 20 cards total, max 8 new. The new cards are spread evenly
   // among the reviews so you get a rhythm of quick-win → challenge → quick-win.
   const buildSession = (size = 20, newCap = 8): StudyCard[] => {
-      size = Math.min(size, remainingTodayTotal(currentUid ? `${currentUid}:en` : null));
+
       if (size <= 0) return [];
       const due = getDueCards(); // shuffled new first, then reviews by due date
-      // Same daily new-card gate as the Swedish deck (see lib/newBudget).
-      const budget = remainingNewToday(currentUid ? `${currentUid}:en` : null);
+      // Same governor as the Swedish deck (see lib/newBudget).
+      const budget = newAllowanceToday(
+        due.filter(c => c.state !== 'NEW').length,
+        currentUid ? `${currentUid}:en` : null);
       const newCards = due.filter(c => c.state === 'NEW').slice(0, budget);
       const reviewCards = due.filter(c => c.state !== 'NEW');
 
@@ -475,19 +477,21 @@ function App() {
       // then oldest-due. Learning cards still lead overall — SRS order is intact.
       const rank = (c: SwedishCard) => c.priority === 'high' ? 0 : c.priority === 'low' ? 2 : 1;
       const sortedReviews = [...reviews].sort((a, b) => rank(a) - rank(b) || a.nextReviewDate - b.nextReviewDate);
-      const recentNew = [...newCards].sort((a, b) => b.createdAt - a.createdAt).slice(0, 250);
+      // Reintroduced cards (reset because they were churning) come FIRST — they are
+      // words already met and failed, so re-teaching them beats meeting a new word.
+      // Everything else stays LIFO (newest first).
+      const recentNew = [...newCards]
+        .sort((a, b) => rank(a) - rank(b) || b.createdAt - a.createdAt)
+        .slice(0, 250);
       const shuffledNew = shuffle(recentNew);
       return [...shuffledNew, ...sortedLearning, ...sortedReviews];
   };
 
   const buildSwedishSession = (size = 20, newCap = 8): SwedishCard[] => {
-      // Never offer more than today's remaining ceiling, however far behind we are.
-      size = Math.min(size, remainingTodayTotal(currentUid));
-      if (size <= 0) return [];
       const due = getSwedishDueCards();
-      // Never introduce more new cards than today's allowance still permits —
-      // the rest of the unseen deck simply waits its turn.
-      const budget = remainingNewToday(currentUid);
+      // Governor: new cards fill whatever room today's reviews leave under the
+      // 50-card target. No total ceiling — the number on screen is the real one.
+      const budget = newAllowanceToday(due.filter(c => c.state !== 'NEW').length, currentUid);
       const newCards = due.filter(c => c.state === 'NEW').slice(0, budget);
       const reviewCards = due.filter(c => c.state !== 'NEW');
 
@@ -770,7 +774,7 @@ function App() {
           }
       }
 
-      const due = buildSwedishSession(50, 12);
+      const due = buildSwedishSession(DAILY_TARGET, NEW_CAP);
       if (due.length === 0) {
           alert("No Swedish cards due!");
           return;
@@ -872,8 +876,11 @@ function App() {
             activeLanguage={activeLanguage}
             onSwitchLanguage={switchLanguage}
             showSwitcher={isAdmin}
-            newBudget={remainingNewToday(currentUid)}
-            dayCeiling={remainingTodayTotal(currentUid)}
+            newBudget={newAllowanceToday(
+              swedishCards.filter(c => c.state !== 'NEW' && c.nextReviewDate <= Date.now()).length,
+              currentUid)}
+            studiedToday={studiedToday(currentUid)}
+            dailyTarget={DAILY_TARGET}
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
             onOpenProgress={() => setShowProgress(true)}
@@ -922,8 +929,9 @@ function App() {
           activeLanguage={activeLanguage}
           onSwitchLanguage={switchLanguage}
           onOpenAccount={() => setShowAccount(true)}
-          newBudget={remainingNewToday(currentUid ? `${currentUid}:en` : null)}
-          dayCeiling={remainingTodayTotal(currentUid ? `${currentUid}:en` : null)}
+          newBudget={newAllowanceToday(
+            [...cards, ...grammarCards].filter(c => c.state !== 'NEW' && c.nextReviewDate <= Date.now()).length,
+            currentUid ? `${currentUid}:en` : null)}
         />
       )}
       <AnimatePresence>

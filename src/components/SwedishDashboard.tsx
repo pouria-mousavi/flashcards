@@ -15,10 +15,32 @@ interface Props {
   onOpenProgress?: () => void;
   onOpenAccount?: () => void;
   showSwitcher?: boolean;
-  /** New cards that may still be introduced today (daily allowance). */
+  /** New cards that may still be introduced today (governor output). */
   newBudget?: number;
-  /** Total cards that may still be offered today (hard daily ceiling). */
-  dayCeiling?: number;
+  /** Distinct cards already studied today. */
+  studiedToday?: number;
+  /** The day's target — what a full day looks like. */
+  dailyTarget?: number;
+}
+
+/**
+ * Reviews falling due on each of the next `days` days.
+ *
+ * This is the honest replacement for the old display cap. A cap said "this is all
+ * you have to do" and was false; the strip says "this is what is actually coming"
+ * and is true — every nextReviewDate is already known, so nothing is estimated.
+ */
+function forecast(cards: SwedishCard[], days = 7): number[] {
+  const start = new Date();
+  start.setHours(0, 0, 0, 0);
+  const out = new Array(days).fill(0);
+  for (const c of cards) {
+    if (c.state === CardState.NEW) continue;
+    const d = Math.floor((c.nextReviewDate - start.getTime()) / 86_400_000);
+    if (d >= 0 && d < days) out[d]++;
+    else if (d < 0) out[0]++;   // already due — lands on today
+  }
+  return out;
 }
 
 interface Tier {
@@ -52,20 +74,20 @@ function classify(cards: SwedishCard[]): Tier[] {
 
 export default function SwedishDashboard({
   cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress,
-  onOpenAccount, showSwitcher = true, newBudget = 0, dayCeiling = Infinity,
+  onOpenAccount, showSwitcher = true, newBudget = 0, studiedToday = 0, dailyTarget = 50,
 }: Props) {
   const totalCards = cards.length;
   const now = Date.now();
   // Today's workload — NOT the lifetime backlog. Unseen cards are not "due";
-  // they arrive at the daily allowance, so the number is something you can finish.
+  // they arrive via the governor, so the number is something you can finish.
   const reviewsDue = cards.filter(c => c.state !== CardState.NEW && c.nextReviewDate <= now).length;
   const notStarted = cards.filter(c => c.state === CardState.NEW).length;
   const newToday = Math.min(newBudget, notStarted);
-  // Today's target is capped by the daily ceiling — anything beyond it waits,
-  // so the number on screen is always something that can actually be finished.
-  const wanted = reviewsDue + newToday;
-  const dueCount = Math.min(wanted, dayCeiling);
-  const heldBack = Math.max(0, wanted - dueCount);
+  // THE REAL NUMBER. No min(), no ceiling, nothing held back — the schedule
+  // itself was rebuilt so that the truth is a finishable number (2026-08-11).
+  const dueCount = reviewsDue + newToday;
+  const started = totalCards - notStarted;
+  const next7 = forecast(cards, 7);
   const hasDue = dueCount > 0;
   const canStudy = hasDue || hasActiveSession;
   const tiers = classify(cards);
@@ -131,15 +153,42 @@ export default function SwedishDashboard({
         </h1>
         <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.01em' }}>
           {dueCount === 0
-            ? 'all done today · Svenska'
+            ? studiedToday > 0 ? `done today · ${studiedToday} studied` : 'all done today · Svenska'
             : reviewsDue === 0
-              ? `today · ${newToday} new ${newToday === 1 ? 'card' : 'cards'}`
+              ? `today · ${newToday} new ${newToday === 1 ? 'word' : 'words'}`
               : `today · ${reviewsDue} ${reviewsDue === 1 ? 'review' : 'reviews'}${newToday > 0 ? ` + ${newToday} new` : ''}`}
         </p>
         <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-          {totalCards} in the deck{notStarted > 0 ? ` · ${notStarted} not started` : ''}{heldBack > 0 ? ` · ${heldBack} waiting for tomorrow` : ''}
+          {totalCards} words · {started} started · {notStarted} to meet
         </p>
       </motion.div>
+
+      {/* Next 7 days — the honest replacement for a display cap. Shows there is
+          no wall behind today's number. */}
+      <div className="glass" style={{ width: '100%', maxWidth: '380px', borderRadius: 'var(--radius)', padding: '14px 16px 12px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '10px' }}>
+          <span style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent-sv)' }}>
+            Next 7 days
+          </span>
+          <span style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+            target {dailyTarget}/day
+          </span>
+        </div>
+        <div style={{ display: 'flex', gap: '5px', alignItems: 'flex-end', height: '46px' }}>
+          {next7.map((n, i) => (
+            <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+              <span className="tabular" style={{ fontSize: '0.6rem', fontWeight: 700, color: n > dailyTarget ? 'var(--danger)' : 'var(--text-muted)' }}>{n}</span>
+              <div style={{
+                width: '100%',
+                height: `${Math.max(3, Math.min(1, n / dailyTarget) * 26)}px`,
+                borderRadius: '3px 3px 1px 1px',
+                background: n > dailyTarget ? 'var(--danger)' : 'var(--grad-sv)',
+                opacity: i === 0 ? 1 : 0.45,
+              }} />
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* State breakdown */}
       <div className="glass" style={{
@@ -217,7 +266,7 @@ export default function SwedishDashboard({
         >
           {hasActiveSession
             ? 'Resume Session'
-            : (dueCount > 0 ? `Study ${Math.min(dueCount, 50)} Cards` : (totalCards === 0 ? 'No cards yet' : 'All Caught Up'))}
+            : (dueCount > 0 ? `Study ${dueCount} ${dueCount === 1 ? 'Card' : 'Cards'}` : (totalCards === 0 ? 'No cards yet' : 'All Caught Up'))}
         </button>
 
         <div style={{ display: 'flex', gap: '12px' }}>
