@@ -31,6 +31,10 @@ export interface Flashcard {
   easeFactor: number;
   createdAt: number;
 
+  /** Cards reset back to NEW are flagged 'high' so they re-enter the queue
+   *  ahead of never-seen words instead of being buried by the LIFO sort. */
+  priority?: 'high' | 'medium' | 'low';
+
   user_notes?: string;
 
   word_forms?: {
@@ -302,6 +306,7 @@ export function mapRowToCard(row: Database['public']['Tables']['cards']['Row']):
         interval: row.interval,
         easeFactor: row.ease_factor,
         createdAt: new Date(row.created_at).getTime(),
+        priority: ((row as any).priority as 'high'|'medium'|'low') ?? 'medium',
         user_notes: row.user_notes || undefined,
         word_forms: (() => {
             if (row.word_forms && typeof row.word_forms === 'object' && !Array.isArray(row.word_forms)) {
@@ -376,6 +381,7 @@ export function mapGrammarRowToCard(
         interval: row.interval,
         easeFactor: row.ease_factor,
         createdAt: new Date(row.created_at).getTime(),
+        priority: ((row as any).priority as 'high'|'medium'|'low') ?? 'medium',
     };
 }
 

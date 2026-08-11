@@ -50,11 +50,27 @@ export const NEW_CAP = 15;
  * Replaces the old fixed NEW_PER_DAY = 12, which could not see its own future and
  * so kept adding cards on days that were already full.
  */
-export function newAllowanceToday(reviewsDueToday: number, uid: string | null): number {
-  const room = DAILY_TARGET - reviewsDueToday;
-  const budget = Math.max(0, Math.min(NEW_CAP, room));
+export function newAllowanceToday(
+  reviewsDueToday: number,
+  uid: string | null,
+  target: number = DAILY_TARGET,
+  cap: number = NEW_CAP,
+): number {
+  const room = target - reviewsDueToday;
+  const budget = Math.max(0, Math.min(cap, room));
   return Math.max(0, budget - introducedToday(uid));
 }
+
+/**
+ * English deck — its own, smaller budget, because Swedish is the active course.
+ *
+ * Pouria's choice (2026-08-11) after being shown the trade-off: "a slow trickle".
+ * The 512 cards with real traction cost ~26 reviews/day, so 35 leaves room for
+ * about 5 new words most days. The other 6,253 words wait; at this rate the deck
+ * is a multi-year project, which is the honest picture rather than a promise.
+ */
+export const DAILY_TARGET_EN = 35;
+export const NEW_CAP_EN = 5;
 
 interface DayState {
   date: string;

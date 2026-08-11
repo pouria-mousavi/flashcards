@@ -134,7 +134,7 @@ import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
 import { setTtsTier } from './lib/tts';
-import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, DAILY_TARGET, NEW_CAP } from './lib/newBudget';
+import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, DAILY_TARGET, NEW_CAP, DAILY_TARGET_EN, NEW_CAP_EN } from './lib/newBudget';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
@@ -297,7 +297,8 @@ function App() {
         state: updatedCard.state,
         next_review: new Date(updatedCard.nextReviewDate).toISOString(),
         interval: updatedCard.interval,
-        ease_factor: updatedCard.easeFactor
+        ease_factor: updatedCard.easeFactor,
+        priority: updatedCard.priority ?? 'medium'
     };
     // Buffer first so a killed app / failed request replays on next launch.
     const uid = currentUid;
@@ -404,8 +405,11 @@ function App() {
     // NEW cards: shuffle to break up topic clusters from batch imports
     // (e.g., 6 "smell" words added together would otherwise cluster).
     // We still bias toward recently-added by taking the top 250 newest first.
+    // Cards returning after a reset (priority 'high') lead — they are words
+    // already met, so re-learning them beats meeting a brand-new one. Then LIFO.
+    const engRank = (c: StudyCard) => c.priority === 'high' ? 0 : c.priority === 'low' ? 2 : 1;
     const recentNew = [...newCards]
-        .sort((a, b) => b.createdAt - a.createdAt)
+        .sort((a, b) => engRank(a) - engRank(b) || b.createdAt - a.createdAt)
         .slice(0, 250);
     const shuffledNew = shuffle(recentNew);
 
@@ -431,7 +435,8 @@ function App() {
       // Same governor as the Swedish deck (see lib/newBudget).
       const budget = newAllowanceToday(
         due.filter(c => c.state !== 'NEW').length,
-        currentUid ? `${currentUid}:en` : null);
+        currentUid ? `${currentUid}:en` : null,
+        DAILY_TARGET_EN, NEW_CAP_EN);
       const newCards = due.filter(c => c.state === 'NEW').slice(0, budget);
       const reviewCards = due.filter(c => c.state !== 'NEW');
 
@@ -735,7 +740,7 @@ function App() {
         }
     }
 
-    const due = buildSession(20, 8);
+    const due = buildSession(DAILY_TARGET_EN, NEW_CAP_EN);
     if (due.length === 0) {
         alert("No cards due!");
         return;
@@ -939,7 +944,8 @@ function App() {
           onOpenAccount={() => setShowAccount(true)}
           newBudget={newAllowanceToday(
             [...cards, ...grammarCards].filter(c => c.state !== 'NEW' && c.nextReviewDate <= Date.now()).length,
-            currentUid ? `${currentUid}:en` : null)}
+            currentUid ? `${currentUid}:en` : null,
+            DAILY_TARGET_EN, NEW_CAP_EN)}
         />
       )}
       <AnimatePresence>
