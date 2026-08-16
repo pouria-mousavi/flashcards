@@ -129,6 +129,7 @@ import AccountPanel from './components/AccountPanel';
 import MilestoneToast from './components/MilestoneToast';
 import ProgressPanel from './components/ProgressPanel';
 import ChapterReview from './components/ChapterReview';
+import Prov from './components/Prov';
 import { logReview } from './lib/progress';
 import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
@@ -164,6 +165,7 @@ function App() {
   const [showSwedishReference, setShowSwedishReference] = useState(false);
   const [showSwedishGrammar, setShowSwedishGrammar] = useState(false);
   const [showChapterReview, setShowChapterReview] = useState(false);
+  const [showProv, setShowProv] = useState(false);
   const [showAccount, setShowAccount] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
 
@@ -891,6 +893,7 @@ function App() {
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
             onOpenChapters={() => setShowChapterReview(true)}
+            onOpenProv={() => setShowProv(true)}
             onOpenProgress={() => setShowProgress(true)}
             onOpenAccount={() => setShowAccount(true)}
           />
@@ -911,6 +914,9 @@ function App() {
           {showChapterReview && (
             <ChapterReview cards={swedishCards} onClose={() => setShowChapterReview(false)} />
           )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {showProv && <Prov userId={currentUid} onClose={() => setShowProv(false)} />}
         </AnimatePresence>
         <AnimatePresence>
           {showAccount && <AccountPanel role={role} onClose={() => setShowAccount(false)} />}

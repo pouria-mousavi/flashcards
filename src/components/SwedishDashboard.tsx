@@ -14,6 +14,7 @@ interface Props {
   onOpenGrammar?: () => void;
   onOpenProgress?: () => void;
   onOpenChapters?: () => void;
+  onOpenProv?: () => void;
   onOpenAccount?: () => void;
   showSwitcher?: boolean;
   /** New cards that may still be introduced today (governor output). */
@@ -74,7 +75,7 @@ function classify(cards: SwedishCard[]): Tier[] {
 }
 
 export default function SwedishDashboard({
-  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress, onOpenChapters,
+  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress, onOpenChapters, onOpenProv,
   onOpenAccount, showSwitcher = true, newBudget = 0, studiedToday = 0, dailyTarget = 50,
 }: Props) {
   const totalCards = cards.length;
@@ -269,6 +270,25 @@ export default function SwedishDashboard({
             ? 'Resume Session'
             : (dueCount > 0 ? `Study ${dueCount} ${dueCount === 1 ? 'Card' : 'Cards'}` : (totalCards === 0 ? 'No cards yet' : 'All Caught Up'))}
         </button>
+
+        {onOpenProv && (
+          <button
+            onClick={onOpenProv}
+            className="pressable glass"
+            style={{
+              padding: '15px',
+              fontSize: '0.95rem',
+              fontWeight: 700,
+              color: 'var(--accent-sv)',
+              borderRadius: 'var(--radius)',
+              background: 'transparent',
+              border: '1px solid var(--accent-sv-border)',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            ✎ Gör ett prov
+          </button>
+        )}
 
         <div style={{ display: 'flex', gap: '12px' }}>
           {onOpenReference && (
