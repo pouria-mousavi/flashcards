@@ -148,9 +148,8 @@ export default function Prov({ userId, onClose }: Props) {
                   ))}
                 </div>
                 <p style={{ margin: '10px 0 0 0', fontSize: '0.73rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                  Every paper mixes easy, medium, hard and very hard questions, and spreads them
-                  across all the skills — noun forms, verb tenses, word order, prepositions,
-                  pronouns and translation.
+                  Fill-in-the-blank, four options, drawn across every skill — noun forms,
+                  verb tenses, word order, prepositions, pronouns and word choice.
                 </p>
               </Section>
 
@@ -187,11 +186,6 @@ export default function Prov({ userId, onClose }: Props) {
           {/* ---------- RUNNING ---------- */}
           {stage === 'running' && questions[at] && (
             <>
-              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                <Pill text={DIFF_LABEL[questions[at].difficulty]} color={DIFF_COLOR[questions[at].difficulty]} />
-                <Pill text={questions[at].skill} color="var(--text-muted)" />
-              </div>
-
               <p style={{ margin: 0, fontSize: '1.12rem', fontWeight: 650, lineHeight: 1.45, color: 'var(--text-primary)' }}>
                 {questions[at].prompt}
               </p>
@@ -254,15 +248,6 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       <p style={{ margin: 0, fontSize: '0.62rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent-sv)' }}>{title}</p>
       {children}
     </div>
-  );
-}
-
-function Pill({ text, color }: { text: string; color: string }) {
-  return (
-    <span style={{
-      fontSize: '0.6rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em',
-      color, border: `1px solid ${color}`, borderRadius: 999, padding: '3px 9px', opacity: 0.9,
-    }}>{text}</span>
   );
 }
 
