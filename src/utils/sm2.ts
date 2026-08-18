@@ -56,24 +56,28 @@ export interface Flashcard {
 
 // Anki-like SM-2 configuration.
 //
-// Retuned 2026-08-11 after 309 of 679 scheduled cards (23% of the deck) were
-// found sitting at an interval of ≤4 days and generating 87% of a 170/day review
-// load. Two settings built that bucket and are the reason it kept re-forming:
+// THE 1-DAY TRAP (found 2026-08-11): 309 of 679 scheduled cards sat at interval
+// ≤4 and generated 87% of a 170/day load. The cause was `minimumInterval: 1`
+// together with lapseNewInterval 0.5 — a card at interval 1 or 2 that lapsed
+// returned to max(1, round(iv*0.5)) = 1.0 day, permanently, with no arithmetic
+// path out. Raising the FLOOR to 2 is what closes it, and that fix is load-bearing.
 //
-//   graduatingInterval: 1  — EVERY card that graduated landed on exactly 1 day
-//     and demanded a review tomorrow, unconditionally.
-//   minimumInterval: 1     — with lapseNewInterval 0.5, a card at interval 1 or 2
-//     that lapsed returned to max(1, round(iv*0.5)) = 1.0 day. Permanently. Once
-//     a card fell into the 1-day slot there was no arithmetic path out of it.
+// I ALSO raised graduatingInterval 1→3 and easyInterval 4→7 at the time. That was
+// an over-correction: verified 2026-08-18 that with minimumInterval 2, a card
+// lapsing repeatedly from graduatingInterval 1 floors at 2 days and the bucket
+// stays closed. The longer starting rungs were never what fixed it.
 //
-// Raising the floor to 2 is what makes this fix permanent rather than another
-// temporary reschedule: the 1-day bucket can no longer exist.
+// They did cost retention. Measured over 585 reviews: 72% correct and falling
+// (79 → 75 → 71 → 68 → 66%), against the ~90% that spaced repetition targets.
+// Retention that low means the intervals were reaching too far, so these are back
+// at the Anki defaults — the most widely-tested configuration there is, and the
+// one Pouria's own instinct pointed at ("I thought it should be after four days").
 const SETTINGS = {
   learningSteps: [10],           // Minutes — one step, not two: 2 presentations per new card, not 3
   relearningSteps: [10],         // Minutes
-  graduatingInterval: 3,         // Days — was 1
-  easyInterval: 7,               // Days — was 4; Easy should mean something
-  minimumInterval: 2,            // Days — was 1; closes the permanent 1-day trap
+  graduatingInterval: 1,         // Days — Anki default; ladder 1 → 3 → 8 → 20 → 50
+  easyInterval: 4,               // Days — Anki default; ladder 4 → 10 → 25 → 63
+  minimumInterval: 2,            // Days — DO NOT lower: this is what closes the 1-day trap
   easyBonus: 1.3,
   hardInterval: 1.2,
   lapseNewInterval: 0.5,         // After lapse, new interval = old * this (floored at minimumInterval)

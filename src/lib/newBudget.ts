@@ -25,21 +25,18 @@ export const DAILY_TARGET = 50;
 /**
  * Hard cap on new cards per day, whatever the governor computes.
  *
- * Every new card costs roughly 3–4 future review slots as it climbs the ladder
- * (3 → 7.5 → 19 → 47 days …), so an unbounded governor would drain the new pool
- * during a quiet week and mint an avalanche a month later.
+ * Every new card costs several future review slots as it climbs the ladder
+ * (1 → 3 → 8 → 20 → 50 days …), so an unbounded governor would drain the new
+ * pool during a quiet week and mint an avalanche a month later.
  *
- * 15 comes from a 365-day forward simulation against the real post-rebuild
- * schedule (545 scheduled + 813 unseen), with leftovers rolling over:
- *
- *   cap 10 → weeks average 44–47/day, all 813 unseen introduced by ~day 138
- *   cap 15 → weeks average 48–50/day, all 813 introduced by ~day 126, no rollover
- *   cap 22 → rollover starts accumulating (7 cards behind by day 30)
- *
- * 15 is the largest value that still leaves the rollover at zero on days
- * 30/90/365, including under a pessimistic 30% again-rate.
+ * Lowered 15 → 10 on 2026-08-18, when graduatingInterval and easyInterval went
+ * back to the Anki defaults. The shorter early rungs add one review per card in
+ * its first year, so intake has to come down to stay inside 50/day. Simulated at
+ * the measured 28% again-rate: 15/day leaves 25 cards of rollover by day 180 and
+ * finishes the unseen pile on day 302; 10/day leaves 1 and finishes on day 286 —
+ * fewer new cards per day is actually FASTER, because nothing piles up.
  */
-export const NEW_CAP = 15;
+export const NEW_CAP = 10;
 
 /**
  * How many new cards to introduce today, given how much review work is already
