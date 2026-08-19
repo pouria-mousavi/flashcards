@@ -5,6 +5,7 @@ import SwedishCardView from './SwedishCard';
 import { calculateSM2, LEARNING_REQUEUE_WINDOW_MS, previewIntervalLabel } from '../utils/sm2';
 import type { SwedishCard } from '../utils/sm2';
 import { SWEDISH_SESSION_KEY } from '../lib/session';
+import { playTTS } from '../lib/tts';
 
 interface Props {
   cards: SwedishCard[];
@@ -39,12 +40,22 @@ export default function SwedishStudySession({
   }, []);
 
   const handleFlip = useCallback(() => {
-    setIsFlipped(prev => {
-      const next = !prev;
-      syncFlipToStorage(next);
-      return next;
-    });
-  }, [syncFlipToStorage]);
+    // Both entry points (the Show Answer button and tapping the card) are gated
+    // on !isFlipped, so this only ever reveals. Guard anyway, so a stray call
+    // cannot replay the audio over itself.
+    if (isFlipped) return;
+    setIsFlipped(true);
+    syncFlipToStorage(true);
+
+    // Speak the answer as it appears — exactly what tapping the Swedish text or
+    // its speaker does. This lives in the click handler rather than an effect on
+    // purpose: mobile browsers only permit audio inside a user gesture, and an
+    // effect would fire twice under StrictMode and play the clip over itself.
+    // Resuming a session that was already flipped never lands here, so reopening
+    // the app is silent.
+    const card = queue[currentCardIndex];
+    if (card) playTTS(card.back, card.backLang);
+  }, [isFlipped, syncFlipToStorage, queue, currentCardIndex]);
 
   // Flush state to localStorage when the app goes to background.
   useEffect(() => {
