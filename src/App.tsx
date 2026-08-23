@@ -135,7 +135,7 @@ import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
 import { setTtsTier } from './lib/tts';
-import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, dailyTarget, NEW_CAP, DAILY_TARGET_EN, NEW_CAP_EN } from './lib/newBudget';
+import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, dailyTarget, reviewTarget, NEW_CAP, DAILY_TARGET_EN, NEW_CAP_EN } from './lib/newBudget';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
@@ -609,7 +609,9 @@ function App() {
         // Spread an overdue pile forward before reading it, so what we map is
         // already the smoothed schedule. Once per local day; moves next_review
         // only, so no interval or ease is lost.
-        try { await smoothBacklog(role.userId, dailyTarget()); }
+        // Level reviews to the target MINUS the new-card allowance, so the day's
+        // 25 is 20 reviews + 5 new rather than 25 reviews and no room to learn.
+        try { await smoothBacklog(role.userId, reviewTarget()); }
         catch (e) { console.error('backlog smoothing skipped', e); }
         const progRows = await fetchAllRows('sv_progress', 'card_id');
         const progMap = new Map<string, any>(progRows.map((p: any) => [p.card_id, p]));

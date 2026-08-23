@@ -45,17 +45,29 @@ export const DAILY_TARGET = DEFAULT_DAILY_TARGET;
 /**
  * Hard cap on new cards per day, whatever the governor computes.
  *
- * PAUSED (0) on 2026-08-19 while the backlog clears. Every new card feeds the
- * young pool, and the young pool is where the daily load lives — 119 cards under
- * a 7-day interval were generating 28 of 50.8 reviews/day. With intake at 0 the
- * deck matures fastest and the pile drains by ~day 60; the 716 unseen words wait.
- * Put this back to ~5-10 once the dashboard has been showing a real 25 for a week.
- * At 5/day with the deck matured, demand settles around 22/day — sustainable.
+ * Paused at 0 on 2026-08-19 to drain the backlog, reopened at 5 on 2026-08-23.
+ * Pouria: "I really prefer to start learning the new words that I'm learning in
+ * the course immediately ... out of those 25 words that I review, just put five
+ * words that are new?"
+ *
+ * The five come OUT OF the 25, not on top of it. That only works if the review
+ * schedule is levelled to `dailyTarget() - NEW_CAP` rather than to the full
+ * target — otherwise reviews fill every slot and the governor computes an
+ * allowance of zero. See REVIEW_TARGET below and its use in App.tsx.
  *
  * Every new card costs several future review slots as it climbs the ladder
  * (1 → 3 → 8 → 20 → 50 days …), so intake is always the first thing to cut.
  */
-export const NEW_CAP = 0;
+export const NEW_CAP = 5;
+
+/**
+ * How many REVIEW slots a day may hold, leaving room for NEW_CAP new cards
+ * inside the same daily total. This is what the backlog leveller aims at, so
+ * that `newAllowanceToday` always finds NEW_CAP worth of space.
+ */
+export function reviewTarget(): number {
+  return Math.max(5, dailyTarget() - NEW_CAP);
+}
 
 /**
  * How many new cards to introduce today, given how much review work is already
