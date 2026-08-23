@@ -14,29 +14,48 @@
 /**
  * The day's target: how many DISTINCT cards you intend to study.
  *
- * Set from Pouria's own stated capacity (2026-08-11): "let's say I can only read
- * 50 cards per day ... I will dedicate time and make sure I am doing 50 words
- * per day." Revealed capacity is actually higher — 63 and 59 on 8–9 Aug — so 50
- * is a comfortable target rather than a stretch, and `studiedToday` lets the UI
- * offer more once it is met instead of stopping dead.
+ * Lowered 50 → 25 on 2026-08-19. Pouria: "there's some days that I don't feel
+ * like studying ... then everything gets piled up and it gets almost impossible
+ * to recover." Two days off had produced a 182-card wall.
+ *
+ * 25 is survivable AND sufficient: simulated against the real 663-card schedule
+ * with new words paused, the backlog drains to zero by day 60 and the deck's
+ * demand falls from 50.8/day to 13.4/day as cards mature. Read from localStorage
+ * so it can be raised again from the app once the pile is gone.
  */
-export const DAILY_TARGET = 50;
+export const DEFAULT_DAILY_TARGET = 25;
+const TARGET_KEY = 'sv_daily_target';
+
+/** The user's chosen daily target, or the default. */
+export function dailyTarget(): number {
+  try {
+    const v = parseInt(localStorage.getItem(TARGET_KEY) ?? '', 10);
+    if (Number.isFinite(v) && v >= 10 && v <= 200) return v;
+  } catch { /* unavailable — fall through */ }
+  return DEFAULT_DAILY_TARGET;
+}
+
+export function setDailyTarget(n: number): void {
+  try { localStorage.setItem(TARGET_KEY, String(n)); } catch { /* ignore */ }
+}
+
+/** @deprecated read `dailyTarget()` instead — kept so callers keep compiling. */
+export const DAILY_TARGET = DEFAULT_DAILY_TARGET;
 
 /**
  * Hard cap on new cards per day, whatever the governor computes.
  *
- * Every new card costs several future review slots as it climbs the ladder
- * (1 → 3 → 8 → 20 → 50 days …), so an unbounded governor would drain the new
- * pool during a quiet week and mint an avalanche a month later.
+ * PAUSED (0) on 2026-08-19 while the backlog clears. Every new card feeds the
+ * young pool, and the young pool is where the daily load lives — 119 cards under
+ * a 7-day interval were generating 28 of 50.8 reviews/day. With intake at 0 the
+ * deck matures fastest and the pile drains by ~day 60; the 716 unseen words wait.
+ * Put this back to ~5-10 once the dashboard has been showing a real 25 for a week.
+ * At 5/day with the deck matured, demand settles around 22/day — sustainable.
  *
- * Lowered 15 → 10 on 2026-08-18, when graduatingInterval and easyInterval went
- * back to the Anki defaults. The shorter early rungs add one review per card in
- * its first year, so intake has to come down to stay inside 50/day. Simulated at
- * the measured 28% again-rate: 15/day leaves 25 cards of rollover by day 180 and
- * finishes the unseen pile on day 302; 10/day leaves 1 and finishes on day 286 —
- * fewer new cards per day is actually FASTER, because nothing piles up.
+ * Every new card costs several future review slots as it climbs the ladder
+ * (1 → 3 → 8 → 20 → 50 days …), so intake is always the first thing to cut.
  */
-export const NEW_CAP = 10;
+export const NEW_CAP = 0;
 
 /**
  * How many new cards to introduce today, given how much review work is already
@@ -50,7 +69,7 @@ export const NEW_CAP = 10;
 export function newAllowanceToday(
   reviewsDueToday: number,
   uid: string | null,
-  target: number = DAILY_TARGET,
+  target: number = dailyTarget(),
   cap: number = NEW_CAP,
 ): number {
   const room = target - reviewsDueToday;

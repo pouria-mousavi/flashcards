@@ -130,12 +130,12 @@ import MilestoneToast from './components/MilestoneToast';
 import ProgressPanel from './components/ProgressPanel';
 import ChapterReview from './components/ChapterReview';
 import Prov from './components/Prov';
-import { logReview } from './lib/progress';
+import { logReview, smoothBacklog } from './lib/progress';
 import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
 import { setTtsTier } from './lib/tts';
-import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, DAILY_TARGET, NEW_CAP, DAILY_TARGET_EN, NEW_CAP_EN } from './lib/newBudget';
+import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, dailyTarget, NEW_CAP, DAILY_TARGET_EN, NEW_CAP_EN } from './lib/newBudget';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
@@ -606,6 +606,11 @@ function App() {
         // Retired cards stay in the database for reference but never enter the
         // study queue (see swedish_cards.retired).
         const svRows = (await fetchAllRows('swedish_cards')).filter((r: any) => !r.retired);
+        // Spread an overdue pile forward before reading it, so what we map is
+        // already the smoothed schedule. Once per local day; moves next_review
+        // only, so no interval or ease is lost.
+        try { await smoothBacklog(role.userId, dailyTarget()); }
+        catch (e) { console.error('backlog smoothing skipped', e); }
         const progRows = await fetchAllRows('sv_progress', 'card_id');
         const progMap = new Map<string, any>(progRows.map((p: any) => [p.card_id, p]));
         const mappedSwedish = svRows.map((r: any) => {
@@ -783,7 +788,7 @@ function App() {
           }
       }
 
-      const due = buildSwedishSession(DAILY_TARGET, NEW_CAP);
+      const due = buildSwedishSession(dailyTarget(), NEW_CAP);
       if (due.length === 0) {
           alert("No Swedish cards due!");
           return;
@@ -889,7 +894,7 @@ function App() {
               swedishCards.filter(c => c.state !== 'NEW' && c.nextReviewDate <= Date.now()).length,
               currentUid)}
             studiedToday={studiedToday(currentUid)}
-            dailyTarget={DAILY_TARGET}
+            dailyTarget={dailyTarget()}
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
             onOpenChapters={() => setShowChapterReview(true)}

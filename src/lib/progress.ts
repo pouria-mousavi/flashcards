@@ -94,3 +94,25 @@ export function masteryBreakdown(cards: SwedishCard[]): number[] {
   }
   return out;
 }
+
+/**
+ * Spread an overdue pile forward so the number on screen is finishable.
+ *
+ * Miss two days and the due count becomes a wall — Pouria hit 182 and said it
+ * felt "almost impossible to recover". This calls sv_smooth_backlog, which moves
+ * only `next_review`: intervals and ease are untouched, so no learning state is
+ * lost and nothing is hidden. The count shown afterwards is the real one.
+ *
+ * Runs at most once per local day. Returns how many cards were moved.
+ */
+export async function smoothBacklog(uid: string | null, target: number): Promise<number> {
+  const key = `sv_smoothed:${uid ?? 'anon'}`;
+  const today = new Date().toISOString().slice(0, 10);
+  try { if (localStorage.getItem(key) === today) return 0; } catch { /* storage off — just run */ }
+
+  const { data, error } = await supabase.rpc('sv_smooth_backlog', { p_target: target });
+  if (error) { console.error('smoothBacklog failed', error); return 0; }
+
+  try { localStorage.setItem(key, today); } catch { /* ignore */ }
+  return (data as number) ?? 0;
+}
