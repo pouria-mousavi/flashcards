@@ -516,16 +516,12 @@ function App() {
       const pickedNew = newCards.slice(0, takeNew);
       const pickedReview = reviewCards.slice(0, takeReview);
 
-      const session: SwedishCard[] = [...pickedReview];
-      if (pickedNew.length > 0) {
-          if (session.length === 0) return pickedNew;
-          const gap = Math.max(1, Math.floor(session.length / pickedNew.length));
-          pickedNew.forEach((card, i) => {
-              const insertAt = Math.min(gap * (i + 1) + i, session.length);
-              session.splice(insertAt, 0, card);
-          });
-      }
-      return session;
+      // New words go FIRST, always (Pouria, 2026-08-30). They used to be spread
+      // through the session at even gaps, which meant the words from the chapter
+      // he is actually studying arrived last, when concentration is lowest.
+      // Meeting a new word takes more attention than confirming an old one, so
+      // it gets the front of the queue.
+      return [...pickedNew, ...pickedReview];
   };
 
   // --- Auth lifecycle: resolve the session, track sign-in / sign-out ---
