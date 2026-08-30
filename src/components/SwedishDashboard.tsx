@@ -23,25 +23,52 @@ interface Props {
   studiedToday?: number;
   /** The day's target — what a full day looks like. */
   dailyTarget?: number;
+  /** Steady-state new-card intake, used to project future days. */
+  newPerDay?: number;
 }
 
 /**
- * Reviews falling due on each of the next `days` days.
+ * What each of the next `days` days will actually ask of you.
  *
  * This is the honest replacement for the old display cap. A cap said "this is all
  * you have to do" and was false; the strip says "this is what is actually coming"
  * and is true — every nextReviewDate is already known, so nothing is estimated.
+ *
+ * Two things it must get right, both reported as bugs on 2026-08-24 (the strip
+ * said 27 while the headline said 16):
+ *
+ *  - **Day 0 is the headline, by construction.** It is passed in rather than
+ *    recomputed. The old version counted every card falling anywhere inside
+ *    today's calendar day, which swept in cards coming back from a 10-minute
+ *    learning step — real work, but already counted once in "studied today",
+ *    and not something you can act on at the moment you read the number.
+ *  - **Future days include new cards.** Reviews are levelled to
+ *    `dailyTarget - newPerDay`, so a bar showing reviews alone reads ~20
+ *    against a stated target of 25 and looks like slack that isn't there.
  */
-function forecast(cards: SwedishCard[], days = 7): number[] {
+function forecast(
+  cards: SwedishCard[],
+  days: number,
+  today: number,
+  newPerDay: number,
+  unseen: number,
+): number[] {
   const start = new Date();
   start.setHours(0, 0, 0, 0);
   const out = new Array(days).fill(0);
   for (const c of cards) {
     if (c.state === CardState.NEW) continue;
     const d = Math.floor((c.nextReviewDate - start.getTime()) / 86_400_000);
-    if (d >= 0 && d < days) out[d]++;
-    else if (d < 0) out[0]++;   // already due — lands on today
+    if (d >= 1 && d < days) out[d]++;
   }
+  // Future days also introduce new words, until the unseen pool runs dry.
+  let left = unseen;
+  for (let d = 1; d < days; d++) {
+    const intake = Math.min(newPerDay, left);
+    out[d] += intake;
+    left -= intake;
+  }
+  out[0] = today;
   return out;
 }
 
@@ -76,7 +103,7 @@ function classify(cards: SwedishCard[]): Tier[] {
 
 export default function SwedishDashboard({
   cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress, onOpenChapters, onOpenProv,
-  onOpenAccount, showSwitcher = true, newBudget = 0, studiedToday = 0, dailyTarget = 50,
+  onOpenAccount, showSwitcher = true, newBudget = 0, studiedToday = 0, dailyTarget = 50, newPerDay = 0,
 }: Props) {
   const totalCards = cards.length;
   const now = Date.now();
@@ -89,7 +116,7 @@ export default function SwedishDashboard({
   // itself was rebuilt so that the truth is a finishable number (2026-08-11).
   const dueCount = reviewsDue + newToday;
   const started = totalCards - notStarted;
-  const next7 = forecast(cards, 7);
+  const next7 = forecast(cards, 7, dueCount, newPerDay, notStarted - newToday);
   const hasDue = dueCount > 0;
   const canStudy = hasDue || hasActiveSession;
   const tiers = classify(cards);

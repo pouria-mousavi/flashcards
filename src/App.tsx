@@ -897,6 +897,7 @@ function App() {
               currentUid)}
             studiedToday={studiedToday(currentUid)}
             dailyTarget={dailyTarget()}
+            newPerDay={NEW_CAP}
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
             onOpenChapters={() => setShowChapterReview(true)}
