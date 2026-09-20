@@ -3,8 +3,11 @@ import { CardState } from '../utils/sm2';
 import type { SwedishCard, Lang } from '../utils/sm2';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
+import { useStudyTime } from '../lib/useStudyTime';
+import { studyDayStart } from '../lib/studyTime';
 
 interface Props {
+  userId: string;
   cards: SwedishCard[];
   onStartStudy: () => void;
   hasActiveSession?: boolean;
@@ -21,54 +24,24 @@ interface Props {
   newBudget?: number;
   /** Distinct cards already studied today. */
   studiedToday?: number;
-  /** The day's target — what a full day looks like. */
-  dailyTarget?: number;
-  /** Steady-state new-card intake, used to project future days. */
-  newPerDay?: number;
 }
 
-/**
- * What each of the next `days` days will actually ask of you.
- *
- * This is the honest replacement for the old display cap. A cap said "this is all
- * you have to do" and was false; the strip says "this is what is actually coming"
- * and is true — every nextReviewDate is already known, so nothing is estimated.
- *
- * Two things it must get right, both reported as bugs on 2026-08-24 (the strip
- * said 27 while the headline said 16):
- *
- *  - **Day 0 is the headline, by construction.** It is passed in rather than
- *    recomputed. The old version counted every card falling anywhere inside
- *    today's calendar day, which swept in cards coming back from a 10-minute
- *    learning step — real work, but already counted once in "studied today",
- *    and not something you can act on at the moment you read the number.
- *  - **Future days include new cards.** Reviews are levelled to
- *    `dailyTarget - newPerDay`, so a bar showing reviews alone reads ~20
- *    against a stated target of 25 and looks like slack that isn't there.
- */
+/** Existing deadlines only; future ratings can generate additional reviews. */
 function forecast(
   cards: SwedishCard[],
   days: number,
-  today: number,
-  newPerDay: number,
-  unseen: number,
 ): number[] {
-  const start = new Date();
-  start.setHours(0, 0, 0, 0);
+  let start = studyDayStart(Date.now());
+  const ends = Array.from({ length: days }, () => {
+    start = studyDayStart(start + 36 * 3600000);
+    return start;
+  });
   const out = new Array(days).fill(0);
   for (const c of cards) {
     if (c.state === CardState.NEW) continue;
-    const d = Math.floor((c.nextReviewDate - start.getTime()) / 86_400_000);
-    if (d >= 1 && d < days) out[d]++;
+    const d = ends.findIndex(end => c.nextReviewDate < end);
+    if (d >= 0) out[d]++;
   }
-  // Future days also introduce new words, until the unseen pool runs dry.
-  let left = unseen;
-  for (let d = 1; d < days; d++) {
-    const intake = Math.min(newPerDay, left);
-    out[d] += intake;
-    left -= intake;
-  }
-  out[0] = today;
   return out;
 }
 
@@ -102,23 +75,22 @@ function classify(cards: SwedishCard[]): Tier[] {
 }
 
 export default function SwedishDashboard({
-  cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress, onOpenChapters, onOpenProv,
-  onOpenAccount, showSwitcher = true, newBudget = 0, studiedToday = 0, dailyTarget = 50, newPerDay = 0,
+  userId, cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress, onOpenChapters, onOpenProv,
+  onOpenAccount, showSwitcher = true, newBudget = 0, studiedToday = 0,
 }: Props) {
   const totalCards = cards.length;
   const now = Date.now();
-  // Today's workload — NOT the lifetime backlog. Unseen cards are not "due";
-  // they arrive via the governor, so the number is something you can finish.
+  const studyTime = useStudyTime(userId, null);
+  // Queue size is separate from today's shared time allowance.
   const reviewsDue = cards.filter(c => c.state !== CardState.NEW && c.nextReviewDate <= now).length;
   const notStarted = cards.filter(c => c.state === CardState.NEW).length;
   const newToday = Math.min(newBudget, notStarted);
-  // THE REAL NUMBER. No min(), no ceiling, nothing held back — the schedule
-  // itself was rebuilt so that the truth is a finishable number (2026-08-11).
   const dueCount = reviewsDue + newToday;
   const started = totalCards - notStarted;
-  const next7 = forecast(cards, 7, dueCount, newPerDay, notStarted - newToday);
+  const next7 = forecast(cards, 7);
+  const scheduleScale = Math.max(...next7, 1);
   const hasDue = dueCount > 0;
-  const canStudy = hasDue || hasActiveSession;
+  const canStudy = (hasDue || hasActiveSession) && !studyTime.exhausted;
   const tiers = classify(cards);
   const maxCount = Math.max(...tiers.map(t => t.count), 1);
 
@@ -178,46 +150,46 @@ export default function SwedishDashboard({
           backgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}>
-          {dueCount}
+          {Math.ceil(studyTime.remainingMs / 60000)}
         </h1>
         <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.01em' }}>
-          {dueCount === 0
-            ? studiedToday > 0 ? `done today · ${studiedToday} studied` : 'all done today · Svenska'
-            : reviewsDue === 0
-              ? `today · ${newToday} new ${newToday === 1 ? 'word' : 'words'}`
-              : `today · ${reviewsDue} ${reviewsDue === 1 ? 'review' : 'reviews'}${newToday > 0 ? ` + ${newToday} new` : ''}`}
+          {studyTime.exhausted ? "Today's plan is complete" : `minutes left today${showSwitcher ? ' · Swedish + English' : ''}`}
         </p>
         <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-          {totalCards} words · {started} started · {notStarted} to meet
+          {reviewsDue} Swedish reviews waiting · {studiedToday} studied today
+          <br />{started} started · {notStarted} to meet
         </p>
       </motion.div>
 
-      {/* Next 7 days — the honest replacement for a display cap. Shows there is
-          no wall behind today's number. */}
+      {/* Existing deadlines, independent of the daily effort limit. */}
       <div className="glass" style={{ width: '100%', maxWidth: '380px', borderRadius: 'var(--radius)', padding: '14px 16px 12px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '10px' }}>
           <span style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent-sv)' }}>
-            Next 7 days
+            Waiting and scheduled
           </span>
           <span style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-            target {dailyTarget}/day
+            next 7 days
           </span>
         </div>
         <div style={{ display: 'flex', gap: '5px', alignItems: 'flex-end', height: '46px' }}>
           {next7.map((n, i) => (
             <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-              <span className="tabular" style={{ fontSize: '0.6rem', fontWeight: 700, color: n > dailyTarget ? 'var(--danger)' : 'var(--text-muted)' }}>{n}</span>
+              <span className="tabular" style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--text-muted)' }}>{n}</span>
               <div style={{
                 width: '100%',
-                height: `${Math.max(3, Math.min(1, n / dailyTarget) * 26)}px`,
+                height: `${Math.max(3, n / scheduleScale * 26)}px`,
                 borderRadius: '3px 3px 1px 1px',
-                background: n > dailyTarget ? 'var(--danger)' : 'var(--grad-sv)',
+                background: 'var(--grad-sv)',
                 opacity: i === 0 ? 1 : 0.45,
               }} />
             </div>
           ))}
         </div>
       </div>
+
+      <p style={{ margin: '-10px 0 0', maxWidth: 380, fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+        These are waiting cards, not a daily assignment. Future repetitions may add reviews.
+      </p>
 
       {/* State breakdown */}
       <div className="glass" style={{
@@ -293,9 +265,9 @@ export default function SwedishDashboard({
             letterSpacing: '-0.01em',
           }}
         >
-          {hasActiveSession
-            ? 'Resume Session'
-            : (dueCount > 0 ? `Study ${dueCount} ${dueCount === 1 ? 'Card' : 'Cards'}` : (totalCards === 0 ? 'No cards yet' : 'All Caught Up'))}
+          {studyTime.exhausted ? "Today's plan is complete" : hasActiveSession
+            ? 'Resume studying'
+            : (dueCount > 0 ? 'Start studying' : (totalCards === 0 ? 'No cards yet' : 'No cards ready now'))}
         </button>
 
         {onOpenProv && (

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import type { SwedishCard } from '../utils/sm2';
 import { fetchSessions, currentStreak, topicStats, masteryBreakdown } from '../lib/progress';
 import type { DaySession } from '../lib/progress';
+import { studyDay } from '../lib/studyTime';
 
 interface Props {
   cards: SwedishCard[];
@@ -24,12 +25,19 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function ProgressPanel({ cards, onClose, onOpenGrammar }: Props) {
   const [sessions, setSessions] = useState<DaySession[] | null>(null);
+  const [historyError, setHistoryError] = useState(false);
+  const [openedAt] = useState(Date.now);
 
-  useEffect(() => { fetchSessions().then(setSessions); }, []);
+  useEffect(() => {
+    let active = true;
+    fetchSessions().then(data => { if (active) setSessions(data); })
+      .catch(() => { if (active) setHistoryError(true); });
+    return () => { active = false; };
+  }, []);
 
   const streak = sessions ? currentStreak(sessions) : 0;
-  const today = sessions?.find(s => s.studied_on === new Date().toISOString().slice(0, 10));
-  const last7 = (sessions ?? []).slice(0, 7);
+  const today = sessions?.find(s => s.studied_on === studyDay(openedAt));
+  const last7 = (sessions ?? []).filter(s => s.studied_on >= studyDay(openedAt - 6 * 86400000));
   const done7 = last7.reduce((s, d) => s + d.cards_done, 0);
   const corr7 = last7.reduce((s, d) => s + d.correct, 0);
   const acc7 = done7 ? Math.round((corr7 / done7) * 100) : null;
@@ -54,6 +62,7 @@ export default function ProgressPanel({ cards, onClose, onOpenGrammar }: Props) 
 
       <div style={{ flex: 1, overflowY: 'auto', padding: '0 16px 40px' }}>
         <div style={{ maxWidth: '520px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {historyError && <p role="status">Review history could not load. Reopen this panel when you are connected.</p>}
 
           <Section title="Streak">
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
@@ -65,12 +74,12 @@ export default function ProgressPanel({ cards, onClose, onOpenGrammar }: Props) 
               </span>
             </div>
             <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-              {today ? `Today: ${today.cards_done} cards, ${today.cards_done ? Math.round((today.correct / today.cards_done) * 100) : 0}% right.` : 'Nothing studied yet today.'}
-              {acc7 !== null && ` Last 7 days: ${done7} cards at ${acc7}%.`}
+              {today ? `Today: ${today.cards_done} answers, ${today.cards_done ? Math.round((today.correct / today.cards_done) * 100) : 0}% recalled.` : sessions ? 'Nothing studied yet today.' : 'Loading review history…'}
+              {acc7 !== null && ` Last 7 days: ${done7} answers at ${acc7}%.`}
             </p>
           </Section>
 
-          <Section title="How much you actually own">
+          <Section title="Review confidence">
             <div style={{ display: 'flex', gap: '4px', height: '64px', alignItems: 'flex-end' }}>
               {mastery.map((n, i) => {
                 const max = Math.max(...mastery, 1);

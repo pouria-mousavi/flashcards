@@ -1,3 +1,5 @@
+import { studyDay } from './studyTime';
+
 /**
  * Daily pacing.
  *
@@ -8,7 +10,7 @@
  * day honest.
  *
  * Budget is consumed only when a NEW card is actually rated, so merely opening
- * the app never burns the allowance. Tracked per user per local day.
+ * the app never burns the allowance. Tracked per user per Stockholm day.
  */
 
 /**
@@ -45,29 +47,15 @@ export const DAILY_TARGET = DEFAULT_DAILY_TARGET;
 /**
  * Hard cap on new cards per day, whatever the governor computes.
  *
- * Paused at 0 on 2026-08-19 to drain the backlog, reopened at 5 on 2026-08-23.
- * Pouria: "I really prefer to start learning the new words that I'm learning in
- * the course immediately ... out of those 25 words that I review, just put five
- * words that are new?"
+ * At most two new Swedish cards while rebuilding a sustainable A1 routine.
  *
- * The five come OUT OF the 25, not on top of it. That only works if the review
- * schedule is levelled to `dailyTarget() - NEW_CAP` rather than to the full
- * target — otherwise reviews fill every slot and the governor computes an
- * allowance of zero. See REVIEW_TARGET below and its use in App.tsx.
+ * New cards come out of the session size. When overdue reviews fill the
+ * available slots, intake pauses; deadlines are never shifted to make room.
+ * Both languages additionally share the daily timer in studyTime.ts.
  *
- * Every new card costs several future review slots as it climbs the ladder
- * (1 → 3 → 8 → 20 → 50 days …), so intake is always the first thing to cut.
+ * Every new card adds future reviews, so intake is the first thing to cut.
  */
-export const NEW_CAP = 5;
-
-/**
- * How many REVIEW slots a day may hold, leaving room for NEW_CAP new cards
- * inside the same daily total. This is what the backlog leveller aims at, so
- * that `newAllowanceToday` always finds NEW_CAP worth of space.
- */
-export function reviewTarget(): number {
-  return Math.max(5, dailyTarget() - NEW_CAP);
-}
+export const NEW_CAP = 2;
 
 /**
  * How many new cards to introduce today, given how much review work is already
@@ -90,15 +78,11 @@ export function newAllowanceToday(
 }
 
 /**
- * English deck — its own, smaller budget, because Swedish is the active course.
- *
- * Pouria's choice (2026-08-11) after being shown the trade-off: "a slow trickle".
- * The 512 cards with real traction cost ~26 reviews/day, so 35 leaves room for
- * about 5 new words most days. The other 6,253 words wait; at this rate the deck
- * is a multi-year project, which is the honest picture rather than a promise.
+ * Maintain existing English cards; pause new intake while Swedish is the active
+ * course. Both decks share the same twenty-minute daily allowance.
  */
 export const DAILY_TARGET_EN = 35;
-export const NEW_CAP_EN = 5;
+export const NEW_CAP_EN = 0;
 
 interface DayState {
   date: string;
@@ -109,8 +93,7 @@ interface DayState {
 const key = (uid: string | null) => `sv_new_today:${uid ?? 'anon'}`;
 
 function localToday(): string {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  return studyDay(Date.now());
 }
 
 function read(uid: string | null): DayState {

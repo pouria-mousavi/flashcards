@@ -1,6 +1,10 @@
 import { supabase } from './supabase';
 import type { SwedishCard } from '../utils/sm2';
 import { CardState } from '../utils/sm2';
+import { studyDay, studyDayStart } from './studyTime';
+import { mergeSessions } from './sessionHistory';
+import type { DaySession, HistoryReview } from './sessionHistory';
+export type { DaySession } from './sessionHistory';
 
 /**
  * Progress & weak-area reporting.
@@ -11,33 +15,31 @@ import { CardState } from '../utils/sm2';
  * fail most rather than a free-text mistake.
  */
 
-export interface DaySession {
-  studied_on: string;
-  cards_done: number;
-  correct: number;
-  again_count: number;
-}
-
-/** Record one rated card. Fire-and-forget — never blocks the review loop. */
-export function logReview(rating: number): void {
-  supabase.rpc('sv_log_review', { p_correct: rating >= 3, p_again: rating === 0 })
-    .then(undefined, () => { /* stats are best-effort; never interrupt studying */ });
-}
-
 export async function fetchSessions(days = 120): Promise<DaySession[]> {
-  const since = new Date(Date.now() - days * 86_400_000).toISOString().slice(0, 10);
-  const { data } = await supabase
+  const since = studyDay(Date.now() - days * 86_400_000);
+  const sinceTime = new Date(studyDayStart(Date.now() - days * 86_400_000)).toISOString();
+  const { data, error } = await supabase
     .from('sv_sessions')
     .select('studied_on, cards_done, correct, again_count')
     .gte('studied_on', since)
     .order('studied_on', { ascending: false });
-  return (data as DaySession[]) ?? [];
+  if (error) throw error;
+  const events: HistoryReview[] = [];
+  for (let from = 0; ; from += 1000) {
+    const { data: reviews, error: reviewError } = await supabase.from('study_review_events')
+      .select('reviewed_at, rating').eq('deck', 'swedish').eq('status', 'applied')
+      .gte('reviewed_at', sinceTime).order('id').range(from, from + 999);
+    if (reviewError) throw reviewError;
+    events.push(...(reviews ?? []));
+    if (!reviews || reviews.length < 1000) break;
+  }
+  return mergeSessions((data as DaySession[]) ?? [], events);
 }
 
 /** Consecutive days studied, counting back from today (yesterday still counts). */
 export function currentStreak(sessions: DaySession[]): number {
   const days = new Set(sessions.filter(s => s.cards_done > 0).map(s => s.studied_on));
-  const iso = (d: Date) => d.toISOString().slice(0, 10);
+  const iso = (d: Date) => studyDay(d.getTime());
   const today = new Date();
   const yesterday = new Date(Date.now() - 86_400_000);
   // A streak survives until you miss a whole day.
@@ -93,26 +95,4 @@ export function masteryBreakdown(cards: SwedishCard[]): number[] {
     out[Math.min(5, Math.max(0, c.masteryLevel ?? 0))]++;
   }
   return out;
-}
-
-/**
- * Spread an overdue pile forward so the number on screen is finishable.
- *
- * Miss two days and the due count becomes a wall — Pouria hit 182 and said it
- * felt "almost impossible to recover". This calls sv_smooth_backlog, which moves
- * only `next_review`: intervals and ease are untouched, so no learning state is
- * lost and nothing is hidden. The count shown afterwards is the real one.
- *
- * Runs at most once per local day. Returns how many cards were moved.
- */
-export async function smoothBacklog(uid: string | null, target: number): Promise<number> {
-  const key = `sv_smoothed:${uid ?? 'anon'}`;
-  const today = new Date().toISOString().slice(0, 10);
-  try { if (localStorage.getItem(key) === today) return 0; } catch { /* storage off — just run */ }
-
-  const { data, error } = await supabase.rpc('sv_smooth_backlog', { p_target: target });
-  if (error) { console.error('smoothBacklog failed', error); return 0; }
-
-  try { localStorage.setItem(key, today); } catch { /* ignore */ }
-  return (data as number) ?? 0;
 }

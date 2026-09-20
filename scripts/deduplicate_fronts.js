@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import Anthropic from '@anthropic-ai/sdk';
+import { generateText, OPENAI_MODEL, env as aiEnv } from './lib/openai.cjs';
 import fs from 'fs';
 import path from 'path';
 
@@ -24,15 +24,14 @@ if (fs.existsSync(envPath)) {
 
 const supabaseUrl = env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
 const supabaseKey = env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-const anthropicKey = env.VITE_CLAUDE_KEY || process.env.VITE_CLAUDE_KEY;
+const openaiKey = aiEnv.OPENAI_API_KEY;
 
-if (!supabaseUrl || !supabaseKey || !anthropicKey) {
-    console.error("Missing env vars. Need Supabase and Claude Key.");
+if (!supabaseUrl || !supabaseKey || !openaiKey) {
+    console.error("Missing env vars. Need Supabase and OpenAI Key.");
     process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
-const anthropic = new Anthropic({ apiKey: anthropicKey });
 
 async function deduplicate() {
     console.log("Fetching all cards...");
@@ -57,7 +56,7 @@ async function deduplicate() {
             console.log(`\nDuplicate Front found: "${front}" (${group.length} cards)`);
             group.forEach(g => console.log(` - ID: ${g.id} | Back: ${g.back}`));
             
-            // Ask Claude to differntiate them
+            // Ask OpenAI to differntiate them
             const backs = group.map(g => g.back).join(', ');
             const prompt = `
             The following English words have identically translated Flashcards in Persian ("${front}").
@@ -76,13 +75,13 @@ async function deduplicate() {
             `;
             
             try {
-                const msg = await anthropic.messages.create({
-                    model: "claude-3-haiku-20240307",
-                    max_tokens: 300,
+                const msg = await generateText({
+                    model: OPENAI_MODEL,
+                    maxOutputTokens: 300,
                     messages: [{ role: "user", content: prompt }]
                 });
                 
-                const text = msg.content[0].text;
+                const text = msg;
                 const jsonMatch = text.match(/\{[\s\S]*\}/);
                 if (jsonMatch) {
                     const result = JSON.parse(jsonMatch[0]);
@@ -102,7 +101,7 @@ async function deduplicate() {
                     }
                 }
             } catch (err) {
-                console.error("Claude Error:", err);
+                console.error("OpenAI Error:", err);
             }
         }
     }

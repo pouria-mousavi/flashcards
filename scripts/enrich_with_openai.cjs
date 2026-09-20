@@ -1,17 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const Anthropic = require('@anthropic-ai/sdk');
+const { generateText, OPENAI_MODEL } = require('./lib/openai.cjs');
 
 const ROOT = path.resolve(__dirname, '..');
-const envContent = fs.readFileSync(path.join(ROOT, '.env'), 'utf8');
-const apiKey = envContent.match(/VITE_CLAUDE_KEY=(.*)/)?.[1]?.trim();
-
-if (!apiKey) {
-    console.error("No Anthropic API key found");
-    process.exit(1);
-}
-
-const client = new Anthropic({ apiKey });
 const BATCH_SIZE = 40;
 const DELAY_MS = 500;
 
@@ -22,9 +13,9 @@ function sleep(ms) {
 async function enrichBatch(words) {
     const wordList = words.map((w, i) => `${i + 1}. ${w}`).join('\n');
 
-    const response = await client.messages.create({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 8000,
+    const response = await generateText({
+        model: OPENAI_MODEL,
+        maxOutputTokens: 8000,
         messages: [{
             role: 'user',
             content: `For each word/phrase below, provide:
@@ -41,7 +32,7 @@ Return ONLY valid JSON, no markdown, no explanation.`
         }]
     });
 
-    const text = response.content[0].text.trim();
+    const text = response.trim();
     // Try to extract JSON from response
     let jsonStr = text;
     if (text.startsWith('```')) {
@@ -67,7 +58,7 @@ Return ONLY valid JSON, no markdown, no explanation.`
 }
 
 async function main() {
-    console.log("=== ENRICHMENT WITH CLAUDE ===\n");
+    console.log("=== ENRICHMENT WITH OPENAI ===\n");
 
     const cardsPath = path.join(ROOT, 'all_new_cards_deduped.json');
     const cards = JSON.parse(fs.readFileSync(cardsPath, 'utf8'));
@@ -144,7 +135,7 @@ async function main() {
 
         enrichedCount++;
 
-        // Merge examples: keep book example first, add Claude examples
+        // Merge examples: keep book example first, add OpenAI examples
         let examples = [...(card.examples || [])];
         if (enrichment.examples && Array.isArray(enrichment.examples)) {
             const existing = new Set(examples.map(e => e.toLowerCase()));

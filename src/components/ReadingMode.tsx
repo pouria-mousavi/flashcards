@@ -228,7 +228,7 @@ export default function ReadingMode({ onCardsGenerated, onError }: Props) {
           animation: 'addcard-spin 0.8s linear infinite',
         }} />
         <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-          {enrichProgress || `Processing ${collectedWords.length} words with Claude...`}
+          {enrichProgress || `Processing ${collectedWords.length} words...`}
         </span>
       </div>
     );

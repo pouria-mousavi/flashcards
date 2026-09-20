@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import Anthropic from '@anthropic-ai/sdk';
+import { generateText, OPENAI_MODEL, env as aiEnv } from './lib/openai.cjs';
 import fs from 'fs';
 import path from 'path';
 
@@ -24,15 +24,14 @@ if (fs.existsSync(envPath)) {
 
 const supabaseUrl = env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
 const supabaseKey = env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-const anthropicKey = env.VITE_CLAUDE_KEY || process.env.VITE_CLAUDE_KEY;
+const openaiKey = aiEnv.OPENAI_API_KEY;
 
-if (!supabaseUrl || !supabaseKey || !anthropicKey) {
-    console.error("Missing env vars. Need Supabase and Claude Key.");
+if (!supabaseUrl || !supabaseKey || !openaiKey) {
+    console.error("Missing env vars. Need Supabase and OpenAI Key.");
     process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
-const anthropic = new Anthropic({ apiKey: anthropicKey });
 
 async function auditGeneral() {
     // Process in batches of 50
@@ -44,7 +43,7 @@ async function auditGeneral() {
     // Checking 2000 cards might cost tokens. 
     // I will iterate all, but maybe just check validity?
     
-    // Efficient strategy: Send batch of 20 (Word, Front) to Claude.
+    // Efficient strategy: Send batch of 20 (Word, Front) to OpenAI.
     // Ask: "Which of these are unnatural or wrong? Return JSON of fixes."
     // If correct, return nothing.
     
@@ -84,13 +83,13 @@ async function auditGeneral() {
         `;
         
         try {
-            const msg = await anthropic.messages.create({
-                model: "claude-3-haiku-20240307",
-                max_tokens: 1000,
+            const msg = await generateText({
+                model: OPENAI_MODEL,
+                maxOutputTokens: 1000,
                 messages: [{ role: "user", content: prompt }]
             });
             
-            const text = msg.content[0].text;
+            const text = msg;
             const jsonMatch = text.match(/\{[\s\S]*\}/);
             
             if (jsonMatch) {
@@ -116,7 +115,7 @@ async function auditGeneral() {
                 }
             }
         } catch(e) {
-            console.error("Claude Error:", e);
+            console.error("OpenAI Error:", e);
         }
         
         page++;

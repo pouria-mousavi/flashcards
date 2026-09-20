@@ -215,6 +215,8 @@ interface Props {
 }
 
 export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: Props) {
+  const notes = (card.examples ?? []).filter(example => example.kind === 'note');
+  const examples = (card.examples ?? []).filter(example => example.kind !== 'note');
   return (
     <div
       onClick={!isFlipped ? onFlip : undefined}
@@ -339,13 +341,32 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
             </p>
           </div>
 
+          <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+            Rate the answer to the prompt. The examples and forms below are help, not extra things to memorise now.
+            {' '}Again = forgot; Hard = recalled with difficulty; Good = recalled; Easy = effortless.
+          </p>
+          {notes.length > 0 && (
+            <details>
+              <summary style={{ cursor: 'pointer', color: SV_ACCENT, fontWeight: 600 }}>Meaning & grammar help</summary>
+              {notes.map((note, index) => (
+                <div key={index} style={{ marginTop: 10, fontSize: '0.88rem', lineHeight: 1.5 }}>
+                  <p style={{ margin: 0 }}>{note.text}</p>
+                  {note.source && <small style={{ color: 'var(--text-muted)' }}>Source: {note.source}</small>}
+                </div>
+              ))}
+            </details>
+          )}
+
           {/* Inflection table — only on Swedish verb / noun / adjective cards */}
           {card.wordForms && (
-            <WordForms forms={card.wordForms} lang={card.backLang} />
+            <details>
+              <summary style={{ cursor: 'pointer', color: SV_ACCENT, fontWeight: 600 }}>Word forms & prepositions</summary>
+              <WordForms forms={card.wordForms} lang={card.backLang} />
+            </details>
           )}
 
           {/* Examples — always on the back, in the back language, each playable */}
-          {card.examples && card.examples.length > 0 && (
+          {examples.length > 0 && (
             <div style={{
               borderTop: `1px solid ${SV_BORDER}`,
               paddingTop: '16px',
@@ -363,7 +384,7 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
                 Examples
               </span>
 
-              {card.examples.map((ex, i) => (
+              {examples.map((ex, i) => (
                 <div
                   key={i}
                   onClick={(e) => { e.stopPropagation(); playTTS(ex.text, card.backLang, ex.emphasis); }}
@@ -390,6 +411,7 @@ export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: P
                         {ex.translation}
                       </p>
                     )}
+                    {ex.source && <small style={{ color: 'var(--text-muted)' }}>Source: {ex.source}</small>}
                   </div>
                 </div>
               ))}

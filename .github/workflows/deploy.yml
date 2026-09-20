@@ -24,18 +24,20 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Test
+        run: npm test
 
       - name: Build
         run: npm run build
         env:
            VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
            VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-           VITE_CLAUDE_KEY: ${{ secrets.VITE_CLAUDE_KEY }}
            VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
 
       - name: Setup Pages

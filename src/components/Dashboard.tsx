@@ -3,8 +3,10 @@ import { CardState } from '../utils/sm2';
 import type { Flashcard, GrammarCard, Lang } from '../utils/sm2';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
+import { useStudyTime } from '../lib/useStudyTime';
 
 interface Props {
+  userId: string;
   cards: Flashcard[];
   grammarCards?: GrammarCard[];
   onStartStudy: () => void;
@@ -53,12 +55,13 @@ function classifyCards(cards: Flashcard[]): Tier[] {
 }
 
 export default function Dashboard({
-  cards, grammarCards = [], onStartStudy, onAddCard, hasActiveSession,
+  userId, cards, grammarCards = [], onStartStudy, onAddCard, hasActiveSession,
   activeLanguage = 'en', onSwitchLanguage, onOpenAccount, newBudget = 0,
 }: Props) {
   const totalCards = cards.length + grammarCards.length;
   const now = Date.now();
-  // Today's workload, not the lifetime backlog — see lib/newBudget.
+  const studyTime = useStudyTime(userId, null);
+  // Queue size is separate from today's shared time allowance.
   const all = [...cards, ...grammarCards];
   const reviewsDue = all.filter(c => c.state !== CardState.NEW && c.nextReviewDate <= now).length;
   const notStarted = all.filter(c => c.state === CardState.NEW).length;
@@ -66,7 +69,7 @@ export default function Dashboard({
   // The real number — no ceiling, nothing silently held back.
   const dueCount = reviewsDue + newToday;
   const hasDue = dueCount > 0;
-  const canStudy = hasDue || hasActiveSession;
+  const canStudy = (hasDue || hasActiveSession) && !studyTime.exhausted;
 
   const tiers = classifyCards(cards);
   const maxCount = Math.max(...tiers.map(t => t.count), 1);
@@ -119,17 +122,13 @@ export default function Dashboard({
           backgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
         }}>
-          {dueCount}
+          {Math.ceil(studyTime.remainingMs / 60000)}
         </h1>
         <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.01em' }}>
-          {dueCount === 0
-            ? 'all done today · English'
-            : reviewsDue === 0
-              ? `today · ${newToday} new ${newToday === 1 ? 'card' : 'cards'}`
-              : `today · ${reviewsDue} ${reviewsDue === 1 ? 'review' : 'reviews'}${newToday > 0 ? ` + ${newToday} new` : ''}`}
+          {studyTime.exhausted ? "Today's plan is complete" : 'minutes left today · Swedish + English'}
         </p>
         <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-          {totalCards} in the deck{notStarted > 0 ? ` · ${notStarted} not started` : ''}
+          {reviewsDue} English reviews waiting · {totalCards} in the collection
         </p>
       </motion.div>
 
@@ -207,11 +206,9 @@ export default function Dashboard({
             letterSpacing: '-0.01em',
           }}
         >
-          {hasActiveSession
-            ? 'Resume Session'
-            : (dueCount > 0
-              ? `Study ${dueCount} ${dueCount === 1 ? 'Card' : 'Cards'}`
-              : 'All Caught Up')}
+          {studyTime.exhausted ? "Today's plan is complete" : hasActiveSession
+            ? 'Resume studying'
+            : (dueCount > 0 ? 'Start studying' : 'No cards ready now')}
         </button>
 
         <button

@@ -33,13 +33,6 @@ function readPendingUpdates(uid: string | null): Record<string, PendingUpdate> {
 function writePendingUpdates(uid: string | null, map: Record<string, PendingUpdate>) {
   try { localStorage.setItem(pendingKey(uid), JSON.stringify(map)); } catch { /* storage full — degrade */ }
 }
-function queuePending(uid: string | null, table: string, id: string, op: 'update' | 'upsert', payload: Record<string, any>, conflict?: string): number {
-  const map = readPendingUpdates(uid);
-  const ts = Date.now();
-  map[`${table}:${id}`] = { table, id, op, payload, conflict, ts };
-  writePendingUpdates(uid, map);
-  return ts;
-}
 // Only clears the entry if it is still the SAME version that was written —
 // a slow older write must never delete a newer rating from the buffer.
 function clearPending(uid: string | null, table: string, id: string, ts: number) {
@@ -130,12 +123,15 @@ import MilestoneToast from './components/MilestoneToast';
 import ProgressPanel from './components/ProgressPanel';
 import ChapterReview from './components/ChapterReview';
 import Prov from './components/Prov';
-import { logReview, smoothBacklog } from './lib/progress';
+import { flushStudyReviews, loadStudyStates, reviewStore, syncStudyTime } from './lib/studySync';
+import { recallPriority } from './lib/scheduler';
+import type { ReviewEvent } from './lib/studyTypes';
+import StudySyncNotice from './components/StudySyncNotice';
 import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
 import { setTtsTier } from './lib/tts';
-import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, dailyTarget, reviewTarget, NEW_CAP, DAILY_TARGET_EN, NEW_CAP_EN } from './lib/newBudget';
+import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, dailyTarget, NEW_CAP, DAILY_TARGET_EN, NEW_CAP_EN } from './lib/newBudget';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
@@ -152,6 +148,7 @@ function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
   const [grammarCards, setGrammarCards] = useState<GrammarCard[]>([]);
   const [loading, setLoading] = useState(true);
+  const [studyNotice, setStudyNotice] = useState('');
   const [view, setView] = useState<View>('dashboard');
   const [restoredSession, setRestoredSession] = useState<{ queue: StudyCard[], index: number, isFlipped: boolean } | null>(null);
 
@@ -173,6 +170,42 @@ function App() {
   const [authReady, setAuthReady] = useState(false);
   const [role, setRole] = useState<Role | null>(null);
   const isAdmin = !!role?.isAdmin;
+
+  const syncStudy = useCallback(async (uid: string, pull = false) => {
+    try {
+      const result = await flushStudyReviews(uid);
+      await syncStudyTime(uid);
+      if (pull) await loadStudyStates(uid);
+      if (currentUid !== uid) return;
+      if (result.states.length || pull) {
+        setCards(prev => reviewStore.overlayMany(uid, 'english', prev));
+        setGrammarCards(prev => reviewStore.overlayMany(uid, 'grammar', prev));
+        setSwedishCards(prev => reviewStore.overlayMany(uid, 'swedish', prev));
+      }
+      if (result.conflicts) {
+        setStudyNotice('A card was reviewed on another device. The latest saved schedule has been restored.');
+        setView('dashboard');
+        setRestoredSession(null); setSwedishSession(null);
+        localStorage.removeItem(SESSION_KEY); localStorage.removeItem(SWEDISH_SESSION_KEY);
+      } else setStudyNotice(result.pending ? 'Your reviews are saved here and waiting to sync.' : '');
+    } catch {
+      if (currentUid === uid) setStudyNotice('Study sync is unavailable. Reviews stay saved on this device; the shared time allowance may be out of date.');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!role) return;
+    const uid = role.userId;
+    const resume = () => { void syncStudy(uid, document.visibilityState === 'visible'); };
+    const interval = window.setInterval(() => { if (document.visibilityState === 'visible') void syncStudy(uid); }, 15000);
+    document.addEventListener('visibilitychange', resume);
+    window.addEventListener('online', resume);
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener('visibilitychange', resume);
+      window.removeEventListener('online', resume);
+    };
+  }, [role, syncStudy]);
 
   // --- Helper: rebuild session from localStorage + card data (vocab + grammar) ---
   const rebuildSessionFromStorage = useCallback((vocab: Flashcard[], grammar: GrammarCard[]) => {
@@ -202,12 +235,15 @@ function App() {
               // session from another device / already rated elsewhere).
               const cutoff = Date.now() + LEARNING_REQUEUE_WINDOW_MS;
               const shown = queue.slice(0, index);
-              const remaining = queue.slice(index).filter((c: StudyCard) => c.nextReviewDate <= cutoff);
+              const remaining = queue.slice(index).filter((c: StudyCard) => c.nextReviewDate <= cutoff && c.state !== 'NEW');
               if (remaining.length === 0) {
                   localStorage.removeItem(SESSION_KEY);
                   return null;
               }
-              return { queue: [...shown, ...remaining], index, isFlipped: session.isFlipped || false };
+              const isFlipped = remaining[0]?.id === queue[index]?.id && !!session.isFlipped;
+              const restored = [...shown, ...remaining];
+              localStorage.setItem(SESSION_KEY, JSON.stringify({ ...session, cardIds: restored.map(c => c.id), isFlipped }));
+              return { queue: restored, index, isFlipped };
           }
       } catch (err) {
           console.error("Failed to restore session", err);
@@ -241,12 +277,20 @@ function App() {
               // session from another device / already rated elsewhere).
               const cutoff = Date.now() + LEARNING_REQUEUE_WINDOW_MS;
               const shown = queue.slice(0, index);
-              const remaining = queue.slice(index).filter((c: SwedishCard) => c.nextReviewDate <= cutoff);
+              let newSlots = newAllowanceToday(deck.filter(c => c.state !== 'NEW' && c.nextReviewDate <= Date.now()).length, currentUid);
+              const remaining = queue.slice(index).filter((c: SwedishCard) => {
+                  if (c.nextReviewDate > cutoff) return false;
+                  if (c.state !== 'NEW') return true;
+                  return newSlots-- > 0;
+              });
               if (remaining.length === 0) {
                   localStorage.removeItem(SWEDISH_SESSION_KEY);
                   return null;
               }
-              return { queue: [...shown, ...remaining], index, isFlipped: session.isFlipped || false };
+              const isFlipped = remaining[0]?.id === queue[index]?.id && !!session.isFlipped;
+              const restored = [...shown, ...remaining];
+              localStorage.setItem(SWEDISH_SESSION_KEY, JSON.stringify({ ...session, cardIds: restored.map(c => c.id), isFlipped }));
+              return { queue: restored, index, isFlipped };
           }
       } catch (err) {
           console.error("Failed to restore Swedish session", err);
@@ -277,83 +321,28 @@ function App() {
       if (error) console.error('Error saving:', error);
   };
 
-  // Unified update dispatcher — routes to the right table based on card type
-  const updateCardStats = async (updatedCard: StudyCard) => {
-    const table = isGrammarCard(updatedCard) ? 'grammar_cards' : 'cards';
-
-    markCardStudied(currentUid ? `${currentUid}:en` : null, updatedCard.id);
-    const prevEn = isGrammarCard(updatedCard)
-      ? grammarCards.find(c => c.id === updatedCard.id)
-      : cards.find(c => c.id === updatedCard.id);
-    if (prevEn?.state === 'NEW' && updatedCard.state !== 'NEW') {
-      markNewIntroduced(currentUid ? `${currentUid}:en` : null, updatedCard.id);
-    }
-
-    if (isGrammarCard(updatedCard)) {
-        setGrammarCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
-    } else {
-        setCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
-    }
-
-    const fields = {
-        state: updatedCard.state,
-        next_review: new Date(updatedCard.nextReviewDate).toISOString(),
-        interval: updatedCard.interval,
-        ease_factor: updatedCard.easeFactor,
-        priority: updatedCard.priority ?? 'medium'
-    };
-    // Buffer first so a killed app / failed request replays on next launch.
+  // All new reviews are saved as immutable events plus separate FSRS state.
+  const updateCardStats = (updatedCard: StudyCard, event: ReviewEvent) => {
     const uid = currentUid;
-    const ts = queuePending(uid, table, updatedCard.id, 'update', fields);
-    const { error } = await serializeWrite(() => supabase.from(table).update(fields).eq('id', updatedCard.id));
-    if (error) console.error(`Error updating ${table} (kept pending for replay):`, error);
-    else clearPending(uid, table, updatedCard.id, ts);
+    if (!uid) throw new Error('Sign in to save reviews');
+    reviewStore.enqueue(uid, event);
+    markCardStudied(uid + ':en', updatedCard.id);
+    if (event.before_stats.state === 'NEW') markNewIntroduced(uid + ':en', updatedCard.id);
+    if (isGrammarCard(updatedCard)) setGrammarCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
+    else setCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
+    void syncStudy(uid);
   };
 
-  // Swedish update — writes the CURRENT USER's progress into sv_progress. The
-  // shared swedish_cards content is never touched here, so one user's ratings
-  // can never affect anyone else's deck.
-  const updateSwedishCardStats = async (updatedCard: SwedishCard) => {
-    // Spend a slot from today's new-card allowance the moment a card actually
-    // leaves NEW — so opening the app never costs anything, only studying does.
-    const before = swedishCards.find(c => c.id === updatedCard.id);
-    if (before?.state === 'NEW' && updatedCard.state !== 'NEW') {
-      markNewIntroduced(currentUid, updatedCard.id);
-    }
-    markCardStudied(currentUid, updatedCard.id);
-    // applyMastery has just set these, so this is exact rather than inferred:
-    // consecutiveIncorrect is reset to 0 by any correct answer.
-    logReview((updatedCard.consecutiveIncorrect ?? 0) > 0 ? 0 : 4);
+  const updateSwedishCardStats = (updatedCard: SwedishCard, event: ReviewEvent) => {
+    const uid = currentUid;
+    if (!uid) throw new Error('Sign in to save reviews');
+    reviewStore.enqueue(uid, event);
+    if (event.before_stats.state === 'NEW') markNewIntroduced(uid, updatedCard.id);
+    markCardStudied(uid, updatedCard.id);
     setSwedishCards(prev => prev.map(c => c.id === updatedCard.id ? updatedCard : c));
-    // Capture the uid ONCE up front: the payload, the buffer namespace, and the
-    // later clear must all refer to the user who made this rating, even if the
-    // account is switched while the write is in flight.
-    const uid = currentUid;
-    if (!uid) return;
-
-    const payload = {
-        user_id: uid,
-        card_id: updatedCard.id,
-        state: updatedCard.state,
-        next_review: new Date(updatedCard.nextReviewDate).toISOString(),
-        interval: updatedCard.interval,
-        ease_factor: updatedCard.easeFactor,
-        mastery_level: updatedCard.masteryLevel ?? 0,
-        consecutive_correct: updatedCard.consecutiveCorrect ?? 0,
-        consecutive_incorrect: updatedCard.consecutiveIncorrect ?? 0,
-        total_reviews: updatedCard.totalReviews ?? 0,
-        lapses: updatedCard.lapses ?? 0,
-        priority: updatedCard.priority ?? 'medium',
-        updated_at: new Date().toISOString(),
-    };
-    // Buffer first so a killed app / failed request replays on next launch.
-    const ts = queuePending(uid, 'sv_progress', updatedCard.id, 'upsert', payload, 'user_id,card_id');
-    const { error } = await serializeWrite(() => supabase.from('sv_progress').upsert(payload, { onConflict: 'user_id,card_id' }));
-    if (error) console.error('Error updating sv_progress (kept pending for replay):', error);
-    else clearPending(uid, 'sv_progress', updatedCard.id, ts);
+    void syncStudy(uid);
   };
 
-  // Swedish delete — removes ONLY from swedish_cards, never the English tables.
   const deleteSwedishCard = async (cardId: string) => {
     setSwedishCards(prev => prev.filter(c => c.id !== cardId));
 
@@ -402,7 +391,7 @@ function App() {
 
     // Both sorted oldest-due-first within their tier.
     const sortedLearning = [...learning].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
-    const sortedReviews = [...reviews].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
+    const sortedReviews = [...reviews].sort((a, b) => recallPriority(a, now) - recallPriority(b, now) || a.nextReviewDate - b.nextReviewDate);
 
     // NEW cards: shuffle to break up topic clusters from batch imports
     // (e.g., 6 "smell" words added together would otherwise cluster).
@@ -485,7 +474,7 @@ function App() {
       // Struggling cards first within the review tier (fluent's priority idea),
       // then oldest-due. Learning cards still lead overall — SRS order is intact.
       const rank = (c: SwedishCard) => c.priority === 'high' ? 0 : c.priority === 'low' ? 2 : 1;
-      const sortedReviews = [...reviews].sort((a, b) => rank(a) - rank(b) || a.nextReviewDate - b.nextReviewDate);
+      const sortedReviews = [...reviews].sort((a, b) => recallPriority(a, now) - recallPriority(b, now) || a.nextReviewDate - b.nextReviewDate);
       // Reintroduced cards (reset because they were churning) come FIRST — they are
       // words already met and failed, so re-teaching them beats meeting a new word.
       // Everything else stays LIFO (newest first).
@@ -597,18 +586,20 @@ function App() {
       try {
         await flushPendingUpdates(role.userId);
         const pending = readPendingUpdates(role.userId);
+        // The new state is read only; there is no bulk progress migration.
+        const replayed = await flushStudyReviews(role.userId);
+        if (replayed.conflicts) {
+          localStorage.removeItem(SESSION_KEY); localStorage.removeItem(SWEDISH_SESSION_KEY);
+          setStudyNotice('A card was reviewed on another device. The latest saved schedule has been restored.');
+        }
+        await Promise.all([loadStudyStates(role.userId), syncStudyTime(role.userId)]);
 
         // Swedish deck (everyone): shared content + this user's own progress.
         // Retired cards stay in the database for reference but never enter the
         // study queue (see swedish_cards.retired).
         const svRows = (await fetchAllRows('swedish_cards')).filter((r: any) => !r.retired);
-        // Spread an overdue pile forward before reading it, so what we map is
-        // already the smoothed schedule. Once per local day; moves next_review
-        // only, so no interval or ease is lost.
-        // Level reviews to the target MINUS the new-card allowance, so the day's
-        // 25 is 20 reviews + 5 new rather than 25 reviews and no room to learn.
-        try { await smoothBacklog(role.userId, reviewTarget()); }
-        catch (e) { console.error('backlog smoothing skipped', e); }
+        // Loading a deck must preserve real deadlines. Study sessions enforce
+        // the daily time allowance without rewriting saved progress.
         const progRows = await fetchAllRows('sv_progress', 'card_id');
         const progMap = new Map<string, any>(progRows.map((p: any) => [p.card_id, p]));
         const mappedSwedish = svRows.map((r: any) => {
@@ -633,8 +624,9 @@ function App() {
           }
           return card;
         }).map(c => overlayPending(c, 'sv_progress', pending));
+        const scheduledSwedish = reviewStore.overlayMany(role.userId, 'swedish', mappedSwedish);
         if (cancelled) return;
-        setSwedishCards(mappedSwedish);
+        setSwedishCards(scheduledSwedish);
 
         // English decks: author only.
         let mappedCards: Flashcard[] = [];
@@ -644,18 +636,18 @@ function App() {
           engOk = true;
           try {
             const rows = await fetchAllRows('cards');
-            mappedCards = rows.map(mapRowToCard).map(c => overlayPending(c, 'cards', pending));
+            mappedCards = reviewStore.overlayMany(role.userId, 'english', rows.map(mapRowToCard).map(c => overlayPending(c, 'cards', pending)));
             if (!cancelled) setCards(mappedCards);
           } catch (e) { engOk = false; console.error('Failed to load cards', e); }
           try {
             const rows = await fetchAllRows('grammar_cards');
-            mappedGrammar = rows.map(mapGrammarRowToCard).map(c => overlayPending(c, 'grammar_cards', pending));
+            mappedGrammar = reviewStore.overlayMany(role.userId, 'grammar', rows.map(mapGrammarRowToCard).map(c => overlayPending(c, 'grammar_cards', pending)));
             if (!cancelled) setGrammarCards(mappedGrammar);
           } catch (e) { engOk = false; console.error('Failed to load grammar', e); }
         }
 
         // Restore in-flight sessions (uid-stamped; rebuild discards mismatches).
-        const svSession = rebuildSwedishSessionFromStorage(mappedSwedish);
+        const svSession = rebuildSwedishSessionFromStorage(scheduledSwedish);
         if (svSession && !cancelled) setSwedishSession(svSession);
         const engSession = (role.isAdmin && engOk) ? rebuildSessionFromStorage(mappedCards, mappedGrammar) : null;
         if (engSession && !cancelled) setRestoredSession(engSession);
@@ -766,12 +758,14 @@ function App() {
 
   const handleSessionPause = () => {
       setView('dashboard');
+      if (currentUid) void syncStudy(currentUid);
   };
 
   const handleSessionComplete = () => {
       localStorage.removeItem(SESSION_KEY);
       setRestoredSession(null);
       setView('dashboard');
+      if (currentUid) void syncStudy(currentUid);
   };
 
   // --- Swedish session controls (mirror the English ones, separate storage) ---
@@ -809,6 +803,7 @@ function App() {
       localStorage.removeItem(SWEDISH_SESSION_KEY);
       setSwedishSession(null);
       setView('dashboard');
+      if (currentUid) void syncStudy(currentUid);
   };
 
   // Switch between the English and Swedish sections. Always lands on the
@@ -868,8 +863,11 @@ function App() {
   if (activeLanguage === 'sv' || !isAdmin) {
     return (
       <div className="app-container">
+      <StudySyncNotice message={studyNotice} onDismiss={() => setStudyNotice('')} />
         {view === 'study' && swedishSession ? (
           <SwedishStudySession
+            key={currentUid}
+            userId={currentUid ?? 'anon'}
             cards={swedishSession.queue}
             startIndex={swedishSession.index}
             startFlipped={swedishSession.isFlipped}
@@ -882,6 +880,8 @@ function App() {
           />
         ) : (
           <SwedishDashboard
+            key={currentUid}
+            userId={currentUid ?? 'anon'}
             cards={swedishCards}
             onStartStudy={() => handleStartSwedishStudy(false)}
             hasActiveSession={!!swedishSession}
@@ -892,8 +892,6 @@ function App() {
               swedishCards.filter(c => c.state !== 'NEW' && c.nextReviewDate <= Date.now()).length,
               currentUid)}
             studiedToday={studiedToday(currentUid)}
-            dailyTarget={dailyTarget()}
-            newPerDay={NEW_CAP}
             onOpenReference={() => setShowSwedishReference(true)}
             onOpenGrammar={() => setShowSwedishGrammar(true)}
             onOpenChapters={() => setShowChapterReview(true)}
@@ -942,8 +940,11 @@ function App() {
   // English section (unchanged behavior).
   return (
     <div className="app-container">
+      <StudySyncNotice message={studyNotice} onDismiss={() => setStudyNotice('')} />
       {view === 'dashboard' && (
         <Dashboard
+          key={currentUid}
+          userId={currentUid ?? 'anon'}
           cards={cards}
           grammarCards={grammarCards}
           onStartStudy={() => handleStartStudy(false)}
@@ -963,6 +964,8 @@ function App() {
       </AnimatePresence>
       {view === 'study' && restoredSession && (
         <StudySession
+          key={currentUid}
+          userId={currentUid ?? 'anon'}
           cards={restoredSession.queue}
           startIndex={restoredSession.index}
           startFlipped={restoredSession.isFlipped}

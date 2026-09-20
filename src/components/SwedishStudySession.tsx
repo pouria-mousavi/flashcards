@@ -2,16 +2,21 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import SwedishCardView from './SwedishCard';
-import { calculateSM2, LEARNING_REQUEUE_WINDOW_MS, previewIntervalLabel } from '../utils/sm2';
+import { LEARNING_REQUEUE_WINDOW_MS } from '../utils/sm2';
+import { makeReview, previewReview } from '../lib/scheduler';
+import type { ReviewEvent } from '../lib/studyTypes';
 import type { SwedishCard } from '../utils/sm2';
 import { SWEDISH_SESSION_KEY } from '../lib/session';
 import { playTTS } from '../lib/tts';
+import { useStudyTime } from '../lib/useStudyTime';
+import StudyBreak, { StudyTimeRemaining } from './StudyBreak';
 
 interface Props {
+  userId: string;
   cards: SwedishCard[];
   startIndex?: number;
   startFlipped?: boolean;
-  onUpdateCard: (card: SwedishCard) => void;
+  onUpdateCard: (card: SwedishCard, event: ReviewEvent) => void;
   onDeleteCard: (cardId: string) => void;
   canEdit?: boolean;
   onSessionComplete: () => void;
@@ -20,13 +25,16 @@ interface Props {
 }
 
 export default function SwedishStudySession({
-  cards, startIndex = 0, startFlipped = false, onUpdateCard, onDeleteCard, canEdit = true, onSessionComplete, onPause, onOpenReference,
+  userId, cards, startIndex = 0, startFlipped = false, onUpdateCard, onDeleteCard, canEdit = true, onSessionComplete, onPause, onOpenReference,
 }: Props) {
   // Initialize queue from props ONCE — never replace on parent re-renders.
   const [queue, setQueue] = useState<SwedishCard[]>(cards);
   const [currentCardIndex, setCurrentCardIndex] = useState(startIndex);
   const [isFlipped, setIsFlipped] = useState(startFlipped);
+  const studyTime = useStudyTime(userId, Math.min(...queue.slice(currentCardIndex).map(c => c.nextReviewDate)));
+  const hasReadyCards = studyTime.ready;
   const completedRef = useRef(false);
+  const [ratingError, setRatingError] = useState('');
 
   const syncFlipToStorage = useCallback((flipped: boolean) => {
     try {
@@ -88,7 +96,7 @@ export default function SwedishStudySession({
   // Honor learning-step delays: if the card we're about to show is a re-queued
   // learning card that is NOT due yet, and a due card still waits later in the
   // queue, rotate the early card to the back and show the due one instead.
-  // If nothing else is due, we show it early (Anki does the same).
+  // If nothing else is due, the break screen preserves the scheduled delay.
   useEffect(() => {
     const card = queue[currentCardIndex];
     if (!card) return;
@@ -142,14 +150,15 @@ export default function SwedishStudySession({
     }
   };
 
-  const handleRate = (rating: number) => {
+  const handleRate = (rating: ReviewEvent['rating']) => {
     const currentCard = queue[currentCardIndex];
-    if (!currentCard) return;
+    if (!currentCard || currentCard.nextReviewDate > Date.now() || !studyTime.canStudy()) return;
 
-    const updates = calculateSM2(currentCard, rating);
-    const updatedCard: SwedishCard = { ...currentCard, ...updates } as SwedishCard;
-
-    onUpdateCard(updatedCard);
+    const { updated: updatedCard, event } = makeReview(currentCard, 'swedish', rating, studyTime.reviewDuration());
+    try { onUpdateCard(updatedCard, event); }
+    catch { setRatingError('This review could not be saved on your device. Free some browser storage and try again.'); return; }
+    studyTime.resetReviewTimer();
+    setRatingError('');
 
     if (rating === 5) {
       confetti({
@@ -165,7 +174,7 @@ export default function SwedishStudySession({
     // Re-queue learning-step cards so they return within THIS session.
     const now = Date.now();
     let isRequeued = false;
-    if (updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now <= LEARNING_REQUEUE_WINDOW_MS)) {
+    if ((updatedCard.consecutiveIncorrect ?? 0) < 2 && updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now <= LEARNING_REQUEUE_WINDOW_MS)) {
       setQueue(prev => [...prev, updatedCard]);
       isRequeued = true;
     }
@@ -188,6 +197,11 @@ export default function SwedishStudySession({
     setCurrentCardIndex(prev => prev + 1);
   };
 
+  if (studyTime.exhausted) return <StudyBreak budgetComplete onBack={onPause} />;
+  if (currentCardIndex < queue.length && !hasReadyCards) {
+    return <StudyBreak budgetComplete={false} onBack={onSessionComplete} />;
+  }
+
   if (queue.length === 0) {
     return (
       <div className="flex-center full-screen" style={{ flexDirection: 'column', gap: '16px', color: 'var(--text-secondary)' }}>
@@ -206,11 +220,11 @@ export default function SwedishStudySession({
   if (currentCardIndex >= queue.length) return null;
 
   const currentCard = queue[currentCardIndex];
-  const cardsLeft = queue.length - currentCardIndex;
   const progress = (currentCardIndex / queue.length) * 100;
 
   return (
     <div className="flex-center full-screen" style={{ flexDirection: 'column', position: 'relative', height: '100dvh', overflow: 'hidden' }}>
+      {ratingError && <p role="alert" style={{ position: 'absolute', top: 58, padding: 12, zIndex: 20, background: 'var(--card-bg)', color: 'var(--danger)' }}>{ratingError}</p>}
       {/* Progress bar */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'rgba(255,255,255,0.05)', zIndex: 15 }}>
         <div style={{ height: '100%', width: `${progress}%`, background: 'var(--grad-sv)', transition: 'width 0.3s ease', borderRadius: '0 2px 2px 0', boxShadow: '0 0 12px var(--glow-sv)' }} />
@@ -237,7 +251,7 @@ export default function SwedishStudySession({
             </button>
           )}
           <div className="glass tabular" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, padding: '8px 14px', borderRadius: '999px' }}>
-            {cardsLeft} left
+            <StudyTimeRemaining remainingMs={studyTime.remainingMs} />
           </div>
         </div>
       </div>
@@ -271,10 +285,10 @@ export default function SwedishStudySession({
             </button>
           ) : (
             <>
-              <RateButton label="Again" hint={previewIntervalLabel(currentCard, 0)} tone="again" onClick={() => handleRate(0)} />
-              <RateButton label="Hard" hint={previewIntervalLabel(currentCard, 3)} tone="hard" onClick={() => handleRate(3)} />
-              <RateButton label="Good" hint={previewIntervalLabel(currentCard, 4)} tone="good" onClick={() => handleRate(4)} />
-              <RateButton label="Easy" hint={previewIntervalLabel(currentCard, 5)} tone="easy" onClick={() => handleRate(5)} />
+              <RateButton label="Again" hint={previewReview(currentCard, 0)} tone="again" onClick={() => handleRate(0)} />
+              <RateButton label="Hard" hint={previewReview(currentCard, 3)} tone="hard" onClick={() => handleRate(3)} />
+              <RateButton label="Good" hint={previewReview(currentCard, 4)} tone="good" onClick={() => handleRate(4)} />
+              <RateButton label="Easy" hint={previewReview(currentCard, 5)} tone="easy" onClick={() => handleRate(5)} />
             </>
           )}
         </div>

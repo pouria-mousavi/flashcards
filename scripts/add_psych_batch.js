@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import Anthropic from '@anthropic-ai/sdk';
+import { generateText, OPENAI_MODEL } from './lib/openai.cjs';
 import fs from 'fs';
 import path from 'path';
 
@@ -22,7 +22,6 @@ if (fs.existsSync(envPath)) {
 }
 
 const supabase = createClient(env.VITE_SUPABASE_URL, env.VITE_SUPABASE_ANON_KEY);
-const anthropic = new Anthropic({ apiKey: env.VITE_CLAUDE_KEY });
 
 async function processList() {
     console.log("Reading raw list...");
@@ -30,9 +29,9 @@ async function processList() {
 
     // Step 1: Extract Headwords
     console.log("Step 1: Extracting English Terms...");
-    const extractMsg = await anthropic.messages.create({
-        model: "claude-3-haiku-20240307",
-        max_tokens: 2000,
+    const extractMsg = await generateText({
+        model: OPENAI_MODEL,
+        maxOutputTokens: 2000,
         messages: [{
             role: "user", 
             content: `Extract ONLY the main English HEADWORDS from this list. 
@@ -59,7 +58,7 @@ async function processList() {
     
     let extractedWords = [];
     try {
-        const text = extractMsg.content[0].text;
+        const text = extractMsg;
         const start = text.indexOf('[');
         const end = text.lastIndexOf(']');
         if (start !== -1 && end !== -1) {
@@ -70,7 +69,7 @@ async function processList() {
         }
     } catch(e) {
         console.error("Extraction failed", e);
-        console.log("Debug text:", extractMsg.content[0].text);
+        console.log("Debug text:", extractMsg);
         return;
     }
 
@@ -104,12 +103,12 @@ async function processList() {
         `;
         
         try {
-            const filterMsg = await anthropic.messages.create({
-                model: "claude-3-haiku-20240307",
-                max_tokens: 1000,
+            const filterMsg = await generateText({
+                model: OPENAI_MODEL,
+                maxOutputTokens: 1000,
                 messages: [{ role: "user", content: filterPrompt }]
             });
-            const allowed = JSON.parse(filterMsg.content[0].text.match(/\[[\s\S]*\]/)[0]);
+            const allowed = JSON.parse(filterMsg.match(/\[[\s\S]*\]/)[0]);
             filteredWords.push(...allowed);
         } catch(e) { 
             console.error("Filter batch failed, keeping all.", e);
@@ -154,13 +153,13 @@ async function processList() {
         `;
         
         try {
-            const enrichMsg = await anthropic.messages.create({
-                model: "claude-3-haiku-20240307",
-                max_tokens: 3000,
+            const enrichMsg = await generateText({
+                model: OPENAI_MODEL,
+                maxOutputTokens: 3000,
                 messages: [{ role: "user", content: enrichPrompt }]
             });
             
-            const result = JSON.parse(enrichMsg.content[0].text.match(/\{[\s\S]*\}/)[0]);
+            const result = JSON.parse(enrichMsg.match(/\{[\s\S]*\}/)[0]);
             
             const dbRows = result.cards.map(c => ({
                 back: c.back,

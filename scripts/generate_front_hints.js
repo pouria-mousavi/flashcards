@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import Anthropic from '@anthropic-ai/sdk';
+import { generateText, OPENAI_MODEL, env as aiEnv } from './lib/openai.cjs';
 import fs from 'fs';
 import path from 'path';
 
@@ -24,15 +24,14 @@ if (fs.existsSync(envPath)) {
 
 const supabaseUrl = env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
 const supabaseKey = env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-const anthropicKey = env.VITE_CLAUDE_KEY || process.env.VITE_CLAUDE_KEY;
+const openaiKey = aiEnv.OPENAI_API_KEY;
 
-if (!supabaseUrl || !supabaseKey || !anthropicKey) {
+if (!supabaseUrl || !supabaseKey || !openaiKey) {
     console.error("Missing env vars.");
     process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
-const anthropic = new Anthropic({ apiKey: anthropicKey });
 
 async function generateHints() {
     console.log("Starting Hint Generation...");
@@ -81,13 +80,13 @@ async function generateHints() {
         `;
 
         try {
-            const msg = await anthropic.messages.create({
-                model: "claude-3-haiku-20240307",
-                max_tokens: 2500,
+            const msg = await generateText({
+                model: OPENAI_MODEL,
+                maxOutputTokens: 2500,
                 messages: [{ role: "user", content: prompt }]
             });
 
-            const text = msg.content[0].text;
+            const text = msg;
             const jsonMatch = text.match(/\{[\s\S]*\}/);
             
             if (jsonMatch) {

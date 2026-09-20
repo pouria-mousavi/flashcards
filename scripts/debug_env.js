@@ -16,16 +16,16 @@ if (fs.existsSync(envPath)) {
     });
 }
 
-const keysToCheck = ['VITE_CLAUDE_KEY', 'VITE_GEMINI_API_KEY', 'VITE_SUPABASE_URL'];
+const keysToCheck = ['OPENAI_API_KEY', 'VITE_GEMINI_API_KEY', 'VITE_SUPABASE_URL'];
 
 console.log("--- Process Env ---");
 keysToCheck.forEach(k => {
     const val = process.env[k];
-    console.log(`${k}: ${val ? `Present (len=${val.length}, start=${val.substring(0,4)}...)` : 'Missing'}`);
+    console.log(`${k}: ${val ? 'Present' : 'Missing'}`);
 });
 
 console.log("\n--- Manual .env Parse ---");
 keysToCheck.forEach(k => {
     const val = manualEnv[k];
-    console.log(`${k}: ${val ? `Present (len=${val.length}, start=${val.substring(0,4)}...)` : 'Missing'}`);
+    console.log(`${k}: ${val ? 'Present' : 'Missing'}`);
 });

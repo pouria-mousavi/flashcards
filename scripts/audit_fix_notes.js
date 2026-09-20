@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import Anthropic from '@anthropic-ai/sdk';
+import { generateText, OPENAI_MODEL, env as aiEnv } from './lib/openai.cjs';
 import fs from 'fs';
 import path from 'path';
 
@@ -24,15 +24,14 @@ if (fs.existsSync(envPath)) {
 
 const supabaseUrl = env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
 const supabaseKey = env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
-const anthropicKey = env.VITE_CLAUDE_KEY || process.env.VITE_CLAUDE_KEY;
+const openaiKey = aiEnv.OPENAI_API_KEY;
 
-if (!supabaseUrl || !supabaseKey || !anthropicKey) {
-    console.error("Missing env vars. Need Supabase and Claude Key.");
+if (!supabaseUrl || !supabaseKey || !openaiKey) {
+    console.error("Missing env vars. Need Supabase and OpenAI Key.");
     process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
-const anthropic = new Anthropic({ apiKey: anthropicKey });
 
 async function fixNotes() {
     console.log("Fetching cards with notes...");
@@ -75,13 +74,13 @@ async function fixNotes() {
         `;
 
         try {
-            const msg = await anthropic.messages.create({
-                model: "claude-3-haiku-20240307",
-                max_tokens: 200,
+            const msg = await generateText({
+                model: OPENAI_MODEL,
+                maxOutputTokens: 200,
                 messages: [{ role: "user", content: prompt }]
             });
 
-            const text = msg.content[0].text;
+            const text = msg;
             const jsonMatch = text.match(/\{[\s\S]*\}/);
             
             if (jsonMatch) {
@@ -106,12 +105,12 @@ async function fixNotes() {
                         Provide a VALID, SYNONYM Persian translation that is different.
                         Output JSON: { "new_front": "synonym" }
                         `;
-                        const msg2 = await anthropic.messages.create({
-                            model: "claude-3-haiku-20240307",
-                            max_tokens: 200,
+                        const msg2 = await generateText({
+                            model: OPENAI_MODEL,
+                            maxOutputTokens: 200,
                             messages: [{ role: "user", content: prompt2 }]
                         });
-                        const text2 = msg2.content[0].text;
+                        const text2 = msg2;
                         const jsonMatch2 = text2.match(/\{[\s\S]*\}/);
                         if (jsonMatch2) {
                             const res2 = JSON.parse(jsonMatch2[0]);
@@ -133,7 +132,7 @@ async function fixNotes() {
                  else console.log("   -> Saved.");
             }
         } catch (e) {
-            console.error("Claude error:", e);
+            console.error("OpenAI error:", e);
         }
     }
 }

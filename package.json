@@ -7,10 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test tests/*.test.mjs",
+    "test:study": "node --test tests/study-*.test.mjs",
+    "test:ai": "node --test tests/ai.test.mjs tests/edge-auth.test.mjs",
+    "check:ai": "node scripts/test_openai.js"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.71.2",
     "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.86.2",
     "@types/canvas-confetti": "^1.9.0",
@@ -22,14 +25,17 @@
     "lucide-react": "^0.556.0",
     "openai": "^6.15.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "ts-fsrs": "5.4.2"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "esbuild": "0.25.12",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",

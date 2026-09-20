@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import Anthropic from '@anthropic-ai/sdk';
+import { generateText, OPENAI_AUDIT_MODEL } from './lib/openai.cjs';
 import fs from 'fs';
 import path from 'path';
 
@@ -9,13 +9,9 @@ const url = envContent.match(/VITE_SUPABASE_URL=(.*)/)[1].trim();
 const key = envContent.match(/VITE_SUPABASE_ANON_KEY=(.*)/)[1].trim();
 const supabase = createClient(url, key);
 
-// Claude Configuration
-const CLAUDE_KEY = process.env.CLAUDE_KEY || "";
-const anthropic = new Anthropic({
-  apiKey: CLAUDE_KEY, 
-});
+// OpenAI Configuration
 
-const MODEL = "claude-sonnet-4-5-20250929"; 
+const MODEL = OPENAI_AUDIT_MODEL;
 
 async function main() {
     console.log(`🚀 Starting Final Translation Audit (${MODEL})...`);
@@ -40,7 +36,7 @@ async function main() {
     for (let i = 0; i < allCards.length; i += BATCH_SIZE) {
         const batch = allCards.slice(i, i + BATCH_SIZE);
         await processBatch(batch);
-        // Anthropic has rate limits. Sonnet 3.5 Tier 1 is generous but let's be safe.
+        // Process batches sequentially to keep requests within rate limits.
         // Parallelizing might hit RPM limits. Sequential is safer for "Cost-Optimization" debugging too.
     }
 
@@ -80,16 +76,16 @@ async function processBatch(cards) {
         Respond ONLY with the JSON object. No markdown.
         `;
 
-        const response = await anthropic.messages.create({
+        const response = await generateText({
             model: MODEL,
-            max_tokens: 4096,
+            maxOutputTokens: 4096,
             temperature: 0.1, 
             system: "You are a backend JSON processor. Output valid JSON only.",
             messages: [{ role: "user", content: prompt }]
         });
 
-        // Filter out markdown code blocks if Claude adds them
-        let content = response.content[0].text;
+        // Filter out markdown code blocks if OpenAI adds them
+        let content = response;
         content = content.replace(/```json/g, '').replace(/```/g, '').trim();
         
         const corrections = JSON.parse(content);
@@ -101,7 +97,7 @@ async function processBatch(cards) {
             // Validation
             if (!suggested || !isDifferent(card.front, suggested)) continue;
             
-            console.log(`✨ CLAUDE FIX: [${card.back}] "${card.front}" -> "${suggested}"`);
+            console.log(`✨ OPENAI FIX: [${card.back}] "${card.front}" -> "${suggested}"`);
             
             const { error } = await supabase
                 .from('cards')
@@ -114,7 +110,7 @@ async function processBatch(cards) {
     } catch (err) {
         console.error("Batch processing failed:", err.message);
         // If JSON parse fails, log content for debugging
-        if (err instanceof SyntaxError) console.error("Invalid JSON from Claude");
+        if (err instanceof SyntaxError) console.error("Invalid JSON from OpenAI");
     }
 }
 

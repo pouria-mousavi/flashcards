@@ -443,7 +443,7 @@ export default function AddCard({ onAdd, onCancel }: Props) {
               animation: 'addcard-spin 0.8s linear infinite'
             }} />
             <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-              Generating with Claude...
+              Generating cards...
             </span>
           </div>
         )}

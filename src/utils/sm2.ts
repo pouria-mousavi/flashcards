@@ -1,4 +1,5 @@
 import type { Database } from '../types/supabase';
+import type { SchedulerMetadata } from '../lib/studyTypes';
 
 export const CardState = {
   NEW: 'NEW',
@@ -14,7 +15,7 @@ export interface OtherMeaning {
   persian: string;
 }
 
-export interface Flashcard {
+export interface Flashcard extends SchedulerMetadata {
   type?: 'vocab';  // discriminator — optional for backwards compat, set by mapper
   id: string;
   front: string;
@@ -30,6 +31,11 @@ export interface Flashcard {
   interval: number;
   easeFactor: number;
   createdAt: number;
+  masteryLevel?: number;
+  consecutiveCorrect?: number;
+  consecutiveIncorrect?: number;
+  totalReviews?: number;
+  lapses?: number;
 
   /** Cards reset back to NEW are flagged 'high' so they re-enter the queue
    *  ahead of never-seen words instead of being buried by the LIFO sort. */
@@ -85,7 +91,7 @@ const SETTINGS = {
 };
 
 // Minimal shape needed by the SM-2 algorithm. Works for Flashcard or GrammarCard.
-export interface SRSCard {
+export interface SRSCard extends SchedulerMetadata {
     state: CardState;
     nextReviewDate: number;
     interval: number;
@@ -349,7 +355,7 @@ export function mapRowToCard(
 // Uses the same SM-2 algorithm via the shared SRSCard interface.
 // -----------------------------------------------------------------------------
 
-export interface GrammarCard {
+export interface GrammarCard extends SchedulerMetadata {
     type: 'grammar';
     id: string;
     front: string;          // Persian
@@ -413,6 +419,8 @@ export interface SwedishExample {
     text: string;         // sentence in the back-side language
     translation?: string; // same sentence in the opposite language
     emphasis?: string;    // verbatim substring of `text` to stress (betoning)
+    kind?: 'note';        // grammar explanation: never play as Swedish audio
+    source?: string;      // textbook reference, not a sentence translation
 }
 
 export type SwedishPos = 'verb' | 'noun' | 'adjective';
@@ -461,7 +469,7 @@ export interface SwedishPrep {
     note?: string;    // English explanation of this preposition's use
 }
 
-export interface SwedishCard {
+export interface SwedishCard extends SchedulerMetadata {
     type: 'swedish';
     id: string;
     front: string;
@@ -509,6 +517,8 @@ export function mapSwedishRowToCard(
                         text: e.text,
                         translation: typeof e.translation === 'string' ? e.translation : undefined,
                         emphasis: typeof e.emphasis === 'string' ? e.emphasis : undefined,
+                        kind: e.kind === 'note' ? 'note' as const : undefined,
+                        source: typeof e.source === 'string' ? e.source : undefined,
                     }));
             }
             return undefined;
