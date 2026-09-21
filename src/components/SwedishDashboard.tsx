@@ -1,16 +1,18 @@
-import { motion } from 'framer-motion';
-import { CardState } from '../utils/sm2';
-import type { SwedishCard, Lang } from '../utils/sm2';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowRight, BookOpen, Leaf, Library, SlidersHorizontal, Sprout, X } from 'lucide-react';
+import type { Lang } from '../utils/sm2';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
 import { useStudyTime } from '../lib/useStudyTime';
-import { studyDayStart } from '../lib/studyTime';
 
 interface Props {
   userId: string;
-  cards: SwedishCard[];
+  cards: { state: string; nextReviewDate: number }[];
+  languageName?: 'Swedish' | 'English';
+  onAddCard?: () => void;
   onStartStudy: () => void;
   hasActiveSession?: boolean;
+  onResetSession?: () => void;
   activeLanguage: Lang;
   onSwitchLanguage: (lang: Lang) => void;
   onOpenReference?: () => void;
@@ -20,332 +22,70 @@ interface Props {
   onOpenProv?: () => void;
   onOpenAccount?: () => void;
   showSwitcher?: boolean;
-  /** New cards that may still be introduced today (governor output). */
   newBudget?: number;
-  /** Distinct cards already studied today. */
   studiedToday?: number;
 }
 
-/** Existing deadlines only; future ratings can generate additional reviews. */
-function forecast(
-  cards: SwedishCard[],
-  days: number,
-): number[] {
-  let start = studyDayStart(Date.now());
-  const ends = Array.from({ length: days }, () => {
-    start = studyDayStart(start + 36 * 3600000);
-    return start;
-  });
-  const out = new Array(days).fill(0);
-  for (const c of cards) {
-    if (c.state === CardState.NEW) continue;
-    const d = ends.findIndex(end => c.nextReviewDate < end);
-    if (d >= 0) out[d]++;
-  }
-  return out;
-}
-
-interface Tier {
-  label: string;
-  count: number;
-  color: string;
-}
-
-function classify(cards: SwedishCard[]): Tier[] {
-  const counts = [0, 0, 0, 0, 0];
-  cards.forEach(card => {
-    switch (card.state) {
-      case CardState.NEW: counts[0]++; break;
-      case CardState.LEARNING:
-      case CardState.RELEARNING: counts[1]++; break;
-      case CardState.REVIEW:
-        if (card.interval <= 7) counts[2]++;
-        else if (card.interval <= 30) counts[3]++;
-        else counts[4]++;
-        break;
-    }
-  });
-  return [
-    { label: 'New', count: counts[0], color: '#a8a29e' },
-    { label: 'Learning', count: counts[1], color: '#f59e0b' },
-    { label: 'Young', count: counts[2], color: '#f97316' },
-    { label: 'Maturing', count: counts[3], color: '#8b5cf6' },
-    { label: 'Mature', count: counts[4], color: '#10b981' },
-  ];
-}
-
 export default function SwedishDashboard({
-  userId, cards, onStartStudy, hasActiveSession, activeLanguage, onSwitchLanguage, onOpenReference, onOpenGrammar, onOpenProgress, onOpenChapters, onOpenProv,
-  onOpenAccount, showSwitcher = true, newBudget = 0, studiedToday = 0,
+  userId, cards, onStartStudy, hasActiveSession, onResetSession, activeLanguage, onSwitchLanguage,
+  onOpenReference, onOpenGrammar, onOpenProgress, onOpenChapters, onOpenProv, onOpenAccount,
+  showSwitcher = true, newBudget = 0, studiedToday = 0, languageName = 'Swedish', onAddCard,
 }: Props) {
-  const totalCards = cards.length;
-  const now = Date.now();
+  const [libraryOpen, setLibraryOpen] = useState(false);
+  const libraryButton = useRef<HTMLButtonElement>(null);
+  const closeLibrary = () => { setLibraryOpen(false); window.setTimeout(() => libraryButton.current?.focus(), 0); };
+  const [now, setNow] = useState(Date.now);
+  useEffect(() => {
+    const refresh = () => setNow(Date.now());
+    const interval = window.setInterval(refresh, 30000);
+    document.addEventListener('visibilitychange', refresh);
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener('visibilitychange', refresh);
+    };
+  }, []);
   const studyTime = useStudyTime(userId, null);
-  // Queue size is separate from today's shared time allowance.
-  const reviewsDue = cards.filter(c => c.state !== CardState.NEW && c.nextReviewDate <= now).length;
-  const notStarted = cards.filter(c => c.state === CardState.NEW).length;
-  const newToday = Math.min(newBudget, notStarted);
-  const dueCount = reviewsDue + newToday;
-  const started = totalCards - notStarted;
-  const next7 = forecast(cards, 7);
-  const scheduleScale = Math.max(...next7, 1);
-  const hasDue = dueCount > 0;
+  const hasDue = cards.some(c => c.state !== 'NEW' && c.nextReviewDate <= now)
+    || (newBudget > 0 && cards.some(c => c.state === 'NEW'));
   const canStudy = (hasDue || hasActiveSession) && !studyTime.exhausted;
-  const tiers = classify(cards);
-  const maxCount = Math.max(...tiers.map(t => t.count), 1);
+  const settled = studyTime.exhausted || (!hasDue && !hasActiveSession);
+  const links = [
+    { title: 'Grammar help', detail: 'Understand a pattern', action: onOpenGrammar },
+    { title: 'Word forms', detail: 'Look up a word', action: onOpenReference },
+    { title: 'Your cards', detail: 'Browse by chapter', action: onOpenChapters },
+    { title: 'Your progress', detail: 'See what you have practised', action: onOpenProgress },
+    { title: 'Practice quiz', detail: 'Try it when you feel ready', action: onOpenProv },
+    { title: 'Add cards', detail: 'Keep new words for later', action: onAddCard },
+  ].filter(link => link.action);
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '48px 24px',
-      gap: '26px',
-      width: '100%',
-      height: '100dvh',
-      overflowY: 'auto',
-    }}>
-      {/* Control strip — language (author only), theme, account */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        {showSwitcher && <LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} />}
-        <ThemeToggle />
-        {onOpenProgress && (
-          <button
-            onClick={onOpenProgress}
-            className="pressable glass"
-            aria-label="Progress"
-            style={{ width: '36px', height: '36px', borderRadius: '999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem', color: 'var(--text-secondary)', background: 'transparent' }}
-          >
-            ◔
-          </button>
-        )}
-        {onOpenAccount && (
-          <button
-            onClick={onOpenAccount}
-            className="pressable glass"
-            aria-label="Account"
-            style={{ width: '36px', height: '36px', borderRadius: '999px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.95rem', color: 'var(--text-secondary)', background: 'transparent' }}
-          >
-            ⚙
-          </button>
-        )}
+    <main className="calm-home">
+      <header className="calm-topbar" inert={libraryOpen}>
+        <span className="calm-brand"><Sprout size={23} strokeWidth={1.6} /> {languageName === 'Swedish' ? 'svenska' : 'english'}<span className="brand-dot">.</span></span>
+        <div className="calm-tools"><ThemeToggle />{onOpenAccount && <button className="calm-icon-button" onClick={onOpenAccount} aria-label="Account settings"><SlidersHorizontal size={19} /></button>}</div>
+      </header>
+      <div className="calm-home-content" inert={libraryOpen}>
+        <div className="calm-art" aria-hidden="true"><div className="art-orbit" /><div className="art-paper art-paper-back" /><div className="art-paper"><span>{languageName === 'Swedish' ? 'hej.' : 'hello.'}</span><i>{languageName === 'Swedish' ? 'hello' : 'a beginning'}</i><Leaf size={25} strokeWidth={1.3} /></div><span className="art-spark">✳</span></div>
+        <p className="calm-eyebrow">YOUR {languageName.toUpperCase()}, AT YOUR PACE</p>
+        <h1 className="calm-title">{settled ? 'Let it settle.' : `A little ${languageName}.`}</h1>
+        <p className="calm-intro">{settled ? 'You can leave it here for today. Your words will be here when you return.' : studiedToday > 0 ? `You’ve already made a little space for ${languageName} today. Another round is optional.` : 'One word, one small step. Start wherever you are.'}</p>
+        <section className="calm-start-panel" aria-label="Your practice">
+          <div className="calm-start-heading"><span className="calm-leaf"><Leaf size={20} /></span><div><h2>{settled ? 'A good place to pause' : hasActiveSession ? 'Pick up your practice' : 'A small round'}</h2><p>{settled ? 'Rest is part of learning, too.' : 'A few cards. You can stop at any point.'}</p></div></div>
+          <button className="calm-primary" disabled={!canStudy} onClick={onStartStudy}>{settled ? 'Rest for now' : hasActiveSession ? 'Continue your round' : 'Study a few cards'}{!settled && <ArrowRight size={19} />}</button>
+          {hasActiveSession && onResetSession && <button className="calm-text-button" onClick={onResetSession}>Start a fresh round</button>}
+        </section>
+        <button ref={libraryButton} className="calm-library-link" onClick={() => setLibraryOpen(true)} aria-expanded={libraryOpen} aria-controls={libraryOpen ? 'learning-space' : undefined}><Library size={18} /><span>Your learning space</span><ArrowRight size={16} /></button>
       </div>
-
-      {/* Hero — the number that matters today */}
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        style={{ textAlign: 'center' }}
-      >
-        <h1 className="tabular" style={{
-          fontSize: 'clamp(3.4rem, 16vw, 4.6rem)',
-          fontWeight: 800,
-          margin: 0,
-          lineHeight: 1,
-          letterSpacing: '-0.04em',
-          background: 'var(--grad-sv)',
-          WebkitBackgroundClip: 'text',
-          backgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-        }}>
-          {Math.ceil(studyTime.remainingMs / 60000)}
-        </h1>
-        <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600, letterSpacing: '0.01em' }}>
-          {studyTime.exhausted ? "Today's plan is complete" : `minutes left today${showSwitcher ? ' · Swedish + English' : ''}`}
-        </p>
-        <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-          {reviewsDue} Swedish reviews waiting · {studiedToday} studied today
-          <br />{started} started · {notStarted} to meet
-        </p>
-      </motion.div>
-
-      {/* Existing deadlines, independent of the daily effort limit. */}
-      <div className="glass" style={{ width: '100%', maxWidth: '380px', borderRadius: 'var(--radius)', padding: '14px 16px 12px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '10px' }}>
-          <span style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent-sv)' }}>
-            Waiting and scheduled
-          </span>
-          <span style={{ fontSize: '0.62rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-            next 7 days
-          </span>
+      <footer className="calm-home-footer" inert={libraryOpen}><span lang="sv">Lite i taget.</span> A little at a time.</footer>
+      {libraryOpen && <section className="calm-library" id="learning-space" aria-label="Your learning space" onKeyDown={event => { if (event.key === 'Escape') closeLibrary(); }}>
+        <header className="calm-topbar"><span className="calm-brand"><BookOpen size={22} /> Your learning space</span><button className="calm-icon-button" onClick={closeLibrary} aria-label="Close learning space" autoFocus><X size={21} /></button></header>
+        <div className="calm-library-content">
+          <h2 className="calm-title">Make it your own.</h2><p className="calm-intro">A little support, whenever you need it.</p>
+          <div className="calm-library-list">{links.map(link => <button key={link.title} onClick={link.action}><span><strong>{link.title}</strong><small>{link.detail}</small></span><ArrowRight size={19} /></button>)}</div>
+          <details className="calm-help"><summary>A gentler way to learn</summary><ol><li>{languageName === 'Swedish' ? 'Read a small part of Rivstart.' : 'Read a short passage in English.'} Understand it before memorising it.</li><li>Try saying each card’s answer before revealing it. A guess is okay.</li><li>Listen to the example, then say one sentence about your own life.</li>{languageName === 'Swedish' && <li>Use Form i fokus A when a grammar pattern needs a little explanation.</li>}</ol><p>Five cards can be enough. The app keeps the roughly 20-minute daily guide in the background and lets you finish your current card.</p></details>
+          {showSwitcher && <div className="calm-language"><LanguageSwitcher active={activeLanguage} onChange={onSwitchLanguage} /></div>}
         </div>
-        <div style={{ display: 'flex', gap: '5px', alignItems: 'flex-end', height: '46px' }}>
-          {next7.map((n, i) => (
-            <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-              <span className="tabular" style={{ fontSize: '0.6rem', fontWeight: 700, color: 'var(--text-muted)' }}>{n}</span>
-              <div style={{
-                width: '100%',
-                height: `${Math.max(3, n / scheduleScale * 26)}px`,
-                borderRadius: '3px 3px 1px 1px',
-                background: 'var(--grad-sv)',
-                opacity: i === 0 ? 1 : 0.45,
-              }} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <p style={{ margin: '-10px 0 0', maxWidth: 380, fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-        These are waiting cards, not a daily assignment. Future repetitions may add reviews.
-      </p>
-
-      {/* State breakdown */}
-      <div className="glass" style={{
-        width: '100%',
-        maxWidth: '380px',
-        borderRadius: 'var(--radius)',
-        padding: '22px 16px 16px',
-        boxShadow: 'var(--card-shadow)',
-      }}>
-        <div style={{ display: 'flex', gap: '6px', alignItems: 'flex-end', height: '108px' }}>
-          {tiers.map((t, i) => {
-            const fillH = Math.max((t.count / maxCount) * 88, t.count > 0 ? 18 : 4);
-            return (
-              <div key={t.label} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%', gap: '7px' }}>
-                <span className="tabular" style={{ fontSize: t.count >= 1000 ? '0.72rem' : '0.95rem', fontWeight: 800, letterSpacing: '-0.02em', color: t.count > 0 ? t.color : 'var(--text-muted)', opacity: t.count > 0 ? 1 : 0.35 }}>
-                  {t.count}
-                </span>
-                <motion.div
-                  initial={{ height: 0 }}
-                  animate={{ height: fillH }}
-                  transition={{ delay: 0.15 + i * 0.06, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  style={{
-                    width: '100%',
-                    background: `linear-gradient(to top, ${t.color}0a, ${t.color}30)`,
-                    borderTop: t.count > 0 ? `2px solid ${t.color}` : '2px solid transparent',
-                    borderRadius: '7px 7px 3px 3px',
-                    boxShadow: t.count > 0 ? `0 -6px 18px -6px ${t.color}55` : 'none',
-                  }}
-                />
-              </div>
-            );
-          })}
-        </div>
-        <div style={{ display: 'flex', gap: '6px', marginTop: '8px' }}>
-          {tiers.map(t => (
-            <span key={t.label} style={{ flex: 1, textAlign: 'center', fontSize: '0.55rem', fontWeight: 700, color: t.count > 0 ? t.color : 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', opacity: t.count > 0 ? 0.9 : 0.35 }}>
-              {t.label}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Session-in-progress pill */}
-      {hasActiveSession && (
-        <div className="glass" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '999px' }}>
-          <motion.div
-            animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.2, 1] }}
-            transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent-sv)', flexShrink: 0 }}
-          />
-          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent-sv)' }}>
-            Session in progress
-          </span>
-        </div>
-      )}
-
-      {/* Action button */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', maxWidth: '380px' }}>
-        <button
-          onClick={onStartStudy}
-          disabled={!canStudy}
-          className="pressable"
-          style={{
-            padding: '18px',
-            fontSize: '1rem',
-            fontWeight: 700,
-            background: canStudy ? 'var(--grad-sv)' : 'var(--card-bg)',
-            color: canStudy ? 'var(--cta-ink-sv)' : 'var(--text-muted)',
-            borderRadius: 'var(--radius)',
-            boxShadow: canStudy ? '0 10px 30px -6px var(--glow-sv), 0 1px 0 rgba(255,255,255,0.25) inset' : 'none',
-            opacity: canStudy ? 1 : 0.5,
-            border: canStudy ? 'none' : '1px solid var(--border)',
-            letterSpacing: '-0.01em',
-          }}
-        >
-          {studyTime.exhausted ? "Today's plan is complete" : hasActiveSession
-            ? 'Resume studying'
-            : (dueCount > 0 ? 'Start studying' : (totalCards === 0 ? 'No cards yet' : 'No cards ready now'))}
-        </button>
-
-        {onOpenProv && (
-          <button
-            onClick={onOpenProv}
-            className="pressable glass"
-            style={{
-              padding: '15px',
-              fontSize: '0.95rem',
-              fontWeight: 700,
-              color: 'var(--accent-sv)',
-              borderRadius: 'var(--radius)',
-              background: 'transparent',
-              border: '1px solid var(--accent-sv-border)',
-              letterSpacing: '-0.01em',
-            }}
-          >
-            ✎ Gör ett prov
-          </button>
-        )}
-
-        <div style={{ display: 'flex', gap: '12px' }}>
-          {onOpenReference && (
-            <button
-              onClick={onOpenReference}
-              className="pressable glass"
-              style={{
-                flex: 1,
-                padding: '15px',
-                fontSize: '0.92rem',
-                fontWeight: 600,
-                color: 'var(--text-secondary)',
-                borderRadius: 'var(--radius)',
-                background: 'transparent',
-                letterSpacing: '-0.01em',
-              }}
-            >
-              ⊞ Tables
-            </button>
-          )}
-          {onOpenChapters && (
-            <button
-              onClick={onOpenChapters}
-              className="pressable glass"
-              style={{
-                flex: 1,
-                padding: '15px',
-                fontSize: '0.92rem',
-                fontWeight: 600,
-                color: 'var(--text-secondary)',
-                borderRadius: 'var(--radius)',
-                background: 'transparent',
-                letterSpacing: '-0.01em',
-              }}
-            >
-              ▤ Repetera
-            </button>
-          )}
-          {onOpenGrammar && (
-            <button
-              onClick={onOpenGrammar}
-              className="pressable glass"
-              style={{
-                flex: 1,
-                padding: '15px',
-                fontSize: '0.92rem',
-                fontWeight: 600,
-                color: 'var(--text-secondary)',
-                borderRadius: 'var(--radius)',
-                background: 'transparent',
-                letterSpacing: '-0.01em',
-              }}
-            >
-              § Grammatik
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
+      </section>}
+    </main>
   );
 }

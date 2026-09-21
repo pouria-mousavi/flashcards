@@ -1,15 +1,13 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import confetti from 'canvas-confetti';
 import SwedishCardView from './SwedishCard';
-import { LEARNING_REQUEUE_WINDOW_MS } from '../utils/sm2';
-import { makeReview, previewReview } from '../lib/scheduler';
+
+import { makeReview } from '../lib/scheduler';
 import type { ReviewEvent } from '../lib/studyTypes';
 import type { SwedishCard } from '../utils/sm2';
 import { SWEDISH_SESSION_KEY } from '../lib/session';
 import { playTTS } from '../lib/tts';
 import { useStudyTime } from '../lib/useStudyTime';
-import StudyBreak, { StudyTimeRemaining } from './StudyBreak';
+import StudyBreak from './StudyBreak';
 
 interface Props {
   userId: string;
@@ -33,6 +31,7 @@ export default function SwedishStudySession({
   const [isFlipped, setIsFlipped] = useState(startFlipped);
   const studyTime = useStudyTime(userId, Math.min(...queue.slice(currentCardIndex).map(c => c.nextReviewDate)));
   const hasReadyCards = studyTime.ready;
+  const [mayFinishCard, setMayFinishCard] = useState(() => !studyTime.exhausted);
   const completedRef = useRef(false);
   const [ratingError, setRatingError] = useState('');
 
@@ -152,32 +151,17 @@ export default function SwedishStudySession({
 
   const handleRate = (rating: ReviewEvent['rating']) => {
     const currentCard = queue[currentCardIndex];
-    if (!currentCard || currentCard.nextReviewDate > Date.now() || !studyTime.canStudy()) return;
+    if (!currentCard || currentCard.nextReviewDate > Date.now() || (studyTime.exhausted && !mayFinishCard)) return;
+    const withinGuide = studyTime.canStudy();
 
     const { updated: updatedCard, event } = makeReview(currentCard, 'swedish', rating, studyTime.reviewDuration());
     try { onUpdateCard(updatedCard, event); }
     catch { setRatingError('This review could not be saved on your device. Free some browser storage and try again.'); return; }
     studyTime.resetReviewTimer();
+    if (!withinGuide) setMayFinishCard(false);
     setRatingError('');
 
-    if (rating === 5) {
-      confetti({
-        particleCount: 40,
-        spread: 55,
-        origin: { y: 0.7 },
-        colors: ['#f59e0b', '#f4691e', '#fbbf24'],
-      });
-    }
-
     setIsFlipped(false);
-
-    // Re-queue learning-step cards so they return within THIS session.
-    const now = Date.now();
-    let isRequeued = false;
-    if ((updatedCard.consecutiveIncorrect ?? 0) < 2 && updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now <= LEARNING_REQUEUE_WINDOW_MS)) {
-      setQueue(prev => [...prev, updatedCard]);
-      isRequeued = true;
-    }
 
     try {
       const saved = localStorage.getItem(SWEDISH_SESSION_KEY);
@@ -185,9 +169,6 @@ export default function SwedishStudySession({
         const session = JSON.parse(saved);
         session.currentIndex = currentCardIndex + 1;
         session.isFlipped = false;
-        if (isRequeued && session.cardIds) {
-          session.cardIds.push(updatedCard.id);
-        }
         localStorage.setItem(SWEDISH_SESSION_KEY, JSON.stringify(session));
       }
     } catch (e) { console.error('Swedish session sync failed', e); }
@@ -197,7 +178,7 @@ export default function SwedishStudySession({
     setCurrentCardIndex(prev => prev + 1);
   };
 
-  if (studyTime.exhausted) return <StudyBreak budgetComplete onBack={onPause} />;
+  if (studyTime.exhausted && !mayFinishCard) return <StudyBreak budgetComplete onBack={onPause} />;
   if (currentCardIndex < queue.length && !hasReadyCards) {
     return <StudyBreak budgetComplete={false} onBack={onSessionComplete} />;
   }
@@ -220,107 +201,34 @@ export default function SwedishStudySession({
   if (currentCardIndex >= queue.length) return null;
 
   const currentCard = queue[currentCardIndex];
-  const progress = (currentCardIndex / queue.length) * 100;
-
   return (
-    <div className="flex-center full-screen" style={{ flexDirection: 'column', position: 'relative', height: '100dvh', overflow: 'hidden' }}>
-      {ratingError && <p role="alert" style={{ position: 'absolute', top: 58, padding: 12, zIndex: 20, background: 'var(--card-bg)', color: 'var(--danger)' }}>{ratingError}</p>}
-      {/* Progress bar */}
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'rgba(255,255,255,0.05)', zIndex: 15 }}>
-        <div style={{ height: '100%', width: `${progress}%`, background: 'var(--grad-sv)', transition: 'width 0.3s ease', borderRadius: '0 2px 2px 0', boxShadow: '0 0 12px var(--glow-sv)' }} />
+    <div className="calm-session">
+      <header className="calm-session-header">
+        <button onClick={onPause} className="calm-back">← Leave for now</button>
+        <span className="calm-session-label">One card at a time</span>
+        {onOpenReference && <button onClick={onOpenReference} className="calm-back" aria-label="Open grammar tables">Help</button>}
+      </header>
+      {ratingError && <p role="alert" style={{ padding: '0 20px', color: 'var(--danger)' }}>{ratingError}</p>}
+      <div className="calm-session-body">
+        <SwedishCardView key={`${currentCard.id}-${currentCardIndex}`} card={currentCard} isFlipped={isFlipped} onFlip={handleFlip} onDelete={canEdit ? () => handleDelete(currentCard.id) : undefined} />
       </div>
-
-      {/* Header */}
-      <div style={{ position: 'absolute', top: '14px', left: '16px', right: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
-        <button
-          onClick={onPause}
-          className="pressable glass"
-          style={{ color: 'var(--text-secondary)', padding: '8px 15px', borderRadius: '999px', fontSize: '0.85rem', fontWeight: 600, background: 'transparent' }}
-        >
-          &#8592; Back
-        </button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {onOpenReference && (
-            <button
-              onClick={onOpenReference}
-              className="pressable glass"
-              aria-label="Open grammar tables"
-              style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, padding: '8px 14px', borderRadius: '999px', background: 'transparent' }}
-            >
-              ⊞ Tables
-            </button>
-          )}
-          <div className="glass tabular" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: 600, padding: '8px 14px', borderRadius: '999px' }}>
-            <StudyTimeRemaining remainingMs={studyTime.remainingMs} />
-          </div>
+      <footer className="calm-session-footer">
+        <div className="calm-footer-content">
+          {!isFlipped ? <button onClick={handleFlip} className="calm-primary">Show answer</button> : <>
+            <p className="calm-rating-label">How did that feel?</p>
+            <div className="calm-ratings">
+              <RateButton label="Again" hint="I forgot" tone="again" onClick={() => handleRate(0)} />
+              <RateButton label="Hard" hint="With effort" tone="hard" onClick={() => handleRate(3)} />
+              <RateButton label="Good" hint="I knew it" tone="good" onClick={() => handleRate(4)} />
+              <RateButton label="Easy" hint="Very easy" tone="easy" onClick={() => handleRate(5)} />
+            </div>
+          </>}
         </div>
-      </div>
-
-      {/* Card area */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'flex-start', paddingTop: '56px', justifyContent: 'center', width: '100%', overflowY: 'auto', paddingBottom: '140px' }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${currentCard.id}-${currentCardIndex}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-          >
-            <SwedishCardView card={currentCard} isFlipped={isFlipped} onFlip={handleFlip} onDelete={canEdit ? () => handleDelete(currentCard.id) : undefined} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Footer controls */}
-      <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, padding: '16px', paddingBottom: 'max(16px, env(safe-area-inset-bottom))', background: 'linear-gradient(to top, var(--bg-color) 60%, transparent)', zIndex: 20, display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '100%', maxWidth: '420px', display: 'flex', gap: '8px' }}>
-          {!isFlipped ? (
-            <button
-              onClick={handleFlip}
-              className="pressable"
-              style={{ width: '100%', padding: '18px', borderRadius: 'var(--radius)', background: 'var(--grad-sv)', color: 'var(--cta-ink-sv)', fontWeight: 700, fontSize: '1rem', boxShadow: '0 10px 30px -6px var(--glow-sv), 0 1px 0 rgba(255,255,255,0.25) inset', border: 'none', letterSpacing: '-0.01em' }}
-            >
-              Show Answer
-            </button>
-          ) : (
-            <>
-              <RateButton label="Again" hint={previewReview(currentCard, 0)} tone="again" onClick={() => handleRate(0)} />
-              <RateButton label="Hard" hint={previewReview(currentCard, 3)} tone="hard" onClick={() => handleRate(3)} />
-              <RateButton label="Good" hint={previewReview(currentCard, 4)} tone="good" onClick={() => handleRate(4)} />
-              <RateButton label="Easy" hint={previewReview(currentCard, 5)} tone="easy" onClick={() => handleRate(5)} />
-            </>
-          )}
-        </div>
-      </div>
+      </footer>
     </div>
   );
 }
 
 function RateButton({ label, hint, tone, onClick }: { label: string; hint: string; tone: string; onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className="pressable"
-      style={{
-        flex: 1,
-        height: '60px',
-        borderRadius: 'var(--radius-sm)',
-        background: `var(--rate-${tone}-bg)`,
-        border: `1px solid var(--rate-${tone}-bd)`,
-        color: `var(--rate-${tone})`,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '2px',
-        fontWeight: 700,
-        fontSize: '0.85rem',
-        letterSpacing: '-0.01em',
-      }}
-    >
-      <span>{label}</span>
-      <span className="tabular" style={{ fontSize: '0.62rem', fontWeight: 600, opacity: 0.75 }}>{hint}</span>
-    </button>
-  );
+  return <button onClick={onClick} className="calm-rate" data-rating={tone}><span>{label}</span><small>{hint}</small></button>;
 }

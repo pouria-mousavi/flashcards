@@ -119,7 +119,6 @@ import SwedishReference from './components/SwedishReference';
 import SwedishGrammar from './components/SwedishGrammar';
 import Auth from './components/Auth';
 import AccountPanel from './components/AccountPanel';
-import MilestoneToast from './components/MilestoneToast';
 import ProgressPanel from './components/ProgressPanel';
 import ChapterReview from './components/ChapterReview';
 import Prov from './components/Prov';
@@ -127,22 +126,16 @@ import { flushStudyReviews, loadStudyStates, reviewStore, syncStudyTime } from '
 import { recallPriority } from './lib/scheduler';
 import type { ReviewEvent } from './lib/studyTypes';
 import StudySyncNotice from './components/StudySyncNotice';
+import { applyFreshStart } from './lib/freshStart';
+import { calmReviewOrder, CALM_ROUND_SIZE } from './lib/calmRound';
 import { roleForSession } from './lib/auth';
 import type { Role } from './lib/auth';
 import type { Session } from '@supabase/supabase-js';
 import { setTtsTier } from './lib/tts';
-import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, dailyTarget, NEW_CAP, DAILY_TARGET_EN, NEW_CAP_EN } from './lib/newBudget';
+import { newAllowanceToday, markNewIntroduced, markCardStudied, studiedToday, NEW_CAP, DAILY_TARGET_EN, NEW_CAP_EN } from './lib/newBudget';
 import { AnimatePresence } from 'framer-motion';
 
 type View = 'dashboard' | 'study' | 'add';
-
-// One-time announcement shown to every user on their next visit. To announce
-// something new later, change the `id` — the old one stays dismissed forever.
-const A1_PART1_MILESTONE = {
-  id: 'a1-part-1-complete',
-  title: 'A1 Part 1 is complete!',
-  body: 'Every word, sentence and grammar point from the whole course is now in the deck.',
-} as const;
 
 function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
@@ -419,7 +412,7 @@ function App() {
   //
   // Defaults: 20 cards total, max 8 new. The new cards are spread evenly
   // among the reviews so you get a rhythm of quick-win → challenge → quick-win.
-  const buildSession = (size = 20, newCap = 8): StudyCard[] => {
+  const buildSession = (size = CALM_ROUND_SIZE, newCap = NEW_CAP_EN): StudyCard[] => {
 
       if (size <= 0) return [];
       const due = getDueCards(); // shuffled new first, then reviews by due date
@@ -429,7 +422,7 @@ function App() {
         currentUid ? `${currentUid}:en` : null,
         DAILY_TARGET_EN, NEW_CAP_EN);
       const newCards = due.filter(c => c.state === 'NEW').slice(0, budget);
-      const reviewCards = due.filter(c => c.state !== 'NEW');
+      const reviewCards = calmReviewOrder(due.filter(c => c.state !== 'NEW'));
 
       let takeNew = Math.min(newCap, newCards.length);
       let takeReview = Math.min(size - takeNew, reviewCards.length);
@@ -471,8 +464,8 @@ function App() {
       const learning = allDue.filter(c => c.state === 'LEARNING' || c.state === 'RELEARNING');
       const reviews = allDue.filter(c => c.state === 'REVIEW');
       const sortedLearning = [...learning].sort((a, b) => a.nextReviewDate - b.nextReviewDate);
-      // Struggling cards first within the review tier (fluent's priority idea),
-      // then oldest-due. Learning cards still lead overall — SRS order is intact.
+      // Recall probability orders reviews; legacy cards use relative lateness.
+      // Round assembly can move one short due review ahead as a warm-up.
       const rank = (c: SwedishCard) => c.priority === 'high' ? 0 : c.priority === 'low' ? 2 : 1;
       const sortedReviews = [...reviews].sort((a, b) => recallPriority(a, now) - recallPriority(b, now) || a.nextReviewDate - b.nextReviewDate);
       // Reintroduced cards (reset because they were churning) come FIRST — they are
@@ -485,13 +478,12 @@ function App() {
       return [...shuffledNew, ...sortedLearning, ...sortedReviews];
   };
 
-  const buildSwedishSession = (size = 20, newCap = 8): SwedishCard[] => {
+  const buildSwedishSession = (size = CALM_ROUND_SIZE, newCap = NEW_CAP): SwedishCard[] => {
       const due = getSwedishDueCards();
-      // Governor: new cards fill whatever room today's reviews leave under the
-      // 50-card target. No total ceiling — the number on screen is the real one.
+      // New intake pauses when the due-review load reaches the configured target.
       const budget = newAllowanceToday(due.filter(c => c.state !== 'NEW').length, currentUid);
       const newCards = due.filter(c => c.state === 'NEW').slice(0, budget);
-      const reviewCards = due.filter(c => c.state !== 'NEW');
+      const reviewCards = calmReviewOrder(due.filter(c => c.state !== 'NEW'));
 
       let takeNew = Math.min(newCap, newCards.length);
       let takeReview = Math.min(size - takeNew, reviewCards.length);
@@ -553,6 +545,10 @@ function App() {
   // --- Role side-effects: uid namespace, voice tier, cleanup on sign-out ---
   useEffect(() => {
     currentUid = role?.userId ?? null;
+    if (role && applyFreshStart(localStorage, role.userId, role.isAdmin)) {
+      setRestoredSession(null); setSwedishSession(null);
+      setActiveLanguage('sv'); setView('dashboard');
+    }
     setTtsTier(role?.isAdmin ? 'azure' : 'browser');
     // Mark this device as "has signed in before" so the Auth screen defaults to
     // Log in for returning users — brand-new devices still land on Sign up.
@@ -737,7 +733,7 @@ function App() {
         }
     }
 
-    const due = buildSession(DAILY_TARGET_EN, NEW_CAP_EN);
+    const due = buildSession(CALM_ROUND_SIZE, NEW_CAP_EN);
     if (due.length === 0) {
         alert("No cards due!");
         return;
@@ -780,7 +776,7 @@ function App() {
           }
       }
 
-      const due = buildSwedishSession(dailyTarget(), NEW_CAP);
+      const due = buildSwedishSession(CALM_ROUND_SIZE, NEW_CAP);
       if (due.length === 0) {
           alert("No Swedish cards due!");
           return;
@@ -884,6 +880,7 @@ function App() {
             userId={currentUid ?? 'anon'}
             cards={swedishCards}
             onStartStudy={() => handleStartSwedishStudy(false)}
+            onResetSession={handleSwedishSessionComplete}
             hasActiveSession={!!swedishSession}
             activeLanguage={activeLanguage}
             onSwitchLanguage={switchLanguage}
@@ -932,7 +929,6 @@ function App() {
             />
           )}
         </AnimatePresence>
-        <MilestoneToast {...A1_PART1_MILESTONE} />
       </div>
     );
   }
@@ -981,7 +977,6 @@ function App() {
           onCancel={() => setView('dashboard')}
         />
       )}
-      <MilestoneToast {...A1_PART1_MILESTONE} />
     </div>
   );
 

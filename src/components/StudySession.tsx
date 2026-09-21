@@ -1,15 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import confetti from 'canvas-confetti';
 import FlashcardComponent from './Flashcard';
-import { isGrammarCard, LEARNING_REQUEUE_WINDOW_MS } from '../utils/sm2';
-import { makeReview, previewReview } from '../lib/scheduler';
+import { isGrammarCard } from '../utils/sm2';
+import { makeReview } from '../lib/scheduler';
 import type { ReviewEvent } from '../lib/studyTypes';
 import type { Flashcard, StudyCard } from '../utils/sm2';
 import { supabase } from '../lib/supabase';
 import { SESSION_KEY } from '../lib/session';
 import { useStudyTime } from '../lib/useStudyTime';
-import StudyBreak, { StudyTimeRemaining } from './StudyBreak';
+import StudyBreak from './StudyBreak';
 
 interface Props {
   userId: string;
@@ -32,6 +31,7 @@ export default function StudySession({ userId, cards, startIndex = 0, startFlipp
   const [ratingError, setRatingError] = useState('');
   const studyTime = useStudyTime(userId, Math.min(...queue.slice(currentCardIndex).map(c => c.nextReviewDate)));
   const hasReadyCards = studyTime.ready;
+  const [mayFinishCard, setMayFinishCard] = useState(() => !studyTime.exhausted);
 
   // Sync isFlipped to localStorage on every flip
   const syncFlipToStorage = useCallback((flipped: boolean) => {
@@ -135,44 +135,24 @@ export default function StudySession({ userId, cards, startIndex = 0, startFlipp
 
   const handleRate = (rating: ReviewEvent['rating']) => {
     const currentCard = queue[currentCardIndex];
-    if (!currentCard || currentCard.nextReviewDate > Date.now() || !studyTime.canStudy()) return;
+    if (!currentCard || currentCard.nextReviewDate > Date.now() || (studyTime.exhausted && !mayFinishCard)) return;
+    const withinGuide = studyTime.canStudy();
 
     const { updated: updatedCard, event } = makeReview(currentCard, isGrammarCard(currentCard) ? 'grammar' : 'english', rating, studyTime.reviewDuration());
     try { onUpdateCard(updatedCard, event); }
     catch { setRatingError('This review could not be saved on your device. Free some browser storage and try again.'); return; }
     studyTime.resetReviewTimer();
+    if (!withinGuide) setMayFinishCard(false);
     setRatingError('');
-
-    if (rating === 5) {
-      confetti({
-        particleCount: 40,
-        spread: 55,
-        origin: { y: 0.7 },
-        colors: ['#7c5cf6', '#a78bfa', '#c4b5fd']
-      });
-    }
 
     setIsFlipped(false);
 
-    // Re-queue learning-step cards so they return within THIS session.
-    const now = Date.now();
-    let isRequeued = false;
-
-    if ((updatedCard.consecutiveIncorrect ?? 0) < 2 && updatedCard.nextReviewDate && (updatedCard.nextReviewDate - now <= LEARNING_REQUEUE_WINDOW_MS)) {
-        setQueue(prev => [...prev, updatedCard]);
-        isRequeued = true;
-    }
-
-    // Sync session to localStorage
     try {
         const saved = localStorage.getItem(SESSION_KEY);
         if (saved) {
             const session = JSON.parse(saved);
             session.currentIndex = currentCardIndex + 1;
             session.isFlipped = false;
-            if (isRequeued && session.cardIds) {
-                 session.cardIds.push(updatedCard.id);
-            }
             localStorage.setItem(SESSION_KEY, JSON.stringify(session));
         }
     } catch (e) { console.error("Session sync failed", e); }
@@ -228,7 +208,7 @@ export default function StudySession({ userId, cards, startIndex = 0, startFlipp
       }
   };
 
-  if (studyTime.exhausted) return <StudyBreak budgetComplete onBack={onPause} />;
+  if (studyTime.exhausted && !mayFinishCard) return <StudyBreak budgetComplete onBack={onPause} />;
   if (currentCardIndex < queue.length && !hasReadyCards) {
     return <StudyBreak budgetComplete={false} onBack={onSessionComplete} />;
   }
@@ -266,7 +246,6 @@ export default function StudySession({ userId, cards, startIndex = 0, startFlipp
   }
 
   const currentCard = queue[currentCardIndex];
-  const progress = ((currentCardIndex) / queue.length) * 100;
 
   return (
     <div className="flex-center full-screen" style={{
@@ -278,26 +257,6 @@ export default function StudySession({ userId, cards, startIndex = 0, startFlipp
     }}>
 
       {ratingError && <p role="alert" style={{ position: 'absolute', top: 58, padding: 12, zIndex: 20, background: 'var(--card-bg)', color: 'var(--danger)' }}>{ratingError}</p>}
-      {/* Progress bar */}
-      <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '3px',
-          background: 'rgba(255,255,255,0.05)',
-          zIndex: 15
-      }}>
-          <div style={{
-              height: '100%',
-              width: `${progress}%`,
-              background: 'var(--grad-en)',
-              transition: 'width 0.3s ease',
-              borderRadius: '0 2px 2px 0',
-              boxShadow: '0 0 12px var(--glow-en)'
-          }} />
-      </div>
-
       {/* Header */}
       <div style={{
           position: 'absolute',
@@ -330,7 +289,7 @@ export default function StudySession({ userId, cards, startIndex = 0, startFlipp
             padding: '8px 14px',
             borderRadius: '999px'
         }}>
-            <StudyTimeRemaining remainingMs={studyTime.remainingMs} />
+            <span>One card at a time</span>
         </div>
       </div>
 
@@ -409,10 +368,10 @@ export default function StudySession({ userId, cards, startIndex = 0, startFlipp
                 </button>
             ) : (
                 <>
-                    <RateButton label="Again" hint={previewReview(currentCard, 0)} tone="again" onClick={() => handleRate(0)} />
-                    <RateButton label="Hard" hint={previewReview(currentCard, 3)} tone="hard" onClick={() => handleRate(3)} />
-                    <RateButton label="Good" hint={previewReview(currentCard, 4)} tone="good" onClick={() => handleRate(4)} />
-                    <RateButton label="Easy" hint={previewReview(currentCard, 5)} tone="easy" onClick={() => handleRate(5)} />
+                    <RateButton label="Again" hint="I forgot" tone="again" onClick={() => handleRate(0)} />
+                    <RateButton label="Hard" hint="With effort" tone="hard" onClick={() => handleRate(3)} />
+                    <RateButton label="Good" hint="I knew it" tone="good" onClick={() => handleRate(4)} />
+                    <RateButton label="Easy" hint="Very easy" tone="easy" onClick={() => handleRate(5)} />
                 </>
             )}
         </div>

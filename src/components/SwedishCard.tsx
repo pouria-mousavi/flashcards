@@ -1,40 +1,17 @@
 import type { CSSProperties } from 'react';
-import { motion } from 'framer-motion';
+import { Volume2 } from 'lucide-react';
 import { playTTS } from '../lib/tts';
-import type { SwedishCard, SwedishWordForms, Lang } from '../utils/sm2';
+import type { SwedishCard, SwedishExample, SwedishWordForms, Lang } from '../utils/sm2';
 
 // Swedish accent — distinct from English indigo so the two decks feel separate.
 const SV_ACCENT = 'var(--accent-sv)';
-const SV_SOFT = 'var(--accent-sv-soft)';
 const SV_BORDER = 'var(--accent-sv-border)';
 
 const LANG_LABEL: Record<Lang, string> = { sv: 'Svenska', en: 'English' };
 
 // Small round speaker button — plays the given text in its own language.
-function Speaker({ text, lang, size = 32, emphasis }: { text: string; lang: Lang; size?: number; emphasis?: string }) {
-  return (
-    <button
-      onClick={(e) => { e.stopPropagation(); playTTS(text, lang, emphasis); }}
-      aria-label={`Play ${LANG_LABEL[lang]} audio`}
-      style={{
-        flexShrink: 0,
-        background: SV_SOFT,
-        color: SV_ACCENT,
-        border: `1px solid ${SV_BORDER}`,
-        borderRadius: '50%',
-        width: `${size}px`,
-        height: `${size}px`,
-        fontSize: `${size * 0.45}px`,
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        lineHeight: 1,
-      }}
-    >
-      🔊
-    </button>
-  );
+function Speaker({ text, lang, emphasis }: { text: string; lang: Lang; size?: number; emphasis?: string }) {
+  return <button className="calm-speak" onClick={e => { e.stopPropagation(); playTTS(text, lang, emphasis); }} aria-label={`Play ${LANG_LABEL[lang]} audio`}><Volume2 size={17} strokeWidth={1.6} /></button>;
 }
 
 // The one-line "which family does this word belong to" answer, shown as a badge
@@ -214,211 +191,36 @@ interface Props {
   onDelete?: () => void;
 }
 
+function ExampleRow({ example, lang }: { example: SwedishExample; lang: Lang }) {
+  return <div className="calm-example-row"><Speaker text={example.text} lang={lang} emphasis={example.emphasis} /><div><p lang={lang}>{example.text}</p>{example.translation && <p className="calm-translation">{example.translation}</p>}{example.source && <small className="calm-source">Source: {example.source}</small>}</div></div>;
+}
+
 export default function SwedishCardView({ card, isFlipped, onFlip, onDelete }: Props) {
   const notes = (card.examples ?? []).filter(example => example.kind === 'note');
   const examples = (card.examples ?? []).filter(example => example.kind !== 'note');
+  const isGap = /_{2,}|\[…\]/.test(card.front);
+  const hintStart = isGap ? card.front.lastIndexOf('\n(') : -1;
   return (
-    <div
-      onClick={!isFlipped ? onFlip : undefined}
-      style={{
-        width: '100%',
-        maxWidth: '460px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
-        padding: '0 20px',
-        cursor: !isFlipped ? 'pointer' : 'default',
-      }}
-    >
-      {/* Front — text + its own speaker */}
-      <div className="glass" style={{
-        borderRadius: 'var(--radius-lg)',
-        padding: '28px 24px',
-        boxShadow: 'var(--card-shadow)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        {/* Gradient hairline — the card's identity strip */}
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2.5px', background: 'var(--grad-sv)', opacity: 0.8 }} />
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '14px',
-        }}>
-          <span style={{
-            fontSize: '0.65rem',
-            fontWeight: '700',
-            color: SV_ACCENT,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-          }}>
-            {LANG_LABEL[card.frontLang]}
-          </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            {onDelete && (
-              <button
-                onClick={(e) => { e.stopPropagation(); onDelete(); }}
-                aria-label="Delete card"
-                style={{
-                  background: 'var(--danger-soft)',
-                  border: 'none',
-                  borderRadius: '6px',
-                  color: '#fca5a5',
-                  padding: '4px 8px',
-                  fontSize: '0.7rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                }}
-              >
-                Delete
-              </button>
-            )}
-            <Speaker text={card.front} lang={card.frontLang} />
-          </div>
-        </div>
-
-        <p style={{
-          fontSize: card.front.length > 60 ? '1.4rem' : '1.7rem',
-          fontWeight: '700',
-          lineHeight: '1.4',
-          color: 'var(--text-primary)',
-          margin: 0,
-        }}>
-          {card.front}
-        </p>
-      </div>
-
-      {/* Back — revealed on flip: translation + examples, each with audio */}
-      {isFlipped && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          style={{
-            background: 'var(--card-tint-sv)',
-            backdropFilter: 'blur(14px)',
-            WebkitBackdropFilter: 'blur(14px)',
-            borderRadius: 'var(--radius)',
-            padding: '22px 20px',
-            border: `1px solid ${SV_BORDER}`,
-            boxShadow: '0 12px 32px -14px var(--glow-sv)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '18px',
-          }}
-        >
-          {/* Back word/phrase */}
-          <div>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '10px',
-            }}>
-              <span style={{
-                fontSize: '0.65rem',
-                fontWeight: '700',
-                color: SV_ACCENT,
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-              }}>
-                {LANG_LABEL[card.backLang]}
-              </span>
-              <Speaker text={card.back} lang={card.backLang} />
-            </div>
-            <p
-              onClick={(e) => { e.stopPropagation(); playTTS(card.back, card.backLang); }}
-              style={{
-                margin: 0,
-                fontSize: card.back.length > 60 ? '1.3rem' : '1.5rem',
-                fontWeight: '600',
-                color: 'var(--text-primary)',
-                lineHeight: '1.4',
-                cursor: 'pointer',
-              }}
-            >
-              {card.back}
-            </p>
-          </div>
-
-          <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-            Rate the answer to the prompt. The examples and forms below are help, not extra things to memorise now.
-            {' '}Again = forgot; Hard = recalled with difficulty; Good = recalled; Easy = effortless.
-          </p>
-          {notes.length > 0 && (
-            <details>
-              <summary style={{ cursor: 'pointer', color: SV_ACCENT, fontWeight: 600 }}>Meaning & grammar help</summary>
-              {notes.map((note, index) => (
-                <div key={index} style={{ marginTop: 10, fontSize: '0.88rem', lineHeight: 1.5 }}>
-                  <p style={{ margin: 0 }}>{note.text}</p>
-                  {note.source && <small style={{ color: 'var(--text-muted)' }}>Source: {note.source}</small>}
-                </div>
-              ))}
-            </details>
-          )}
-
-          {/* Inflection table — only on Swedish verb / noun / adjective cards */}
-          {card.wordForms && (
-            <details>
-              <summary style={{ cursor: 'pointer', color: SV_ACCENT, fontWeight: 600 }}>Word forms & prepositions</summary>
-              <WordForms forms={card.wordForms} lang={card.backLang} />
-            </details>
-          )}
-
-          {/* Examples — always on the back, in the back language, each playable */}
-          {examples.length > 0 && (
-            <div style={{
-              borderTop: `1px solid ${SV_BORDER}`,
-              paddingTop: '16px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '14px',
-            }}>
-              <span style={{
-                fontSize: '0.6rem',
-                fontWeight: '700',
-                color: SV_ACCENT,
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-              }}>
-                Examples
-              </span>
-
-              {examples.map((ex, i) => (
-                <div
-                  key={i}
-                  onClick={(e) => { e.stopPropagation(); playTTS(ex.text, card.backLang, ex.emphasis); }}
-                  style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', cursor: 'pointer' }}
-                >
-                  <Speaker text={ex.text} lang={card.backLang} size={28} emphasis={ex.emphasis} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{
-                      margin: 0,
-                      fontSize: '0.98rem',
-                      fontWeight: '600',
-                      color: 'var(--text-primary)',
-                      lineHeight: '1.5',
-                    }}>
-                      {ex.text}
-                    </p>
-                    {ex.translation && (
-                      <p style={{
-                        margin: '3px 0 0 0',
-                        fontSize: '0.85rem',
-                        color: 'var(--text-muted)',
-                        lineHeight: '1.45',
-                      }}>
-                        {ex.translation}
-                      </p>
-                    )}
-                    {ex.source && <small style={{ color: 'var(--text-muted)' }}>Source: {ex.source}</small>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </motion.div>
-      )}
-    </div>
+    <article className="calm-card">
+      <section className="calm-card-cue">
+        <div className="calm-card-label"><span>{isGap ? 'Fill in the gap' : card.backLang === 'sv' ? 'Say it in Swedish' : 'What does it mean?'}</span>{!isGap && <Speaker text={card.front} lang={card.frontLang} />}</div>
+        <button className="calm-prompt" onClick={onFlip} disabled={isFlipped} aria-label={isFlipped ? undefined : `Reveal answer: ${card.front}`} lang={card.frontLang}>
+          {hintStart < 0 ? card.front : <>{card.front.slice(0, hintStart)}<span className="calm-prompt-hint" lang="en">{card.front.slice(hintStart + 1)}</span></>}
+        </button>
+        {!isFlipped && <p className="calm-card-nudge">Try it aloud. It’s okay to take your time.</p>}
+      </section>
+      {isFlipped && <section className="calm-card-answer" aria-label="Answer">
+        <div className="calm-card-label"><span>{LANG_LABEL[card.backLang]}</span><Speaker text={card.back} lang={card.backLang} /></div>
+        <p className="calm-answer-text" lang={card.backLang}>{card.back}</p>
+        {examples[0] && <div className="calm-example"><p className="calm-example-label">In everyday life</p><ExampleRow example={examples[0]} lang={card.backLang} /></div>}
+        {examples.length > 1 && <details><summary>More examples</summary>{examples.slice(1).map((example, i) => <ExampleRow key={i} example={example} lang={card.backLang} />)}</details>}
+        {(notes.length > 0 || card.wordForms) && <details><summary>A little help</summary>
+          {notes.map((note, index) => <div key={index}><p>{note.text}</p>{note.source && <small className="calm-source">Source: {note.source}</small>}</div>)}
+          {card.wordForms && <WordForms forms={card.wordForms} lang={card.backLang} />}
+          <p>The example and word forms are here to help. Only rate what the prompt asks.</p>
+        </details>}
+      </section>}
+      {isFlipped && onDelete && <details className="calm-card-options"><summary>Card options</summary><button onClick={onDelete}>Delete this card</button></details>}
+    </article>
   );
 }

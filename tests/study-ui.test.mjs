@@ -49,8 +49,8 @@ const props = {
 test('both study screens let future learning cards wait without revealing or grading', () => {
   for (const Component of [ui.English, ui.Swedish]) {
     const html = ui.render(ui.createElement(Component, { ...props, userId: 'waiting' }));
-    assert.match(html, /Time for a break/);
-    assert.match(html, /scheduled for later/);
+    assert.match(html, /A little pause/);
+    assert.match(html, /when they’re ready/);
     assert.doesNotMatch(html, /Show Answer|En användbar fråga/);
   }
 });
@@ -61,28 +61,27 @@ test('both study screens stop at the shared budget and preserve the option to le
   budget.pause(now);
   for (const Component of [ui.English, ui.Swedish]) {
     const html = ui.render(ui.createElement(Component, { ...props, userId: 'finished', cards: [{ ...card, nextReviewDate: now - 1 }] }));
-    assert.match(html, /20 minutes are complete/);
-    assert.match(html, /Back to deck/);
+    assert.match(html, /Let it settle/);
+    assert.match(html, /Back home/);
     assert.doesNotMatch(html, /Show Answer|En användbar fråga/);
   }
 });
 
-test('dashboards present remaining minutes instead of assigning the entire backlog', () => {
+test('dashboards invite a small round without countdowns, backlog counts or progress panels', () => {
   for (const Component of [ui.Dashboard, ui.SwedishDashboard]) {
     const html = ui.render(ui.createElement(Component, {
       ...props, userId: 'fresh', cards: Array.from({ length: 268 }, (_, i) => ({ ...card, id: String(i), state: 'REVIEW', nextReviewDate: now - 1 })),
     }));
-    assert.match(html, /minutes left today/);
-    assert.match(html, /268 .*reviews waiting/);
-    assert.match(html, /Start studying/);
-    assert.doesNotMatch(html, /Study 268/);
+    assert.match(html, /Study a few cards/);
+    assert.match(html, /Your learning space/);
+    assert.doesNotMatch(html, /minutes left|268|reviews waiting|Your progress|Grammar help/);
   }
 });
 
 test('dashboards stop offering more sessions once the daily budget is used', () => {
   for (const Component of [ui.Dashboard, ui.SwedishDashboard]) {
     const html = ui.render(ui.createElement(Component, { ...props, userId: 'finished', hasActiveSession: true }));
-    assert.match(html, /Today.*plan is complete/);
+    assert.match(html, /Let it settle/);
     assert.match(html, /disabled=""/);
     assert.doesNotMatch(html, /Resume studying/);
   }
@@ -93,8 +92,17 @@ test('grammar notes are optional reference text and never Swedish audio prompts'
     { text: 'English grammar explanation', kind: 'note', source: 'TB p.79' },
     { text: 'Jag läser en bok.', translation: 'I am reading a book.' },
   ] }, isFlipped: true, onFlip: noop }));
-  assert.match(html, /<details><summary[^>]*>Meaning &amp; grammar help/);
+  assert.match(html, /<details><summary[^>]*>A little help/);
   assert.match(html, /Source: TB p.79/);
   assert.match(html, /I am reading a book/);
   assert.equal((html.match(/Play Svenska audio/g) ?? []).length, 2); // answer + real example
+});
+
+test('gap prompts keep the answer hidden and do not read the English hint as Swedish', () => {
+  const html = ui.render(ui.createElement(ui.SwedishCard, { card: {
+    ...card, front: 'Jag har två ___ hus.\n(small — plural of liten)', frontLang: 'sv', back: 'små',
+    examples: [{ text: 'Jag har två små hus.', translation: 'I have two small houses.' }],
+  }, isFlipped: false, onFlip: noop }));
+  assert.match(html, /Fill in the gap/);
+  assert.doesNotMatch(html, /små|Play Svenska audio|In everyday life/);
 });
